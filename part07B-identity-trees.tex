@@ -1,0 +1,397 @@
+\documentclass[PHIL101-Textbook.tex]{subfiles}
+\begin{document}
+
+\chapter{Truth Trees With Identity}
+\label{ch:identity.trees}
+
+We introduced Identity in Chapter \ref{ch:identity}, and Identity tables in Chapter \ref{ch:models.identity}. It should come as no surprise that we can also add Identity to Truth Trees.
+
+The rules for Identity are a little different from the other Truth Tree rules.
+
+The first rule is that we can always introduce the logical truth $(\alpha = \alpha)$ into any branch, for any name $\alpha$.
+
+\factoidbox{
+\begin{center}
+\begin{prooftree}
+{not line numbering}
+ [\alpha {\, = \,} \alpha , just={\id}]
+\end{prooftree}
+\end{center}
+}
+
+
+\noindent The only use for this rule is to close branches that already contain $(\alpha \neq \alpha)$, which is shorthand for $\enot(\alpha = \alpha)$. 
+
+The second rule is more complicated. If one formula in the current branch is an identity statement $\alpha = \beta$, then we can substitute some or all instances of $\alpha$ with $\beta$, or $\beta$ with $\alpha$, in a copy of another formula in the current branch.
+
+\factoidbox{
+\begin{center}
+\begin{prooftree}
+{not line numbering}
+[\alpha {\, = \,} \beta
+[A
+[A{[}\alpha/\beta{]}, just={\sub}]
+]
+]\end{prooftree}
+\end{center}
+}
+
+This \sub rule uses 2 formulas (the identity, and the formula being copied), so both need to be listed. But we aren't decomposing these formulas, so they aren't ticked ($\checkmark$) -- they can be used as many times as needed. We represent this rule by $[\alpha/\beta]$, where we replace $\alpha$ with $\beta$ in the formula.
+
+An example will help to make these rules clearer. Let's test this argument: $(a=b),(a=a)\eif Fa\ \therefore\ Fb$. 
+
+
+\begin{center}
+\begin{prooftree}
+{close with=\ensuremath{\times}}
+[{a=b}, checked, name=p1, just={Premise}
+ [({a=a})\eif Fa, checked, name=p2, just={Premise}
+  [\enot Fb, name=nc, just={Neg Conc}
+   [\enot{(a=a)}, name=r4, just={$\eif$}:p2
+	[({a=a}), close, just={\id}
+   ]]
+   [Fa, name=r4b, just={$\eif$}:p2
+    [Fb, close, just={$[a/b]$:p1,r4}, move by = 1
+   ]]
+]]]
+\end{prooftree}\end{center}
+Adding $(a=a)$ on line \#5 lets us close the branch. Otherwise we'd need a special closing rule for $\enot(a=a)$. On line \#6 we copy the formula $Fa$ on line \#4 and replace an $a$ with a $b$, because line \#1 says that $a$ and $b$ are identical.
+
+\practiceproblems
+
+  \solutions   
+\noindent\problempart  \label{pr.identity01}
+  Let $A$ be this formula:
+
+\[a = b \eif (Rca \eor Pb)\]
+Write all formulas that can be obtained from the following substitutional instances: 
+\begin{earg}
+\item $A[a/b]$
+\item $A[b/a]$
+\item $A[a/c]$
+\item $A[c/a]$
+\item $A[b/c]$
+\item $A[c/b]$
+\end{earg}
+
+
+\section{Logical Truths of Identity}
+In Chapter \ref{ch:models.identity} we learned several rules to help us to complete Identity tables. The first rule was `Reflexivity', which says that everything is identical with itself: $\qab x {x=x}$. The second rule was `Symmetry', which says that if $a$ is identical to $b$, then $b$ is identical to $a$: $\qan x {\qab y{x=y \eif y=x}}$. The third rule was `Transitivity', which says that if anything is identical to two other things, they are identical with each other: $\qan x{\qan y {\qab z {(x=y \eand y = z) \eif x=z}}}$. Let's check these rules are logical truths, using Truth Trees.
+
+
+%Reflexivity is a logical truth
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot \qab x {x=x}, checked, name=r1, just={Root}
+ [\qeb x {x\neq x}, checked=a, name=r2, just={$\enot\forall$}:r1
+  [a \neq a, just={$\exists$ a}:r2
+   [{a = a}, close, just={\id}
+]]]]
+\end{prooftree}\end{center}
+
+\noindent The last line is one in which we use the rule of identity to close the branch. 
+
+%Symmetry is a logical truth
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot \qan x {\qab y{x=y \eif y=x}}, checked, name=r1, just={Root}
+ [\qeb x {\enot\qab y{x=y \eif y=x}}, checked=a, name=r2, just={$\enot\forall$}:r1
+  [\enot\qab y{a=y \eif y=a}, checked, name=r3, just={$\exists$ a}:r2
+   [\qeb y {\enot (a=y \eif y=a)}, checked=b, name=r4, just={$\enot\forall$}:r3
+	[\enot {(a=b \eif b=a)}, checked, name=r5, just={$\exists$ b}:r4
+	 [{a=b}, name=r6, just={$\enot\eif$}:r5
+	  [\enot{(b=a)},  name=r7, just={$\enot\eif$}:r5
+	   [{a=a}, name=r8,  just={\id}
+		[{b=a}, close, just={$[a/b]$:r8,r6}
+	 ]]]]
+	]
+]]]]
+\end{prooftree}\end{center}
+
+
+%Transitivity is a logical truth
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot \qan x{\qan y {\qab z {(x=y \eand y=z) \eif x=z}}}, checked, name=r1, just={Root}
+ [\qeb x{\enot \qan y {\qab z {(x=y \eand y=z) \eif x=z}}}, checked=a, name=r2, just={$\enot\forall$}:r1
+  [\enot \qan y {\qab z {(a=y \eand y=z) \eif a=z}}, checked, name=r3, just={$\exists$ a}:r2
+   [\qeb y {\enot \qab z {(a=y \eand y=z) \eif a=z}}, checked=b, name=r4, just={$\enot\forall$}:r3
+	[\enot \qab z {(a=b \eand b=z) \eif a=z}, checked, name=r5, just={$\exists$ b}:r4
+	 [\qeb z {\enot ((a=b \eand b=z) \eif a=z)}, checked=c, name=r6, just={$\enot\forall$}:r5
+	  [\enot {((a=b \eand b=c) \eif a=c)}, checked, name=r7, just={$\exists$ c}:r6
+	   [{a=b \eand b=c}, name=r8, just={$\enot\eif$}:r7
+		[\enot{(a=c)}, name=r9, just={$\enot\eif$}:r7
+	[{a=b}, name=r10, just={$\eand$}:r8
+	 [{b=c}, name=r11, just={$\eand$}:r8
+	  [{a=c}, close, just={$[b/a]$:r10,r11}
+	]]]
+	 ]]]]
+	]
+]]]]
+\end{prooftree}\end{center}
+
+
+We also learned how to complete predicate tables from information in identity tables, and identity tables from predicate tables. If two names are identical, then they have exactly the same truth values for each predicate: $\qan x {\qab y{(x=y) \eif (Px\eiff Py)}}$. And if two names had different values for at least one predicate, then they were not identical: $\qan x {\qab y{\enot (Px\eiff Py) \eif (x \neq y)}}$. These formulas are equivalent, so we'll only test the first one.
+
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot \qan x {\qab y{(x=y) \eif (Px\eiff Py)}}, checked, name=r1, just={Root}
+ [\qeb x {\enot \qab y{(x=y) \eif (Px\eiff Py)}}, checked=a, name=r2, just={$\enot\forall$}:r1
+  [\enot \qab y{(a=y) \eif (Pa\eiff Py)}, checked, name=r3, just={$\exists$ a}:r2
+   [\qeb y{\enot((a=y) \eif (Pa\eiff Py))}, checked=b, name=r4, just={$\enot\forall$}:r3
+	[\enot(({a=b}) \eif (Pa\eiff Pb)), checked, name=r5, just={$\exists$ b}:r4
+	 [{a = b}, name=r6, just={$\eif$}:r5
+	  [\enot(Pa\eiff Pb), checked, name=r7, just={$\eif$}:r5
+		[Pa, name=r8, just={$\enot\eiff$}:r7
+		 [\enot Pb, just={$\enot\eiff$}:r7
+		  [Pb, close, just={$[a/b]$:r6,r8}
+		]]]
+		[\enot Pa, just={$\enot\eiff$}:r7
+		 [Pb, just={$\enot\eiff$}:r7
+		  [\enot Pb, close, just={$[a/b]$:r6,r8}
+		]]]
+	 ]]
+]]]]]
+\end{prooftree}\end{center}
+
+One final logical truth about Identity: $\qab x { \qab y {(x=y) \eif Fy}\eiff Fx}$.
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot \qab x { \qab y {(x=y) \eif Fy}\eiff Fx}, checked, name=r1, just={Root}
+ [\qeb x {\enot (\qab y {(x=y) \eif Fy}\eiff Fx)}, checked=a, name=r2, just={$\enot\forall$}:r1
+  [\enot (\qab y {(a=y) \eif Fy}\eiff Fa), checked, name=r3, just={$\exists$ a}:r2
+	[\qab y {(a=y) \eif Fy}, subs={a}, name=r4, just={$\enot\eiff$ a}:r3
+	 [\enot Fa, name=r5, just={$\enot\eiff$ a}:r3
+	  [({a=a}) \eif Fa, checked, name=r6, just={$\forall$ a}:r4
+		[\enot({a=a}), just={$\eif$}:r6
+		 [{a=a}, close, just={\id}
+		]]
+		[Fa, close, just={$\eif$}:r6]
+	]]]
+	[\enot \qab y {(a=y) \eif Fy}, checked, name=r4b, just={$\enot\eiff$ a}:r3
+	 [ Fa, name=r5b, just={$\enot\eiff$ a}:r3
+	  [\qeb y {\enot ((a=y) \eif Fy)}, checked=b, just={$\enot\forall$}:r4, move by = 2
+		[\enot (({a=b}) \eif Fb), checked, name=r7, just={$\exists$ b}:r4
+		 [{a=b}, name=r8, just={$\enot\eif$}:r7
+		  [\enot Fb, name=r9, just={$\enot\eif$}:r7
+		   [\enot Fa, close, just={$[b/a]$:r8,r9}
+		]]]]
+	]]]
+]]]
+\end{prooftree}\end{center}
+
+
+
+\section{Arguments with Identity}
+Checking arguments that use Identity for validity is the same as any other argument. Consider $Rab, a=c\ \therefore\ Rbc$:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[Rab, name=p1, just={Premise}
+ [{a=c}, name=p2, just={Premise}
+  [\enot Rbc, name=nc, just={Neg Conc}
+   [Rcb, just={$[a/c]$:p1,p2}
+	[\enot Rba, open, just={$[c/a]$:p2,nc}
+]]]]]
+\end{prooftree}\end{center}
+
+\begin{tabular}{c|ccc}
+R & a & b & c\\
+\hline
+a & \vU & \vT & \vU \\
+b & \vF & \vU & \vF \\
+c & \vU & \vT & \vU \\
+\end{tabular} \hspace{30pt}
+\begin{tabular}{c|ccc}
+= & a & b & c\\
+\hline
+a & \vT & \vF & \vT \\
+b & \vF & \vT & \vF \\
+c & \vT & \vF & \vT \\
+\end{tabular}
+
+\medskip
+
+Counter-examples are read off an open branch of the tree, just like any other counter-example. Once you've read off the counter-example, you'll need to do a little more work to complete the identity and other predicate tables, exactly as we've shown you in Chapter \ref{ch:models.identity}.
+
+\medskip
+
+Is this argument valid?
+
+\[\qeb x {Fx}, \qeb x {Gx}, \qab x {\enot (Fx \eand Gx)}\ \therefore\ \qen x {\qeb y {x \neq y}}\]
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qeb x {Fx}, name=p1, just={Premise}
+ [\qeb x {Gx}, name=p2, just={Premise}
+  [\qab x {\enot (Fx \eand Gx)}, name=p3, just={Premise}
+   [\enot \qen x {\qeb y {x \neq y}}, name=nc, just={Neg Conc}
+	[Fa, name=r5, just={$\exists$ a}:p1
+	 [Gb, name=r6, just={$\exists$ b}:p2
+	  [\qan x {\enot \qeb y {x \neq y}}, name=r7, just={$\enot\exists$}:nc
+	   [\enot \qeb y {a \neq y}, name=r8, just={$\forall$ a}:r7
+		[\qab y {\enot (a \neq y)}, name=r9, just={$\enot\exists$}:r8
+		 [\enot\enot ({a = b}), name=r10, just={$\forall$ a}:r9
+		  [{a = b}, name=r11, just={$\enot\enot$ a}:r10
+[\enot(Fa \eand Ga), name=r12, just={$\forall$ a}:p2
+ [\enot Fa, close, just={$\eor$}:r12]
+ [\enot Ga, just={$\eor$}:r12
+  [Ga, close, just={$[b/a]$:r5,r11}
+ ]]
+]
+	  ]]]]]
+	]]
+]]]]
+\end{prooftree}\end{center}
+
+
+Is this argument valid?
+\[Rab \eif Sa, a=c, Rcb\ \therefore \ Sa\]
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[Rab \eif Sa, name=p1, just={Premise}
+ [{a=c}, name=p2, just={Premise}
+  [Rcb, name=p3, just={Premise}
+   [\enot Sa, name=nc, just={Neg Conc}
+	[\enot Rab, name=r5, just={$\eif$}:p1
+	 [\enot Rcb, close, just={$[a/c]$:p3,r5}
+	]]
+	[Sa, close, just={$\eif$}:p1]
+]]]]
+\end{prooftree}\end{center}
+
+Is this argument valid?
+\[\qan x {\qab y {(Fx \eand Gy) \eif x \neq y}}\ \therefore \ \enot\qeb x {Fx \eand Gx}\]
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qan x {\qab y {(Fx \eand Gy) \eif x \neq y}}, name=p1, subs={a}, just={Premise}
+ [\enot \enot\qeb x {Fx \eand Gx}, name=nc, just={Neg Conc}
+  [\qeb x {Fx \eand Gx}, name=r3, checked=a, just={$\enot\enot$}:nc
+   [Fa \eand Ga, name=r4, just={$\exists$ a}:r3
+	[\qab y {(Fa \eand Gy) \eif a \neq y}, subs={a},  name=r5, just={$\forall$ a}:p1
+	 [(Fa \eand Ga) \eif a \neq a, checked, name=r6, just={$\forall$ a}:r5
+	  [\enot(Fa \eand Ga), close, just={$\eif$}:r6]
+	  [\enot({a=a}),  just={$\eif$}:r6
+	   [{a=a}, close, just={\id}
+	  ]]
+	]]
+]]]]
+\end{prooftree}\end{center}
+
+Is this argument valid?
+\[\qab x {Fx \eif {x=a}}, \qab x {Fx \eor Gx}, \qeb x {\enot Gx}\ \therefore \ Fa\]
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qab x {Fx \eif {x=a}}, name=p1, subs={b}, just={Premise}
+ [\qab x {Fx \eor Gx}, name=p2, subs={b}, just={Premise}
+  [\qeb x {\enot Gx}, name=p3, checked=b, just={Premise}
+   [\enot Fa, name=nc, just={Neg Conc}
+	[\enot Gb, name=r5, just={$\exists$ b}:p3
+	 [Fb \eor Gb, checked, name=r6, just={$\forall$ b}:p2
+	  [Fb, name=r7, just={$\eor$}:r6
+	   [Fb \eif {b=a}, checked, name=r8, just={$\forall$ b}:p1
+		[\enot Fb, close, just={$\eif$}:r8]
+		[{b=a}, name=r9, just={$\eif$}:r8
+		 [Fa, close, just={$[b/a]$:r7,r9}
+		]]
+	  ]]
+	  [Gb, close, just={$\eor$}:r6]
+	]]
+]]]]
+\end{prooftree}\end{center}
+
+
+
+
+\pagebreak
+Identity can be used for counting. Here's an argument involving counting:
+	\begin{quote}
+	Suppose there are at most two things, and Angela and Belinda are both frogs, and Angela is not Belinda. Then obviously, everything is a frog.
+	\end{quote}
+        And here's a symbolisation of this argument, using initials as an implicit symbolisation key:
+        \[\qen x{\qeb y {\qab z{z=x \eor z=y}}}, Fa, Fb, a \neq b\ \therefore\ \qab x {Fx}\]
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qen x{\qeb y {\qab z{z=x \eor z=y}}}, checked=d, name=p1, just={Premise}
+ [Fa, name=p2, just={Premise}
+  [Fb, name=p3, just={Premise}
+   [(a \neq b), name=p4, just={Premise}
+   [\enot \qab x {Fx}, name=nc, just={Neg Conc}
+    [\qeb x {\enot Fx}, checked=c, name=r6, just={$\enot\forall$}:nc
+	 [\enot Fc, name=r7, just={$\exists$ c}:r6
+	  [\qeb y {\qab z{z=d \eor z=y}}, checked=e, name=r8, just={$\exists$ d}:p1
+	   [\qab z{z=d \eor z=e}, checked, name=r9, just={$\exists$ e}:r8
+		[{a=d \eor a=e}, checked, name=r10, just={$\forall$ a}:r9
+		 [{b=d \eor b=e}, checked, name=r11, just={$\forall$ b}:r9
+		  [{c=d \eor c=e}, checked, name=r12, just={$\forall$ c}:r9
+			[{a=d}, name=r13, just={$\eor$}:r10
+			 [{b=d}, name=r14, just={$\eor$}:r11
+			  [{a=b}, close, just={$[d/b]$:r13,r14}
+			 ]]
+			 [{b=e}
+			  [Fd, name=r14b, just={$[a/d]$:p2,r13}, move by = 1
+			   [Fe, name=r15, just={$[b/e]$:p3,r14}
+				[{c=d}, name=r16, just={$\eor$}:r12
+				 [Fc, close, just={$[d/c]$:r14,r16}
+				]]
+				[{c=e}, name=r16b, just={$\eor$}:r12
+				 [Fc, close, just={$[e/c]$:r14,r16}
+				]]
+			 ]]]
+			]
+			[{a=e}
+			 [{b=e}, name=r14c, just={$\eor$}:r11
+			  [{a=b}, close, just={$[e/b]$:r13,r14}%, move by = 1
+			 ]]
+			 [{b=d}
+			  [Fd, name=r14d, just={$[b/d]$:p2,r13}, move by = 1
+			   [Fe, name=r15b, just={$[a/e]$:p3,r14}
+				[{c=d}, name=r16c, just={$\eor$}:r12
+				 [Fc, close%, just={$[d/c]$:r14,r16}
+				]]
+				[{c=e}, name=r16d, just={$\eor$}:r12
+				 [Fc, close%, just={$[e/c]$:r14,r16}
+				]]
+			 ]]]
+			]
+		]]]
+	]]]]
+]]]]]
+\end{prooftree}\end{center}
+You can see the slightly different substitutions in the parallel branches on lines \#15-\#19. Identity trees with many parallel branches -- like this one -- can get messy. When the different substitutions become too messy to keep track of, we can abuse notation, and just write:
+
+
+$$19. \hspace{47pt} Fc \hspace{27pt} Fc \hspace{27pt} Fc \hspace{27pt} Fc \hspace{32pt}14, 18 [/]\hspace{67pt}$$
+
+
+
+\pagebreak
+\practiceproblems
+
+\noindent\solutions
+\problempart
+\label{pr.identity.trees.validity}
+Use a tree to show that the following arguments are valid.
+\begin{earg}
+\item $\forall x (x=a \eor x=b)$, $\enot(Fa \eand Ga)$, $Gb \eif Hb$ \therefore\ $\forall x ((Fx \eand \enot Hx) \eif \enot Gx)$ %Ex. 10
+\item $\exists x Fx$, $\forall x \forall y ((Fx \eand Fy) \eif x=y)$ \therefore\ $\exists x \forall y (Fy \eiff (x=y))$ %Ex. 14
+\item $\forall x \forall y (Fx \eif x=y)$, $\forall x(Fx \eor Gx)$ \therefore\ $(\forall x Fx \eor \forall x Gx)$ %Ex. 15
+\item $\exists x \forall y (Fy \eiff (x=y))$ \therefore\ $\exists x Fx$ %Ex. 13
+\item $\exists x \forall y(Fy \eiff (x=y))$ \therefore\ $\forall x \forall y ((Fx \eand Fy)\eif (x=y))$ %Ex. 12
+\item $\exists x \forall y(Fy \eiff(x=y))$, $\forall x(Fx \eor Gx)$ \therefore\ $\forall x \forall y((Gx \eor Gy) \eor x=y)$ %Ex. 17
+\end{earg} %(16 too similar to 17)
+
+\noindent\problempart
+\label{pr.identity.trees.relations}
+Use a tree to test whether the following arguments are valid.
+\begin{earg}
+\item $(\forall x\forall y \forall z((Rxy \eand Rxz) \eif y=z) \eor \forall x\forall y \forall z((Rxy \eand Rzy) \eif x=z))$, $\forall x Rxx$ \therefore\ $\forall x \forall y (Rxy \eiff (x=y))$ %Ex 6.2.1
+\item $\forall x \enot Rxx$, $\forall x \forall y((Rxy \eand Ryx) \eif x=y)$, $\forall x \forall y \forall z((Rxy \eand Ryz)\eif Rxz)$ \therefore\ $\forall x \forall y \forall z (\enot Rxy \eor \enot Ryz \eor \enot Rzx)$ %Ex 6.2.2
+\item $\exists x \forall y (Fy \eiff (x=y))$, $\exists x \forall y (Gy \eiff (x=y))$, $\enot \exists x (Fx \eand Gx)$\\ \indent \therefore\ $\exists x \exists y (x \neq y \eand \forall z((Fz \eor Gz) \eiff (z=x \eor z=y)))$ %Ex 6.2.4
+\item $\forall x \forall y ((Rxy \eand Ryx) \eif x=y)$, $\forall x (Fx \eif \exists y(Rxy \eand \enot Fy))$\\ \indent \therefore\ $\forall x \exists y \enot (Ryx \eand Fx)$ %Ex 6.2.5
+\item $\forall x \exists y \forall z (Rxz \eiff (z=y)$, $\forall x \forall y \forall z((Rxy \eand Ryz)\eif Rxz)$\\ \indent \therefore\ $\forall x \exists y (Rxy \eand Ryx)$ %Ex 6.2.6
+\end{earg}
+
+\end{document}

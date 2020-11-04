@@ -1,0 +1,282 @@
+\documentclass[PHIL101-Textbook.tex]{subfiles}
+
+\begin{document}
+
+\chapter{Quick Reference}
+\label{app.solutions}
+
+
+\section*{Truth Table Connectives}
+\label{app.CharacteristicTTs}
+
+\indent
+\begin{tabular}{c|c}
+\script{A} & \enot\script{A}\\
+\hline
+\vT & \vF\\
+\vF & \vT 
+\end{tabular}
+\hfill
+\begin{tabular}{c|c|c|c|c|c}
+\script{A} & \script{B} & (\script{A}\eand\script{B}) & (\script{A}\eor\script{B}) & (\script{A}\eif\script{B}) & (\script{A}\eiff\script{B})\\
+\hline
+\vT & \vT & \vT & \vT & \vT & \vT\\
+\vT & \vF & \vF & \vT & \vF & \vF\\
+\vF & \vT & \vF & \vT & \vT & \vF\\
+\vF & \vF & \vF & \vF & \vT & \vT
+\end{tabular}
+\hfill
+
+%\vfill
+%\newpage
+
+
+\section*{Symbolisation}
+%\begin{center}
+\label{app.symbolisation}
+\begin{tabular*}{\textwidth}{rl}
+\multicolumn{2}{c}{\textsc{Connectives} (chapter \ref{ch.TFL})}\\ \\
+It is not the case that $P$. & $\enot P$\\
+Either $P$, or $Q$. & $(P \eor Q)$\\
+Neither $P$, nor $Q$. & $\enot(P \eor Q)$\ or \ $(\enot P \eand \enot Q)$\\
+Both $P$, and $Q$. & $(P \eand Q)$\\
+If $P$, then $Q$. $Q$ if $P$. & $(P \eif Q)$\\
+$P$ only if $Q$. Only if $Q$, $P$. & $(P \eif Q)$\ or \ $(\enot Q \eif \enot P)$\\
+$P$ if and only if $Q$. & $(P \eiff Q)$\\
+Unless $P$, $Q$. $Q$ unless $P$. & $(\enot P \eif Q)$\\
+\\
+\multicolumn{2}{c}{\label{SymbolizingPredicates}\textsc{Predicates} (chapter \ref{ch.PL})}\\ \\
+All $F$s are $G$s. & $\forall x(Fx \eif Gx)$\\
+Some $F$s are $G$s. & $\exists x(Fx \eand Gx)$\\
+Not all $F$s are $G$s. & $\enot\forall x(Fx \eif Gx)$\ or\ $\exists x(Fx \eand \enot Gx)$\\
+No $F$s are $G$s. & $\forall x(Fx \eif\enot Gx)$\ or\ $\enot\exists x(Fx \eand Gx)$\\
+
+\end{tabular*}
+%\end{center}
+
+
+\newpage
+
+\section*{Truth Trees}
+
+\begin{tabular}{cc}
+\textbf{Conjunction}\\
+{\begin{prooftree}
+	{not line numbering}
+	[\meta{A}\eand\meta{B}, checked
+		[\meta{A} , just={$i$ \eand}
+		[\meta{B} , just={$i$ \eand}
+		]]
+	]
+	\end{prooftree}
+}
+&
+{\begin{prooftree}
+	{not line numbering}
+	[\enot(\meta{A}\eand\meta{B}), checked
+			[\enot\meta{A} , just={$i$, \enot\eand}]
+			[\enot\meta{B} , just={$i$, \enot\eand}]
+	]
+	\end{prooftree}
+}\\
+\textbf{Disjunction}\\
+{\begin{prooftree}
+	{not line numbering}
+	[\meta{A}\eor\meta{B}, checked
+		[\meta{A} , just={$i$, \eor}]
+		[\meta{B} , just={$i$, \eor}]
+	]
+	\end{prooftree}
+}
+&
+{\begin{prooftree}
+	{not line numbering}
+	[\enot(\meta{A}\eor\meta{B}), checked
+		[\enot\meta{A} , just={$i$, \enot\eor}
+		[\enot\meta{B} , just={$i$, \enot\eor}
+		]
+		]
+	]
+	\end{prooftree}
+}\\
+\textbf{Conditional}\\
+{\begin{prooftree}
+	{not line numbering}
+	[\meta{A}\eif\meta{B}, checked
+		[\enot\meta{A} , just={$i$, \eif}]
+		[     \meta{B} , just={$i$, \eif}]
+	]
+	\end{prooftree}
+}
+&
+{\begin{prooftree}
+	{not line numbering}
+	[\enot(\meta{A}\eif\meta{B}), checked
+		[     \meta{A} , just={$i$, \enot\eif}
+		[\enot\meta{B} , just={$i$, \enot\eif}
+		]]
+	]
+	\end{prooftree}
+}\\
+\textbf{Negation}\\
+{\begin{prooftree}
+	{not line numbering}
+	[\enot\enot\meta{A}, checked
+		[\meta{A} , just={$i$, \enot\enot}]
+	]
+	\end{prooftree}
+}\\
+\textbf{Biconditional}\\
+{\begin{prooftree}
+	{not line numbering}
+	[\meta{A}\eiff\meta{B}, checked
+		[\meta{A}, just={$i$, \eiff}
+		[\meta{B}, just={$i$, \eiff}
+		]]
+		[\enot\meta{A}
+		[\enot\meta{B}
+		]]
+	]
+	\end{prooftree}
+}
+&
+{\begin{prooftree}
+	{not line numbering}
+	[\enot(\meta{A}\eiff\meta{B}), checked
+		[     \meta{A}, just={$i$, \enot\eiff}
+		[\enot\meta{B}, just={$i$, \enot\eiff}
+		]]
+		[\enot\meta{A}
+		[     \meta{B}
+		]]
+	]
+	\end{prooftree}
+}\\
+\textbf{Negated Quantifier}\\
+{\begin{prooftree}
+	{not line numbering}
+	[\enot\exists\script{x}\ \meta{A}
+		[\forall\script{x}\ \enot\meta{A} , just={$i$ \enot\esome}]
+	]
+	\end{prooftree}
+}
+&
+{\begin{prooftree}
+	{not line numbering}
+	[\enot\forall\script{x}\ \meta{A}
+		[\exists\script{x}\ \enot\meta{A} , just={$i$ \enot\eall}]
+	]
+\end{prooftree}
+}\\
+\textbf{Quantifier}\\
+{\begin{prooftree}
+	{not line numbering}
+	[\exists\script{x}\meta{A}, checked={\script{a}}
+	 [\meta{A}\substitution{x}{a}, just={$i$ \esome \script{a}}
+ 	  [ , just={(where \script{a} is new})]
+	]]
+\end{prooftree}
+}
+&
+{\begin{prooftree}
+	{not line numbering}
+	[\forall\script{x}\meta{A}, subs={\script{a}}
+	 [\meta{A}\substitution{x}{a}, just={$i$ \eall \script{a}}
+ 	  [ , just={(where \script{a} is old})]
+	]]
+\end{prooftree}
+}
+\end{tabular}
+
+\newpage
+
+
+\section*{Identity}
+%\begin{center}
+\begin{tabular*}{\textwidth}{rl}
+\multicolumn{2}{c}{\textsc{Identity} (section \ref{sec.identity})}\\ \\
+Only $j$ is $G$. & $\forall x(Gx \eiff x=j)$\\
+Everything except $j$ is $G$. & $\forall x(x \neq j \eif Gx)$\\
+%$j$ is more $R$ than anyone else. & $\forall x(x\neq j \eif Rjx)$\\
+The $F$ is $G$. & $\exists x(Fx \eand \forall y(Fy \eif x=y) \eand Gx)$\\
+%\multicolumn{2}{l}{`The F is not G' can be translated two ways:} \\
+%It is not the case that the F is G. (wide)& $\enot\exists x(Fx \eand \forall y(Fy \eif x=y) \eand Gx)$\\
+The $F$ is non-$G$. (narrow) & $\exists x(Fx \eand \forall y(Fy \eif x=y) \eand \enot Gx)$
+
+\end{tabular*}
+
+\subsection*{There are at least \blank\ $F$s.}
+\label{summary.atleast}
+
+\begin{ekey}
+\item[one] $\exists xFx$
+\item[two] $\exists x_1\exists x_2(Fx_1 \eand Fx_2 \eand x_1 \neq x_2)$
+\item[three] $\exists x_1\exists x_2\exists x_3(Fx_1 \eand Fx_2 \eand Fx_3 \eand x_1 \neq x_2 \eand x_1 \neq x_3 \eand x_2 \neq x_3)$
+%\item[four] $\exists x_1\exists x_2\exists x_3\exists x_4 (Fx_1 \eand Fx_2 \eand Fx_3 \eand Fx_4 \eand x_1 \neq x_2 \eand x_1 \neq x_3 \eand x_1 \neq x_4 \eand x_2 \neq x_3 \eand x_2 \neq x_4 \eand x_3 \neq x_4)$
+\item[n] $\exists x_1\cdots\exists x_n(Fx_1 \eand\cdots\eand Fx_n \eand x_1 \neq x_2 \eand\cdots\eand x_{n-1}\neq x_n)$ 
+\end{ekey}
+
+\subsection*{There are at most \blank\ $F$s.}
+\label{summary.atmost}
+
+One way to say `at most $n$ things are $F$' is to put a negation sign in front of one of the symbolizations above and say `NOT at least $n+1$ things are $F$.' Equivalently:
+\begin{ekey}
+\item[one] $\forall x_1\forall x_2\bigl[(Fx_1 \eand Fx_2) \eif x_1=x_2\bigr]$
+\item[two] $\forall x_1\forall x_2\forall x_3\bigl[(Fx_1 \eand Fx_2 \eand Fx_3) \eif (x_1=x_2 \eor x_1=x_3 \eor x_2=x_3)\bigr]$
+%\item[three] $\forall x_1\forall x_2\forall x_3\forall x_4\bigl[(Fx_1 \eand Fx_2 \eand Fx_3 \eand Fx_4) \eif (x_1=x_2 \eor x_1=x_3 \eor x_1=x_4 \eor x_2=x_3 \eor x_2=x_4 \eor x_3=x_4)\bigr]$
+\item[n]$\forall x_1\cdots\forall x_{n+1}
+\bigl[(Fx_1\eand \cdots \eand Fx_{n+1}) \eif (x_1=x_2 \eor \cdots \eor x_n=x_{n+1})\bigr]$ 
+\end{ekey}
+
+\subsection*{There are exactly \blank\ $F$s.}
+\label{summary.exactly}
+
+One way to say `exactly $n$ things are $F$' is to say `at least $n$ things are $F$ AND at most $n$ things are $F$.' The following is shorter:
+\begin{ekey}
+\item[zero] $\enot \exists x Fx$
+\item[one] $\exists x\bigl[Fx \eand \enot\exists y(Fy \eand x\neq y)\bigr]$
+\item[two] $\exists x_1\exists x_2\bigl[(Fx_1 \eand Fx_2) \eand (x_1 \neq x_2) \eand \enot\exists y\bigl(Fy \eand y\neq x_1 \eand y \neq x_2\bigr) \bigr]$
+%\item[three] $\exists x_1\exists x_2\exists x_3\bigl[Fx_1 \eand Fx_2 \eand Fx_3 \eand x_1 \neq x_2 \eand x_1 \neq x_3 \eand x_2 \neq x_3 \eand\\ \enot\exists y(Fy \eand y \neq x_1 \eand y \neq x_2 \eand y\neq x_3) \bigr]$
+\item[n] $\exists x_1\cdots\exists x_n\bigl[(Fx_1 \eand\cdots\eand Fx_n)  \eand (x_1 \neq x_2 \eand\cdots\eand x_{n-1}\neq x_n) \eand\\
+ \enot\exists y(Fy \eand y\neq x_1 \eand \cdots \eand y\neq x_n)\bigr]$ 
+%\item[one] $\exists x\forall y\bigl[Fx \eand (Fy \eif y = x)\bigr]$
+%\item[two] $\exists x\exists y\forall z\Bigl(Fx \eand Fy \eand \bigl[Fz \eif (z=x \eor z=y)\bigr] \eand x \neq y\Bigr)$
+%\item[three] $\exists x_1\exists x_2\exists x_3\forall y\Bigl(Fx_1 \eand Fx_2 \eand Fx_3 \eand [Fy \eif (y=x_1 \eor y=x_2 \eor y=x_3)] \eand x_1 \neq x_2 \eand x_1 \neq x_3 \eand x_2 \neq x_3\Bigr)$
+%\item[n] $\exists x_1\cdots\exists x_n\forall y\Bigl(Fx_1 \eand\cdots\eand Fx_n \eand \bigl[Fy \eif (y=x_1 \eor \cdots \eor y=x_n)\bigr] \eand x_1 \neq x_2 \eand\cdots\eand x_{n-1}\neq x_n\Bigr)$ 
+\end{ekey}
+
+
+\newpage
+
+
+% Tree Rules
+
+% Tree uses 
+
+\section*{Proving Logical Properties}
+%\begin{table}
+	Sometimes we should use a truth tree, and sometimes a model. 
+	\begin{center}
+	\begin{tabular*}{\textwidth}{p{10em}|p{10em}|p{10em}|}
+	\cline{2-3}
+	 & {\centerline{YES}} & {\centerline{NO}}\\
+	\cline{2-3}
+	Is \script{A} a tautology? & close tree with root $\enot \script{A}$ & give a model in which \script{A} is false\\
+	\cline{2-3}
+	Is \script{A} a contradiction? &  close tree with root $\script{A}$ & give a model in which \script{A} is true\\
+	\cline{2-3}
+	Is \script{A} contingent? & give a model in which \script{A} is true and one in which \script{A} is false & close tree with root $\script{A}$ or root $\enot\script{A}$\\
+	\cline{2-3}
+	Are \script{A} and \script{B} equivalent? & close tree with root $\script{A}\eiff\script{B}$ & give a model in which \script{A} and \script{B} have different truth values\\
+	\cline{2-3}
+	Is the set $\{\script{A}_1,\ldots, \script{A}_n\}$ consistent? & give a model in which all $\script{A}_1,\ldots, \script{A}_n$ are true & close tree with root $\script{A}_1,\ldots, \script{A}_n$\\
+	\cline{2-3}
+	Is the argument $\script{A}_1,\ldots, \script{A}_n \therefore\ \script{C}$ valid? & close tree with root $\script{A}_1,\ldots, \script{A}_n, \enot\script{C}$ & give a model in which $\script{A}_1,\ldots, \script{A}_n$ is true and \script{C} is false\\
+	\cline{2-3}
+	\end{tabular*}
+	\end{center}
+%\end{table}
+	
+\vfill
+
+\end{document}

@@ -1,0 +1,743 @@
+\documentclass[PHIL101-Textbook.tex]{subfiles}
+\begin{document}
+
+\part[Truth-Functional Logic]{Truth-Functional Logic\\Symbolisation} \label{part:tfl}
+
+\chapter{Symbolising}\label{ch:Symbolising}
+
+\section{Formal Validity}\label{s:FormalValidity}
+
+One key feature of \emph{logical} validity is that it should not depend on the content of the premises and conclusion, but only on their logical form. Appealing to logical form will allow us to make finer-grained distinctions between arguments. For instance, both
+\begin{earg}
+	\item[] Either Priya is an ophtalmologist or a dentist.
+	\item[] Priya isn't a dentist.
+	\item[\therefore] Priya is an eye doctor.
+\end{earg}
+and
+\begin{earg}
+	\item[] Either Priya is an ophtalmologist or a dentist.
+	\item[] Priya isn't a dentist.
+	\item[\therefore] Priya is an ophtalmologist.
+\end{earg}
+may seem to be valid arguments. But while the validity of the first depends on the meanings of `ophtalmologist' and `eye doctor', the second does not. The second argument is \define{formally valid}; the \emph{form} of the argument is sufficient. We can describe the form of this argument as a pattern, something like this:
+\begin{earg}
+	\item[] Either $A$ is an $X$ or a $Y$.
+	\item[] $A$ isn't a $Y$.
+	\item[\therefore] $A$ is an $X$.
+\end{earg}
+Here, $A$, $X$, and $Y$ are placeholders for appropriate phrases that, when substituted for $A$, $X$, and $Y$, turn the pattern into an argument consisting of statements. 
+
+\pagebreak
+For instance,
+\begin{earg}
+	\item[] Either Mei is a mathematician or a botanist.
+	\item[] Mei isn't a botanist.
+	\item[\therefore] Mei is a mathematician.
+\end{earg}
+is an argument of the same form, but the first argument of this chapter is not. In fact, it is not formally valid. Its form is:
+\begin{earg}
+	\item[] Either $A$ is an $X$ or a $Y$.
+	\item[] $A$ isn't a $Y$.
+	\item[\therefore] $A$ is a $Z$.
+\end{earg}
+In this pattern we can replace $X$ by `ophtalmologist', $Y$ by `dentist', and $Z$ by `eye doctor' to obtain the original argument. But here is another argument of the same form:
+\begin{earg}
+	\item[] Either Mei is a mathematician or a botanist.
+	\item[] Mei isn't a botanist.
+	\item[\therefore] Mei is an acrobat.
+\end{earg}
+This argument is clearly not valid, since we can create a counter-example of a mathematician named Mei who is neither an acrobat nor botanist.
+
+Our strategy as logicians will be to come up with a notion of `possibility' on which an argument turns out to be valid if it is formally valid. Clearly such a notion of `possibility' will have to violate not just some laws of nature but some rules of English. Since we want our first argument to be invalid, we must allow a counterexample where Priya is an ophtalmologist but not an eye doctor, despite the meanings of `ophtalmologist' and `eye doctor.'
+But we can't ignore English entirely. You'll notice that the form keeps some English terms; those that make the argument valid. We'll start in this chapter by focusing on `either-or', `not', `if-then', and `both-and', which we will take to be \emph{logical} terms. 
+\history{
+  Why those four terms? We can blame the Stoic logicians of Ancient Greece. They developed an early logic system using the Greek equivalents of `either-or', `not', `if-then', and `both-and'. The Stoics flourished in the third century BCE.
+  The Stoic logicians were the first to create a logic based on statements, a tradition that we are still following in this course.
+}
+We'll look at other logical terms such as `is the same as', `none', `some', and `all' later in this book.
+
+
+\pagebreak
+Consider for instance this argument, which uses the logical term `if-then':
+	\begin{earg}
+		\item[] It is raining outside.
+		\item[] If it is raining outside, then Dipan is miserable.
+		\item[\therefore] Dipan is miserable.
+	\end{earg}
+and another argument:
+	\begin{earg}
+		\item[] Talia is an anarcho-syndicalist.
+		\item[] If Talia is an anarcho-syndicalist, then Ilya is a fan of Tolstoy.
+		\item[\therefore] Ilya is a fan of Tolstoy.
+	\end{earg}
+Both arguments are valid, and there is a straightforward sense in which we can say that they share a common form. We might express the form thus:
+	\begin{earg}
+		\item[] $A$
+		\item[] If $A$, then $C$
+		\item[\therefore] $C$
+	\end{earg}
+This is a simple argument \emph{form}, and it is formally valid. Note also that the symbols are standing for statements, which is simpler than our earlier attempt at a form where they stood for a mixture of names and adjectives. Let's re-analyse our earlier example:
+
+\begin{earg}
+	\item[] Either Priya is an ophtalmologist or a dentist.
+	\item[] Priya isn't a dentist.
+	\item[\therefore] Priya is an ophtalmologist.
+\end{earg}
+With symbols standing for statements, its argument form is:
+	\begin{earg}
+		\item[] Either $A$ or $B$
+		\item[] Not $A$
+		\item[\therefore] $B$
+	\end{earg}
+This argument will also turn out to be formally valid.\\
+	
+These examples illustrate an important idea. The validity of these arguments has little to do with the meanings of English expressions like `Priya is an ophtalmologist', `Ilya is a fan of Tolstoy', or `Dipan is miserable'. If it has to do with meanings at all, it is with the meanings of phrases like `either-or', `not,' `if-then', and `both-and'. 
+
+We will shortly introduce a formal language which allows us to symbolise many arguments in such a way as to show that they are formally valid. That language will be \emph{truth-functional logic}, or \tfl.
+
+
+
+\section{English v Formal Validity}
+There are plenty of arguments that are valid in English, but not for reasons relating to their argument form. Take an example:
+	\begin{earg}
+		\item[] `Mint Sauce' is my pet ewe
+		\item[\therefore] `Mint Sauce' is my pet sheep
+	\end{earg}
+Because a ewe is a female sheep, it seems impossible for the premise to be true and the conclusion false. So the English argument is valid. However, this validity is not related to the form of the argument. Here is an invalid argument with the same form:
+	\begin{earg}
+		\item[] `Mint Sauce' is my pet ewe
+		\item[\therefore] `Mint Sauce' is my pet pukeko
+	\end{earg}
+In the first argument, the conclusion follows from the premise due to the relationship between the meanings of the English words `ewe' and `sheep'. Similarly, consider the argument:
+	\begin{earg}
+		\item[] The sculpture is green all over.
+		\item[\therefore] The sculpture is not red all over. 
+	\end{earg}
+Again, it seems impossible for the premise to be true and the conclusion false, because nothing \emph{physical} can be both green all over and red all over. But here is an invalid argument with the same logical form:
+	\begin{earg}
+		\item[] The sculpture is green all over.
+		\item[\therefore] The sculpture is not shiny all over.
+	\end{earg}
+This argument is invalid, since it is possible for something to be green all over and shiny all over. (We might paint our nails an elegant shiny green.) Again, the validity of the first of these two English arguments is due to the relationships between colours (or colour-words), not the \emph{form} of the argument.
+
+Arguments that are valid in English but not formally valid demonstrate both the power and limitations of formal systems.
+\begin{quote}
+\emph{\tfl\ only helps us with checking if arguments are formally valid.}
+\end{quote}
+In addition, \tfl\ is based on only four logical terms. It doesn't include `all', `most', `is the same as', `exists', `possibly', `afterwards', or many other potential logical terms. So while an argument that is formally valid in \tfl\ will be valid generally, many arguments will be valid, even formally valid, but not valid in \tfl. 
+
+
+\section{Atomic Statements}
+
+We started isolating the form of an argument, in \S\ref{s:FormalValidity}, by replacing the simplest \emph{statements} with individual letters. For example, `it is raining outside' is a statement within `If it is raining outside, then Jenny is miserable'. There are no simpler statements within  `it is raining outside', it cannot be broken down further. It is an atomic statement, and we might symbolise it with the letter `$A$'.
+
+Our artificial language, \tfl, pursues this idea ruthlessly. We start with some \emph{statement symbols}. These symbols will be the basic formulas out of which more complex formulas are built to express more complex English statements. We will use single uppercase letters as statement symbols in \tfl, such as $A$ or $P$. There are only twenty-six letters in the Latin alphabet, and there is no limit to the number of statements that we might want to consider. But in practice we won't need that many symbols. 
+
+We will use statement symbols to represent, or \emph{symbolise}, our atomic English statements. These symbols may stand for different things in each argument. So that we know which symbol stands for which statement, we will need a \define{symbolisation key}, such as the following:
+	\begin{ekey}
+		\item[A] It is raining outside
+		\item[F] Jenny is miserable
+	\end{ekey}
+This symbolisation key will remain constant for an entire argument (or piece of prose).  In doing this, we are not fixing this symbolisation \emph{once and for all}. We are just saying that, for the time being, we will think of the statement symbol `$A$' of \tfl\ as symbolising the English statement `It is raining outside', and the statement symbol `$C$' of \tfl\ as symbolising the English statement `Jenny is miserable'. Later, when we are dealing with different statements or different arguments, we can provide a new symbolisation key; perhaps:
+	\begin{ekey}
+		\item[A] Talia is an anarcho-syndicalist
+		\item[F] Ilya is a fan of Tolstoy
+	\end{ekey}
+It is important to understand that whatever structure an English statement might have is lost when it is symbolised by a statement symbol of \tfl. From the point of view of \tfl, a statement symbol is just an atomic formula. It can be used to build more complex formulas, but it cannot be taken apart. We cannot split the atom (at least, not yet).
+
+
+
+
+\practiceproblems
+\noindent\solutions
+\problempart\label{pr.symbolisation1}
+Using the symbolisation key below, identify the atomic statements, and then symbolise each sentence using \tfl:
+	\begin{ekey}
+		\item[G] The grass is wet
+		\item[R] It is raining
+		\item[S] The sun is shining
+		\item[W] The ground is wet
+	\end{ekey}
+\begin{earg}
+\item It’s both raining and the ground is wet.
+\item It’s raining and the sun is not shining.
+\item It’s not both raining and the sun shining.
+\item It’s neither raining nor is the sun shining.
+\item If it’s raining, then the ground and the grass are wet.
+\item The grass is wet but the ground isn't.
+\item If it’s raining, then the ground is wet and the sun is not shining.
+\item If it’s raining then the ground is wet, and the sun is not shining.
+\end{earg}
+\problempart
+The last two sentences in Exercise \ref{pr.symbolisation1} are identical apart from the location of the comma. And their symbolisations appear almost identical. Add brackets (like in maths) to your symbolisation of each sentence, to help differentiate them. What does this tell you about one role of commas?
+\medskip
+
+\noindent\solutions
+\problempart\label{pr.symboliseargument1}
+For each argument below, construct a symbolisation key, and then symbolise each sentence in the argument. Pay especial attention to commas, using what you have learned in the previous exercises:
+\begin{earg}
+\item I will not be conscripted into the army. The reasons are that I won’t be conscripted unless there is a Zombie Apocalypse. But if there is a Zombie Apocalypse then it will be over in ten days. If a Zombie Apocalypse is over in ten days then they won’t conscript me.
+
+\item If Kim runs for the bus, then she is stressed. If Kim runs for the bus, then she gets more exercise.  So if Kim does not get more exercise, she need not run for the bus and will not be stressed.
+
+\item If minds are wholly private, then I cannot know about any individual other than myself that they have a mind.
+Having a mind is needed for being a person. 
+If this is true, then if I cannot know that any individual besides myself has a mind, then I also cannot know that any other individual is a person.
+ So, if I can know that even one individual other than myself is a person, then it is false that minds are completely private.
+\end{earg}
+
+
+
+\chapter{Connectives}\label{ch:TFLConnectives}
+
+In the previous chapter, we considered symbolising fairly basic English sentences with statement symbols of \tfl. This leaves us wanting to deal with the English terms `and', `or', `not', and so forth. These are \emph{connectives} -- they can be used to form new statements out of old ones. In \tfl, we will make use of logical connectives to build complex formulas from atomic symbols. There are four basic logical connectives in \tfl, and one more that is commonly used. This table summarises them, and they are explained throughout this section.
+
+	\begin{table}[h]
+	\center
+	\begin{tabular}{l l l}
+	
+	\textbf{symbol}&\textbf{what it is called}&\textbf{rough meaning}\\
+	\hline
+	\enot &negation&`It is not the case that$\ldots$'\\
+	\eand &conjunction&`Both$\ldots$\ and $\ldots$'\\
+	\eor &disjunction&`Either$\ldots$\ or $\ldots$'\\
+	\eif &conditional&`If $\ldots$\ then $\ldots$'\\
+	\hline
+	\eiff &biconditional&`$\ldots$ if and only if $\ldots$'\\
+%	\xor &exclusive disjunction&`Either$\ldots$\ or $\ldots$; not both'\\
+	\hline
+	\end{tabular}
+	\end{table}
+
+These are not the only connectives of English of interest. Others include `unless', `neither \dots{} nor \dots', `except if', `only if', `but', `although', `since', and `because'. We will see that the first few of these can be at least partially symbolised by the logical connectives we will discuss, while the last few cannot. `Since' and `because', although they are very useful in arguments, cannot be symbolised in \tfl\ as they are not \emph{truth functional}.
+
+There are only 16 distinct truth functions that take two truth-values and return a truth-value. (Why?) This sharply limits the expressive power of \tfl; most English connectives cannot be symbolised in \tfl. However the four basic truth functions can be used to define all 16 truth functions. So our four connectives have the full power of \tfl. They are all we need.
+
+  
+\section{Negation}
+
+Consider how we might symbolise these statements:
+	\begin{earg}
+	\item[\ex{not1}] Mary is in Barcelona.
+	\item[\ex{not2}] It is not the case that Mary is in Barcelona.
+	\item[\ex{not3}] Mary is not in Barcelona.
+	\item[\ex{not4}] Mary has left Barcelona.
+	\end{earg}
+Sentence 1 is an atomic statement, so we'll add it to our symbolisation key:
+	\begin{ekey}
+		\item[B] Mary is in Barcelona.
+	\end{ekey}
+The other statements are related to Statement \ref{not1}, so to capture that relationship, we want to use the same atomic symbol. Now, Statement \ref{not2} is something like `It is not the case that~$B$', so we can symbolise it as `$\enot B$'.
+
+\factoidbox{
+An English statement can be symbolised as $\enot\meta{A}$ if it can be paraphrased as `It is not the case that $\meta{A}$'.
+}
+ Statement \ref{not3} also contains the word `not', and on the surface it appears roughly similar to Statement \ref{not2} so we will also symbolise it as `$\enot B$'. Statement \ref{not4} doesn't contain `not', but Statement \ref{not3} expresses part of its meaning. We might be tempted to also symbolise that she \emph{had been} in Barcelona, but at a minimum `$\enot B$' is part of the symbolisation.
+
+\linguistics{Statements \ref{not2}, \ref{not3}, and \ref{not4} aren't interchangable in conversation. They are in different registers -- \ref{not2} is a lot more formal -- but \ref{not4}  (and perhaps \ref{not3}) also presupposes that Mary exists, while \ref{not2} does not. Try re-reading these statements while thinking of Mary as your imaginary aunt. However, \tfl\ is simple enough that we can't make these kinds of distinctions. Keep an eye out for what other aspects of meaning are being discarded when we symbolise.}
+
+\logic{You might be wondering what $\meta{A}$ is. It is  a variable that stands for any formula, rather than being a specific atomic symbol, like $A$ or $B$. We'll be using these curly letters when we are \emph{talking about} formulas rather than using them. They form a meta-language -- a set of formulas to stand for other formulas. This distinction will only become important in later courses, so don't worry too much for now.}\label{metalanguage1}
+
+\noindent It may help to examine a few more examples:
+	\begin{earg}
+		\item[\ex{not5}] The widget can be replaced.
+		\item[\ex{not5a}] The widget is irreplaceable.
+		\item[\ex{not5b}] The widget is not irreplaceable.
+	\end{earg}
+Let us use the following symbolisation key:
+	\begin{ekey}
+		\item[R] The widget is replaceable.
+	\end{ekey}
+Statement \ref{not5} can be symbolised by `$R$'. Statement \ref{not5a} says the widget is irreplaceable, which roughly means that it is not the case that (the widget is replaceable). So we will symbolise it as `$\enot R$'.
+Statement  \ref{not5b} can be paraphrased as `It is not the case that (the widget is irreplaceable).' Which is `$\enot$' then Statement \ref{not5a}. So we will symbolise it as `$\enot\enot R$'.
+You might be tempted to just symbolise it as $R$. But we don't know (yet) if $R$ is the same as $\enot\enot R$.
+
+But not all negations are created equal. Consider:
+	\begin{earg}
+		\item[\ex{not6}] Jane is happy.
+		\item[\ex{not7}] Jane is unhappy.
+	\end{earg}
+Suppose we symbolise Statement \ref{not6} as `$H$'. It would then be tempting to symbolise Statement \ref{not7} as `$\enot{H}$'. This isn't terrible, as if Jane is unhappy, then she is not happy. However Statement \ref{not7} does not mean the same thing as `It is not the case that (Jane is happy)'. Jane might be neither happy nor unhappy; she might be experiencing very different emotions. In order to fully symbolise Statement \ref{not7}, then, we would need a new statement symbol. This might become important if we are expressing the subtleties of a statement like `Jane is not \emph{un}happy'.
+
+Finally, some apparent negations are not negations at all:
+	\begin{earg}
+		\item[\ex{not8}] This textbook is flammable.
+		\item[\ex{not9}] This textbook is inflammable.
+		\item[\ex{not10}] This textbook is valuable.
+		\item[\ex{not11}] This textbook is invaluable.
+	\end{earg}
+Statements \ref{not8} and \ref{not9} have the same meaning, so would share the same symbolisation. Even more confusingly, Statement \ref{not11} means something like `This textbook is very valuable', which is an intensified version of Statement \ref{not10}. We don't have a `very' connective. (We'll discuss why we can't have this type of connective  many chapters hence.)
+
+ Not all `not's are created equal. You will need to think about the meaning of each statement, rather than turn every `not \ldots', `\_\_n't \ldots', and `un\ldots' into a `$\enot\ldots$'. The same caution will be required for our other connectives.
+	
+
+\section{Conjunction}
+\label{s:ConnectiveConjunction}
+
+Here's a key for some simple atomic statements:
+	\begin{ekey}
+		\item[A] Adam is athletic.
+		\item[B] Barbara is athletic.
+		\item[E] Barbara is energetic.
+	\end{ekey}
+
+\noindent These complex statements combine some of the above atomic statements:
+	\begin{earg}
+		\item[\ex{and3}]Adam is athletic, and Barbara is also athletic.
+		\item[\ex{and4}]Barbara is athletic and energetic.
+\item[\ex{and5}]Barbara and Adam are both athletic.
+\item[\ex{and6}]Although Barbara is energetic, she is not athletic.
+\item[\ex{and7}]Adam is athletic, but Barbara is more athletic than him.
+	\end{earg}
+Statement \ref{and3} roughly says `$A$ and $B$', so we will symbolise it as `$(A\eand B)$'. This connective is called \define{conjunction}. We also say that `$A$' and `$B$' are the two \define{conjuncts} of the conjunction `$(A \eand B)$'.
+
+	\factoidbox{
+		An English statement can be symbolised as $(\meta{A}\eand\meta{B})$ if it can be paraphrased as `Both \meta{A} and \meta{B}'.
+	}
+	
+Notice that we don't attempt to symbolise the word `also' in Statement \ref{and3}. Words like `both' and `also' function to draw our attention to the fact that two things are being conjoined. Maybe they affect the emphasis of a statement, but we will not (and cannot) symbolise such things in \tfl. `Both' also serves to tell us where the conjunction starts, which can help us to understand ambiguous statements. The brackets `$($' and `$)$' around the formula serve this role in \tfl. We'll see an example of this shortly.
+
+We often need to expand or paraphrase English sentences before symbolising them, to ensure that our connectives are conjoining \emph{statements}. For example, we might first try to symbolise Statement \ref{and4} as `$B$ and energetic'. This would be a mistake; `energetic' isn't a statement. Instead, we can paraphrase it as `Barbara is athletic and Barbara is energetic', and then symbolise it as `($B \eand E$)'. 
+Similarly, Statement \ref{and5} can be paraphrased as `Barbara is athletic and Adam is athletic', and symbolised as `$(B\eand A)$'.
+
+Statement \ref{and6} is more complicated. The word `although' sets up a contrast between the first part of the statement and the second part, but \tfl\ can't express this, so we'll ignore it. We will paraphrase Statement \ref{and6} as `\emph{Both} Barbara is energetic \emph{and} Barbara is \emph{not} athletic'. This can be symbolised with the \tfl\ statement `$(E\eand\enot B)$'. Note that we have lost all sorts of nuance in this symbolisation. %There is a distinct difference between Statement \ref{and6} and `Both Barbara is energetic and it is not the case that Barbara is athletic'. \tfl\ cannot express these nuances.
+
+\logic{You can now see that \tfl\ cannot really translate sentences, because it misses out on nuances in the forms and modes of expressions. That's why we talk about `symbolisation' instead. You can think of symbolisation as a way of extracting just the information from sentences that is required for logic. }
+
+Statement \ref{and7} raises similar issues. `But' is contrastive, which is also beyond \tfl's expressive powers. So we paraphrase the statement as `\emph{Both} Adam is athletic, \emph{and} Barbara is more athletic than Adam'. We could symbolise this as `$(A \eand B)$', but this logical form loses the information about Barbara's superior athleticism. If that information is important to the argument, we need a new statement symbol in our key:
+\begin{ekey}
+\item[R] Barbara is more athletic than Adam.
+\end{ekey}
+\noindent Now we can symbolise Statement \ref{and7} by `$(A \eand R)$'.\\
+
+You might be wondering why we put brackets around the conjunctions. This is for the same reason we use brackets in mathematics; it's needed for more complicated formulas. We can illustrate this by symbolising some statements containing both negation and conjunction:
+\begin{earg}
+\item[\ex{negcon1}] You won't get both soup and salad.
+\item[\ex{negcon2}] You won't get soup but you'll get salad.
+\end{earg}
+
+\noindent  We'll use this symbolisation key:
+\begin{ekey}
+\item[P] You will get soup.
+\item[S] You will get salad.
+\end{ekey}                
+
+\noindent Statement \ref{negcon1} can be paraphrased as `It is not the case that (both you will get soup and you will get salad)'.
+We would symbolise `both you will get soup and you will get salad' as `$(P \eand S)$'. To symbolise Statement \ref{negcon1}, we negate the whole statement: `$\enot (P \eand S)$'. 
+
+Statement \ref{negcon2} is a conjunction of `You will \emph{not} get soup', and `You will get salad'. `You will not get soup' is symbolised by `$\enot P$'. So we  symbolise Statement \ref{negcon2} as `$(\enot P \eand S)$'. 
+
+These English statements have different meanings, and so their symbolisations differ. In one of them, the entire conjunction is negated. In the other, just one conjunct is negated. Brackets help us to keep track of things like the \emph{scope} of the negation -- which part of the formula it applies to. 
+
+
+\pagebreak
+\section{Disjunction}
+
+Here's another symbolisation key:
+\begin{ekey}
+\item[V] Adara will play videogames.
+\item[M] Adara will watch movies.
+\item[O] Omar will play videogames.
+\end{ekey}
+
+\noindent And some English disjunctions using the above statements:
+\begin{earg}
+\item[\ex{or1}]Either Adara will play videogames, or she will watch movies.
+\item[\ex{or2}]Either Adara or Omar will play videogames. 
+\end{earg}
+
+  
+
+Statement \ref{or1} can be symbolised by `$(V \eor M)$'. We call `$V$' and `$M$' the \define{disjuncts} of the disjunction `$(V \eor M)$'.
+
+
+\noindent Statement \ref{or2} can be paraphrased as `Either Adara will play videogames, or Omar will play videogames'. Now we can symbolise it by `$(V \eor O)$'.
+	\factoidbox{
+		An English statement can be symbolised as $(\meta{A}\eor\meta{B})$ if it can be paraphrased as `Either $\meta{A}$ or $\meta{B}$.'}
+
+
+
+\noindent Like conjunction, disjunction interacts with negation. Consider:
+	\begin{earg}
+		\item[\ex{or3}] Either you will not have soup, or you will not have salad.
+		\item[\ex{or4}] You will have neither soup nor salad.
+		\item[\ex{or5}] You will not have both soup and salad.
+	\end{earg}
+Statement \ref{or3} can be paraphrased as: `Either it is not the case that (you get soup), or it is not the case that (you get salad)'. To symbolise this in \tfl, we need both disjunction and negation. `It is not the case that you get soup' is symbolised by `$\enot P$'. `It is not the case that you get salad' is symbolised by `$\enot S$'. So Statement \ref{or3} itself is symbolised by `$(\enot P \eor \enot S)$'.
+
+Statement \ref{or4} can be paraphrased as: `It is not the case that (either you get soup or you get salad)'. The `\emph{n}either \ldots \emph{n}or \ldots' tells us that the whole disjunction (the `or' in `nor' tells us it's a disjunction) is being \emph{n}egated. We symbolise Statement \ref{or4} with `$\enot (P \eor S)$'. The different symbolisations of  statements \ref{or3} and \ref{or4} allow us to express their different meanings.
+
+Statement \ref{or5} is just a paraphrase of Statement \ref{negcon1}, so it has the same symbolisation: `$\enot (P \eand S)$'. Now, if you don't have both soup and salad, then either you don't have soup or you don't have salad. But that's just Statement \ref{or3}. And if either you don't have soup or you don't have salad, then you can't have both. Statements \ref{or3} and \ref{or5} seem to say the same thing, even though they have different symbolisations! We are going to need methods to determine if different formulas are logically equivalent. Developing these methods will be one of the main themes of the rest of this book.
+
+
+
+\section{Conditionals}
+Our next symbolisation key is:
+\begin{ekey}
+\item[A] Aroha is in Aotearoa. 
+\item[T] Aroha is in Waikato.
+  \end{ekey}
+
+\noindent And here's some English conditionals using the above statements:
+\begin{earg}
+\item[\ex{if1}] If Aroha is in Waikato then Aroha is in Aotearoa.
+\item[\ex{if2}] Aroha is in Waikato if Aroha is in Aotearoa.
+\end{earg}
+
+	
+\noindent Statement \ref{if1} is roughly of this form: `if $T$ then $A$'. We symbolise it as `$(T\eif A)$'. The connective $\eif $ is called a \define{conditional}. Here, `$T$' is called the \define{antecedent} of the conditional `$(T \eif A)$', and `$A$' is called the \define{consequent}.
+
+	\factoidbox{
+		An English statement can be symbolised as $(\meta{A} \eif \meta{B})$ if it can be paraphrased  as `If A, then B'.
+	}
+
+
+\noindent Statement \ref{if2} is also a conditional. You might think to symbolise this in the same way as Statement \ref{if1}. That would be a mistake. The location of the term `if' is important. 
+Your knowledge of geography tells you that Statement \ref{if1} is true: there is no way for Aroha to be in Waikato that doesn't involve her being in Aotearoa (given current geography -- we aren't saying this is logically true!). But Statement \ref{if2} is different: suppose Aroha is in Taranaki or Taupo; then she is in Aotearoa without being in Waikato, and Statement \ref{if2} is false. Since geography alone dictates the truth of Statement \ref{if1}, whereas Aroha's location affects the truth of Statement \ref{if2}, they must be distinct.
+
+\emph{Tip}: It's helpful to always paraphrase conditional statements to use an `if', and to do so with the `if' (antecedent) before the `then' (consequent). This paraphrasing of Statement \ref{if2} gives `If Aroha is in Aotearoa, then Aroha is in Waikato'. So we can symbolise it by `$(A \eif T)$'.\\
+
+
+Many English expressions can be paraphrased using conditionals. 
+	\begin{earg}
+		\item[\ex{ifnec2}] Aroha's being in Waikato informs us that she is in Aotearoa. 
+		\item[\ex{ifsuf1}] For Aroha to be in Aotearoa, it is enough that she is in Waikato.
+		\item[\ex{ifsuf2}] Aroha's being in Aotearoa guarantees that she is in Waikato.
+	\end{earg}
+These statements can all be paraphrased as `If Aroha is in Waikato, then Aroha is in Aotearoa'. So they can all be symbolised by `$(A \eif T)$'.
+
+But symbolising conditionals isn't as straight-forward as it looks. We'll have more to say about some potential problems with them shortly. 
+
+\pagebreak
+
+\practiceproblems
+\noindent%\solutions %Should be there, TODO 3 August
+\problempart\label{pr.connectives.neg}
+Symbolise each of the following statements, being careful with negation. Create your own key as needed. If a statement is ambiguous, symbolise each possible meaning.
+\begin{earg}
+\item No one has read my novel.
+\item Your assignment was unintelligible, and I don't need to hear any excuses.
+\item He doesn't pray at the University mosque.
+\item I was not unaware of the time but I am now.
+\item I cannot say that I do not disagree with you.
+\end{earg}
+
+\noindent\problempart\label{pr.connectives.conjdisj}
+Symbolise each of the following statements, being careful with conjunction and disjunction. Create your own key as needed. If a statement is ambiguous, symbolise each possible meaning.
+\begin{earg}
+\item **
+\end{earg}
+
+
+\noindent\problempart\label{pr.connectives.cond}
+Symbolise each of the following statements, being careful with conditionals. Create your own key as needed. If a statement is ambiguous, symbolise each possible meaning.
+\begin{earg}
+\item **
+\end{earg}
+
+\chapter{Connective Complications}
+\label{ch:TFLComplications}
+
+\section{Interpreting Language}
+
+Many students struggle with figuring out which connectives to use when symbolising English statements. One reason for this is that we are all trained to interpret the meaning of a statement in its context, from the moment we are born. And we tend to construct our own statements within its context.
+
+For example, we tend not to say `or' when we can say `and'; instead we provide alternatives that don't overlap, due to restrictions based on natural laws and social customs. These choices of words exclude the `or' from allowing both options. More generally we choose our words to convey and imply and connote a lot of information -- the probable, the expected, and the default -- as well as the explicit content.
+
+Then a logician comes along and says ``you are interpreting `or' incorrectly -- it's never exclusive''. But you've been treating it as excluding the possibility of both options for decades, and so has everyone else. What is the logician thinking? Don't they understand language?
+
+Yes, we do. Linguists and philosophers of language divide communication into semantics (the literal truth-based meaning of sentences), and pragmatics (how we use the sentences in a continual, fragile, dynamic negotiation for agreement). If you've ever listened to a recording of a real conversation between friends, you'll know that what is said is fragmentary and incoherent -- a lot of the communication comes from shared history, understanding key phrases, body language, etc.
+
+The pragmatics of a statement is not part of our symbolisation, because it's all culture and context-dependent. This means that people will disagree on what is being said. We will stick to what is the agreed core of literal meaning (semantics).
+
+This chapter contains advice on how to do this well.
+
+
+\section{Exclusive Disjunction}
+
+Sometimes in English, the word `or' is used in a way that excludes the possibility that both disjuncts are true. This is called an \define{exclusive or}.  An \emph{exclusive or} is clearly intended when it says, on a restaurant menu, `the main course comes with either soup or salad': you may have soup; you may have salad; but if you want \emph{both} soup \emph{and} salad you will have to pay extra.
+
+Other times, the word `or' allows for the possibility that both disjuncts might be true. For example, `Adara or Omar will come to the party' allows that Adara might come alone, Omar might come alone, or they might both come to the party. The statement merely says that \emph{at least} one of them will come to the party. This is called an \define{inclusive or}. The \tfl\ symbol `\eor' always symbolises an \emph{inclusive or}.
+
+But what about the \emph{exclusive or}? Consider: 
+
+\begin{earg}
+\item[\ex{or.xor}] You get either soup or salad, but not both.
+\end{earg}
+
+\noindent Statement \ref{or.xor} expresses the exclusivity of the options; it is an \emph{exclusive} `or'. We can break the statement into two parts. The first part says that you get soup or salad. We symbolise this as `$(P \eor S)$'. The second part says that you do not get both.
+Using both negation and conjunction, we symbolise this with `$\enot(P \eand S)$'. Now we just need to put the two parts together. As we saw previously, `but' can usually be symbolised as `$\eand$'. Statement \ref{or.xor} can thus be symbolised as `$((P \eor S) \eand \enot(P \eand S))$'.
+
+This last example shows something important. Although the \tfl\ symbol `\eor' always symbolises \emph{inclusive or}, we can symbolise an \emph{exclusive or} in {\tfl}. We just have to combine a few of our symbols. However, if we wanted to use a single symbol for exclusive disjunction, we could introduce one, such as $(P \xor S)$. We won't be using this exclusive disjunction symbol, partially because it can be defined by the other existing symbols, but mainly because we don't think logical exclusive disjunction is actually that common in English.
+
+\linguistics{Many uses of `or' in English, such as Statement \ref{or.xor}, seem exclusive. But most linguists think that exclusivity isn't due to the connective. Instead, the exclusive restriction is from our knowledge of the world. That is, almost all exclusivity is due to the laws of nature, or social customs, or regulations, and not the laws of logic. As we are interested solely in logical validity, this physical exclusivity is not part of disjunction.}
+
+
+\section{Conditional Complications}
+
+Conditionals are much more complex than we have indicated above. There are dozens of books written by philosophers, linguists, and logicians simply titled `Conditionals', and hundreds more on the topic.
+
+A common approach taken by logicians is to dismiss many uses of `if' (and similar subordinating connectives) as not being real conditionals. These uses generally can't be represented by the \tfl\  connective `\eif'. This is because `\eif', like all connectives in \tfl, is truth functional. This means that `$(A \eif B)$' only tells us that if $A$ is true then $B$ is also true. For instance, it says nothing about a \emph{causal} or \emph{temporal} connection or any \emph{relevance} between $A$ and $B$. In fact, we lose a huge amount of information when we use `$\eif$' to symbolise English conditionals.  Sometimes what we lose is exactly what the conditional is trying to convey, and so we can't use `\eif'. Here are a few examples of the wide range of conditionals, which show the limited expressivity of \tfl.
+
+\begin{earg}
+\item[\ex{if13}] If Logic is the gold standard of thought, then Philosophy is iron pyrites.
+\item[\ex{if15}] If only there was a simple way to treat conditionals.
+\item[\ex{if11}] If I don't see you before Monday, have a great weekend.
+\item[\ex{if12}] If you don't mind, I think I'll leave now.
+\item[\ex{if14}] Even if you don't enjoy logic, you'll find it useful.
+\item[\ex{if16}] Since gold is a soft metal, it is easy to work.
+\item[\ex{if17}] If I were a cat, I'd like to chase mice.
+\item [\ex{ifcmd1}] Be quiet, and I'll give you a cookie.
+\item[\ex{if18}] If I get funding, I'll go to the conference.
+\end{earg}
+Statement \ref{if13} is a metaphor. Statement \ref{if15} is a wish -- note there is no consequent. Statements \ref{if11}-\ref{if14} are really \emph{unconditional} statements. Statement \ref{if11} wishes you a great weekend, whether you see them before Monday or not. Similarly, Statement \ref{if12} usually isn't about whether you mind or not; it's a declaration of intent. And Statement \ref{if14} says you'll find logic useful, whether you enjoy it or not. Statement \ref{if16} is a factual conditional -- as well as being a conditional, it tells us the antecedent is true. This would be symbolised in \tfl\ as $(A \eand (A \eif B))$, which we'll later see is the same as `$(A \eand B)$'; so it's really a conjunction. Statement \ref{if17} is a counter-factual conditional; one where the antecedent is false. This would be symbolised in \tfl\ as $(\enot A \eand (A \eif B))$, which we'll later see is the same as `$\enot A$'.
+Finally, Statement \ref{if18} seems to also say that `if I don't get funding, I won't go to the conference'. So it somehow combines two different conditionals in one.
+
+
+\section{Only Conditionals}\label{s.only}
+
+We have already seen that `$B$ if $A$' and `if $A$ then $B$' are paraphrases of each other, and are both symbolised by `$(A \eif B)$'. We might feel we've discovered a general rule that the phrase that goes at the start of the conditional is the phrase that follows the `if'. But consider this:
+
+	\begin{earg}
+		\item[\ex{if19}] Aroha is in Waikato only if Aroha is in Aotearoa.
+		\item[\ex{if20}] Only if Aroha is in Waikato then Aroha is in Aotearoa.
+	\end{earg}
+The `only' seems to change the meaning of Statement \ref{if19} from `If Aroha is in Aotearoa then Aroha is in Waikato' into `If Aroha is in Waikato then Aroha is in Aotearoa'. A common rule of thumb is to say that `only if' swaps the antecedent and consequent order.
+
+This rule of thumb makes `Aroha is in Waikato only if Aroha is in Aotearoa' a paraphrase of `Aroha is in Aotearoa if Aroha is in Waikato', which is already a paraphrase of `if Aroha is in Waikato then Aroha is in Aotearoa'. We've swapped order twice, back to the original order. %Using this rule of thumb, Statement \ref{if20} is a paraphrase of `if Aroha is in Aotearoa then Aroha is in Waikato'.
+
+\factoidbox{`$A$ only if $B$' \emph{can} be symbolised as `$(A \eif B)$'. \\
+`only if $A$ , $B$' \emph{can} be symbolised as `$(B \eif A)$'. }
+
+But there's a better way. `Only' has a property that applies in \tfl, in the logic we'll learn later in this book, and in linguistics generally: It's actually a form of global negation. This is more complicated to explain, but it's a much more generally applicable principle. The short version is that `only if' negates both parts of the conditional formed by `if'.
+
+Under this approach, Statement \ref{if19} becomes `Aroha is not in Waikato if Aroha is not in Aotearoa', which is a paraphrase of `if  Aroha is not in Aotearoa, then Aroha is not in Waikato'. And Statement \ref{if20} becomes `if Aroha is not in Waikato then Aroha is not in Aotearoa'.
+
+This method avoids the confusion of swapping order twice, and it also applies to more subtle statements that we will later want to symbolise, such as `Only you can save the world', `There are only two solutions to this puzzle', and `I only felt free on the dance floor'.
+
+\factoidbox{`$A$ only if $B$' \emph{should} be symbolised as `$(\enot B \eif \enot A)$. \\
+`only if $A$ , $B$' \emph{should} be symbolised as `$(\enot A \eif \enot B)$. }
+
+We suggest that only if you want an easy option now that you will need to discard in a month would you not use this rule instead. That is, if you have other priorities than taking the option that is easiest for this week, you should use this negation-based rule for `only if'.
+
+\section{Biconditional}
+Biconditionals aren't a common part of English, and they can always be paraphrased away. But they are a common part of Philosophical and Mathematical writing, and are very common in Logic. So we are introducing a symbol for biconditionals for our convenience, not because standard English speakers need them.
+
+A biconditional is two conditionals combined -- an `if' conditional, and an `only if' conditional. Unsurprisingly, the biconditional is often written `if and only if' in English; this is sometimes abbreviated as `iff'.
+
+Consider these statements:
+\begin{earg}
+\item[\ex{iff2a}] If Laika has a heart then she has a kidney 
+\item[\ex{iff2}] Laika has a kidney if she has a heart
+\item[\ex{iff1}] Laika has a kidney only if she has a heart
+\item[\ex{iff3}] Laika has a kidney if and only if she has a heart
+\end{earg}
+We will use the following symbolisation key:
+\begin{ekey}
+\item[H] Laika has a heart
+\item[K] Laika has a kidney
+\end{ekey}
+Statement \ref{iff2a} can be symbolised by `$(H \eif K)$'. Statement \ref{iff2} is a paraphrase of Statement \ref{iff2a}, so has the same symbolisation. Statement \ref{iff1} can be symbolised by `$(\enot H \eif \enot K)$'. The conjunction of \ref{iff2} and \ref{iff1} is Statement \ref{iff3}, so we can symbolise it as `$((H \eif K) \eand(\enot H \eif \enot K))$'. If you prefer the simpler form of symbolising `only if', it would be `$((H \eif K) \eand (K \eif H))$'. 
+
+We could treat every biconditional this way. So, just as we do not need a new \tfl\ symbol to deal with \emph{exclusive or}, we do not really need a new \tfl\ symbol to deal with biconditionals. 
+Because the biconditional occurs so often, however, we will use the symbol `\eiff' for it. We can then symbolise Statement \ref{iff3} with the \tfl\ formula `$(H \eiff K)$'. 
+
+
+	\factoidbox{
+		An English statement can be symbolised as $\meta{A} \eiff \meta{B}$ if it can be paraphrased  as `$A$ if and only if $B$'.
+	}
+
+We often read ordinary conditionals as biconditionals. Suppose we say `if it rains, the cricket will be cancelled tomorrow'; then we expect that if it doesn't rain, the cricket will not be cancelled. But this doesn't follow from the statement; after all snowfall, a plague of frogs, or an earthquake might also cause cricket to be cancelled. It's our knowledge of physical reality, not the logical content of the sentence, that tempts us to add this extra thought. Biconditionals are rare in nature; let's keep them that way.
+
+
+You might have thought that the previous paragraph railing against biconditionals was too strong, or even just plain wrong. If so, here's an argument that you might use as an example:
+
+	\begin{quotation}
+	\noindent Suppose your parents told you, when you were a child: `if you don't eat your greens, you won't get any dessert'. Now imagine that you ate your greens, but that your parents refused to give you any dessert, on the grounds that they were only committed to the \emph{conditional}, rather than the biconditional (`you get dessert iff you eat your greens'). A tantrum would rightly ensue.
+	\end{quotation} 
+
+It seems reasonable on the surface to translate `if you don't eat your greens, you won't get any dessert' as a biconditional. Perhaps you think of `if you don't eat your greens, you won't get any dessert' as a threat, and its inverse `if you eat your greens, you will get dessert' as a promise. Now if you think that threats always come paired with promises as a matter of logic, go ahead and use a biconditional. And if you think that your parents meant both conditionals, add both.
+
+But here's a reason you might not want to do that: your parents' next statement could be `if you don't sit up straight, you won't get any dessert'. Conditionals can be added to each other; you need to sit up straight and eat your greens to have a hope of dessert. But you can't do that if you treat them as biconditionals. (We must wait until a later chapter to explain this completely.)
+
+So what are biconditionals for? We mainly use biconditionals in definitions, in giving exact conditions for something to occur, and when stating that things are identical, interchangeable or equivalent.
+	\begin{earg}
+		\item[\ex{iff4}] A polygon is a square iff it has four equal sides and four equal angles.
+		\item[\ex{iff5}] An animal is human iff it is a featherless biped.
+		\item[\ex{iff6}] Fire occurs iff there is oxygen, fuel, and enough heat.
+	\end{earg}
+
+Statement \ref{iff4} is the sort of definition you'll see throughout mathematics and some other formal disciplines such as physics or computer science. Statement \ref{iff5} was Plato's attempt at defining a human (in response, a rival philosopher Diogenes plucked a chicken and let it loose in Plato's academy). Statement \ref{iff6} describes the necessary and sufficient conditions for fire -- all these conditions are needed, and if they are all met, there will be fire.
+
+
+\pagebreak
+\section{Unless}
+
+The English `unless' is another tricky connective. Consider:
+
+\begin{earg}
+\item[\ex{unless1}] \emph{Unless} you wear a jacket, you will catch a cold. 
+\item[\ex{unless2}] You will catch a cold \emph{unless} you wear a jacket. 
+\end{earg}
+We will use the symbolisation key:
+	\begin{ekey}
+		\item[J] You will wear a jacket.
+		\item[D] You will catch a cold.
+	\end{ekey}
+Both statements are paraphrases of `if you do not wear a jacket, then you will catch a cold'. So we could symbolise them as `$(\enot J \eif D)$'. But both statements are also paraphrases of `if you do not catch a cold, then you must have worn a jacket', which is symbolised as `$(\enot D \eif J)$'. We might also claim that `either you will wear a jacket or you will catch a cold' is a paraphrase, and symbolise them as `$(J \eor D)$'.
+
+All three are \emph{adequate} symbolisations. Indeed, we will shortly be able to prove that all three symbolisations are equivalent in \tfl. However, we don't typically treat disjunctions and conditionals interchangeably in English. The differences between these connectives in English are not captured by the truth functions of \tfl. But your intuitions as a speaker of English will cause you to make mistakes, or doubt yourself, if you don't use the paraphrase (and symbolisation) that best fits how you use `unless'.
+%Todo:  it might be useful to mention the equivalence of $A \to B$ and $\neg A \lor B$ explicitly here. It's refered to in exercise 11.F.3 (Semantic concepts)
+
+Most people use `unless' as a conditional, with the statement that comes earlier in time as the antecedent. In the example above, that's `$(\enot J \eif D)$'. But if in doubt, the simplest approach is to replace the word `unless' with `if not'.
+
+	\factoidbox{
+		If a statement can be paraphrased as `Unless A, B,' then it can be symbolised as `($\enot\meta{A}\eif\meta{B})$'.
+	}
+Warning: there is a trap. `Unless' is a type of conditional, and people often use a conditional when the physical or social constraints make it seem like a biconditional. And if we treat it as a disjunction, the same physical or social constraints make it seem like an exclusive disjunction. Suppose someone says: `I will go running unless it rains'. You might think they mean the biconditional `I will go running iff it does not rain'. As we discussed in the section on the biconditional, don't assume that. If they go for a run in the rain, they wouldn't have lied; you would have just made a wrong assumption.
+
+Don't treat a disjunction as exclusive, or a conditional as a biconditional, if they aren't explicitly treated that way in the text.
+
+
+
+
+\practiceproblems
+\noindent\solutions
+\problempart\label{pr.monkeysuits} 
+Symbolise each English statement in \tfl, using the key.
+	\begin{ekey}
+		\item[M] Those creatures are men in suits. 
+		\item[C] Those creatures are chimpanzees. 
+		\item[G] Those creatures are gorillas.
+	\end{ekey}
+\begin{earg}
+\item Those creatures are not men in suits.
+\item Those creatures are men in suits, or they are not.
+\item Those creatures are either gorillas or chimpanzees.
+\item Those creatures are neither gorillas nor chimpanzees.
+\item If those creatures are chimpanzees, then they are neither gorillas nor men in suits.
+\item Unless those creatures are men in suits, they are either chimpanzees or they are gorillas.
+\end{earg}
+
+\noindent\problempart Symbolise each English statement in \tfl, using the key.
+\begin{ekey}
+\item[A] Ace was murdered.
+\item[B] The butler did it.
+\item[C] The cook did it.
+\item[D] The Duchess is lying.
+\item[E] Emma was murdered.
+\item[F] The murder weapon was a frying pan.
+\end{ekey}
+\begin{earg}
+\item Either  Ace or Emma was murdered.
+\item If  Ace was murdered, then the cook did it.
+\item If Emma was murdered, then the cook did not do it.
+\item Either the butler did it, or the Duchess is lying.
+\item The cook did it only if the Duchess is lying.
+\item If the murder weapon was a frying pan, then the culprit must have been the cook.
+\item If the murder weapon was not a frying pan, then the culprit was either the cook or the butler.
+\item Ace was murdered if and only if Emma was not murdered.
+\item The Duchess is lying, unless it was Emma who was murdered.
+\item If Ace was murdered, he was done in with a frying pan.
+\item Since the cook did it, the butler did not.
+\item Of course, the Duchess is lying!
+\end{earg}
+
+\pagebreak
+
+\noindent\solutions 
+\problempart\label{pr.avacareer} Symbolise each English statement in \tfl, using the key.
+	\begin{ekey}
+		\item[A] Ava is an electrician.
+		\item[B] Harrison is an electrician.
+		\item[C] Ava is a firefighter.
+		\item[D] Harrison is a firefighter.
+		\item[E] Ava is satisfied with her career.
+		\item[F] Harrison is satisfied with his career.
+	\end{ekey}
+\begin{earg}
+\item Ava and Harrison are both electricians.
+\item If Ava is a firefighter, then she is satisfied with her career.
+\item Ava is a firefighter, unless she is an electrician.
+\item Harrison is an unsatisfied electrician.
+\item Neither Ava nor Harrison is an electrician.
+\item Both Ava and Harrison are electricians, but neither of them find it satisfying.
+\item Harrison is satisfied only if he is a firefighter.
+\item If Ava is not an electrician, then neither is Harrison, but if she is, then he is too.
+\item Ava is satisfied with her career if and only if Harrison is not satisfied with his.
+\item If Harrison is both an electrician and a firefighter, then he must be satisfied with his work.
+\item It cannot be that Harrison is both an electrician and a firefighter.
+\end{earg}
+
+
+\noindent\problempart \label{pr.jazzinstruments}Symbolise each English statement in \tfl, using the key.
+\begin{ekey}
+\item[T] John Coltrane played tenor sax.
+\item[S] John Coltrane played soprano sax.
+\item[U] John Coltrane played tuba
+\item[R] Miles Davis played trumpet
+\item[B] Miles Davis played tuba
+\end{ekey}
+
+\begin{earg}
+\item John Coltrane played tenor and soprano sax.
+\item Neither Miles Davis nor John Coltrane played tuba.
+\item John Coltrane did not play both tenor sax and tuba.
+\item John Coltrane did not play tenor sax unless he also played soprano sax.
+\item John Coltrane did not play tuba, but Miles Davis did.
+\item Miles Davis played trumpet only if he also played tuba.
+\item If Miles Davis played trumpet, then John Coltrane played at least one of these three instruments: tenor sax, soprano sax, or tuba.
+\item If Coltrane played tuba then Davis played neither trumpet nor tuba.
+\end{earg}
+
+
+\noindent\solutions
+\problempart \label{pr.spies} Create a key, and symbolise each English statement in \tfl.
+\begin{earg}
+\item Alice and Bob are both spies.
+\item If either Alice or Bob is a spy, then the code has been broken.
+\item If neither Alice nor Bob is a spy, then the code remains unbroken.
+\item The American embassy will be in an uproar, unless someone has broken the code.
+\item Either the code has been broken or it has not, but the American embassy will be in an uproar regardless.
+\item Either Alice or Bob is a spy, but not both.
+\end{earg}
+
+
+\noindent
+\problempart Create a key, and symbolise each English statement in \tfl.
+\begin{earg}
+\item If there is food to be found in the pridelands, then Rafiki will talk about squashed bananas.
+\item Rafiki will talk about squashed bananas unless Simba is alive.
+\item Rafiki will either talk about squashed bananas or he won't, but there is food to be found in the pridelands regardless.
+\item Scar will remain as king if and only if there is food to be found in the pridelands.
+\item If Simba is alive, then Scar will not remain as king.
+\end{earg}
+
+
+\noindent\solutions
+\problempart \label{pr.complexargument1}
+For each argument, create a key and symbolise all of the statements of the argument in \tfl.
+\begin{earg}
+\item If Anna plays in the snow in the morning, then Elsa wakes up cranky. Anna plays in the snow in the morning unless she is distracted. So if Elsa does not wake up cranky, then  Anna will be distracted.
+\item It will either rain or snow on Tuesday. If it rains, Xinyu will be sad. If it snows, Xinyu will be cold. Therefore, Xinyu will either be sad or cold on Tuesday.
+\item If Badr remembered to do his chores, then things are clean but not neat. If he forgot, then things are neat but not clean. Therefore, things are either neat or clean; but not both.
+\item Jane will see exactly one of her parents at her 21st party. If her mum doesn't go, her father will definitely attend; and if her dad can't make it, her mother will make an appearance. But they simply refuse to be in the same room any more.
+\end{earg}
+
+
+\pagebreak
+\noindent\problempart
+For each argument, create a key and symbolise the argument as well as possible in \tfl. Don't symbolise the part of the passage in italics; it is there only to provide context for the argument.
+\begin{earg}
+\item It is going to rain soon. I know because my leg is hurting, and my leg hurts if it's going to rain. 
+
+\item  \emph{Spider-man tries to figure out the bad guy's plan.} If Doctor Octopus gets the uranium, he will blackmail the city. I am certain of this because if Doctor Octopus gets the uranium, he can make a dirty bomb, and if he can make a dirty bomb, he will blackmail the city.
+
+\item \emph{A westerner tries to predict the policies of the Chinese government.} If the Chinese government cannot solve the water shortages in Beijing, they will have to move the capital. They don't want to move the capital. Therefore they must solve the water shortage. But the only way to solve the water shortage is to divert almost all the water from the Yangzi river northward. Therefore the Chinese government will go with the project to divert water from the south to the north.       
+\end{earg}
+
+
+\noindent\problempart
+We symbolised an \emph{exclusive or} using `$\eor$', `$\eand$', and `$\enot$'. How could you symbolise an \emph{exclusive or} using only two connectives? What about symbolising  \emph{exclusive or} using only one connective (repeatedly)?
+
+\end{document}

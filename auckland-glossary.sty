@@ -1,0 +1,318 @@
+% See https://www.resurchify.com/latex_tutorial/latex_glossaries.php#Terms_and_Acronyms
+
+%%%% TERMS %%%%
+
+%% PART 1%%
+
+\newglossaryentry{premise indicator word}
+{
+name=premise indicator,
+description={a word or phrase such as `because' used to indicate that what follows is the premise of an argument}
+}
+
+\newglossaryentry{conclusion indicator word}
+{
+name=conclusion indicator,
+description={a word or phrase such as `therefore' used to indicate that what follows is the conclusion of an argument}
+}
+\newglossaryentry{statement}
+{
+name=statement,
+description={a sentence that is true or false}
+}
+
+\newglossaryentry{argument}
+{
+name=argument,
+description={a connected series of statements, divided into \gls{premise}s and \gls{conclusion}}
+}
+
+\newglossaryentry{premise}
+{
+name=premise,
+description={a \gls{statement} in an \gls{argument} other than the \gls{conclusion}}
+}
+
+\newglossaryentry{conclusion}
+{
+name=conclusion,
+description={the last \gls{statement} in an \gls{argument}}
+}
+
+\newglossaryentry{proposition}
+{
+name=proposition,
+description={Whatever is in common between different statements that mean the same thing}
+}
+
+\newglossaryentry{valid}
+{
+name=valid,
+description={An argument for which there is no case where the premises are all true and the conclusion is false}
+}
+
+\newglossaryentry{invalid}
+{
+name=invalid,
+description={An argument that is not valid}
+}
+
+\newglossaryentry{counterexample}
+{
+name=counterexample,
+description={A case in which the premises of an argument are true and the conclusion is false}
+}
+
+\newglossaryentry{nomologically valid}
+{
+name=nomologically valid,
+description={An argument with for which there are no counterexamples that don't violate the laws of nature}
+}
+
+\newglossaryentry{validity}
+{
+name=validity,
+description={The quality of being valid}
+}
+
+\newglossaryentry{conceptually valid}
+{
+name=conceptually valid,
+description={An argument with for which there are no counterexamples that violate the conceptual connections between words}
+}
+
+\newglossaryentry{logical truth}
+{
+name=logical truth,
+text={logical truth},
+description={A statement that is true in every case}
+}
+
+\newglossaryentry{logical falsehood}
+{
+name=logical falsehood,
+text={logical falsehood},
+description={A statement that is false in every case}
+}
+
+\newglossaryentry{contingent}
+{
+name=contingent,
+text={contingent},
+description={A statement that is true in some case and false in some other case}
+}
+
+\newglossaryentry{logically equivalent}
+{
+name=logically equivalent,
+text={logically equivalent},
+description={Two statements that, in each case, are both true or both false}
+}
+
+\newglossaryentry{logically contradictory}
+{
+name=logically contradictory,
+text={logically contradictory},
+description={A property of a pair of statements such that, in each case, one is true and the other false}
+}
+
+\newglossaryentry{mutually consistent}
+{
+name=mutually consistent,
+text={mutually consistent},
+description={A collection of statements for which there is a case where they are all true}
+}
+
+\newglossaryentry{mutually inconsistent}
+{
+name=mutually inconsistent,
+text={mutually inconsistent},
+description={A collection of statements that are not consistent}
+}
+
+%% PART 2%%
+
+\newglossaryentry{statement symbol}
+{
+name=statement symbol,
+description={A symbol in TFL used to represent a basic statement}
+}
+\newglossaryentry{atomic statement}
+{
+name=atomic statement,
+description={A symbol used to represent a basic statement; a statement symbol in TFL, or a predicate symbol followed by names in FOL}
+}
+
+\newglossaryentry{symbolisation key}
+{
+name=symbolisation key,
+description={A list that shows which English statements are represented by which \glspl{statement symbol} in TFL}
+}
+
+
+\newglossaryentry{connective}
+{
+name=connective,
+description={A logical operator in TFL used to combine \glspl{statement symbol} into larger formulas}
+}
+
+
+\newglossaryentry{negation}
+{
+name=negation,
+description={The symbol \enot, used to represent words and phrases that function like the English word `not'}
+}
+
+\newglossaryentry{conjunction}
+{
+name=conjunction,
+description={The symbol \eand, used to represent words and phrases that function like the English word `and'; or a formula formed using that symbol}
+}
+
+\newglossaryentry{conjunct}
+{
+name=conjunct,
+description={A statement or formula joined to another by a \gls{conjunction}}
+}
+
+
+\newglossaryentry{disjunction}
+{
+name=disjunction,
+description={The connective \eor, used to represent words and phrases that function like the English word `or' in its inclusive sense; or a formula formed by using this connective}
+}
+
+\newglossaryentry{disjunct}
+{
+name=disjunct,
+description={A statement or formula joined to another by a \gls{disjunction}}
+}
+
+\newglossaryentry{conditional}
+{
+name=conditional,
+description={The symbol \eif, used to represent conditional words and phrases, like the English phrase `if \dots{} then \dots'; a formula formed by using this symbol}
+}
+\newglossaryentry{antecedent}
+{
+name=antecedent,
+description={The formula on the left side of a \gls{conditional}}
+}
+\newglossaryentry{consequent}
+{
+name=consequent,
+description={The formula on the right side of a \gls{conditional}}
+}
+
+
+\newglossaryentry{biconditional}
+{
+name=biconditional,
+description={The symbol \eiff, used to represent phrases that function like the English phrase `if and only if'; or a formula formed using this connective}
+}
+
+%% PART 3%%
+
+\newglossaryentry{truth value}
+{
+  name = truth value,
+  description = {One of the two logical values formulas can have: True and False}
+}
+\newglossaryentry{truth-functional connective}
+{
+name=truth-functional connective,
+description={an operator that builds larger formulas out of smaller ones and fixes the {truth value} of the resulting formula based only on the truth value of the component formulas}
+}
+\newglossaryentry{valuation}
+{
+name=valuation,
+description={An assignment of \glspl{truth value} to particular \glspl{statement symbol}}
+}
+\newglossaryentry{complete truth table}
+{
+name=complete truth table,
+description={A table that gives all the possible \glspl{truth value} for a {formula of TFL} or formulas in TFL, with a line for every possible {valuation} of all statement symbols}
+}
+\newglossaryentry{logical truth}
+{
+name=logical truth,
+description={A formula that has only \vT s in the column under the main logical operator of its {complete truth table}; a formula that is true on every {valuation}}
+}
+\newglossaryentry{contradiction of TFL}
+{
+  name=contradiction (of TFL),
+  text = contradiction,
+description={A formula that has only \vF s in the column under the main logical operator of its {complete truth table}; a formula that is false on every {valuation}}
+}
+
+\newglossaryentry{consistency in TFL}
+{
+  name=consistency (in TFL),
+  text=mutually consistent,
+description={A property held by formulas if and only if the {complete truth table} for those formulas contains a line on which all the formulas are true, i.e., if some {valuation} makes all the formulas true}
+}
+
+\newglossaryentry{valid in TFL}
+{
+  name= validity of arguments (in TFL),
+  text = valid,
+description={A property held by arguments if and only if the {complete truth table} for the argument contains no rows where the \glspl{premise} are all true and the {conclusion} false, i.e., if no {valuation} makes all premises true and the conclusion false}
+}
+\newglossaryentry{equivalent}
+{
+  name=equivalence (in TFL),
+  text = equivalent,
+description={A property held by pairs of formulas if and only if the {complete truth table} for those formulas has identical columns under the two main logical operators, i.e., if the formulas have the same truth value on every valuation}
+}
+
+
+%% PART 4%%
+
+%% PART 5%%
+
+
+\newglossaryentry{name}{
+  name = name,
+  description = {A linguistic expression used to refer to a unique thing without describing it. In \pl names refer to items of a unique thing of a domain}
+  }
+
+  \newglossaryentry{predicate}{
+    name = predicate,
+  description = {A property of a thing, or a relation between things. In \pl, predicates are symbols used to symbolise a property or relation}
+}
+
+\newglossaryentry{quantifier}{
+  name = quantifier,
+  description = {Quantifiers are symbols of \pl\ that are used to refer to several things at the same time.}
+}
+
+\newglossaryentry{universal quantifier}{
+  name = universal quantifier,
+  description = {The symbol $\forall$ of \pl\ used to refer to all things in a domain; $\forall x\, \atom{F}{x}$ is true iff every member of the domain is~$F$}
+}
+
+\newglossaryentry{existential quantifier}{
+  name = existential quantifier,
+  description = {The symbol $\exists$ of \pl\ used to refer to some things in a domain; $\exists x\, \atom{F}{x}$ is true iff at least one member of the domain is~$F$}
+}
+
+
+\newglossaryentry{variable}{
+  name = variable,
+  description = {A symbol of \pl\ used following quantifiers and as placeholders in atomic formulas; lowercase letters between $s$ and~$z$}
+}
+
+\newglossaryentry{domain}{
+  name = domain,
+  description = {The collection of objects assumed for a symbolisation in \pl, or that gives the range of the quantifiers in an \gls{interpretation}}
+}
+
+
+\newglossaryentry{interpretation}{
+  name = interpretation,
+  description = {***}
+}
+
+%%%% ACRONYMS %%%%
+\newacronym{pl}{PL}{Predicate Logic}
+\newacronym{tfl}{TFL}{Truth Functional Logic}

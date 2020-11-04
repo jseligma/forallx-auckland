@@ -1,0 +1,245 @@
+%!TEX root = forallx.tex
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{forallx}[2011/10/29 support for a logic textbook]
+\RequirePackage{amssymb,hyperref,multicol,ifthen}
+
+% The original forallx.sty was written in 2005
+
+%    ****************************************
+%    *            LOGICAL SYMBOLS           *
+%    ****************************************
+%
+
+\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
+
+\def\eor{\ensuremath{\vee}}
+\def\xor{\ensuremath{\veebar}}
+\def\eand{\ensuremath{\land}}
+\def\eif{\ensuremath{\rightarrow}}
+\def\eiff{\ensuremath{\leftrightarrow}}
+\def\enot{\ensuremath{\neg}}
+\def\eall{\ensuremath{\forall}}
+\def\esome{\ensuremath{\exists}}
+
+
+%Used in Part 7, for bracket scope. But only good if used  in parts 5, 6 first.
+
+\newcommand{\qab}[2]{\ensuremath{\qaop #1}\,[#2]}
+\newcommand{\qeb}[2]{\ensuremath{\qeop #1}\,[#2]}
+\newcommand{\qan}[2]{\ensuremath{\qaop #1}\,#2}
+\newcommand{\qen}[2]{\ensuremath{\qeop #1}\,#2}
+
+%%%% ACRONYMS %%%%
+\newacronym{pl}{PL}{Predicate Logic}
+\newacronym{tfl}{TFL}{Truth Functional Logic}
+
+
+
+
+%truth values (for truth tables, but also text)
+\def\vT{1}
+\def\vF{0}
+\def\vTF{\vT\!\slash\!\vF} %{\rlap{0}1}
+\def\vU{?}
+
+\def\gT{\textcolor{gray}\vT}
+\def\gF{\textcolor{gray}\vF}
+
+\def\bT{\textbf{\vT}} %bolded true
+\def\bF{\textbf{\vF}} %bolded false
+\def\bTF{\textbf{\vTF}} %bolded true and false
+
+\def\mT{\cellcolor{green!15}\bT} % main value true
+\def\mF{\cellcolor{magenta!10}\bF} % main value false
+\def\mTF{\cellcolor{yellow!50}\bTF} % both true and false
+
+
+%Do we need these? Part 7
+\def\GT{\colorbox{gray!15}{\vT}}
+\def\GF{\colorbox{gray!15}{\vF}}
+
+\def\TT{\colorbox{green!15}{\vT}}
+\def\FF{\colorbox{magenta!35}{\vF}}
+
+%\def\wT{\colorbox{white}{\vT}}
+%\def\wF{\colorbox{white}{\vF}}
+
+
+%    ****************************************
+%    *        TITLE AND VERSION DATA        *
+%    ****************************************
+% the title of the book
+\newcommand*{\forallx}{{\tt forall\script{x}}}
+% The version number of the book is a 5 digit integer:
+% the last digit of the year, the month, the day of the month
+\newcounter{dummy}
+\setcounter{dummy}{\year}
+\addtocounter{dummy}{-2000}
+\newcommand*{\bookversion}{%
+	\ifthenelse{\arabic{dummy}<10}{0}{}%
+	\arabic{dummy}%
+	\ifthenelse{\month<10}{0}{}\number\month%
+	\ifthenelse{\day<10}{0}{}\number\day%
+}  
+
+% table of contents
+\renewcommand{\contentsname}{\forallx\ contents}
+% chapter
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+{\normalfont\bfseries}
+{{\titlerule[2pt]}\LARGE Chapter \thechapter}
+{1ex}
+{\Huge}
+[\vspace{1ex}{\titlerule[2pt]}]
+
+
+%    ****************************************
+%    *       SYMBOLS AND SCRIPTY BITS       *
+%    ****************************************
+% equivalent to commenting something out, but usable on multiple lines
+\providecommand{\nix}[1]{}
+% script letters are rendered in Zapf Chancery,
+% which has both upper and lower case.
+\DeclareFontFamily{OT1}{pzc}{}
+\DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.200] pzcmi7t}{}
+\DeclareMathAlphabet{\mathscr}{OT1}{pzc}{m}{it}
+\newcommand*{\script}[1]{\ensuremath{\mathscr{#1}}}
+% create a blank
+\newcommand*{\blank}{\underline{\hspace*{2.5em}}}
+% These are included for discussing formal semantics in predicate logic.
+\newcommand*{\model}[1]{\ensuremath{\mathbb{#1}}}
+\newcommand*{\extension}[1]{\ensuremath{\mbox{extension}(#1)}}
+\newcommand*{\referent}[1]{\ensuremath{\mbox{referent}(#1)}}
+  % I personally dislike the default LaTeX angle brackets. I think that
+  % they are too narrow. If you want to use them, though, you can
+  % replace < and > in the commands below with \langle and \rangle
+\newcommand*{\openntuple}{<}
+\newcommand*{\closentuple}{>}
+\newcommand*{\ntuple}[1]{\mbox{\ensuremath{\mathopen{\openntuple}}#1\ensuremath{\mathclose{\closentuple}}}} 
+% definitions
+\newcommand*{\define}[1]{\textsc{\lowercase{#1}}}
+
+\newcommand*{\substitution}[2]{\ensuremath{\langle \script{#1} \Rightarrow \script{#2} \rangle}}
+
+
+% %    ****************************************
+% %    *          BOX   ENVIRONMENTS          *
+% %    ****************************************
+
+\newcommand{\factoidbox}[1]{\begin{quote}\framebox{\parbox{\linewidth}{#1}}\end{quote}}
+
+
+\newcommand{\philosophy}[1]{\vspace{10pt} \begin{tcolorbox}[sharp corners, colback=black!5, colframe=blue!80, title=Philosophy Corner]
+#1
+\end{tcolorbox}}
+
+\newcommand{\linguistics}[1]{\vspace{10pt} \begin{tcolorbox}[sharp corners, colback=black!5, colframe=blue!80, title=Linguistics Corner]
+#1
+\end{tcolorbox}}
+
+\newcommand{\logic}[1]{\vspace{10pt} \begin{tcolorbox}[sharp corners, colback=black!5, colframe=blue!80, title=Logic Corner]
+#1
+\end{tcolorbox}}
+
+\newcommand{\mathematics}[1]{\vspace{10pt} \begin{tcolorbox}[sharp corners, colback=black!5, colframe=blue!80, title=Mathematics Corner]
+#1
+\end{tcolorbox}}
+
+\newcommand{\compsci}[1]{\vspace{10pt} \begin{tcolorbox}[sharp corners, colback=black!5, colframe=blue!80, title=Computer Science Corner]
+#1
+\end{tcolorbox}}
+
+\newcommand{\history}[1]{\vspace{10pt} \begin{tcolorbox}[sharp corners, colback=black!5, colframe=blue!80, title=History Corner]
+#1
+\end{tcolorbox}}
+
+\newcommand{\notation}[1]{\vspace{10pt} \begin{tcolorbox}[sharp corners, colback=black!5, colframe=blue!80, title=Notation Corner]
+#1
+\end{tcolorbox}}
+
+
+%    ****************************************
+%    *          PRACTICE PROBLEMS           *
+%    ****************************************
+\newcounter{ProbPart}
+\renewcommand{\theProbPart}{\Alph{ProbPart}}
+% This inserts a heading and resets the counter:
+\newcommand*{\practiceproblems}{
+	\setcounter{ProbPart}{0}\section*{Practice Exercises}%
+	\addcontentsline{toc}{section}{Practice Exercises}
+}
+% This starts a new section which is automatically numbered:
+\newcommand*{\problempart}{
+	\refstepcounter{ProbPart}\textbf{Exercise \Alph{ProbPart}:}\ 
+}
+% This bullet is used to indicate that solutions appear at the end of
+% the book.
+\newcommand*{\solutions}{$\star$}
+% When solutions are only given for selected problems, the
+% star is placed left of the problem number.
+\newcommand*{\leftsolutions}{\hspace{-2.2em}\makebox[2em][l]{\solutions}}
+
+% This is used at the beginning of a section in the solutions
+% appendix.
+\newcommand*{\solutionsection}[2]{%
+	\textbf{\textsc{Chapter {\ref{#1}} Ex {\ref{#2}}:}}%
+	\markright{solutions for ch.~\ref{#1}}%
+	\setcounter{countSeq}{0}
+}
+
+% This is used to enumerate things that have a given property.
+% For example: \nextSeq\nextSeq\noSeq\lastSeq are valid.
+% produces   : 1, 2, and 4 are valid.
+\newcounter{countSeq}
+\newcommand*{\nextSeq}{\stepcounter{countSeq}\arabic{countSeq}, }
+\newcommand*{\noSeq}{\stepcounter{countSeq}}
+\newcommand*{\lastSeq}{and \stepcounter{countSeq}\arabic{countSeq} }
+
+% This is used to place (eg) a partial model or proof as an item
+% in a list. Without it, the item tag will be vertically centered next
+% to the model or proof.
+%		--- doesn't actually work yet ---
+%\newenvironment{solutioninlist}{}{}%{~\vspace{-1.6em}}{}
+
+
+%    ****************************************
+%    *         TABLE OF CONTENTS, ETC.      *
+%    ****************************************
+\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{1}
+\renewcommand{\thechapter}{\arabic{chapter}}
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+%\renewcommand{\thesubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}
+
+\renewcommand{\chaptermark}[1]{\markboth%
+{\forallx}%
+{\textrm{ch.~\thechapter\ \lowercase{#1}}}%
+}
+\renewcommand{\sectionmark}[1]{}
+
+
+
+%    ****************************************
+%    *             TRUTH TABLES             *
+%    ****************************************
+
+% Formatting for quantified, thus merged, rows.
+% The merged column just before, with {
+\newcommand*{\brax}[2]{\ldelim\{{#1}{*}[\ #2]}
+%The merged column just after, with ]
+\newcommand*{\braz}[2]{\rdelim]{#1}{*}[#2]}
+% Any other merged column
+\newcommand*{\mrow}[2]{\multirow{#1}{*}{#2}}
+
+
+
+
+
+
+%    ****************************************
+%    *           TREE PROOFS                *
+%    ****************************************
+%\newenvironment{scprooftree}[1]%
+%  {\gdef\scalefactor{#1}\begin{center}\proofSkipAmount \leavevmode}%
+%  {\scalebox{\scalefactor}{\DisplayProof}\proofSkipAmount \end{center} }

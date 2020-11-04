@@ -1,0 +1,65 @@
+\documentclass[PHIL101-Textbook.tex]{subfiles}
+\begin{document}
+
+\part*{Interlude}\label{part:interlude}
+
+%\chapter{Truth Trees}\label{ch:chaptertruthtrees}
+
+%\section{Truth Tables aren't Enough}
+
+Well done! You've finished the first half of the book, where we learn the basics of \tfl. For the rest of the book, we will work through the same steps (symbolisation, tables, trees) with another logic, \pl. But let's just pause for a short reflection first.
+
+
+\section*{The Limits of Validity}
+
+The logic we've taught you so far is quite limited, but \emph{any} formal method has some limitations. The first limitation is with validity. If an argument is valid, then whenever its premises are true, its conclusion is guaranteed to be valid. That's great, but it's not enough.\\
+
+\paragraph{False Premises} If even one of the premises is false, validity tells us nothing about the conclusion. Here's a valid argument with false premises and a true conclusion:
+
+\begin{quotation}I just ran 10km in 5 minutes, and swam to the moon and back. And there'll be 12 solar eclipses before lunch tomorrow. So, like it or not, there'll either be those eclipses or I was born on Earth.\end{quotation}
+%\begin{center}$ (p \eand q), r \ \therefore\ (r \eor s)$\end{center}
+
+\paragraph{Relevance} Even if all the premises are true, many of them may not be relevant to the conclusion. Here's an argument where most of the premises don't contribute at all:
+
+\begin{quotation}Well I'm feeling great this morning and feel like a good meal. I'll eat a peach. At any rate, I'll eat a peach or the whole of Mars.\end{quotation}
+%\begin{center}$(p \eand q), r \ \therefore\ (r \eor s)$\end{center}
+
+\paragraph{Circularity} The conclusion may be one of the premises, making the reasoning valid but question-begging. See what you make of this valid argument:
+\begin{quotation}I say that all experts tell the truth, and you can trust me not to lie because I'm an expert. So I'm telling the truth.\end{quotation}
+
+\paragraph{Explosion} If the premises are inconsistent, then the argument will be valid, no matter what conclusion you choose. Here's a valid argument that's slightly bananas:
+\begin{quotation} Whangarei is in the north, and so is Taihape if Whangarei is. But Taihape is not in the north, so you'll be immortal if you eat a banana every day.\end{quotation}
+
+
+\pagebreak
+
+\section*{The Limits of Symbolisation}
+Another major issue is that formalisation is inherently asymmetric. I'll explain what I mean via an example. 
+Suppose that we have an argument in English, and we want to know if it is valid. We can symbolise the argument in \tfl\ (or any other logic we know), then test it for validity.
+
+If the truth table, truth tree, or whatever, says that the formal symbolisation of the argument is valid, and we didn't make any mistakes, then the original argument is valid. We are done.
+
+However, if the formal symbolisation is invalid, then we need to check if the counter-example is applicable to the original English argument. By considering what our counter-example means when desymbolised, we can see if its relevant. For instance, perhaps our counter-example requires faster-than-light travel, or someone being in two places at the same time, or being both a cat and a dog. None of these are relevant counter-examples, but they do show an implicit hole in our original argument, just because we often don't write down all the basic premises.
+
+In this case, we should adapt our original argument by adding another premise that rules out the crazy counter-example, symbolise the new argument, and test it. If it's not valid, check if your counter-example is relevant, and keep repeating this loop until either you have a relevant counter-example that shows your argument is not good, or your new argument is valid.
+
+If you have a relevant counter-example, not even the improved argument is valid. But if the new argument is valid, what does that say about your original one? You could say your argument was valid, if you did believe all the extra added premises required to make it valid. But if you had to add something you didn't initially believe, then perhaps it wasn't valid; it might have been missing some key information that you hadn't realised.
+
+%\pagebreak
+On the other hand, maybe you just didn't work with a powerful enough logic. Consider this argument:
+
+\begin{quotation}
+	Every horse likes carrots.
+
+	Jasper is a horse
+
+	\therefore\ Jasper likes carrots.
+\end{quotation}
+
+\noindent This is a valid argument in English. But \tfl\ can't capture what makes it valid. The logic you are about to learn does make it valid, but there can \emph{never} be a logic that can capture all the aspects of English that make valid arguments. And we can prove that with a valid argument.\\
+
+\indent\indent Enjoy !!
+
+
+
+\end{document}

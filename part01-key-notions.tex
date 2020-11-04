@@ -1,0 +1,597 @@
+\documentclass[PHIL101-Textbook.tex]{subfiles}
+\begin{document}
+
+\part{Key Notions of Logic}\label{part:intro}
+
+\chapter{What is Logic?}\label{ch:WhatIsLogic}
+
+Logic studies which claims can go together without causing problems, and which claims have to be true whenever other ones are. It also studies the methods we use for checking for problems and truth, and their limitations.
+
+That's vague. Let's try again:
+
+\begin{itemize}
+\item Formal Logic, which is the topic of this textbook, uses formal, symbolic methods for manipulating representations of claims to demonstrate relationships between them. The relationships that we are interested are solely those related to the truth or falsity of the claims, and not what might be known, believed, implied, inferred, or contextually relevant.
+
+\item Logic does not study how humans use language to communicate claims, or the cultural or social significance of exactly how a claim is phrased. It is not dependent on which language is used, or the social or moral standing of the logician, or the knowledge, power, or skill of the logician. Logic is person-independent. Or so we would like to think.
+
+\item The logics we will introduce in this book are formal, algebraic, and central to the Western philosophical tradition of the ancient Greeks, Indians, and Romans, the Medieval Islamic and Christian scholars, and the modern mathematicians, computer scientists, and linguists. They are the two core, primary logics that underpin formal reasoning today.
+
+
+\item Logic is not a study of how we think or reason, or even a very good story about how we should reason. It is not psychology, although it is used in psychology.
+\end{itemize}
+
+
+One of the key attributes of Logic is that it is precise, and that everything we talk about can be defined. So we will attempt to describe our terms more carefully, in preparation for providing full and precise definitions for our logical notions.
+
+
+
+
+
+%\chapter{Descriptions}\label{ch:Descriptions}
+
+\section{Statements}
+\label{intro.statements}
+
+Logic is a study of relationships between claims. These claims are something like thoughts, and something like sentences. But all we are interested in is the truth or falsity of the claims, not the rest of their properties. Thoughts are hard to examine, so we will just consider sentences. The type of sentence that is used to directly make truth claims is a \define{statement}.
+
+
+
+\philosophy{If we were being careful, we would talk solely of \emph{propositions}. A proposition is whatever is in common between different statements that `mean the same thing', whether written or spoken, whether in English, Chinese or Serbian, and even if only thought, or expressed in language. This is because we can apply logic to our thoughts, as well as to  sentences, and logic is constant regardless of which language (if any) we use. However, we will continue to talk of statements.}
+
+
+You should not confuse the idea of a statement with the difference between fact and opinion. Often, statements in logic will express things that would count as facts -- such as `Kierkegaard was a hunchback' or `Kierkegaard liked almonds.' They can also express things that you might think of as matters of opinion -- such as, `Almonds are tasty.' In other words, a statement is not disqualified  because we don't know if it is true or false, or because its truth or falsity is a matter of opinion. We only need it to be either true or false, and not anything else.
+
+There are many types of sentences that are not statements, and we will usually ignore them, or re-write them as statements. It's worth considering some of the major classes of non-statements, just so we don't get tripped up.
+
+
+
+\paragraph{Questions} `Are you sleepy yet?' is a question. Although your answer might be a statement, the question itself is neither true nor false.
+e.g., `What is Logic?' is not a statement, but `Logic is mysterious' is a statement.
+
+\paragraph{Commands} Sentences like `Wake up!', `Sit up straight', and so on are commands. Although it might be good for you to wake up, the command is neither true nor false.
+
+\paragraph{Exclamations} `Ouch!' is an exclamation; it is neither true nor false. We will treat `Ouch, I hurt my toe!' as meaning the same thing as `I hurt my toe.' The `ouch' does not explicitly add any information to the claim. 
+
+
+
+\section{Statements and Possibilities}
+
+Most statements can be true if the world is one way, and false if the world is another way. This seems obvious, and even uninteresting. But if we reflect on the possible relationships between statements, we might end up asking ourselves questions like these:
+
+\begin{earg}
+\item Are there any statements that are always true, or always false?
+\item Are there collections of statements which can't all be true together?
+\item Are there some statements that have to be true if other ones are?
+\item Are there pairs of opposite statements, where one is true exactly when the other is false?
+\item Are there pairs of similar statements which are always true or false together?
+\end{earg}
+
+Exploring techniques for investigating these five questions, particularly \#2 and \#3, will occupy us for the rest of this book. 
+
+
+You might be wondering what we mean when we say that a statement is not always true.  We don't mean that it's true now, and false tomorrow, or true for me and false for you. Instead, we are talking about \define{possibilities} -- ways reality might be, or might have been. We will use logic to represent possibilities by giving truth values to various symbols by means of \define{valuations}. And then we can systematically check these valuations. We can re-frame the above questions in terms of valuations:
+
+\begin{earg}
+\item Is there a valuation where this statement is true and one where it is false?
+\item Is there a valuation for which this set of statements are all true?
+\item Is there no valuation where the first statement is true and the second statement false?
+\item Is there no valuation where these two statements have the same truth value?
+\item Is there no valuation where these two statements have different truth values?
+\end{earg}
+
+Now we need an algorithm or set of rules to systematically search through each possible valuation, and determine which symbols are true for that valuation. And we'll also need a way to turn statements into symbols, so we can check their truth value for each valuation. And we should have a clear idea of what we mean by truth, and possibility.
+
+Lets start at the end -- with examining truth, and possibility.
+
+
+
+
+\section{What is Truth?}
+The only property of statements that logic needs is their truth value. So, what values of truth are there? To avoid a lot of controversial philosophy, we will make some assumptions:\\
+
+First, that in every possibility, every statement is either true or not true. 
+ So any scenario that leaves the truth-value of a statement in our argument undetermined will not be considered. For instance, a scenario where it is neither true nor false that I like chocolate is not a possibility we would consider. When dealing with predictions, we might say instead that every statement will eventually either be true or not true. 
+
+Second, that if a statement isn't true in a possibility, it is \define{false}; that is, every statement is either true or false in a possibility.
+
+Finally, that it is impossible that a statement is both true and false.\\
+
+We will use the symbol `\vT' for the truth value \define{true} and the symbol `\vF' for the truth value \define{false}. We assume that these are the only two truth values, and that every statement has exactly one of these truth values.
+
+\philosophy{Even if these assumptions seem common-sense to you, they are controversial among philosophers of logic. First of all, there are logicians who want to consider cases where statements are neither true nor false, but have some kind of intermediate level of truth or probability. More controversially, some logicians think we should allow for the possibility of statements being both true and false at the same time.} 
+
+It's important not to be confused between a statement being true or false, and us knowing whether a statement is true or false. We will often not know the truth value of a statement. But there will be an actual truth of the matter; we merely don't happen to know it. If this occurs, we'll use `$\vU$' to represent that we haven't got the information to determine a truth value. This is NOT a third truth value. We will be using just two truth values -- true and false -- in this book.
+
+
+Finally, we will assume \define{compositionality} -- that the truth value of complex statements can be calculated by only considering the truth values of the simpler statements they contain, and how these statements are connected. So, if we know the truth-values of each part of a statement, we will know the truth-value of the whole statement.
+
+
+\pagebreak
+\practiceproblems
+At the end of most chapters there are exercises that review and explore the material covered in the chapter. Actually working through some problems is really important, because learning logic is more about developing a way of thinking than it is about memorising facts. Learning it is a surprising practical, hands-on activity.
+
+\medskip
+
+\noindent\solutions
+\problempart \label{pr.Conclusions}
+
+Select the statement expressing the conclusion of each argument:
+\begin{earg}
+	\item It is sunny. So I should take my sunglasses.
+	\item It must have been sunny. I did wear my sunglasses, after all.
+	\item No one but you has had their hands in the cookie-jar. And the scene of the crime is littered with cookie-crumbs. You're the culprit!
+	\item Miss Scarlett and Professor Plum were in the study at the
+	time of the murder. Reverend Green had the candlestick in the
+	ballroom, and we know that there is no blood on his hands. Hence
+	Colonel Mustard did it in the kitchen with the lead pipe.
+	Recall, after all, that the gun had not been fired.
+\end{earg}
+
+
+\problempart
+Which of the following sentences are statements?
+\begin{earg}
+	\item The trains are always late.	
+	\item Welcome to the University of Auckland.
+	\item Tailgating is a major cause of car accidents.	
+	\item How can I stop tailgating?
+	\item The reason that I like bananas is that they have no bones.
+	\item When the car ahead passes an object, make sure you can count to four crocodiles before you pass the same object.
+	\item Just leave them in the bathroom and I'll deal with them on Wednesday afternoon.
+%	\item If you leave them in the bathroom, then I'll deal with them on Wednesday afternoon.
+	\item Logic is the study of deductive arguments.
+	\item Never engage in light treason.
+	\item All great things are the cause of their own self-destruction.
+	\item Only 5\% of North Americans can locate New Zealand on a world map.
+	\item Do at least a few of the exercises from the textbook every day.
+	\item An apple a day keeps the doctor away.
+	\item Ask me if I'm a policeman.
+	\item Are you a policeman?
+	\item The Mayor said bus passengers should be belted.
+\end{earg}
+
+
+
+\chapter{The scope of logic}\label{ch:Valid}
+
+
+\section{Arguments}
+One important use for Logic is evaluating arguments; sorting the good from the bad. 
+People sometimes use the word `argument' to talk about belligerent shouting matches. Logic is not concerned with such teeth-gnashing and hair-pulling. For logicians, an argument is not a disagreement, it is a reasoned series of statements culminating in a conclusion. 
+
+To be perfectly general, we can define an \define{argument} as a series of statements. All the statements are premises, except for the final sentence, which is the conclusion. If the premises are true and the argument is a good one, then you should accept the conclusion is true.
+
+An argument, as we will understand it, is something more like this:
+	\begin{earg}\label{argButlergardener}
+		\item[] Either the butler or the gardener did it.
+		\item[] The butler didn't do it.
+		\item[\therefore] The gardener did it.
+	\end{earg}
+We have here a series of sentences. The three dots on the final line of the argument are read as `therefore'. They indicate that this sentence is the \emph{conclusion} of the argument. The two sentences before that are the \emph{premises} of the argument. If you believe the premises and you think the conclusion follows from the premises, then you have a reason to believe the conclusion.
+
+%This is the sort of thing that logicians are interested in. 
+We will say that an argument is any collection of premises, together with a conclusion. An argument whose conclusion follows from its premises will be called a \define{valid} argument.
+
+We will discuss some further concepts that apply to arguments in a natural language like English, so that we begin with a clear understanding of what arguments are and what it means for an argument to be valid. Later we will `translate' arguments from English into a formal language, explore some of the limitations of this process, then finally move to relying predominantly on arguments in the formal language. We will approach logic in this order as we want validity, as defined in the formal language, to have at least some of the important features of natural-language validity.
+
+In the example argument above, we used individual sentences to express both of the argument's premises, and we used a third sentence to express the argument's conclusion. Many arguments are expressed in this way, but a single sentence can contain a complete argument. Consider:
+	\begin{quote}
+		 The butler has an alibi; so they cannot have done it.
+	\end{quote}
+This argument has one premise followed by a conclusion. 
+
+Many arguments start with premises, and end with a conclusion, but not all of them. An argument can also have its conclusion at the beginning:
+	\begin{quote}
+		The gardener did it. After all, it was either the butler or the
+		gardener. And the gardener didn't do it. 
+	\end{quote}
+Equally, the conclusion might have been in the middle:
+	\begin{quote}
+		The butler didn't do it. Accordingly, it was the gardener,
+		given that it was either the gardener or the butler.
+	\end{quote}
+In logic, the most important thing we want to know about almost any argument is whether or not the conclusion follows from the premises. So the first thing to do is to separate out the conclusion from the premises. The following words are often used to indicate an argument's conclusion:
+	\begin{center}
+		so, therefore, hence, thus, accordingly, consequently
+	\end{center}
+For this reason, they are sometimes called conclusion
+indicator words.
+
+By contrast, these expressions are premise indicator words,
+as they often indicate that we are dealing with a premise, rather than a
+conclusion:
+	\begin{center}
+		since, because, given that
+	\end{center}
+But in analysing an argument, there is no substitute for practice.
+
+
+\section{Introducing validity}
+
+We have talked about arguments, i.e., a single statement (the conclusion) that \emph{follows from} a collection of statements (the premises). Logic develops theories and tools that tell us when a statement follows from some others.
+
+Let's review the first argument we discussed:
+\begin{earg}
+	\item[] Either the butler or the gardener did it.
+	\item[] The butler didn't do it.
+	\item[\therefore] The gardener did it.
+\end{earg}
+We don't have any context for what the statements in this argument refer to. Perhaps you suspect that `did it' here means `was the perpetrator' of some unspecified crime. You might imagine that the argument occurs in a mystery novel or TV show, perhaps spoken by a detective working through the evidence. But even without having any of this information, you probably agree that the argument is a good one in the sense that if both the premises are true (whatever they refer to), the conclusion must be true as well. We call arguments that have this property \define{valid}.
+
+%\begin{enumerate}
+%\item 
+%If the first premise is true, i.e., the butler did it or the gardener did it, then at least one of them `did it', whatever that means.
+%\item And if the second premise is true, then the butler did not `do it'. That leaves only one option: `the gardener did it' must be true.
+%\item So, the conclusion must be true if the premises are. It follows from the premises. We call arguments that have this property \define{valid}.
+%\end{enumerate}
+
+
+By way of contrast, consider the following argument:
+\begin{earg}\label{argMaidDriver}
+	\item[] If the driver did it, the maid didn't do it.
+	\item[] The maid didn't do it.
+	\item[\therefore] The driver did it.
+\end{earg}
+We still have no idea what is being talked about here. But this argument is different from the previous one in an important respect. If the premises are true, the conclusion need not also be true. 
+%The premises of this argument do not rule out, by themselves, that someone other than the maid or the driver `did it'. There is a possible case where both premises are true, and yet the conclusion is not true. 
+In this argument, the conclusion does not follow from the premises alone. So we say it is \define{invalid}.
+
+\section{Cases and types of Validity}
+
+How did we determine that the second argument is invalid? We pointed to a case where neither the driver nor maid did it, but some other person did. Here, the premises are true and the conclusion is not. We call such a case a \define{counterexample} to the argument. If there is a counterexample to an argument, the conclusion cannot follow from the premises. For the conclusion to follow from the premises, the truth of the premises must \emph{guarantee} the truth of the conclusion. If there is a counterexample, the truth of the premises does not guarantee the truth of the conclusion.
+
+There can be more than one counterexample to an argument. For instance, perhaps in the above argument, neither the maid nor the driver `did it', and in fact no one `did it' at all. Perhaps there was a misunderstanding or deception. This serves equally well as a counterexample. But whichever counterexample you find, you only need one. One failure is enough to show than an argument is invalid; after that, we are just being mean.
+
+As logicians, we want to be able to determine when the conclusion of an argument follows from the premises. The conclusion follows from the premises if there is no counterexample, a case where the premises are all true but the conclusion is not. This motivates a definition:
+
+	\factoidbox{
+		A statement $A$ \define{follows from} statements $B_1$, \dots, $B_n$ if and only if there is no case where $B_1$, \dots, $B_n$ are all true and $A$ is not true.)
+	}
+
+This `definition' is incomplete: it does not tell us what a `case' is or what it means to be `true in a case.' So far we've only seen an example: a hypothetical scenario involving three people, including a driver and a maid. In this scenario, as described above, the driver didn't do it, and so it is a case in which `the driver did it' is not true. The premises of our second argument are true but the conclusion is not true: the scenario is a counterexample.
+
+We said that arguments where the conclusion follows from the premises are called valid, and those where the conclusion does not follow from the premises are invalid. Since we now have at least a first stab at a definition of `follows from', we'll record this: 
+
+	\factoidbox{
+		An argument is \define{valid} if and only if the conclusion follows from the premises.
+	}
+
+	\factoidbox{
+		An argument is \define{invalid} if and only if it is not valid.
+	}
+
+\philosophy{In the logics we'll cover in this course, an argument is invalid exactly when it has a counterexample; that is, a conclusion follows from premises unless you can describe a situation where the premises are true and the conclusion is not. Now, suppose you have two premises that disagree. Then there is no case where they are both true and the conclusion false, so there can't be any counterexamples; every conclusion follows from  these premises. Weird but true!} %There are also other subtler challenges to this idea of invalidity; however, the simplicity and power of this logic is generally worth the cost. Modern mathematics is built on this simplified notion of invalidity.}
+
+Logicians are in the business of making the concept of `case' more precise, and investigating which arguments are valid under various readings of `case'. If we take `case' to mean `hypothetical scenario' like the counterexample to the second argument, then the first argument counts as valid. If we imagine a scenario in which either the butler or the gardener did it, and also the butler didn't do it, we are automatically imagining a scenario in which the gardener did it. So any hypothetical scenario in which the premises of our first argument are true automatically makes the conclusion of our first argument true. This makes the first argument valid. 
+
+However, there are other ways of unpacking the concept of `case'. We can look at cases as being scenarios where we have incomplete information, and anything that is compatible with the information \emph{we already have} is possible. We might also consider some inconsistent situations, in case our evidence conflicts with itself in a few areas. Both of these distinctions lead to different types of logic -- roughly Intuitionistic or Constructive logics in the former case, and Relevant or Dialetheic logics in the latter. Some of these logics do not guarantee that the gardener did it! We will not study these logics in this course. They are great fun, but we think they are only appropriate for more advanced students. Let's learn to walk, first\dots
+
+\medskip
+
+\section{Cases and types of possibility}
+Making `case' more specific by interpreting it as `hypothetical scenario' is not the end of the story. We still don't know what to count as a hypothetical scenario. If we limit ourselves to our existing beliefs, then we can't use reason to change them, so our hypotheses must be able to include statements we would ordinarily reject. But how far do we go? Are our hypotheses limited by the laws of nature? Or by our conceptual and linguistic connections? Or neither? What answers we give to these questions determine which arguments we count as valid.
+
+
+Suppose our logic is limited by the current laws of physics. Then the following argument is valid:
+	\begin{earg}
+		\item[] The spaceship \emph{Rocinante} took six hours to reach Jupiter from Tycho.
+		\item[\therefore] The distance between Tycho and Jupiter is less than $6.5\times 10^9 km$.
+	\end{earg}
+A counterexample to this argument would be a scenario in which the \emph{Rocinante} makes a trip of over 7 billion kilometres in 6 hours, exceeding the speed of light. This scenario isn't compatible with current physics, which does not allow faster than light travel. So it can't be a counterexample; but it would have been a counterexample under our theories before Einstein. We are in the awkward position of saying the argument used to be invalid, but now is valid. Worse still, we can't reason about alternative  scientific theories.
+
+Limiting ourselves to reasoning without our best theories of physics restricts us unduly. Worse still, if we accepted this, shouldn't we also be restricted by all our best theories of nature -- chemistry, biology, psychology, sociology, etc.? We'd not be able to use reason to challenge any part of the scientific consensus.
+
+%And this means that time travel, being in two places at once, dogs that are reptiles, telepathy, and so forth are available for use in our hypothetical scenarios.
+
+Suppose we are instead limited by what we can conceive or communicate. Then the following is valid:
+	\begin{earg}
+		\item[] Priya is an ophtalmologist.
+		\item[\therefore] Priya is an eye doctor.
+	\end{earg}
+If you imagine Priya being an ophtalmologist, and you know what the word means, you also imagine Priya being an eye doctor. That's just what `opthalmologist' and `eye doctor' mean. A scenario where Priya is an ophtalmologist but not an eye doctor is ruled out by the conceptual connection between these words. But we know that word meanings change over time, and so does what we can conceive. Our logic would be culturally specific, rather than universal.
+
+Depending on what kinds of cases we consider as potential counterexamples, we arrive at different notions of validity. We could require our counter-examples to conform to the laws of nature (nomologic validity). Or we could require they don't violate our conceptual worldview. Or even our moral standards.  But for all these notions of validity, the laws of nature or thought or meaning or morality are part of whether an argument is valid. And that's going to be messy.
+
+Instead of these forms, we will only be considering whether an argument is \define{logically valid}. So if you ever start taking into account natural laws, or the meanings of different words, or conceivability or morality, you can be sure that you have shifted away from doing Logic. We have taught you about these ways of reasoning solely to make you aware of them so you can avoid them (in this course).
+%We'll shortly be introducing another notion of validity that is based on what we will call the \emph{logical form} of an argument. This is a way of hiding most of the mess under the philosophical carpet. But in the meantime, we'll work with conceptual validity.
+
+\medskip
+
+\pagebreak
+\section{Validity and Truth}
+
+If an argument is valid, and all its premises are true, then its conclusion must be true. That's why we value validity so highly. But validity \emph{by itself} doesn't require the premises (or conclusion) to be true. 
+Consider this example:
+	\begin{earg}
+		\item[] Oranges are either fruit or musical instruments.
+		\item[] Oranges are not fruit.
+		\item[\therefore] Oranges are musical instruments.
+	\end{earg}
+The conclusion of this argument is ridiculous. Nevertheless, it follows from the premises. \emph{If} both premises are true, \emph{then} the conclusion just has to be true. So the argument is valid. Don't let the meanings of the words distract you, nor whether the premises are true, or whether they even make sense. None of that is part of Logic.
+
+Conversely, having true premises and a true conclusion is not enough to make an argument valid. Consider this example:
+	\begin{earg}
+		\item[] London is in England.
+		\item[] Beijing is in China.
+		\item[\therefore] Paris is in France.
+	\end{earg}
+The premises and conclusion of this argument are all true, but the argument is invalid. If Paris were to declare independence from France, then the conclusion would be false, while the premises would remain true. This is a counter-example to the argument, so the argument is invalid.
+
+The important thing to remember is that validity is not about the truth or falsity of the statements in the argument. It is about whether it is \emph{possible} for all the premises to be true and the conclusion to be not true at the same time (in some hypothetical case). What is actually true does not determine whether an argument is valid or not.  Logic doesn't care about anything except mere validity.
+
+
+There are also good arguments that are less than valid.  Consider this one:
+	\begin{earg}
+		\item[] Every winter so far, it has rained in Auckland.
+	\item[\therefore] It will rain in Auckland this coming winter.
+\end{earg}
+The seems like good reasoning, but the argument is invalid. Even if it has rained in Auckland every winter thus far, it remains \emph{possible} that Auckland will stay dry all through the coming winter. There are many good, reliable arguments that don't guarantee their conclusions. But determining what makes them good or reliable is again a matter of actual facts. For the same reason (we  aren't interested in actual facts) that we don't care about stronger notions than validity, we don't care about weaker notions either.
+% They are not \emph{guaranteed}. Unlikely though it might be, it is \emph{possible} for their conclusion to be false, even when all of their premises are true. In this book, we will set aside (entirely) the question of what makes for a good inductive argument. Our interest is simply in sorting the (deductively) valid arguments from the invalid ones. 
+
+%So: we are interested in whether or not a conclusion \emph{follows from} some premises.
+
+\pagebreak
+\practiceproblems
+\problempart
+Which of the following arguments are logically valid? Which are invalid?
+
+\begin{earg}
+\item Socrates is a man.
+\item All men are carrots.
+\item[\therefore] Socrates is a carrot.
+\end{earg}
+
+\begin{earg}
+\item Jacinda Ardern was either born in Berlin or she was once a nurse.
+\item Jacinda Ardern was never a nurse.
+\item[\therefore] Jacinda Ardern was born in Berlin.
+\end{earg}
+
+\begin{earg}
+\item If I light the match, the paper will burn.
+\item I do not light the match.
+\item[\therefore] The paper will not burn.
+\end{earg}
+
+\begin{earg}
+\item Confucius was either from France or from Luxembourg.
+\item Confucius was not from Luxembourg.
+\item[\therefore] Confucius was from France.
+\end{earg}
+
+\begin{earg}
+\item If the world ends today, then I will not need to get up tomorrow morning.
+\item I will need to get up tomorrow morning.
+\item[\therefore] The world will not end today.
+\end{earg}
+
+\begin{earg}
+\item Joe is now 19 years old.
+\item Joe is now 87 years old.
+\item[\therefore] Bob is now 20 years old.
+\end{earg}
+
+\noindent\solutions
+\problempart \label{pr.EnglishCombinations}
+Could there be:
+	\begin{earg}
+		\item A valid argument that has one false premise and one true premise?
+		\item A valid argument that has only false premises?
+		\item A valid argument with only false premises and a false conclusion?
+		\item An invalid argument that can be made valid by adding a new premise?
+		\item A valid argument that can be made invalid by adding a new premise?
+	\end{earg}
+In each case: if so, give an example argument; if not, explain why not.
+
+
+\chapter{Other logical notions}\label{ch:BasicNotions}
+
+In Chapter \ref{ch:Valid}, we introduced the concept of a valid argument. This is perhaps the most important concept in logic. In this section, we will introduce some related concepts. They all rely, as did validity, on the idea that statements are true (or not) in cases. 
+
+%\section{Truth values}
+%As we said in \S\ref{s:Arguments}, arguments consist of premises and a conclusion. Note that many kinds of English sentence cannot be used to express premises or conclusions of arguments. For example:
+%	\begin{ebullet}
+%		\item \textbf{Questions}, e.g.\ `are you feeling sleepy?'
+%		\item \textbf{Imperatives}, e.g.\ `Wake up!'
+%		\item \textbf{Exclamations}, e.g.\ `Ouch!'
+%	\end{ebullet}
+%The common feature of these three kinds of sentence is that they are not \emph{assertoric}: they cannot be true or false. It does not even make sense to ask whether a \emph{question} is true (it only makes sense to ask whether the \emph{answer} to a question is true).
+
+%The general point is that, the premises and conclusion of an argument must be capable of having a \define{truth value}. The two truth values that concern us are just True and False. 
+
+\section{Consistency}
+Consistency is the other central logical notion that we'll be working with, along with validity. We highly value those of our ideas and beliefs that could all be true together, and tend to reject one or more of a set of statements if they can't all be true.
+
+Consider these two statements:
+	\begin{ebullet}
+		\item[B1.] Jane's only brother is shorter than her.
+		\item[B2.] Jane's only brother is taller than her.
+	\end{ebullet}
+Logic alone cannot tell us which, if either, of these statements is true. Yet we can say that \emph{if} the first statement (B1) is true, \emph{then} the second statement (B2) must be false. And if B2 is true, then B1 must be false. There is no case where both statements are true together. This motivates the following definition:
+	\factoidbox{
+		Statements are \define{mutually consistent} if and only if there is a case where they are all true together.
+	}
+B1 and B2 are \emph{mutually inconsistent}, while the following two statements are mutually consistent:
+	\begin{ebullet}
+		\item[B1.] Jane's only brother is shorter than her.
+		\item[B2.] Jane's only brother is younger than her.
+	\end{ebullet}
+
+We can ask about the mutual consistency of any number of statements. For example, consider the following four statements:
+	\begin{ebullet}	
+		\item[G1.] \label{MartianGiraffes} There are at least four giraffes at the wild animal park.
+		\item[G2.] There are exactly seven gorillas at the wild animal park.
+		\item[G3.] There are not more than two martians at the wild animal park.
+		\item[G4.] Every giraffe at the wild animal park is a martian.
+	\end{ebullet}
+G1 and G4 together tell us there are at least four martian giraffes at the park. This conflicts with G3, which implies that there are no more than two martian giraffes there. So the statements G1--G4 are mutually inconsistent. They cannot all be true together. 
+
+\section{Logical Terms}
+
+We can also consider the consistency of single statements. Consider these statements:
+	\begin{earg}
+		\item[\ex{Acontingent}] It is raining.
+		\item[\ex{Acontradiction}] It is both raining here and not raining here.
+		\item[\ex{Atautology}] Either it is raining here, or it is not.
+	\end{earg}
+In order to know if statement \ref{Acontingent} is true, we would need to look outside or check the weather channel. It might be true; it might be false. A statement which might be true and might be false is called \define{contingent}.
+
+
+But we do not need to check the weather to determine whether or not statement \ref{Acontradiction} is true. It must be false; it's not consistent with itself. It is a \define{logical falsehood}.
+
+
+
+Statement \ref{Atautology} is different again; it's always true. Regardless of what the weather is like, it is either raining or it is not. Statement \ref{Atautology} is mutually consistent with every contingent statement. It is a \define{logical truth}. This is also sometimes known as a tautology. Tautologies are important in logic, although primarily for historical reasons.
+
+
+
+\philosophy{Something might \emph{always} be true and still be contingent. For instance, if there never were a time when the universe contained fewer than two things, then the statement `At least two things exist' would always be true. Yet the statement is contingent: we can imagine that the universe only contains a single photon, and then the statement would have been false.}
+
+%\subsection{Equivalence}
+
+We can also ask about the logical relations \emph{between} two statements. For example:
+\begin{earg}
+\item[] John went to the store after he washed the dishes.
+\item[] John washed the dishes before he went to the store.
+\end{earg}
+These two statements are both contingent, since John might not have gone to the store or washed dishes at all. But if either of the statements is true, then they both are; and if either of the statements is false, then they both are. When two statements are true in exactly the same cases, we say that they are \define{logically equivalent}.
+
+
+Let's change that example slightly:
+\begin{earg}
+\item[] John went to the store after he washed the dishes.
+\item[] John washed the dishes after he went to the store.
+\end{earg}
+Now, if either of those statements is true, the other is false (assuming that John washed the dishes exactly once, and went to the store exactly once). And if either of them is false, the other is true! When two statements are true in exactly the opposite cases, we say that they are \define{logically contradictory}.
+
+
+
+\section*{Summary of Logical Terms}
+
+\begin{itemize}
+\item An argument is \define{valid} if there is no case where the premises are all true and the conclusion is false; it is \define{invalid} otherwise.
+
+\item A collection of statements is \define{mutually consistent} if there is a case where they are all true; otherwise it is \define{mutually inconsistent}.
+
+\item A \define{logical truth} is a statement that is true in every case.
+
+\item A \define{logical falsehood} is a statement that is false in every case.
+
+\item A \define{contingent} statement is neither a logical truth nor a logical falsehood; it is true in some case and false in some other case.
+
+\item Two statements are \define{logically equivalent} if, in each case, they are both true or both false.
+
+\item Two statements are \define{logically contradictory} if, in each case, one is true and the other false.
+
+\end{itemize}
+
+
+
+\pagebreak
+\practiceproblems
+
+\problempart
+Are these logical truths, logical falsehoods, or contingent?
+\begin{earg}
+  \item Rangi Topeora, a Ng\={a}ti Toa leader, signed the Treaty of Waitangi.
+\item A woman signed the Treaty of Waitangi.
+\item No woman has ever signed the Treaty of Waitangi.
+\item If Rangi Topeora signed the Treaty of Waitangi, then someone has.
+%\item Although Rangi Topeora signed the Treaty of Waitangi, no one has signed the Treaty of Waitangi.
+\item If anyone has ever signed the Treaty of Waitangi, it was Rangi Topeora.
+\end{earg}
+\noindent\solutions\problempart\label{pr.EnglishTautology2}
+Are these logical truths, logical falsehoods, or contingent?
+\begin{earg}
+\item Elephants dissolve in water.
+\item Wood is a light, durable substance useful for building things.
+\item If wood were a good building material, it would be good for building.
+\item I live in a three story building that is two stories tall.
+\item If gerbils were mammals they would nurse their young.
+\end{earg}
+\problempart 
+Which pairs of statements are logically equivalent? 
+\begin{earg}
+\item Elephants dissolve in water.	\\
+	If you put an elephant in water, it will disintegrate.
+\item All mammals dissolve in water.\\		
+	If you put an elephant in water, it will disintegrate. 
+\item John Key is the 39th Prime Minister of New Zealand. \\
+	 Jacinda Arden is the 40th Prime Minister of New Zealand. 
+\item Jacinda Arden is the 40th Prime Minister of New Zealand. \\
+	Jacinda Arden is the Prime Minister of New Zealand immediately after the 39th Prime Minister. 
+\item Elephants dissolve in water. 	\\	
+	All mammals dissolve in water. 
+\end{earg}
+\noindent\solutions\problempart \label{pr.EnglishEquivalent}
+Which pairs of statements are logically equivalent?
+\begin{earg}
+\item Sarah Murphy is a biathlete.	\\
+  Valerie Adams is a shot putter. 
+\item Sarah Murphy represented New Zealand at the Olympics.	\\
+  Valerie Adams represented New Zealand at the Olympics.
+\item All biathletes are cross-country skiers.	\\
+  Sarah Murphy is a cross-country skier.
+\item Sarah Murphy won more medals at the Olympics than Valerie Adams.	 \\
+ Valerie Adams won fewer medals at the Olympics than Sarah Murphy.
+\item Sarah Murphy represented New Zealand at the Olympics, or she didn't.	 \\
+ Valerie Adam represented New Zealand at the Olympics, or she didn't.
+\end{earg} \pagebreak
+
+\noindent \problempart 
+Consider the following statements: 
+\begin{ebullet}%[label=(\alph*)]
+\item[G1] \label{itm:at_least_four}There are at least four giraffes at the wild animal park.
+\item[G2] \label{itm:exactly_seven} There are exactly seven gorillas at the wild animal park.
+\item[G3] \label{itm:not_more_than_two} There are not more than two Martians at the wild animal park.
+\item[G4] \label{itm:martians} Every giraffe at the wild animal park is a Martian.
+\end{ebullet}
+
+Which combinations of statements are mutually consistent?
+\begin{earg}
+\item Statements G2, G3, and G4
+\item Statements G1, G3, and G4
+\item Statements G1, G2, and G4
+\item Statements G1, G2, and G3
+\end{earg}
+\noindent\solutions\problempart  \label{pr.EnglishConsistent}
+Consider the following statements.
+\begin{ebullet}%[label=(\alph*)]
+\item[M1] \label{itm:allmortal} All people are mortal.
+\item[M2] \label{itm:socperson} Hypatia is a person.
+\item[M3] \label{itm:socnotdie} Hypatia will never die.
+\item[M4] \label{itm:socmortal} Hypatia is mortal.
+\end{ebullet}
+Which combinations of statements are mutually consistent?\begin{earg}
+\item Statements M2 and M3
+\item Statements M1 and M4
+\item Statements M1, M2, and M3
+\item Statements M1, M2, and M4
+\item Statements M1, M3, and M4
+\item Statements M2, M3, and M4
+\item Statements M1, M2, M3, and M4
+\end{earg}
+\noindent\solutions\problempart \label{pr.EnglishCombinations2}
+Which of the following is possible? \\
+\indent If it is possible, give an example. If it is not possible, explain why.
+\begin{earg}
+\item A valid argument, the conclusion of which is a logical falsehood
+
+\item An invalid argument, the conclusion of which is a logical truth
+
+\item A valid argument, whose premises are all logical truths, and whose conclusion is contingent
+
+\item A logical truth that is contingent
+
+\item Two logically equivalent statements, both of which are logical truths
+
+\item Two logically equivalent statements, one of which is a logical truth and one of which is contingent
+
+\item Two logically equivalent statements that are mutually inconsistent
+
+\item A mutually consistent collection that contains a logical falsehood
+
+\item A mutually inconsistent set of statements that contains a logical truth
+\end{earg}
+
+\end{document}

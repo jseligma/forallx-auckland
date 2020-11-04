@@ -1,0 +1,1746 @@
+\documentclass[PHIL101-Textbook.tex]{subfiles}
+\begin{document}
+
+\part{Truth Tables}\label{part:truth.tables}
+
+\chapter{Introducing Truth Tables}\label{ch:TruthTables}
+
+\section{Characteristic Truth Tables}
+
+Any formula of \tfl\ is composed of stomic statement symbols, possibly combined using sentential connectives. The truth value of a complex formula depends only on the truth value of the statement symbols that it contains. In order to know the truth value of `$(D \eand E)$', for instance, you only need to know the truth value of `$D$' and the truth value of `$E$', and how `$\eand$' works. That's what makes the logic truth-functional. 
+
+We will need to define the connectives we introduced in chapter \ref{ch:TFLConnectives}. We will abbreviate \emph{True}  with `\vT' and \emph{False}  with `\vF'. (But just to be clear, the  truth values are \emph{True} and \emph{False}; truth values are not numbers!)
+
+
+\paragraph{Negation.} If \meta{A} is true, then \enot\meta{A} is false. If \enot\meta{A} is true, then \meta{A} is false. We can summarise this in the \emph{characteristic truth table} for negation:
+\begin{center}
+\begin{tabular}{c|c}
+\meta{A} & \enot\meta{A}\\
+\hline
+\vT & \vF\\
+ \vF & \vT 
+\end{tabular}
+\end{center}
+
+\paragraph{Conjunction.} $(\meta{A}\eand\meta{B})$ is true if and only if \meta{A} is true and \meta{B} is true. Here is the {characteristic truth table} for conjunction:
+\begin{center}
+\begin{tabular}{c c |c}
+\meta{A} & \meta{B} & $(\meta{A}\eand\meta{B})$\\
+\hline
+ \vT  & \vT & \vT \\
+ \vT  & \vF & \vF \\
+ \vF & \vT & \vF \\
+ \vF & \vF &  \vF
+\end{tabular}
+\end{center}
+Note that conjunction is \emph{symmetrical}. The truth value for $(\meta{A} \eand \meta{B})$ is always the same as the truth value for $(\meta{B} \eand \meta{A})$.  
+
+\paragraph{Disjunction.} $(\meta{A}\eor \meta{B})$ is true if and only if at least one of \meta{A} and \meta{B} is true. Here is  the {characteristic truth table} for disjunction:
+\begin{center}
+\begin{tabular}{c c|c}
+\meta{A} & \meta{B} & $(\meta{A}\eor\meta{B})$ \\
+\hline
+ \vT  & \vT & \vT \\
+ \vT  & \vF & \vT \\
+ \vF & \vT & \vT \\
+ \vF & \vF &  \vF
+\end{tabular}
+\end{center}
+Like conjunction, disjunction is symmetrical. 
+
+\paragraph{Conditional.} Conditionals are complex and \tfl\ treats them in a simplified manner: $(\meta{A}\eif\meta{B})$ is false if and only if \meta{A} is true and \meta{B} is false; otherwise it is true. Here is the characteristic truth table for the conditional.
+\begin{center}
+\begin{tabular}{c c|c}
+\meta{A} & \meta{B} & $(\meta{A}\eif\meta{B})$\\
+\hline
+ \vT  & \vT & \vT \\
+ \vT  & \vF & \vF \\
+ \vF & \vT & \vT \\
+ \vF & \vF &  \vT 
+\end{tabular}
+\end{center}
+The conditional is \emph{asymmetrical}. You cannot swap the antecedent and consequent without changing the meaning of the formula, because $(\meta{A}\eif\meta{B})$ has a very different truth table from $(\meta{B}\eif\meta{A})$.
+
+\paragraph{Biconditional.} Since a biconditional is to be the same as the conjunction of a conditional running in each direction, the characteristic truth table for the biconditional must be:
+\begin{center}
+\begin{tabular}{c c|c}
+\meta{A} & \meta{B} & $(\meta{A}\eiff\meta{B})$\\
+\hline
+ \vT  & \vT & \vT \\
+ \vT  & \vF & \vF \\
+ \vF & \vT & \vF \\
+ \vF & \vF &  \vT 
+\end{tabular}
+\end{center}
+Unsurprisingly, the biconditional is symmetrical. 
+
+\paragraph{Exclusive Disjunction.} We won't be using exclusive disjunction very much. However, it's a worthwhile exercise for you to devise your own characteristic truth table for exclusive disjunction, or for any other connective you would like to add to \tfl.
+
+
+\section{Truth-functional Connectives}
+\label{s:TruthFunctionality}
+
+Let's formalise an idea we've talked about earlier. 
+	\factoidbox{
+  A connective is \define{truth-functional} iff the truth value of a formula with that connective as its main logical operator is uniquely determined by the truth value(s) of its constituent formula(s).
+	}
+        
+Every connective in \tfl\ is truth-functional. The truth value of a negation is uniquely determined by the truth value of the unnegated formula. The truth value of a conjunction is uniquely determined by the truth value of both conjuncts. The truth value of a disjunction is uniquely determined by the truth value of both disjuncts, and so on. To determine the truth value of some \tfl\ formulas, we only need to know the truth value of its component formulas. 
+
+%This is what gives \tfl\ its name: \emph{truth-functional logic}.
+
+Truth-functionality is actually quite rare. Almost no connectives and operators in English are truth-functional.
+
+For example the connectives `although' and `because' seem very `logical', but aren't truth-functional. Think about how the components of each of these statements contribute to the truth of the overall statement:
+
+	\begin{earg}
+  \item Sara is trustworthy and she is a lawyer.
+  \item Sara is trustworthy because she is a lawyer.
+  \item Sara is trustworthy although she is a lawyer.
+	\end{earg}
+
+To be true, each sentence needs the statements `Sara is trustworthy' and `Sara is a lawyer' to be true. Truth is all that \tfl\ knows about, so the \tfl\ symbolisation of these three statements would be identical. However, you can see that they do convey very different ideas about the relationship between being trustworthy and a lawyer, so they aren't interchangeable in English. `Although' and `because' are not \emph{truth-functional}.\\
+
+More abstractly, we can form a new statement from any simpler statement by prefixing it with, for example: `Audrey Hepburn thought that \ldots'. The truth value of this new sentence is not fixed solely by the truth value of the original sentence. For consider two true sentences:
+	\begin{earg}
+  \item $2 + 2 = 4$.
+  \item Beyonc\'{e}'s middle name is Giselle.
+	\end{earg}
+As both these sentences are true, adding our Hepburn operator should make them both true (or both false). But while Audrey Hepburn thought that $2+2=4$, she certainly didn't think Beyonc\'{e}'s middle name was Giselle. So `Audrey Hepburn thought that\ldots' is an English operator, but it is not a \emph{truth-functional} or logical operator.
+
+
+\section{Symbolising vs. Translating}
+All of the connectives of \tfl\ are truth-functional, but more than that: they really do \emph{nothing} except map between truth values.  
+
+When we symbolise a sentence or an argument in \tfl, we ignore everything \emph{besides} the contribution that the truth values of a component might make to the truth value of the whole. There are subtleties to our ordinary claims that far outstrip their mere truth values, such as sarcasm; poetry; tension; surprise; causation; temporality; emotional connotations; emphasis; and many others. These are important parts of everyday discourse, which are not expressible in \tfl. As remarked in Chapter \ref{ch:TFLConnectives}, \tfl\ cannot capture the subtle differences between the following English sentences:
+	\begin{earg}
+  \item Dana is a logician and Dana is a nice person
+  \item Although Dana is a logician, Dana is a nice person
+  \item Dana is a logician despite being a nice person
+  \item Dana is a nice person, since they are a logician
+  \item Dana is a logician; co-incidentally they are also a nice person
+	\end{earg}
+All of the above sentences would be symbolised with the same \tfl\ formula, perhaps `$(L \eand N)$'.
+
+We keep saying that we use \tfl\ formulas to \emph{symbolise} English statements. Many other textbooks talk about \emph{translating} English sentences into \tfl. However, a  translation must preserve certain facets of meaning, and -- as we have just pointed out -- \tfl\ cannot do that. This is why we will speak of \emph{symbolising} English statements, rather than of \emph{translating} them.
+
+This affects how we should understand our symbolisation keys. Consider a key like:
+	\begin{ekey}
+  \item[L] Dana is a logician.
+  \item[N] Dana is a nice person.
+	\end{ekey}
+Other textbooks will understand this as a stipulation that the \tfl\ formula `$L$' should \emph{mean} that Dana is a logician, and that the \tfl\ formula `$N$' should \emph{mean} that Dana is a nice person, but \tfl\ is totally unequipped to deal with \emph{meaning}. The preceding symbolisation key is only stipulating that the \tfl\ formula `$L$' must take the same truth value as the English statement `Dana is a logician', and that the \tfl\ formula `$N$' must take the same truth value as the English statement `Dana is a nice person'. 
+%	\factoidbox{
+%  When we treat a \tfl\ formula as \emph{symbolising} an English sentence, we are stipulating that the \tfl\ formula is to take the same truth value as that English sentence.
+%	}
+
+We should not expect that a symbolisation of a statement's truth value would also contain all the richness of communication. Truth is only a very small (if central) element of communication.
+
+
+
+\pagebreak
+
+\practiceproblems\label{pr.TT.intro}
+\problempart
+Write characteristic truth tables for each of the following connectives:
+\begin{earg}
+\item Exclusive disjunction (Either $A$ nor $B$, but not both).
+\item Nor (Neither $A$ nor $B$).
+\item Only if (Only if $A$ then $B$).
+\item Another connective that you think might be interesting.
+\end{earg}
+
+\problempart
+One major limitation on \tfl\ connectives is our choice of having two truth values (True and False). What third truth value might you add (e.g. `unknown', `both true and false', `irrelevant', `unproven', `future' (i.e. not yet true or false), `partially true'? Create characteristic truth tables for conjunction and negation using True, False, and your third truth value.
+
+
+\chapter{Complete Truth Tables}
+\label{ch:CompleteTruthTables}
+
+We have two main uses for truth values. First, we can assign truth values to a \tfl\ formula based on the truth value of the statement it symbolises. For example, `$B$' could take the same truth value as the English sentence `Big Ben is in London'.  Second -- and more interesting for logicians -- we can stipulate the truth value of some of our formulas, and check if this informs us of the truth values of others. Usually we only provide values for the atomic statement symbols in \tfl.
+	\factoidbox{
+  A \define{valuation} in \tfl\ is any assignment of truth values to \\ individual \tfl\ statement symbols.
+	}
+
+
+The power of truth tables lies in the following: Each row of a truth table represents a possible valuation. The entire truth table represents all possible valuations; thus the truth table provides us with a means to calculate the truth values of complex formulas, over all possibilities. This is easiest to explain with examples.
+
+\section{Our First Complete Truth Table}
+Consider the formula `$((H\eor I)\eif H)$'. There are four possible ways to assign True and False to the statement symbols `$H$' and `$I$' -- four possible valuations -- which we can represent on four rows, as follows:
+\begin{center}
+\begin{tabular}{c c|ccccc}
+$H$&$I$&$((H$&\eor&$I)$&\eif&$H)$\\
+\hline
+ \vT & \vT \\
+ \vT & \vF \\
+ \vF & \vT \\
+ \vF &  \vF
+\end{tabular}
+\end{center}
+To calculate the truth value of the entire formula `$((H \eor I) \eif H)$', we first copy the truth values underneath their symbols in the formula:
+\begin{center}
+\begin{tabular}{c c|ccccc}
+$H$&$I$&$((H$&\eor&$I)$&\eif&$H)$\\
+\hline
+ \vT & \vT & {\vT} & & {\vT} & & {\vT}\\
+ \vT & \vF & {\vT} & & {\vF} & & {\vT}\\
+ \vF & \vT & {\vF} & & {\vT} & & {\vF}\\
+ \vF & \vF & {\vF} & & {\vF} & & {\vF}
+\end{tabular}
+\end{center}
+Now consider the subformula `$(H\eor I)$'. This is a disjunction $(\meta{A}\eor\meta{B})$ with `$H$' as \meta{A} and with `$I$' as \meta{B}. A disjunction is true iff one of its disjuncts is true. In this case, our disjuncts are just `$H$' and `$I$'.
+
+\begin{center}
+\begin{tabular}{c c|ccccc}
+ & & (\meta{A} & \eor & \meta{B}) & & \\
+$H$&$I$&$((H$&\eor&$I)$&\eif&$H)$\\
+\hline
+ \vT & \vT & \gT & \vT & \gT & & \vT \\
+ \vT & \vF & \gT & \vT & \gF & & \vT \\
+ \vF & \vT & \gF & \vT & \gT & & \vF \\
+ \vF & \vF & \gF & \vF & \gF & &  \vF
+\end{tabular}
+\end{center}
+Tip: When we show that a column is used to to calculate another, we will often grey that column out once it's used, as we'll never need to use that column again. You could cross out, tick, or highlight them instead. %This makes it easier to read the truth table. 
+
+The next connective is a conditional $(\meta{A}\eif\meta{B})$ with `$(H \eor I)$' as \meta{A} and with `$H$' as \meta{B}. On the first row, for example, `$(H\eor I)$' is true and `$H$' is true, so `$((H\eor I) \eif I)$' is true. We write `\vT' on the row:
+
+\begin{center}
+\begin{tabular}{c c| ccccc}
+ & &  & (\meta{A} &  &\eif &\meta{B}) \\
+$H$&$I$&$((H$&\eor&$I)$&\eif&$H)$\\
+\hline
+ \vT & \vT & \gT & \gT & \gT & \vT & \gT \\
+ \vT & \vF & \gT & \gT & \gF &     & \gT \\
+ \vF & \vT & \gF & \gT & \gT &     & \gF \\
+ \vF & \vF & \gF & \gF & \gF &     & \gF \\
+% & & & & & $\uparrow$
+\end{tabular}
+\end{center}
+
+The second row is similar. In the third row, however, `$(H\eor I)$ is true and `$H$' is false, so we write `\vF'. Finally, the antecedent of the conditional is false on the last row, so we write `\vT'. The completed table looks like this: 
+
+\begin{center}
+\begin{tabular}{c c| ccccc}
+$H$&$I$&$((H$&\eor&$I)$&\eif&$H)$\\
+\hline
+ \vT & \vT & \gT & \gT & \gT &\mT & \gT \\
+ \vT & \vF & \gT & \gT & \gF &\mT & \gT \\
+ \vF & \vT & \gF & \gT & \gT &\mF & \gF \\
+ \vF & \vF & \gF & \gF & \gF &\mT & \gF \\
+
+\end{tabular}
+\end{center}
+The conditional is the main logical operator of the formula. It is true on three rows, and false on one row.
+
+
+\section{Building Complete Truth Tables}
+A complete truth table has a row for every possible valuation; that is, every possible combination of \emph{True} and \emph{False} for the relevant statement symbols. To make sure you include every possibility, it's best to be orderly when building your truth table.
+
+
+The size of the complete truth table depends on the number of different statement symbols in the table. Two rows are needed for the complete truth table for a formula that contains only one atomic statement symbol, such as the characteristic truth table for negation.
+Four rows are needed for the complete truth table for formulas that contain two atomic statement symbols, such as the characteristic truth tables for our binary connectives, and the truth table for `$((H \eand I)\eif H)$'.
+
+Eight rows are needed for the complete truth table for formulas that contain three atomic statement symbols. Sixteen rows for four different symbols, 32 rows for five symbols, 64 rows for six symbols, etc., In general: A complete truth table with $n$ atomic statement symbols has $2^n$ rows.
+
+In order to write the columns of a complete truth table, begin with the right-most atomic symbol; write alternately `\vT' and `\vF'. In the next column to the left, write two `\vT's, then two `\vF's, and repeat. For the third atomic symbol, write four `\vT's then four `\vF's. This yields an eight line truth table like the one below: 
+
+\begin{center}
+\begin{tabular}{c c c|ccccc}
+$M$&$N$&$P$&$(M$&\eand&$(N$&\eor&$P))$\\
+\hline
+%           M        &     N   v   P
+ \vT  & \vT & \vT \\%& \vT & \vT & \vT & \vT & \vT \\
+ \vT  & \vT & \vF \\%& \vT & \vT & \vT & \vT & \vF \\
+ \vT  & \vF & \vT \\%& \vT & \vT & \vF & \vT & \vT \\
+ \vT  & \vF & \vF \\%& \vT & \vF & \vF & \vF & \vF \\
+ \vF & \vT & \vT \\%& \vF & \vF & \vT & \vT & \vT \\
+ \vF & \vT & \vF \\%& \vF & \vF & \vT & \vT & \vF \\
+ \vF & \vF & \vT \\%& \vF & \vF & \vF & \vT & \vT \\
+ \vF & \vF & \vF %& \vF & \vF & \vF & \vF &  \vF
+\end{tabular}
+\end{center}
+
+\noindent For a 16 line truth table, the next column of statement symbols should have eight `\vT's followed by eight `\vF's. Then 16 `\vT's and 16 `\vF's, and so on.
+
+
+But what if the same atomic symbol occurs many times, as in the formula
+`$(((C\eiff C) \eif C) \eand \enot(C \eif C))$'?
+Only two lines are required because there is only one atomic symbol $C$, and so only two possibilities: $C$ is true or false. The complete truth table for this formula is:
+
+\begin{center}
+  \begin{tabular}{c|  c  c c c c c  c  c c c c }
+$C$&$(((C$&\eiff&$C)$&\eif&$C)$&\eand&\enot&$(C$&\eif&$C))$\\
+\hline
+ \vT &     \,\,\,\, \gT &  \gT  & \gT &    \gT  & \gT &\mF&  \gF &    \gT &  \gT  & \gT   \\
+ \vF &     \,\,\,\, \gF &  \gT  & \gF &    \gF  & \gF  &\mF&   \gF &    \gF &  \gT  & \gF 
+\end{tabular}
+\end{center}
+
+
+
+\section{Dropping Brackets}\label{s:MoreBracketingConventions}
+Our formulas are starting to accumulate a lot of brackets. You might think that not all these brackets are necessary. And you'd be right. But it can be tricky to know which brackets are needed and which are not. One pair more than you need is annoying. One pair less is disastrous. Given that warning, there \emph{are} times you can safely drop brackets.\\
+
+(1) You can drop the outermost set of brackets, if they are the very first and very last symbols.
+
+\begin{center}
+\begin{tabular}{ l c l} 
+$(A \eor B)$ & $\Rightarrow$ & $A \eor B$ \\
+$((A \eand B) \eif (C \eor D))$ & $\Rightarrow$ & $(A \eand B) \eif (C \eor D)$ \\
+$(A \eand B) \eif (C \eor D)$ & $\not\Rightarrow$ & $A \eand B) \eif (C \eor D$ \\
+$\enot(A \eor B)$ & $\not\Rightarrow$ & $\enot A \eor B$
+\end{tabular}
+\end{center}
+
+Don't forget to add those brackets again though, if you need to negate your formula, or join it to another formula.\\
+
+(2) If you have several conjuncts in a row, or several disjuncts in a row, you can drop the pairs of brackets separating them. However, be careful, and if in doubt, leave the  brackets alone.
+
+\begin{center}
+\begin{tabular}{lcl} 
+$((A \eand B) \eand C)$ & $\Rightarrow$ & $(A \eand B \eand C)$ \\
+$(A \eor (B \eor C))$ & $\Rightarrow$ & $(A \eor B \eor C)$ \\
+$((A \eif B) \eif C)$ & $\not\Rightarrow$ &$(A \eif B \eif C)$ \\
+$((A \eand B) \eor C)$ & $\not\Rightarrow$ & $(A \eand B \eor C)$ \\
+\end{tabular}
+\end{center}
+
+You cannot drop brackets if there are several conditionals in a row. Nor can you drop brackets if there are a mixture of conjuncts and disjuncts. And even if it's permissible to drop brackets, you'll find it is sometimes useful to use them to group some of the subformulas.
+
+You might be wondering, why only conjunctions or disjuncts? The answer is that $((A \eand B) \eand C)$ and $(A \eand (B \eand C))$ have the same truth tables:
+
+\begin{center}
+\begin{tabular}{c c c|ccccc|ccccc}
+$A$ & $B$ & $C$ & $((A$ & \eand & $B)$ & \eand & $C)$ & $(A$ & \eand & $(B$ & \eand & $C))$\\
+\hline
+%           M        &     N   v   P
+ \vT  & \vT & \vT & \gT & \gT & \gT & \mT & \gT & \gT & \mT & \gT & \gT & \gT \\
+ \vT  & \vT & \vF & \gT & \gT & \gT & \mF & \gF & \gT & \mF & \gT & \gF & \gF \\
+ \vT  & \vF & \vT & \gT & \gF & \gF & \mF & \gT &  \gT & \mF & \gF & \gF & \gT \\
+ \vT  & \vF & \vF & \gT & \gF & \gF & \mF & \gF &  \gT & \mF & \gF & \gF & \gF \\
+ \vF  & \vT & \vT & \gF & \gF & \gT & \mF & \gT &  \gF & \mF & \gT & \gT & \gT \\
+ \vF  & \vT & \vF & \gF & \gF & \gT & \mF & \gF &  \gF & \mF & \gT & \gF & \gF \\
+ \vF  & \vF & \vT & \gF & \gF & \gF & \mF & \gT &  \gF & \mF & \gF & \gF & \gT \\
+ \vF  & \vF & \vF & \gF & \gF & \gF & \mF & \gF &  \gF & \mF & \gF & \gF & \gF
+\end{tabular}
+\end{center}
+
+\noindent Because these two conjunction formulas have the same truth table, the precise bracketting doesn't matter. We can then write this formula simply as: $(A \eand B \eand C)$.
+The same story holds for disjunction: $((A \eor B) \eor C)$ and $(A \eor (B \eor C))$ have the same truth tables, so we can simply write $(A \eor B \eor C)$. 
+
+But $((A \eif B) \eif C)$ and $(A \eif (B \eif C))$ have different truth tables:
+
+\begin{center}
+\begin{tabular}{c c c|ccccc|ccccc}
+$A$ & $B$ & $C$ & $((A$ & \eif & $B)$ & \eif & $C)$ & $(A$ & \eif & $(B$ & \eif & $C))$\\
+\hline
+%           M        &     N   v   P
+ \vT  & \vT & \vT & \gT & \gT & \gT & \mT & \gT & \gT  & \mT & \gT & \gT & \gT \\
+ \vT  & \vT & \vF & \gT & \gT & \gT & \mF & \gF & \gT  & \mF & \gT & \gF & \gF \\
+ \vT  & \vF & \vT & \gT & \gF & \gF & \mT & \gT &  \gT & \mT & \gF & \gT & \gT \\
+ \vT  & \vF & \vF & \gT & \gF & \gF & \mT & \gF &  \gT & \mT & \gF & \gT & \gF \\
+ \vF  & \vT & \vT & \gF & \gT & \gT & \mT & \gT &  \gF & \mT & \gT & \gT & \gT \\
+ \vF  & \vT & \vF & \gF & \gT & \gT & \mF & \gF &  \gF & \mT & \gT & \gF & \gF \\
+ \vF  & \vF & \vT & \gF & \gT & \gF & \mT & \gT &  \gF & \mT & \gF & \gT & \gT \\
+ \vF  & \vF & \vF & \gF & \gT & \gF & \mF & \gF &  \gF & \mT & \gF & \gT & \gF 
+\end{tabular}
+\end{center}
+
+\noindent Because their truth tables are different, we need to distinguish between them, so we can't simplify the formula to: $(A \eif B \eif C)$. Similarly $((A \eand B) \eor C)$ and $(A \eand (B \eor C))$ have different truth tables, so we can't write: $(A \eand B \eor C)$.\\
+
+This tension between having enough brackets, and avoiding confusing clutter, will reoccur throughout this course, as we learn more techniques and create more complicated formulas. If in doubt, use brackets.
+
+Importantly, always make sure you have the same number of opening `('and closing `)' brackets. There are several useful tricks for this. One way is to use different sized or shaped pairs of brackets, such as 
+$$[\big( ( p \eand q) \eif q\big) \to \enot \{ p \lor q\}]$$ However, we are going to use $[$square brackets$]$ for a particular type of bracket in the second half of this book, so you might find that using different colours, or even numbering your brackets, might work better: 
+
+$$(^1(^2 (^3 p \eand q)^3 \eif q)^2 \to \enot (^4 p \lor q)^4)^1$$
+
+With a little practice, you'll be keeping track of your brackets, and dropping the ones you don't need, without causing yourself any confusion.\\
+
+Finally, don't drop all your brackets when writing a complex formula. Writing $((A \eand B) \eand C)$ as $A \eand B \eand C$ isn't wrong, but it leaves the formula completely naked. Have \emph{some} decency.
+
+
+\pagebreak
+
+\practiceproblems\label{pr.TT.TTorC}
+\problempart
+Write complete truth tables for each of the following:
+\begin{earg}
+\item $(A \eif A)$ %taut
+\item $(C \eif\enot C)$ %contingent
+\item $((A \eiff B) \eiff \enot(A\eiff \enot B))$ %logical truth
+\item $((A \eif B) \eor (B \eif A))$ % taut
+\item $((A \eand B) \eif (B \eor A))$  %taut
+\item $(\enot(A \eor B) \eiff (\enot A \eand \enot B))$ %taut
+\item $(((A\eand B) \eand\enot(A\eand B))\eand C)$ %contradiction
+\item $(((A \eand B) \eand C) \eif B)$ %taut
+\item $\enot((C\eor A) \eor B)$ %contingent
+\end{earg}
+\problempart
+Check all the claims made in \S\ref{s:MoreBracketingConventions} Dropping Brackets, i.e.\ show:
+\begin{earg}
+	\item `$((A \eand B) \eand C)$' and `$(A \eand (B \eand C))$' have the same truth table
+	\item `$((A \eor B) \eor C)$' and `$(A \eor (B \eor C))$' have the same truth table
+	\item `$((A \eor B) \eand C)$' and `$(A \eor (B \eand C))$' have different truth tables
+	\item `$((A \eif B) \eif C)$' and `$(A \eif (B \eif C))$' have different truth tables
+	\item[]\hspace{-30pt}Also, check whether:
+	\item `$((A \eiff B) \eiff C)$' and `$(A \eiff (B \eiff C))$' have the same truth table
+\end{earg}
+
+\noindent\solutions
+\problempart \label{pr.completeTT1}
+Write complete truth tables for the following formulas and mark the column that represents the truth values for the whole formula.
+
+\begin{earg}
+\item $\enot (S \eiff (P \eif S))$
+\item $\enot ((X \eand Y) \eor (X \eor Y))$
+\item $((\enot P \eor \enot M) \eiff M)$
+\item $((A \eif B) \eiff (\enot B\eiff \enot A))$
+\item $\enot \enot (\enot A \eand \enot B)$
+\item $(((D \eand R) \eif I) \eif \enot(D \eor R))$
+\item $((C \eiff (D \eor E)) \eand \enot C)$
+\item $(\enot(G \eand (B \eand H)) \eiff (G \eor \enot(B \eor H)))$
+\item $(\enot ((D \eiff O) \eiff A) \eif (\enot D \eand O))$
+\end{earg}
+
+\problempart
+Write out each of the formulas in this set of exercises, using as few pairs of brackets as possible.\\
+
+\problempart 
+If you want additional practice, you can construct truth tables for any of the formulas in the exercises for the previous chapter.
+
+
+
+\chapter{Semantic Notions}
+\label{ch:SemanticNotions}
+
+Now we know how to determine the truth value of any \tfl\ formula for any possible valuation by using a truth table, we can put this to good use. We have discussed several logical notions such as validity and consistency for English statements. We can now create tests for these same notions in \tfl.
+
+
+\section{Logical Truths and Falsehoods}
+In Chapter \ref{ch:BasicNotions}, we explained \emph{logical truth} and \emph{logical falsity}. Both notions have analogues in \tfl. Here is the definition of logical truth for \tfl:
+	\factoidbox{
+  $\meta{A}$ is a \define{logical truth} (in \tfl) iff it is true in every valuation.
+	}
+
+
+
+We can determine whether a formula is a logical truth just by using truth tables. If the formula is true on every line of a complete truth table, then it is true in every valuation, so it is a logical truth. For example, the formula `$(H \eand I) \eif H$' is a logical truth, as is shown in the completed truth table:
+
+\begin{center}
+\begin{tabular}{c c| ccccc}
+$H$&$I$&$((H$&\eand&$I)$&\eif&$H)$\\
+\hline
+ \vT & \vT & \gT & {\gT} & \gT &{\mT} & \gT \\
+ \vT & \vF & \gT & {\gF} & \gF &{\mT} & \gT \\
+ \vF & \vT & \gF & {\gF} & \gT &{\mT} & \gF \\
+ \vF & \vF & \gF & {\gF} & \gF &{\mT} & \gF \\
+% & & & & & $\uparrow$
+\end{tabular}
+\end{center}
+
+\noindent The column of `\vT's underneath the conditional shows that the \tfl\ formula `$((H \eand I)\eif H)$' is a logical truth: it is true in all cases. `$H$' and `$I$' can be true or false in any combination, and the conditional formula still comes out true. Since we have considered all possibilities for the truth of `$H$' and `$I$' -- since, that is, we have considered all their \emph{valuations} -- we can say that `$((H \eand I)\eif H)$' is true on every valuation, so is a logical truth.
+
+A completed truth-table can also show that $(A \eif B) \eif C$ isn't a logical truth, because some rows of its main connective are false (shaded pink): 
+
+\begin{center}
+\begin{tabular}{c c c|ccccc}
+$A$ & $B$ & $C$ & $((A$ & \eif & $B)$ & \eif & $C)$ \\
+\hline
+ \vT  & \vT & \vT & \gT & \gT & \gT & \mT & \gT \\
+ \vT  & \vT & \vF & \gT & \gT & \gT & \mF & \gF \\
+ \vT  & \vF & \vT & \gT & \gF & \gF & \mT & \gT \\
+ \vT  & \vF & \vF & \gT & \gF & \gF & \mT & \gF \\
+ \vF  & \vT & \vT & \gF & \gT & \gT & \mT & \gT \\
+ \vF  & \vT & \vF & \gF & \gT & \gT & \mF & \gF \\
+ \vF  & \vF & \vT & \gF & \gT & \gF & \mT & \gT \\
+ \vF  & \vF & \vF & \gF & \gT & \gF & \mF & \gF 
+\end{tabular}
+\end{center}
+
+This methods identifies all logical truths that can be captured by \tfl. There are some logical truths that we cannot adequately symbolise in \tfl. For example `Every cat is a cat' \emph{must} always be true, but the best symbolisation we can offer is an atomic symbol, and no atomic symbol is a logical truth. That's because any atomic symbol has the possibility of being true, and of being false.
+ Still, any English statement that is symbolised by a logical truth in \tfl\ will also be a logical truth in English.\\
+
+We have a similarly restricted definition for logical falsity:
+	\factoidbox{
+  $\meta{A}$ is a \define{logical falsehood} iff it is false in every valuation.
+	}
+
+
+We can determine whether a formula is a falsehood just by using truth tables. If the formula is false on every line of a complete truth table, then it is false on every valuation, so it is a falsehood. This formula from Chapter \ref{ch:CompleteTruthTables}, `$((C\eiff C) \eif C) \eand \enot(C \eif C)$', is a logical falsehood:
+
+\begin{center}
+  \begin{tabular}{c|  c  c c c c c  c  c c c c }
+$C$&$(((C$&\eiff&$C)$&\eif&$C)$&\eand&\enot&$(C$&\eif&$C))$\\
+\hline
+ \vT &     \,\,\,\, \gT &  \gT  & \gT &    \gT  & \gT &\mF&  \gF &    \gT &  \gT  & \gT   \\
+ \vF &     \,\,\,\, \gF &  \gT  & \gF &    \gF  & \gF  &\mF&   \gF &    \gF &  \gT  & \gF 
+\end{tabular}
+\end{center}
+
+Finally, most statements are neither logical truths nor  falsehoods:
+	\factoidbox{
+  $\meta{A}$ is \define{contingent} iff it is not a logical truth or falsehood.
+	}
+
+Contingent statements are those that are useful in the world; one's that can affect our actions, because they can be either true or false, and we need to engage in observation to determine which they are. For logicians, that's just too much work.
+
+
+\section{Consistency}
+In Chapter \ref{ch:BasicNotions}, we said that statements are mutually consistent iff it is possible for all of them to be true at once. We can adapt this to \tfl\ too:
+	\factoidbox{
+  $\meta{A}_1, \meta{A}_2, \ldots, \meta{A}_n$ are \define{mutually consistent} (in \tfl) iff there is some valuation which makes them all true.
+	}
+
+To test for mutually consistency using complete truth tables, we look for a truth table row where all the formulas are true. For instance, the formulas `$(P \eif Q)$' and `$(\enot P \eand \enot Q)$' are mutually consistent:
+
+\begin{center}
+\begin{tabular}{c c|ccc |ccccc}
+$P$&$Q$&$(P$&\eif&$Q)$&$($\enot&$P$&\eand&\enot&$Q)$\\
+\hline
+ \vT & \vT & \gT & \bT & \gT & \gF & \gT & \bF & \gF & \gT \\
+ \vT & \vF & \gT & \bF & \gF & \gF & \gT & \bF & \gT & \gF \\
+ \vF & \vT & \gF & \bT & \gT & \gT & \gF & \bF & \gF & \gT \\
+ \vF & \vF & \gF & \mT & \gF & \gT & \gF & \mT & \gT & \gF 
+\end{tabular}
+\end{center}
+
+\noindent Both formulas get the value `\vT' (true) on the last row in the table, which shows it is possible for the formulas to be true together.\\
+
+\noindent A set of formulas is \define{mutually inconsistent} iff it isn't mutually consistent. 
+
+	\factoidbox{
+  $\meta{A}_1, \meta{A}_2, \ldots, \meta{A}_n$ are \define{mutually inconsistent} (in \tfl) iff there is no valuation which makes them all true.
+	}
+
+
+We can show that `$(P \eif Q)$' and `$(P \eand \enot Q)$' are mutually inconsistent:
+
+\begin{center}
+\begin{tabular}{cc|ccc |cccc}
+$P$&$Q$&$(P$&\eif&$Q)$&$(P$&\eand&\enot&$Q)$\\
+\hline
+ \vT & \vT & \gT & \bT & \gT & \gT & \bF & \gF & \gT \\
+ \vT & \vF & \gT & \bF & \gF & \gT & \bT & \gT & \gF \\
+ \vF & \vT & \gF & \bT & \gT & \gF & \bF & \gF & \gT \\
+ \vF & \vF & \gF & \bT & \gF & \gF & \bF & \gT & \gF 
+\end{tabular}
+\end{center}
+
+To show that a set of formulas is mutually inconsistent, we must check every row, as we did for checking logical truth and falsehood. 
+
+Consistency (and inconsistency) need not apply just to pairs of formulas. In fact, it's possible to have a set of formulas, each pair of which is consistent, while the whole set is inconsistent:
+
+\begin{center}
+\begin{tabular}{cc|ccc |ccccc|ccc}
+$P$&$Q$&
+$(P$&\eor&$Q)$&$($\enot&$P$&\eor&\enot&$Q)$&$(P$&\eiff&$Q)$\\
+\hline
+ \vT & \vT & 
+ \gT& \bT& \gT&   \gF  &\gT& \bF& \gF & \gT& \gT& \bT & \gT \\
+ \vT & \vF &
+ \gT& \bT& \gF&   \gF  &\gT& \bT& \gT & \gF& \gT& \bF & \gF \\
+ \vF & \vT &
+ \gF& \bT& \gT&   \gT  &\gF& \bT& \gF & \gT& \gF& \bF & \gT \\
+ \vF & \vF &
+ \gF& \bF& \gF&   \gT  &\gF& \bT& \gT & \gF& \gF& \bT & \gF \\
+\end{tabular}
+\end{center}
+
+So be careful when you specify which set of formulas is consistent!
+
+
+\section{Validity}
+The validity of an argument is closely related to mutual consistency of its premises and negated conclusion:
+	\factoidbox{
+          $\meta{A}_1, \meta{A}_2, \ldots, \meta{A}_n\ \therefore\ \meta{C}$ is valid iff \\\indent\indent$\meta{A}_1, \meta{A}_2, \ldots, \meta{A}_n, \enot\, \meta{C}\ $ are mutually inconsistent. 	}
+Restating this relationship in English, an argument is valid if and only if there is no possibility that every premise and the negated conclusion can all be true. And this holds iff the conclusion can't be false when the premises are true.
+
+We can use a complete truth table to test for validity. In a truth table, we indicate the start of each premise with a vertical line, and the start of the conclusion with a double vertical line. For example, to test whether `$\enot L \eif (J \eor L), \enot L \ \therefore\ J$' is a valid argument, we check if every row where the premises `$\enot L \eif (J \eor L)$' and `$\enot L$' are true also has `$J$' true:
+\begin{center}
+\begin{tabular}{c c|cccccc|cc||c}
+$J$&$L$&\enot&$L$&\eif&$(J$&\eor&$L)$&\enot&$L$&$J$\\
+\hline
+ \vT & \vT & \gF & \gT & \bT & \gT & \gT & \gT & \bF & \gT & \bT\\
+ \vT & \vF & \gT & \gF & \mT & \gT & \gT & \gF & \mT & \gF & \mT\\
+ \vF & \vT & \gF & \gT & \bT & \gF & \gT & \gT & \bF & \gT & \bF\\
+ \vF & \vF & \gT & \gF & \bF & \gF & \gF & \gF & \bT & \gF & \bF \\
+\end{tabular}
+\end{center}
+
+ The above argument is valid, because the conclusion is true on every row where the premises are true. Note that had there been \emph{no} rows where the premises were true, the argument would automatically be valid, because there are no rows where it could go wrong.\\
+
+The test for invalidity is similar. For example, to test whether `$\enot L \eif (J \eor L), \enot L \ \therefore\ \enot J$' is invalid argument, we check if there is any valuation that makes both `$\enot L \eif (J \eor L)$' and `$\enot L$' true and `$\enot J$' false:
+\begin{center}
+\begin{tabular}{c c|cccccc|cc||cc}
+$J$&$L$&\enot&$L$&\eif&$(J$&\eor&$L)$&\enot&$L$&\enot&$J$\\
+\hline
+ \vT & \vT & \gF & \gT & \bT & \gT & \gT & \gT & \bF & \gT &\bF& \gT\\
+ \vT & \vF & \gT & \gF & \mT & \gT & \gT & \gF & \mT & \gF &\mF& \gT\\
+ \vF & \vT & \gF & \gT & \bT & \gF & \gT & \gT & \bF & \gT &\bT& \gF\\
+ \vF & \vF & \gT & \gF & \bF & \gF & \gF & \gF & \bT & \gF &\bT& \gF \\
+\end{tabular}
+\end{center}
+
+\noindent  Only the second row has both `$\enot L \eif (J \eor L)$' and `$\enot L$' true, and on that row `$\enot J$' is false. We have found one row where it failed (no matter how many rows it might pass the test for validity. So `$\enot L \eif (J \eor L), \enot L \ \therefore\ \enot J$' is invalid.
+
+
+
+\section{Equivalent and Contradictory}
+Only pairs of formulas can be Equivalent or Contradictory. We start with Equivalence in \tfl:
+	\factoidbox{
+  $\meta{A}$ and $\meta{B}$ are \define{equivalent} (in \tfl) iff their truth values agree for each valuation.
+	}
+
+We have already made use of this notion in \S\ref{s:MoreBracketingConventions} when we showed that `$(A \eand B) \eand C$' and  `$A \eand (B \eand C)$' are equivalent. To test for equivalence using truth tables, we complete the truth tables and check the columns are identical. For example, are the formulas `$\enot(P \eor Q)$' and `$(\enot P \eand \enot Q)$' equivalent?
+\begin{center}
+\begin{tabular}{c c|cccc |ccccc}
+$P$&$Q$&\enot&$(P$&\eor&$Q)$&$($\enot&$P$&\eand&\enot&$Q)$\\
+\hline
+ \vT & \vT & \bF & \gT & \gT & \gT & \gF & \gT & \bF & \gF & \gT \\
+ \vT & \vF & \bF & \gT & \gT & \gF & \gF & \gT & \bF & \gT & \gF \\
+ \vF & \vT & \bF & \gF & \gT & \gT & \gT & \gF & \bF & \gF & \gT \\
+ \vF & \vF & \bT & \gF & \gF & \gF & \gT & \gF & \bT & \gT & \gF \\
+ %& & $\uparrow$ & & & & & & $\uparrow$
+\end{tabular}
+\end{center}
+Both formulas are false on the first three rows, and true on the final row. Since they have identical truth values on every row, the two formulas are equivalent.\\
+
+The definition of Contradictory formulas in \tfl\ is similar:
+	\factoidbox{
+  $\meta{A}$ and $\meta{B}$ are \define{contradictory} (in \tfl) iff their truth values differ for each valuation.
+}
+
+We can test if the formulas `$(P \eif Q)$' and `$(P \eand \enot Q)$' are contradictory:
+\begin{center}
+\begin{tabular}{c c|ccc |cccc}
+$P$&$Q$&$(P$&\eif&$Q)$&$(P$&\eand&\enot&$Q)$\\
+\hline
+ \vT & \vT & \gT & \bT & \gT & \gT & \bF & \gF & \gT \\
+ \vT & \vF & \gT & \bF & \gF & \gT & \bT & \gT & \gF \\
+ \vF & \vT & \gF & \bT & \gT & \gF & \bF & \gF & \gT \\
+ \vF & \vF & \gF & \bT & \gF & \gF & \bF & \gT & \gF \\
+ %& & $\uparrow$ & & & & & & $\uparrow$
+\end{tabular}
+\end{center}
+The first formula is false only on the second row, while the second formula is true on the second row, and false elsewhere. Since they have different truth values on every row, the two formulas are contradictory.\\
+
+Being equivalent and contradictory are negations of each other, in the sense that $\meta{A}$ and $\meta{B}$ are equivalent iff $\meta{A}$ and $\enot\meta{B}$ are contradictory.
+
+
+
+\section{Relationships between Logical Notions}
+We can observe a number of relationships between our logical terms.
+
+\begin{earg}
+\item The negation of a logical truth is a logical falsehood.
+\item The negation of a logical falsehood is a logical truth.\\
+
+\item The conjunction of inconsistent formulas is a logical falsehood.
+\item A single formula is inconsistent iff it is a logical falsehood.
+\item A set of formulas is inconsistent iff their conjunction is a logical falsehood.
+\item A formula's negation is inconsistent iff it is a logical truth.
+\item A set of formulas is inconsistent iff the disjunction of their negations is a logical truth.\\
+
+\item An argument is valid iff the conditional from the conjunction of its premises to its conclusion is a logical truth.
+\item An argument is valid iff its premises plus its negated conclusion is inconsistent.
+\item An argument is invalid iff its premises plus its negated conclusion is consistent.
+\item Any argument whose conclusion is a logical truth is valid.
+\item Any argument whose premises are inconsistent is valid.\\
+
+\item All logical truths are equivalent to each other.
+\item All logical falsehoods are equivalent to each other.
+\item Any logical truth and falsehood are contradictory.
+\item A pair of formulas is equivalent iff one paired with the negation of the other is contradictory.
+\item A pair of formulas is equivalent iff a formula joining them with a biconditional is a logical truth.
+\item A pair of formulas is equivalent iff each is mutually inconsistent with the other's negation.
+\item A pair of formulas is contradictory iff a formula joining them with a biconditional is a logical falsehood.
+\item A pair of formulas is contradictory iff a formula joining them with an exclusive disjunction is a logical truth.
+\item A pair of formulas is contradictory iff they are mutually inconsistent and so are their negations.
+\item A pair of formulas is equivalent iff the arguments from each to the other are both valid.
+
+\end{earg}
+
+
+
+%Mutual consistency only requires that we find one row where the formulas are all true. This is similar to a failure of logical truth (one false row), or a failure of logical falsehood (one row true). In this sense, checking consistency is the opposite process to truth, falsity, and (as we will shortly see) validity and equivalence.\\
+%
+%Consistency is about the possibility that things could be a certain way. The rest of our logical terms are about certainty, ruling out possibilities that they could be otherwise. This makes checking for consistency a special case in ways that will prove to be important in Part \ref{part:tfl.trees}.
+%
+%Framing our other logical tests in terms of mutual inconsistency is useful, as we can look for a possibility (row) where the formulas are consistent. This row would be a counter-example to the property we seek. Seeking this single row can be a lot faster than writing a complete truth table. For example, we can show that $(A \eor \enot B) \ \therefore\ \enot (A \eif B)$ is invalid by showing that $(A \eor \enot B)$ is mutually consistent with $(A \eif B)$: 
+%
+%\begin{center}
+%\begin{tabular}{cc|ccc |cccc}
+%$A$&$B$&$(A$&\eif&$B)$&$(A$&\eor&\enot&$B)$\\
+%\hline
+% \vT & \vT & \gT & \mT & \gT & \gT & \mT & \gF & \gT \\
+%% \vT & \vF & \gT & \mF & \gF & \gT & \mT & \gT & \gF \\
+%% \vF & \vT & \gF & \mT & \gT & \gF & \mT & \gF & \gT \\
+%% \vF & \vF & \gF & \mT & \gF & \gF & \mF & \gT & \gF 
+%\end{tabular}
+%\end{center}
+
+
+%\section{Logical Truth and Falsehood}
+%Here is a similarly useful notion that we can adapt to \tfl:
+%	\factoidbox{
+%  $\meta{A}$ is a \define{logical truth} (in \tfl) iff it is true for all valuations.
+%
+%  $\meta{A}$ is a \define{logical falsehood} iff it is false for all valuations.
+%  
+%  $\meta{A}$ is \define{contingent} iff it is not a logical truth nor falsehood.
+%	}
+%
+%\begin{center}
+%\begin{tabular}{c |ccc |cccc| cccc}
+%$P$ & $P$ & \eif & $P$ & $P$ & \eand & \enot & $P$ & $P$ & \eif & \enot & $P$\\
+%\hline
+% \vT & \vT & \mT & \vT & \vT & \mF   & \vF   & \vT & \vT & \mF  & \vF   & \vT \\
+% \vF & \vF & \mT & \vF & \vF & \mF   & \vT   & \vF & \vF & \mT  & \vT   & \vF \\
+% %& & $\uparrow$ & & & & & & $\uparrow$
+%\end{tabular}
+%\end{center}
+%The above complete truth table tells us that $(p \eif p)$ is a logical truth, $(p \land \enot p)$ a logical falsehood, and surprisingly, $(p \eif\enot p)$ is contingent.
+%
+%\medskip
+%
+%Take a moment to explore these notions. Ask yourself some questions. For instance: Are any two logical truths equivalent? Are they always mutually consistent? Is there a pair of equivalent formulas that are mutually inconsistent?
+%
+%In \tfl, logical truths are often called \emph{tautologies}, and logical falsehoods are often called \emph{contradictions}. We will use these terms occasionally.
+
+\pagebreak
+
+
+
+
+\section{Some Challenges with \tfl}\label{s:ParadoxesOfMaterialConditional}
+We can now test for validity of arguments in \tfl! Sadly, this means that we can also describe some of \tfl's limitations. We will illustrate some of these using three examples. \\
+
+
+(1) The expressive paucity of \tfl\ affects our analysis of argument validity. Consider the argument: 
+\begin{earg}
+\item Daisy has four legs. So Daisy has more than two legs.
+\end{earg}
+This argument is valid in English. But as there are no logical connectives that \tfl\ recognises, any symbolisation of this argument in \tfl\ would be of the form `$A\ \therefore \ B$',  which is not formally valid:
+
+\begin{center}
+  \begin{tabular}{cc|c||c}
+    $A$&$B$&$A$&$B$\\
+    \hline
+    \vT & \vT & \bT & \bT \\
+    \vT & \vF & \mT & \mF \\
+    \vF & \vT & \bT & \bT\\
+    \vF & \vF & \bF & \bF
+  \end{tabular}
+\end{center}      
+
+
+On the second row the premise is true and the conclusion is false. So \tfl\ hasn't preserved whatever made the argument valid.
+The logical link between the English premise and conclusion is that both are about the number of legs that Daisy has. But \tfl\ doesn't recognise the subject of a sentence. Later in this book we will introduce a logic that can represent this link, and show that this argument is valid in that logic. \\
+
+(2) When reasoning with vague concepts, using binary categories such as truth/falsity imposes substantial limitations. Consider the statement:
+\begin{earg}
+  \setcounter{eargnum}{1}
+\item\label{n:JanBald} Jan is neither completely bald nor completely not-bald.
+\end{earg}
+A symbolisation of this statement in \tfl\ would be roughly like `$\enot B \eand \enot \enot B$'. This is a contradiction:
+
+\begin{center}
+  \begin{tabular}{c|cccccc}
+    $B$ & $\enot$& $B$ & $\eand$ & $\enot$ & $\enot$ & $B$\\
+    \hline
+    \vT & \gF & \gT & \mF & \gT & \gF & \gT \\
+    \vF & \gT & \gF & \mF & \gF & \gT & \gF
+  \end{tabular}
+\end{center}      
+
+\noindent But Statement \ref{n:JanBald} doesn't seem to be a contradiction; we might say something like `Jan isn't really bald, but he's also not really not-bald. Jan is somewhere in-between.' Or `Jan is kinda bald', or `Jan is bald-ish'.
+
+\pagebreak
+(3) Conditionals aren't represented adequately in \tfl. For example:
+
+\begin{earg}\label{argGod1}
+\item[P1] If God doesn't exist, then it is not the case that if I pray, then God answers my prayers.
+\item[P2] I don't pray. 
+\item[\therefore] God exists. 
+\end{earg}
+
+\noindent We will use the following symbolisation key:
+
+\begin{ekey}
+\item[A] God answers my prayers. 
+\item[G] God exists. 
+\item[P] I pray. 
+\end{ekey}
+
+
+\noindent Symbolising the argument in \tfl, we obtain:
+
+\begin{earg}\label{argGod2}
+\item[P1] $\enot G \eif \enot (P \eif A)$
+\item[P2] $\enot P$
+\item[\therefore] $G$
+\end{earg}
+
+\noindent But this argument is valid! Look at the truth-tables: 
+
+\begin{center}
+  \begin{tabular}{ccc|ccccccc|cc||c}
+    $A$&$G$&$P$ & $\enot$ & $G$ & $\eif$ & $\enot$ &  $(P$& $\eif$& $A)$ & $\enot$ & $P$ & $G$\\
+    \hline
+    \vT & \vT & \vT & \gF & \gT &\bT& \gF & \gT &\gT&\gT &\bF& \gT & \bT\\
+    \vT & \vT & \vF & \gF & \gT &\mT& \gF & \gF &\gT&\gT &\mT& \gF & \mT\\
+    \vT & \vF & \vT & \gT & \gF &\bF& \gF & \gT &\gT&\gT &\bF& \gT & \bF\\
+    \vT & \vF & \vF & \gT & \gF &\bF& \gF & \gF &\gT&\gT &\bT& \gF & \bF\\
+    \vF & \vT & \vT & \gF & \gT &\bT& \gT & \gT &\gF&\gF &\bF& \gT & \bT\\
+    \vF & \vT & \vF & \gF & \gT &\mT& \gF & \gF &\gT&\gF &\mT& \gF & \mT\\
+    \vF & \vF & \vT & \gT & \gF &\bT& \gT & \gT &\gF&\gF &\bF& \gT & \bF\\
+    \vF & \vF & \vF & \gT & \gF &\bF& \gF & \gF &\gT&\gF &\bT& \gF & \bF\\
+  \end{tabular}
+\end{center}     
+
+\noindent All rows in which both premises are true (the second and sixth row) are rows in which the conclusion is also true. So the argument is valid. But the premises could be true, and in that case, the conclusion must also be true. Hence, I can prove that God exists simply by not praying.
+
+\begin{quote}\emph{That escalated quickly!}\end{quote}
+                
+In different ways, these examples highlight some of the limits of working with a language (like \tfl) that can \emph{only} handle truth-functional connectives. Moreover, these limits give rise to some interesting questions in philosophical logic. 
+The case of Jan's quasi-baldness raises the general question of how logic should deal with \emph{vague} discourse.
+The case of the existence of God raises the question of how logic should deal with negated conditionals such as `it is not the case that if I pray, then God answers my prayers.' Both are discussed in PHIL 216. 
+The expressive paucity of \tfl\ is addressed in the second half of this book.
+%Part of the purpose of this course is to equip you with the tools to explore these questions of \emph{philosophical logic}. But we have to walk before we can run; we have to become proficient in using \tfl, before we can adequately discuss its limits, and consider alternatives. 
+
+
+
+\pagebreak
+\practiceproblems
+\problempart
+Revisit your answers to Chapter \ref{ch:CompleteTruthTables} Exercise \textbf{A}. Determine which formulas were tautologies (logical truths), which were contradictions (logical falsehoods), and which were contingent. 
+
+\
+
+\noindent\solutions
+\problempart\label{pr.TT.consistent}
+Use truth tables to determine whether these formulas are mutually consistent, or mutually inconsistent:
+\begin{earg}
+\item $A\eif A$, $\enot A \eif \enot A$, $A\eand A$, $A\eor A$ %consistent
+\item $A\eor B$, $A\eif C$, $B\eif C$ %consistent
+\item $B\eand(C\eor A)$, $A\eif B$, $\enot(B\eor C)$  %inconsistent
+\item $A\eiff(B\eor C)$, $C\eif \enot A$, $A\eif \enot B$ %consistent
+\end{earg}
+
+
+\noindent\solutions
+\problempart
+\label{pr.TT.valid}
+Use truth tables to determine whether each argument is valid or invalid.
+\begin{earg}
+\item $A\eif A \therefore A$ %invalid
+\item $A\eif(A\eand\enot A) \therefore \enot A$ %valid
+\item $A\eor(B\eif A) \therefore \enot A \eif \enot B$ %valid
+\item $A\eor B, B\eor C, \enot A \therefore B \eand C$ %invalid
+\item $(B\eand A)\eif C, (C\eand A)\eif B \therefore (C\eand B)\eif A$ %invalid
+\end{earg}
+
+\noindent\problempart Determine whether each formula is a logical truth, a logical falsehood, or a contingent formula, using a complete truth table.
+\begin{earg}
+\item $\enot B \eand B$ \vspace{.5ex}%contra
+\item $\enot D \eor D$ \vspace{.5ex}%taut
+\item $(A\eand B) \eor (B\eand A)$\vspace{.5ex} %contingent
+\item $\enot[A \eif (B \eif A)]$\vspace{.5ex} %contra
+\item $A \eiff [A \eif (B \eand \enot B)]$ \vspace{.5ex}%contra
+\item $[(A \eand B) \eiff B] \eif (A \eif B)$ \vspace{.5ex}% contingent. 
+\end{earg}
+
+
+
+\noindent\problempart
+\label{pr.TT.equiv}
+Determine whether each pair of formulas are logically equivalent using complete truth tables. %If the two formulas really are logically equivalent, write ``equivalent.'' Otherwise write, ``Not equivalent.'' 
+\begin{earg}
+\item $A$ and $\enot A$
+\item $A \eand \enot A$ and $\enot B \eiff B$
+\item $[(A \eor B) \eor C]$ and $[A \eor (B \eor C)]$
+\item $A \eor (B \eand C)$ and $(A \eor B) \eand (A \eor C)$
+\item $[A \eand (A \eor B)] \eif B$ and $A \eif B$\end{earg}
+
+
+\noindent\problempart
+\label{pr.TT.equiv2}
+Determine whether each pair of formulas are logically equivalent using complete truth tables. %If the two formulas really are equivalent, write ``equivalent.'' Otherwise write, ``not equivalent.''
+\begin{earg}
+\item $A\eif A$ and $A \eiff A$ \vspace{.5ex}
+\item $\enot(A \eif B)$ and $\enot A \eif \enot B$ \vspace{.5ex}
+\item $A \eor B$ and $\enot A \eif B$ \vspace{.5ex}
+\item$(A \eif B) \eif C$ and $A \eif (B \eif C)$ \vspace{.5ex}
+\item $A \eiff (B \eiff C)$ and $A \eand (B \eand C)$ \vspace{.5ex}
+\end{earg}
+
+
+\noindent\problempart
+\label{pr.TT.consistent2}
+Determine whether each list of formulas is mutually consistent or mutually inconsistent using a complete truth table. 
+\begin{earg}
+\item $A \eand \enot B$, $\enot(A \eif B)$, $B \eif A$\vspace{.5ex} %Consistent
+\item $A \eor B$, $A \eif \enot A$, $B \eif \enot B$ \vspace{.5ex} %inconsistent. 
+\item $\enot(\enot A \eor B) $, $A \eif \enot C$, $A \eif (B \eif C)$\vspace{.5ex} %Inconsistent
+\item $A \eif B$, $A \eand \enot B$\vspace{.5ex} %Inconsistent
+\item $A \eif (B \eif C)$, $(A \eif B) \eif C$, $A \eif C$\vspace{.5ex} %consistent. 
+
+\end{earg}
+
+\noindent\problempart
+\label{pr.TT.consistent3}
+Determine whether each collection of formulas is mutually consistent or mutually inconsistent, using a complete truth table. 
+\begin{earg}
+\item $\enot B$, $A \eif B$, $A$ \vspace{.5ex}%inconsistent.
+\item $\enot(A \eor B)$, $A \eiff B$, $B \eif A$\vspace{.5ex} %Consistent
+\item $A \eor B$, $\enot B$, $\enot B \eif \enot A$\vspace{.5ex} %Inconsistent
+\item $A \eiff B$, $\enot B \eor \enot A$, $A \eif B$\vspace{.5ex} %consistent. 
+\item $(A \eor B) \eor C$, $\enot A \eor \enot B$, $\enot C \eor \enot B$\vspace{.5ex} %consistent
+\end{earg}
+
+
+\noindent\problempart
+\label{pr.TT.valid2}
+Determine whether each argument is valid or invalid, using a complete truth table. 
+\begin{earg}
+\item $A\eif B$, $B \therefore  A$ \vspace{.5ex} %invalid
+\item $A\eiff B$, $B\eiff C \therefore A\eiff C$ \vspace{.5ex} %valid
+\item $A \eif B$, $A \eif C\therefore B \eif C$ \vspace{.5ex} %invalid. 
+\item $A \eif B$, $B \eif A\therefore A \eiff B$ \vspace{.5ex} %valid. 
+\end{earg}
+
+\pagebreak
+\noindent\problempart
+\label{pr.TT.valid3}
+Determine whether each argument is valid or invalid, using a complete truth table. 
+\begin{earg}
+\item $A\eor\bigl[A\eif(A\eiff A)\bigr] \therefore  A $\vspace{.5ex}%invalid
+\item $A\eor B$, $B\eor C$, $\enot B \therefore A \eand C$\vspace{.5ex} %valid
+\item $A \eif B$, $\enot A\therefore \enot B$ \vspace{.5ex}%invalid
+\item $A$, $B\therefore \enot(A\eif \enot B)$ \vspace{.5ex}%valid
+\item $\enot(A \eand B)$, $A \eor B$, $A \eiff B\therefore C$ \vspace{.5ex}%valid 
+\end{earg}
+
+\noindent\solutions
+\problempart
+\label{pr.TT.concepts}
+Give reasons for your answers to these questions.
+\begin{earg}
+\item Suppose that \meta{A} and \meta{B} are logically equivalent. What can you say about $\meta{A}\eiff\meta{B}$?
+%\meta{A} and \meta{B} have the same truth value on every line of a complete truth table, so $\meta{A}\eiff\meta{B}$ is true on every line. It is a logical truth.
+\item Suppose that $(\meta{A}\eand\meta{B})\eif\meta{C}$ is neither a logical truth nor a contradiction. What can you say about whether $\meta{A}, \meta{B} \therefore\meta{C}$ is valid?
+%The formula is false on some line of a complete truth table. On that line, \meta{A} and \meta{B} are true and \meta{C} is false. So the argument is invalid.
+\item Suppose that $\meta{A}$, $\meta{B}$ and $\meta{C}$  are mutually inconsistent. What can you say about $(\meta{A}\eand\meta{B}\eand\meta{C})$?
+%Since $\meta{A}$, $\meta{B}$ and $\meta{C}$  are mutually inconsistent,  there is no line on which all three are true, so their conjunction will be a logical falsehood.
+\item Suppose that \meta{A} is a contradiction. What can you say about $\meta{A}, \meta{B} \ \therefore\ \meta{C}$?
+%Since \meta{A} is false on every line of a complete truth table, there is no line on which \meta{A} and \meta{B} are true and \meta{C} is false. So the argument is valid.
+\item Suppose that \meta{C} is a logical truth. What can you say about $\meta{A}, \meta{B}\ \therefore\  \meta{C}$?
+%Since \meta{C} is true on every line of a complete truth table, there is no line on which \meta{A} and \meta{B} are true and \meta{C} is false. So the argument is valid.
+\item Suppose that \meta{A} and \meta{B} are logically equivalent. What can you say about $(\meta{A}\eor\meta{B})$?
+%It's equivalent to $\meta{A}$. So $(\meta{A}\eor\meta{B})$ is a logical truth iff \meta{A} is; a contradiction iff \meta{A} is; and contingent iff \meta{A} is.
+\item Suppose that \meta{A} and \meta{B} are \emph{not} logically equivalent. What can you say about $(\meta{A}\eor\meta{B})$?
+%\meta{A} and \meta{B} have different truth values on at least one line of a complete truth table, and $(\meta{A}\eor\meta{B})$ will be true on that line. On other lines, it might be true or false. So $(\meta{A}\eor\meta{B})$ is either a logical truth or it is contingent; it is \emph{not} a contradiction.
+\end{earg}
+\problempart 
+Consider the following possible principle:
+	\begin{ebullet}
+  \item Suppose $\meta{A}$ and $\meta{B}$ are logically equivalent. The validity of any argument containing $\meta{A}$ would be unaffected, if we replaced $\meta{A}$ with $\meta{B}$.
+	\end{ebullet}
+Is this principle correct? Does it matter if we replace a premise or the conclusion? What about replacing a subformula? Explain your answer.
+
+
+
+\chapter{Partial Truth Tables}
+\label{ch:PartialTruthTable}
+
+\section{Going Backwards to Move Forwards}
+When we use truth tables to test for mutual consistency, we check for a good row -- one where all the formulas are true. Similarly when testing for validity we check for a \emph{bad} row -- one where the premises are all true and the conclusion is false. To test logical truth we check for a bad row -- one where the formula is false. To test logical falsity we check for a bad row -- one where the formula is true. And finally to test for equivalence, we test for a bad row -- one where the formulas have different truth values.
+
+Since each test for a semantic notion \emph{only} looks for a single row, we could try to create a partial truth table with only the valuation we are seeking. This should save a lot fo work, particualry for long truth tables.
+
+Here's our general approach for testing: we will assume we've found the row we want, and work backwards to identify what row we are on. If we get contradictory information, the row is impossible. If not, we've described our row. Either way, we'll have a result for our test. All we need to do is use our truth tables backwards:
+
+\begin{earg}
+	\item If a negated formula is true, the formula is false.
+	\item If a negated formula is false, the formula is true.
+	\item If a conjunction is true, both its conjuncts are true.
+	\item If a conjunction is false, at least one of its conjuncts is false.
+	\item If a disjunction is false, both its disjuncts are false.
+	\item If a disjunction is true, at least one of its disjuncts is true.
+	\item If a conditional is false, its antecedent is true and consequent false.
+	\item If a conditional is true, its antecedent is false or consequent true.
+	\item If a biconditional is true, its subformulas have the same truth value.
+	\item If a biconditional is false, its subformulas have different truth values.
+\end{earg}
+
+
+\section{Testing our Logical Notions}
+\paragraph{Consistency} We will use this approach to test if the set of formulas $\{\ (P \eand Q), (P \eif  R)\ \}$ is mutually consistent.
+If the formulas are consistent, there is a valuation where they are both true:
+\begin{center}
+\begin{tabular}{c c c | ccc|ccc}
+$P$&$Q$&$R$  &$(P$&\eand&$Q)$&$(P$&\eif&$R)$\\
+\hline
+ \ & \ & \ & \ &  \vT &  \  & \ &  \vT &   \
+\end{tabular}
+\end{center}
+
+\noindent We first analyse the first formula. As $(P \eand Q)$ is true, so are $P$ and $Q$:
+
+\begin{center}
+\begin{tabular}{c c c | ccc|ccc}
+$P$&$Q$&$R$  &$(P$&\eand&$Q)$& $(P$&\eif&$R)$\\
+\hline
+  & & \ & \vT &  \gT &  \vT  &  &  \vT &   
+\end{tabular}
+\end{center}
+
+\noindent We record this information in the valuation for $P$ and $Q$: 
+
+\begin{center}
+\begin{tabular}{c c c | ccc|ccc}
+$P$&$Q$&$R$  &$(P$&\eand&$Q)$& $(P$&\eif&$R)$\\
+\hline
+ \bT & \bT & \ & \gT &  \gT &  \gT  & &  \vT &   
+\end{tabular}
+\end{center}
+
+\noindent Next, we consider the second formula, and we start by copying the information from the valuation, in this case that $P$ is true:
+
+\begin{center}
+\begin{tabular}{c c c | ccc|ccc}
+$P$&$Q$&$R$  &$(P$&\eand&$Q)$& $(P$&\eif&$R)$\\
+\hline
+ \bT & \bT & \ & \gT &  \gT &  \gT  & \vT&  \vT &   
+\end{tabular}
+\end{center}
+
+\noindent As $(P \eif R)$ and $P$ are true, $R$ must be true as well:
+
+\begin{center}
+\begin{tabular}{c c c | ccc|ccc}
+$P$&$Q$&$R$  &$(P$&\eand&$Q)$& $(P$&\eif&$R)$\\
+\hline
+ \bT & \bT & \ & \gT &  \gT &  \gT  & \gT&  \gT & \vT 
+\end{tabular}
+\end{center}
+
+\noindent Finally, we record the information in the valuation for $R$: 
+
+\begin{center}
+\begin{tabular}{c c c | ccc|ccc}
+$P$&$Q$&$R$  &$(P$&\eand&$Q)$& $(P$&\eif&$R)$\\
+\hline
+ \bT & \bT & \bT & \gT &  \gT &  \gT  & \gT&  \gT & \gT 
+\end{tabular}
+\end{center}
+
+\noindent We've found the truth values for all the subformulas and atomic symbols. There has been no contradictory information, and we've identified a valuation where the formulas are true, so they are mutually consistent.\\
+
+By working backwards from the values requires for the desired row, we can fill in the rest of the truth values, and then check if this row is possible. While each step requires a little more thought, the ultimate process is faster than the laborious task of filling in a large complete truth table. And, with the number of steps drastically reduced, the chance of a silly error can be reduced with practice.
+
+
+\pagebreak
+
+Now let's use the same method on another set of  formulas:
+$$\{\ (P \eand Q), (\enot P \eor  \enot Q)\ \}$$ If the formulas are consistent, there is a valuation where they are both true:
+\begin{center}
+\begin{tabular}{c c | ccc|ccccc}
+$P$&$Q$  &$(P$&\eand&$Q)$&$(\enot$ & $P$&\eor&$\enot$ & $Q)$\\
+\hline
+ \ & \ & \ &  \vT &  \  & \  & \  &  \vT &   \
+\end{tabular}
+\end{center}
+
+\noindent We start with the first formula. As $(P \eand Q)$ is true, so are $P$ and $Q$:
+
+\begin{center}
+\begin{tabular}{c c | ccc|ccccc}
+$P$&$Q$  &$(P$&\eand&$Q)$&$(\enot$ & $P$&\eor&$\enot$ & $Q)$\\
+\hline
+ \ & \ & \vT &  \gT &  \vT  & \  & \  &  \vT &   \
+\end{tabular}
+\end{center}
+
+\noindent We record this information in the valuation for $P$ and $Q$: 
+
+\begin{center}
+\begin{tabular}{c c | ccc|ccccc}
+$P$&$Q$  &$(P$&\eand&$Q)$&$(\enot$ & $P$&\eor&$\enot$ & $Q)$\\
+\hline
+ \bT & \bT & \gT &  \gT &  \gT  & \  & \  &  \vT &   \
+\end{tabular}
+\end{center}
+
+\noindent We can copy the values of $P$ and $Q$ in the second formula:
+
+\begin{center}
+\begin{tabular}{c c | ccc|ccccc}
+$P$&$Q$  &$(P$&\eand&$Q)$&$(\enot$ & $P$&\eor&$\enot$ & $Q)$\\
+\hline
+ \bT & \bT & \gT &  \gT &  \gT  & \  & \vT  &  \vT &  & \vT
+\end{tabular}
+\end{center}
+
+\noindent We can now find $\enot P$ and $\enot Q$:
+
+\begin{center}
+\begin{tabular}{c c | ccc|ccccc}
+$P$&$Q$  &$(P$&\eand&$Q)$&$(\enot$ & $P$&\eor&$\enot$ & $Q)$\\
+\hline
+ \bT & \bT & \gT &  \gT &  \gT  & \vF  & \gT  &  \vT & \vF & \gT
+\end{tabular}
+\end{center}
+
+\noindent But as$\enot P$ and $\enot Q$ are false, so is $(\enot P \eor \enot Q)$. But we already made that true. This is impossible!
+
+\begin{center}
+\begin{tabular}{c c | ccc|ccccc}
+$P$&$Q$  &$(P$&\eand&$Q)$&$(\enot$ & $P$&\eor&$\enot$ & $Q)$\\
+\hline
+ \bT & \bT & \gT &  \gT &  \gT  & \gF  & \gT  & \mTF & \gF & \gT
+\end{tabular}
+\end{center}
+
+
+We have tried to find an example of a row where the formulas are all true, that is, proof of the claim that the formulas are  mutually consistent. However, our attempt has not produced a possible valuation. We can then confidentially say that there is no row where all the premises are true, and so the set if mutually inconsistent.
+
+
+\paragraph{Contradiction.}
+Showing that a formula is a contradiction requires us to show that there is no valuation which makes the formula true.  
+However, to show that a formula is \emph{not} a contradiction, we only need find a single valuation which makes the formula true. The formula $((P \eif Q) \eif P) \eand \enot P$ seems like it might be contradictory. Let's try to make it true:
+\begin{center}
+\begin{tabular}{c c|cccccccc}
+$P$&$ Q $&   $((P$&\eif &$ Q )$&\eif &$P)$&$\eand$ & $\enot$ &$P$\\
+\hline
+  &   &   &   &  &  &  &\vT &  \ 
+\end{tabular}
+\end{center}
+
+\noindent As the conjunction is true, so are $(P \eif Q) \eif P$ and $\enot P$:
+
+\begin{center}
+\begin{tabular}{c c|cccccccc}
+$P$&$ Q $&   $((P$&\eif &$ Q )$&\eif &$P)$&$\eand$ & $\enot$ &$P$\\
+\hline
+&   & &   &  & \vT & &\gT & \vT & 
+\end{tabular}
+\end{center}
+
+\noindent Since $\enot P$ is true, $P$ must be false, which we record in the valuation and copy over under each occurence of $P$: 
+
+\begin{center}
+\begin{tabular}{c c|cccccccc}
+$P$&$ Q $&   $((P$&\eif &$ Q )$&\eif &$P)$&$\eand$ & $\enot$ &$P$\\
+\hline
+ \bF &   & \, \vF  &   &  & \vT & \vF &\gT & \gT & \vF
+\end{tabular}
+\end{center}
+
+\noindent As $(P \eif Q) \eif P$ is true, and $P$ is false, $(P \eif Q)$ must be false:
+
+\begin{center}
+\begin{tabular}{c c|cccccccc}
+$P$&$ Q $&   $((P$&\eif &$ Q )$&\eif &$P)$&$\eand$ & $\enot$ &$P$\\
+\hline
+ \bF &   & \, \gF  &  \vF &  & \gT & \gF &\gT & \gT & \gF
+\end{tabular}
+\end{center}
+
+\noindent Now, $(P \eif Q)$ is false, as is $P$. But this isn't possible; a false antecedent always gives a true conditional:
+
+\begin{center}
+\begin{tabular}{c c|cccccccc}
+$P$&$ Q $&   $((P$&\eif &$ Q )$&\eif &$P)$&$\eand$ & $\enot$ &$P$\\
+\hline
+ \bF &   & \, \gF  &  \mTF &  & \gT & \gF &\gT & \gT & \gF
+\end{tabular}
+\end{center}
+
+\noindent So there's no valuation where the formula is true; it's a contradiction.\\
+
+
+The formula $(P \eif Q) \eand (P \eif \enot Q)$ also seems contradictory. Let's try to make it true. As it's a conjunction, its conjuncts will also be true:
+
+
+\begin{center}
+\begin{tabular}{c c|cccccccc}
+$P$&$ Q $&   $(P$&\eif &$ Q )$&\eand &$(P$&\eif&$\enot$ & $Q)$\\
+\hline
+  &   &   & \vT   &   &\gT &  & \vT & \ & \
+\end{tabular}
+\end{center}
+
+\noindent But there are lots of valuations where each of these formulas can be true. We will have to try several valuations; let's start with those for $P$:
+
+\begin{center}
+\begin{tabular}{c c|cccccccc}
+$P$&$ Q $&   $(P$&\eif &$ Q )$&\eand &$(P$&\eif&$\enot$ & $Q)$\\
+\hline
+ \bT &   &  \vT & \gT   &   &\gT & \vT & \gT & \ & \  \\
+ \bF &   &  \vF & \gT   &   &\gT & \vF & \gT & \ & \ \\
+\end{tabular}
+\end{center}
+
+\noindent On the first row, as $P$ and $P \eif Q$ are true, $Q$ must be true:
+
+\begin{center}
+\begin{tabular}{c c|cccccccc}
+$P$&$ Q $&   $(P$&\eif &$ Q )$&\eand &$(P$&\eif&$\enot$ & $Q)$\\
+\hline
+ \bT &  \vT &  \gT & \gT   &  \vT &\gT & \vT & \gT & \ & \vT  \\
+ \bF &   &  \vF & \gT   &   &\gT & \vF & \gT & \ & \ \\
+\end{tabular}
+\end{center}
+
+\noindent If $Q$ is true, then $\enot Q$ must be false:
+
+\begin{center}
+\begin{tabular}{c c|cccccccc}
+$P$&$ Q $&   $(P$&\eif &$ Q )$&\eand &$(P$&\eif&$\enot$ & $Q)$\\
+\hline
+ \bT &  \bT &  \gT & \gT   &  \gT &\gT & \vT & \vT & \vF & \gT  \\
+ \bF &   &  \vF & \gT   &   &\gT & \vF & \gT & \ & \ \\
+\end{tabular}
+\end{center}
+
+\noindent Now we have a conflict:
+
+
+\begin{center}
+\begin{tabular}{c c|cccccccc}
+$P$&$ Q $&   $(P$&\eif &$ Q )$&\eand &$(P$&\eif&$\enot$ & $Q)$\\
+\hline
+ \bT &  \bT &  \gT & \gT   &  \gT &\gT & \gT & \mTF & \gF & \gT  \\
+ \bF &   &  \vF & \gT   &   &\gT & \vF & \gT & \ & \ \\
+\end{tabular}
+\end{center}
+
+\noindent So we discard the first attempt at a valuation as it is impossible:
+
+\begin{center}
+\begin{tabular}{c c|cccccccc}
+$P$&$ Q $&   $(P$&\eif &$ Q )$&\eand &$(P$&\eif&$\enot$ & $Q)$\\
+\hline
+ \bF &   &  \vF & \gT   &   &\gT & \vF & \gT & \ & \ \\
+\end{tabular}
+\end{center}
+
+\noindent For the remaining valuation, notice that both conjuncts are conditionals with a false antecedent, which is always true in \tfl. We are thus free to pick any value for $Q$. Let's make it false:
+
+\begin{center}
+\begin{tabular}{c c|cccccccc}
+$P$&$ Q $&   $(P$&\eif &$ Q )$&\eand &$(P$&\eif&$\enot$ & $Q)$\\
+\hline
+ \bF & \bF  &  \gF & \gT   & \gF  &\gT & \gF & \gT & \gT & \gF \\
+\end{tabular}
+\end{center}
+
+\noindent We've found truth values for all the subformulas and atomic symbols. There has been no contradictory information, and we've identified a valuation where the formula is true, so it is not contradictory. %But you can see that this method starts to get messy.
+
+
+
+\logic{When there is only one truth value for the subformulas that gives the desired truth value for the overall formula (such as a true conjunction), this process is straight-forward. No choices need to be made. When there are several options (such as a true disjunction), you need to list all the options, and the advantages of this method start to fade away. Either subtle strategy (or computational brute force) starts to play an important role, or we can revert to using complete truth tables.}
+
+
+\paragraph{Tautology.} 
+Showing that a formula is a logical truth requires us to show that there is no valuation which makes the formula false.  Thus, to show that a formula is \emph{not} a logical truth, we only need  find a single valuation which makes the formula false. Let's test the formula $(P \eif Q) \eor (Q \eif P)$:
+
+\begin{center}
+\begin{tabular}{c c|ccccccc}
+$P$&$ Q $&   $(P$&\eif &$ Q )$&\eor &$(Q$&$\eif$ & $P)$\\
+\hline
+  &   &   &   &  &  \vF &  &  & \ 
+\end{tabular}
+\end{center}
+
+\noindent If a disjunction is false, so are both its disjuncts:
+
+\begin{center}
+\begin{tabular}{c c|ccccccc}
+$P$&$ Q $&   $(P$&\eif &$ Q )$&\eor &$(Q$&$\eif$ & $P)$\\
+\hline
+  &   &   &  \vF &  &  \gF &  & \vF  & \ 
+\end{tabular}
+\end{center}
+
+\noindent  Each disjunct is a conditional, and a false conditional has a true antecedent and false consequent: 
+
+\begin{center}
+\begin{tabular}{c c|ccccccc}
+$P$&$ Q $&   $(P$&\eif &$ Q )$&\eor &$(Q$&$\eif$ & $P)$\\
+\hline
+  &   &  \vT &  \gF & \vF &  \gF & \vT & \gF  & \vF 
+\end{tabular}
+\end{center}
+
+\noindent This means that $P$ (and $Q$) is both true and false:
+
+\begin{center}
+\begin{tabular}{c c|ccccccc}
+$P$&$ Q $&   $(P$&\eif &$ Q )$&\eor &$(Q$&$\eif$ & $P)$\\
+\hline
+ \mTF & \mTF  &  \gT &  \gF & \gF &  \gF & \gT & \gF  & \gF 
+\end{tabular}
+\end{center}
+
+\noindent This is an impossible valuation. There is thus no valuation where the formula is false; it's a tautology.\\
+
+\noindent Let's try a different formula. Is $(P \eif Q) \eif (P \eor Q)$ a tautology?
+
+\begin{center}
+\begin{tabular}{c c|ccccccc}
+$P$&$ Q $&   $(P$&\eif &$ Q )$&\eif &$(P$& \eor & $Q)$\\
+\hline
+  &   &   &   &  &  \vF &  &  & \ 
+\end{tabular}
+\end{center}
+
+\noindent A false conditional has a true antecedent and false consequent:
+
+\begin{center}
+\begin{tabular}{c c|ccccccc}
+$P$&$ Q $&   $(P$&\eif &$ Q )$&\eif &$(P$& \eor & $Q)$\\
+\hline
+  &   &   &  \vT &  &  \gF &  & \vF  & \ 
+\end{tabular}
+\end{center}
+
+\noindent If a disjunction is false, so are both its disjuncts:
+
+\begin{center}
+\begin{tabular}{c c|ccccccc}
+$P$&$ Q $&   $(P$&\eif &$ Q )$&\eif &$(P$& \eor & $Q)$\\
+\hline
+ &  &  &  \vT & &  \gF & \vF & \gF  & \vF 
+\end{tabular}
+\end{center}
+
+\noindent We record this information in the valuation for $P$ and $Q$ and compute the rest of the table: 
+
+\begin{center}
+\begin{tabular}{c c|ccccccc}
+$P$&$ Q $&   $(P$&\eif &$ Q )$&\eif &$(P$& \eor & $Q)$\\
+\hline
+ \bF & \bF  & \gF  &  \gT & \gF &  \gF & \gF & \gF  & \gF 
+\end{tabular}
+\end{center}
+
+
+\noindent We've found the truth values for all the subformulas and atomic symbols. There has been no contradictory information, and we've identified a valuation where the formula is false, so it is not a tautology.
+
+
+%Sometimes, we do not need to know what happens on every line of a truth table. Sometimes, just a line or two will do. 
+
+\paragraph{Equivalence.}
+Showing that two formulas are equivalent requires that we show there \emph{is no} row  where the formulas have different truth values. To show that two formulas are \emph{not} equivalent, we need to show that there \emph{is} a row where they have different truth values. Either way, we need to check if the first formula is true and second is false, or \emph{vice versa}. Let's test the formulas $(P \eand \enot Q)$ and $\enot(\enot P \eor Q)$:
+
+\begin{center}
+\begin{tabular}{c c|cccc|cccccc}
+$P$&$ Q $&   $(P$&\eand & $\enot$ &$ Q )$ & $\enot$ &$(\enot$ & $P$&$\eor$ & $Q)$\\
+\hline
+  &   &   &   \vF &  &    & \vT \\
+  &   &   &   \vT &  &    & \vF \\
+\end{tabular}
+\end{center}
+
+\noindent We'll start with the second formula. If a negation is true, the subformula is false, and \emph{vice versa}:
+
+\begin{center}
+\begin{tabular}{c c|cccc|cccccc}
+$P$&$ Q $&   $(P$&\eand & $\enot$ &$ Q )$ & $\enot$ &$(\enot$ & $P$&$\eor$ & $Q)$\\
+\hline
+  &   &   &   \vF &  & & \gT &&& \vF \\
+  &   &   &   \vT &  & & \gF &&& \vT\\
+\end{tabular}
+\end{center}
+
+\noindent Now we work row by row. In the first row, we have a false conjunction and a false disjunction. The latter is more informative, because a false disjunction tells us that each disjunct is false:
+
+\begin{center}
+\begin{tabular}{c c|cccc|cccccc}
+$P$&$ Q $&   $(P$&\eand & $\enot$ &$ Q )$ & $\enot$ &$(\enot$ & $P$&$\eor$ & $Q)$\\
+\hline
+  &   &   &   \vF &  & & \gT &\, \vF&& \gF & \vF\\
+  &   &   &   \vT &  & & \gF &&& \vT\\
+\end{tabular}
+\end{center}
+
+\noindent This tells us that $P$ is true (because $\enot P$ is false) and that $Q$ is false. We record this in the valuation and compute the rest of the row, if possible:
+
+\begin{center}
+\begin{tabular}{c c|cccc|cccccc}
+$P$&$ Q $&   $(P$&\eand & $\enot$ &$ Q )$ & $\enot$ &$(\enot$ & $P$&$\eor$ & $Q)$\\
+\hline
+\bT& \bF  &\vT   &   \vF & \vT &\gF & \gT &\, \gF&\gT& \gF & \gF\\
+  &   &   &   \vT &  & & \gF &&& \vT\\
+\end{tabular}
+\end{center}
+
+\noindent Unfortunately, that gives an impossible answer for the conjunction: 
+
+\begin{center}
+\begin{tabular}{c c|cccc|cccccc}
+$P$&$ Q $&   $(P$&\eand & $\enot$ &$ Q )$ & $\enot$ &$(\enot$ & $P$&$\eor$ & $Q)$\\
+\hline
+\bT& \bF  &\gT   &   \mTF & \gT &\gF & \gT &\, \gF&\gT& \gF & \gF\\
+  &   &   &   \vT &  & & \gF &&& \vT\\
+\end{tabular}
+\end{center}
+
+\noindent This attempt at finding a valuation has failed, so we  try the second row: 
+
+\begin{center}
+\begin{tabular}{c c|cccc|cccccc}
+$P$&$ Q $&   $(P$&\eand & $\enot$ &$ Q )$ & $\enot$ &$(\enot$ & $P$&$\eor$ & $Q)$\\
+\hline
+  &   &   &   \vT &  & & \gF &&& \vT\\
+\end{tabular}
+\end{center}
+
+This time, we start with the first formula, a true conjunction, which tells us that $P$ and $\enot Q$ must be true:
+
+\begin{center}
+\begin{tabular}{c c|cccc|cccccc}
+$P$&$ Q $&   $(P$&\eand & $\enot$ &$ Q )$ & $\enot$ &$(\enot$ & $P$&$\eor$ & $Q)$\\
+\hline
+ \bT &   & \vT  &   \gT & \vT & & \gF &&& \vT\\
+\end{tabular}
+\end{center}
+
+\noindent Since $\enot Q$ is true, $Q$ must be false. We record this in the valuation, copy the values over to the second formula and compute as much as we can:
+
+\begin{center}
+\begin{tabular}{c c|cccc|cccccc}
+$P$&$ Q $&   $(P$&\eand & $\enot$ &$ Q )$ & $\enot$ &$(\enot$ & $P$&$\eor$ & $Q)$\\
+\hline
+ \bT & \bF  & \gT  &   \gT & \gT &\gF & \gF &\, \vF&\gT& \vT & \vF\\
+\end{tabular}
+\end{center}
+
+\noindent Now the disjunction has an impossible answer:
+
+\begin{center}
+\begin{tabular}{c c|cccc|cccccc}
+$P$&$ Q $&   $(P$&\eand & $\enot$ &$ Q )$ & $\enot$ &$(\enot$ & $P$&$\eor$ & $Q)$\\
+\hline
+ \bT & \bF  & \gT  &   \gT & \gT &\gF & \gF &\, \gF&\gT& \mTF & \gF\\
+\end{tabular}
+\end{center}
+
+\noindent We are unable to find a valuation that makes the two formulas have different truth values. Therefore, the formulas are equivalent. 
+
+% The first valuation has a false conjunction (boo!) and a false disjunction (yay!). The second valuation has a true conjunction (yay!) and a true disjunction (boo!). Let's start with the easy option for each row:
+
+% \begin{center}
+% \begin{tabular}{c c|cccccccccc}
+% $P$&$ Q $&   $(P$&\eand & $\enot$ &$ Q )$ & \ \  & $\enot$ &$(\enot$ & $P$&$\eor$ & $Q)$\\
+% \hline
+%  &   &   &   \vF &  &  &  & \gT & \vF &  & \gF & \vF\\
+%  &  &  \vT &   \gT & \vT &  &  & \gF & & & \vT &\\
+% \end{tabular}
+% \end{center}
+
+% Now we fill in the valuations for the atomic symbols:
+
+% \begin{center}
+% \begin{tabular}{c c|d e e e e e e e e f}
+% $P$&$ Q $&   $(P$&\eand & $\enot$ &$ Q )$ & \ \  & $\enot$ &$(\enot$ & $P$&$\eor$ & $Q)$\\
+% \hline
+% \vT & \vF  &   &   \gF &  &  &  & \gT & \gF & \vT & \gF & \gF\\
+% \vT & \vF &  \gT & \gT & \gT & \vF &  & \gF & & & \gT &\\
+% \end{tabular}
+% \end{center}
+
+% \noindent Hmm. The only valuation that might make the first formula false and the second true is where $P$ is true and $Q$ is false. But that's also the only valuation which might make the first formula true and the second. If we completely fill in this truth table row, we have:
+
+
+% \begin{center}
+% \begin{tabular}{c c|d e e e e e e e e f}
+% $P$&$ Q $&   $(P$&\eand & $\enot$ &$ Q )$ & \ \  & $\enot$ &$(\enot$ & $P$&$\eor$ & $Q)$\\
+% \hline
+% \vT & \vF &  \vT & \vT & \vT & \vF & & \vT & \vF & \vT & \vF & \vF
+% \end{tabular}
+% \end{center}
+
+% Our best attempt at making the two formulas have different truth values results in a valuation where they are the same. These two formulas are equivalent.
+% We can also see our method of working backwards becoming less mechanical, and more like an ordinary argument. It's reaching it's limits.
+
+\paragraph{Validity.}
+To show an argument is invalid argument requires that we find a valuation which makes all of the premises true and the conclusion false. So to show that an argument is valid we show there is no valuation which makes all of the premises true and the conclusion false. Consider this argument:
+
+$$\enot L \eif (J \eor L), \ \enot L, \ \therefore\ J$$
+
+
+\noindent We look for a valuation where $\enot L \eif (J \eor L)$ and $\enot L$ are true and $J$ false:
+
+\begin{center}
+\begin{tabular}{c c|cccccc|cc||c}
+$J$ & $L$ & $\enot$ & $L$ & $\eif$ & $(J$ & $\eor$ & $L)$ & $\enot$ & $L$ & $J$\\
+  \hline
+  && && \vT &&&& \vT&& \vF
+\end{tabular}
+\end{center}
+
+\noindent If $\enot L$ is true, $L$ is false. We know $J$ is false. We record this information in the valuation and copy the values over to the first formula:
+
+\begin{center}
+\begin{tabular}{c c|cccccc|cc||c}
+$J$ & $L$ & $\enot$ & $L$ & $\eif$ & $(J$ & $\eor$ & $L)$ & $\enot$ & $L$ & $J$\\
+  \hline
+  \bF & \bF& \vF&& \gT &\vF&&\vF& \gT&\vF& \gF
+\end{tabular}
+\end{center}
+
+\noindent Next we compute as much as we can:
+
+%\begin{center}
+%\begin{tabular}{c c|cccccc|cc||c}
+%$J$ & $L$ & $\enot$ & $L$ & $\eif$ & $(J$ & $\eor$ & $L)$ & $\enot$ & $L$ & $J$\\
+%  \hline
+%  \bF & \bF& \gF&\vT& \gT &\gF&\vF&\gF& \gT&\gF& \gF
+%\end{tabular}
+%\end{center}
+
+
+\begin{center}
+\begin{tabular}{c c|cccccc|cc||c}
+$J$ & $L$ & $\enot$ & $L$ & $\eif$ & $(J$ & $\eor$ & $L)$ & $\enot$ & $L$ & $J$\\
+  \hline
+  \bF & \bF& \gF&\gT& \mTF &\gF&\gF&\gF& \gT&\gF& \gF
+\end{tabular}
+\end{center}
+
+We've reached an impossible situation, so there's no counter-example; this means that the argument is valid.
+
+
+% Also, if $\enot L$ and $\enot L \eif (J \eor L)$ are both true, so is $(J \eor L)$:
+
+% \begin{center}
+% \begin{tabular}{c c|d e e e e e e e e e e e e f}
+% $J$ & $L$ & $\enot$ & $L$ & \eif & $(J$ & \eor & $L)$ & \ \ \ & $\enot$ & $L$ & \ \ \ & $J$\\
+% \hline
+% \vF & \vF & \vT & \vF & \gT & \vF &\vT & \vF & & \gT & \vF & & \gF
+% \end{tabular}
+% \end{center}
+
+% \noindent But $(J \eor L)$ is true and $L$ is false, so $J$ is also true:
+
+% \begin{center}
+% \begin{tabular}{c c|d e e e e e e e e e e e e f}
+% $J$ & $L$ & $\enot$ & $L$ & \eif & $(J$ & \eor & $L)$ & \ \ \ & $\enot$ & $L$ & \ \ \ & $J$\\
+% \hline
+% \gF & \gF & \gT & \gF & \gT & \vTF &\gT & \gF & & \gT & \gF & & \gF
+% \end{tabular}
+% \end{center}
+
+% \noindent But $J$ can't be true and false. This is a contradiction. There can't be a valuation where the premises are all true and the conclusion false, so the argument is valid.
+
+\pagebreak
+We will test one last argument: 
+
+$$A,\ (\enot A \eif \enot B)\ \therefore\ B$$
+
+
+\noindent As before, we assign the truth values required for a counter-example: 
+
+\begin{center}
+\begin{tabular}{c c|c|ccccc||c}
+$A$ & $B$ & $A$ & \ $(\enot$ & $A$ & \eif & \enot & $B)$ & \ $B$\\
+\hline
+&& \vT &&&\vT &&& \vF
+\end{tabular}
+\end{center}
+
+\noindent We immediately get valuations for $A$ and $B$, which we record in the valuation, and copy over in the second formula:
+
+\begin{center}
+\begin{tabular}{c c|c|ccccc||c}
+$A$ & $B$ & $A$ & \ $(\enot$ & $A$ & \eif & \enot & $B)$ & \ $B$\\
+\hline
+\bT&\bF& \gT &&\vT&\vT &&\vF& \gF
+\end{tabular}
+\end{center}
+
+\noindent We compute further, looking for conflict:
+
+\begin{center}
+\begin{tabular}{c c|c|ccccc||c}
+$A$ & $B$ & $A$ & \ $(\enot$ & $A$ & \eif & \enot & $B)$ & \ $B$\\
+\hline
+\bT&\bF& \gT &\vF&\gT&\vT &\vT&\gF& \gF
+\end{tabular}
+\end{center}
+
+\noindent But everything calculates fine. We've found truth values for all the subformulas and atomic symbols. There has been no contradictory information, and we've identified a valuation where the premises are true and conclusion false. Therefore, the argument is invalid.\\
+
+Every logical notion can be tested for (perhaps the trickiest is contingency, which requires that a formula not be a logical truth nor a logical falsehood). While the process can be messy, the essential points that we hope to have established are:
+
+(1) You can use truth tables `backwards' to derive the truth value of simpler formulas from more complex ones.
+
+(2) By searching for a single row that serves as a counter-example (or a confirming instance, for consistency), you can avoid the time-consuming process of filling in a complete truth table. For the small examples we've given so far, this is not really a savings, but as formulas get more complicated, the savings can become substantial.
+
+(3) When there's more than one option to consider, this method doesn't work as well. For complex cases, it can be worse than a complete truth table.\\
+
+
+We still value the key insights of (1) and (2), but would like to avoid the problems with (3). To do this, we will have to create a new proof method from scratch. This new method, Truth Trees, is the topic of the next Part of this textbook. Until then, practice the reasoning-backwards mindset, and become confident in how to use the definition of a logical notion to know which row you are looking for in your partial truth table.
+
+
+\pagebreak
+\practiceproblems
+
+\noindent\solutions
+\problempart \label{pr.TT.eQuiv3}
+Use partial truth tables to test for logical equivalence:
+\begin{earg}
+\item $A$, $\enot A$ %No
+\item $A$, $A \eor A$ %Yes
+\item $A\eif A$, $A \eiff A$ %Yes
+\item $A \eor \enot B$, $A\eif B$ %No
+\item $A \eand \enot A$, $\enot B \eiff B$ %Yes
+\item $\enot(A \eand B)$, $\enot A \eor \enot B$ %Yes
+\item $\enot(A \eif B)$, $\enot A \eif \enot B$ %No
+\item $(A \eif B)$, $(\enot B \eif \enot A)$ %Yes
+\end{earg}
+
+
+\noindent\problempart
+\label{pr.TT.TTorC2}
+Use partial truth tables to test for a tautology or contradiction. 
+\begin{earg}
+\item $\enot B \eand B$ %contra
+\item $\enot D \eor D$ %taut
+\item $(A\eand B) \eor (B\eand A)$ %contingent
+\item $\enot(A \eif (B \eif A))$ %contra
+\item $A \eiff (A \eif (B \eand \enot B))$ %contra
+\item $\enot(A\eand B) \eiff A$ %contingent
+\item $A\eif(B\eor C)$ %contingent
+\item $(A \eand\enot A) \eif (B \eor C)$ %logical truth
+\item $(B\eand D) \eiff (A \eiff(A \eor C))$%contingent
+\end{earg}
+
+
+\noindent
+\problempart
+\label{pr.TT.consistent4}
+Use partial truth tables to test for mutual consistency:
+\begin{earg}
+\item $A \eand B$, $C\eif \enot B$, $C$ %inconsistent
+\item $A\eif B$, $B\eif C$, $A$, $\enot C$ %inconsistent
+\item $A \eor B$, $B\eor C$, $C\eif \enot A$ %consistent
+\item $A$, $B$, $C$, $\enot D$, $\enot E$, $ \vF$ %consistent
+\item $A \eand (B \eor C)$, $\enot(A \eand C)$, $\enot(B \eand C)$ %consistent
+\item $A \eif B$, $B \eif C$, $\enot(A \eif C)$ %inconsistent
+\end{earg}
+
+\noindent\solutions
+\problempart
+\label{pr.TT.valid4}
+Use partial truth tables to test for validity:
+\begin{earg}
+\item $A\eor\bigl(A\eif(A\eiff A)\bigr) \therefore A$ %invalid
+\item $A\eiff\enot(B\eiff A) \therefore A$ %invalid
+\item $A\eif B, B \therefore A$ %invalid
+\item $A\eor B, B\eor C, \enot B \therefore A \eand C$ %valid
+\item $A\eiff B, B\eiff C \therefore A\eiff C$ %valid
+\end{earg}
+
+\pagebreak
+
+\noindent\problempart
+\label{pr.TT.TTorC3}
+Use partial truth tables to test for a tautology or contradiction. 
+
+\begin{earg}
+\item  $A \eif \enot A$ \vspace{.5ex}      	
+\item $A \eif (A \eand (A \eor B))$ \vspace{.5ex}	
+\item $(A \eif B) \eiff (B \eif A)$ 	\vspace{.5ex}    %
+\item $A \eif \enot(A \eand (A \eor B)) $	\vspace{.5ex}	
+\item $\enot B \eif ((\enot A \eand A) \eor B)$\vspace{.5ex} 
+\item $\enot(A \eor B) \eiff (\enot A \eand \enot B)$ \vspace{.5ex}
+\item $((A \eand B) \eand C) \eif B$\vspace{.5ex}      	
+\item $\enot\bigl((C\eor A) \eor B\bigr)$\vspace{.5ex}       
+\item $\bigl((A\eand B) \eand\enot(A\eand B)\bigr) \eand C$ \vspace{.5ex}	
+\item $(A \eand B) )\eif((A \eand C) \eor (B \eand D))$ \vspace{.5ex}  
+
+\end{earg}
+
+\noindent\problempart
+\label{pr.TT.TTorC4}
+Use partial truth tables to test for a tautology or contradiction. 
+\begin{earg}
+\item  $\enot (A \eor A)$\vspace{.5ex}      	%	Contradiction  1 symbol, 2 connectives
+\item $(A \eif B) \eor (B \eif A)$\vspace{.5ex}    	%	Tautology  	2 symbols, 2 connectives
+\item $((A \eif B) \eif A) \eif A$\vspace{.5ex}    	%	Tautology  	2 symbols, 3 connectives
+\item $\enot(( A \eif B) \eor (B \eif A))$\vspace{.5ex}  	%	Contradiction  2 symbols, 4 connectives
+\item $(A \eand B) \eor (A \eor B)$\vspace{.5ex}     %	Contingent  2 symbols, 5 connectives
+\item $\enot(A\eand B) \eiff A$\vspace{.5ex}     	%contingent  	2 symbols, 3 connectives
+\item $A\eif(B\eor C)$\vspace{.5ex}       	%contingent  	3 symbols, 2 connectives
+\item $(A \eand\enot A) \eif (B \eor C)$\vspace{.5ex}   	%logical truth  	3 symbols, 4 connectives 
+\item $(B\eand D) \eiff (A \eiff(A \eor C))$\vspace{.5ex}  	%contingent  	4 symbols, 4 connectives
+\item $\enot((A \eif B) \eor (C \eif D))$\vspace{.5ex}   	% Contingent.   4 symbols, 4 connectives
+\end{earg}
+
+
+
+\noindent\problempart
+Use complete truth tables to test for logical equivalence. Then attempt this exercise again using partial truth tables.
+\begin{earg}
+\item $A$ and $A \eor A$
+\item $A$ and $A \eand A$
+\item $A \eor \enot B$ and $A\eif B$
+\item $(A \eif B)$ and $(\enot B \eif \enot A)$
+\item $\enot(A \eand B)$ and $\enot A \eor \enot B$
+\item $ ((U \eif (X \eor X)) \eor U)$ and $\enot (X \eand (X \eand U))$
+\item $ ((C \eand (N \eiff C)) \eiff C)$ and $(\enot \enot \enot N \eif C)$
+\item $((A \eor B) \eand C)$ and $(A \eor (B \eand C))$
+\item $((L \eand C) \eand I)$ and $L \eor C$
+\end{earg}
+
+
+\noindent\problempart
+\label{pr.TT.consistent5}
+Test for mutual consistency. Use either a complete or partial truth table.
+\begin{earg}
+\item $A\eif A$, $\enot A \eif \enot A$, $A\eand A$, $A\eor A$ %consistent
+\item $A \eif \enot A$, $\enot A \eif A$%inconsistent. 
+\item $A\eor B$, $A\eif C$, $B\eif C$ %consistent
+\item $A \eor B$, $A \eif C$, $B \eif C$, $\enot C$ %	Inconsistent
+\item $B\eand(C\eor A)$, $A\eif B$, $\enot(B\eor C)$  %inconsistent
+\item $(A \eiff B) \eif B$,  $B \eif \enot (A \eiff B)$, $A \eor B$  %	Consistent
+\item $A\eiff(B\eor C)$, $C\eif \enot A$, $A\eif \enot B$ %consistent
+\item  $A \eiff B$,  $\enot B \eor \enot A$,  $A \eif  B$ % Consistent
+\item $A \eiff B$, $A \eif C$, $B \eif D$, $\enot(C \eor D)$ %consitent
+\item $\enot (A \eand \enot B)$,  $B \eif \enot A$, $\enot B$   %Consistent
+\end{earg}
+
+\noindent\problempart Test for validity. Use either a complete or partial truth table.
+
+\label{pr.TT.valid5} 
+\begin{earg}
+\item $A\eif(A\eand\enot A)\therefore \enot A$% valid
+\item $A \eor B$, $A \eif B$, $B \eif A \therefore  A \eiff B$  % Valid
+\item $A\eor(B\eif A)\therefore \enot A \eif \enot B$ %valid
+\item $A \eor B$, $A \eif B$, $ B \eif A \therefore  A \eand B$ %valid
+\item $(B\eand A)\eif C$, $(C\eand A)\eif B\therefore (C\eand B)\eif A$ % invalid
+\item $\enot (\enot A \eor \enot B)$, $A \eif \enot C \therefore  A \eif (B \eif C)$ % invalid.
+\item $A \eand (B \eif C)$, $\enot C \eand (\enot B \eif \enot A)\therefore C \eand \enot C$ % valid
+\item $A \eand B$, $\enot A \eif \enot C$, $B \eif \enot D \therefore  A \eor B$ % Invalid
+\item $A \eif B\therefore (A \eand B) \eor (\enot A \eand \enot B)$ % invalid
+\item $\enot A \eif B$,$ \enot B \eif C $,$ \enot C \eif A \therefore  \enot A \eif (\enot B \eor \enot C) $% Invalid
+
+\end{earg}
+
+\noindent\problempart Test for validity. Use either a complete or partial truth table.
+\label{pr.TT.valid6} 
+\begin{earg}
+\item $A\eiff\enot(B\eiff A)\therefore A$ % invalid
+\item $A\eor B$, $B\eor C$, $\enot A\therefore B \eand C$ % invalid
+\item $A \eif C$, $E \eif (D \eor B)$, $B \eif \enot D\therefore (A \eor C) \eor (B \eif (E \eand D))$ % invalid
+\item $A \eor B$, $C \eif A$, $C \eif B\therefore A \eif (B \eif C)$ % invalid
+\item $A \eif B$, $\enot B \eor A\therefore A \eiff B$ % valid
+\end{earg}
+
+\end{document}

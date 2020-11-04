@@ -1,0 +1,1408 @@
+\documentclass[PHIL101-Textbook.tex]{subfiles}
+
+\begin{document}
+
+\chapter{Solutions to selected exercises}
+\label{app.solutions}
+
+Many of the exercises may be answered correctly in different ways. Where that is the case, the solution here represents one possible correct answer.
+
+\medskip
+
+%----------------------------------------------------
+% Key Notions
+%----------------------------------------------------
+
+\solutionsection{ch:WhatIsLogic}{pr.Conclusions}
+\begin{earg}
+	\item I should take my sunglasses.
+	\item It must have been sunny.
+	\item You took the cookie from the cookie-jar.
+	\item Colonel Mustard did it in the kitchen with the lead pipe.
+\end{earg}
+
+
+\solutionsection{ch:Valid}{pr.EnglishCombinations}
+
+	\begin{earg}
+		\item Yes, valid arguments can have a mix of true and false premises. 
+		
+		e.g., You are a lizard (false). If you are a lizard, you are a reptile (true). Therefore, you are a reptile. 
+		\item Yes, a valid argument can have only false premises.
+		
+		e.g., You are a lizard (false). If you are a lizard, you are a mammal (false). Therefore, you are a mammal. 
+		\item Yes, a valid argument can have false premises and conclusion.
+		
+		e.g., You are a lizard (false). If you are a lizard, you are a fish (false). Therefore, you are a fish.
+ 		\item Yes, an invalid argument can be made valid by adding a new premise.
+ 		
+ 		e.g., You are alive. Therefore you breathe. This is invalid. But adding `Everything that is alive breathes' makes the argument valid.
+		\item No, you can't make a valid argument invalid by adding a new premise. Adding new premises just makes it harder to make all the premises true. Recall that a valid argument has a true conclusion whenever its premises are true, so adding premises can only make it easier to be valid.
+	\end{earg}
+\pagebreak
+
+\solutionsection{ch:BasicNotions}{pr.EnglishTautology2}
+Are these logical truths,  falsehoods, or contingent?
+\begin{earg}
+\item contingent %Elephants dissolve in water.
+\item contingent %Wood is a light, durable substance useful for building things.
+\item logical truth %If wood were a good building material, it would be useful for building.
+\item logical falsehood %I live in a three story building that is two stories tall.
+\item contingent %If gerbils were mammals they would nurse their young.
+\end{earg}
+
+\solutionsection{ch:BasicNotions}{pr.EnglishEquivalent}
+Which pairs of statements are logically equivalent?
+\begin{earg}
+\item Not equivalent %Sarah Murphy is a biathlete.	\\  Valerie Adams is a shot putter. 
+\item Not equivalent %Sarah Murphy represented New Zealand at the Olympics.	\\   Valerie Adams represented New Zealand at the Olympics.
+\item Not equivalent %All biathletes are cross-country skiers.	\\  Sarah Murphy is a cross-country skier.
+\item Equivalent %Sarah Murphy won more medals at the Olympics than Valerie Adams.	 \\  Valerie Adams won fewer medals at the Olympics than Sarah Murphy.
+\item Equivalent %Sarah Murphy represented New Zealand at the Olympics, or she didn't.	 \\  Valerie Adams represented New Zealand at the Olympics, or she didn't.
+\end{earg}
+
+
+\solutionsection{ch:BasicNotions}{pr.EnglishConsistent}
+%\item[M1] \label{itm:allmortal} All people are mortal.
+%\item[M2] \label{itm:socperson} Hypatia is a person.
+%\item[M3] \label{itm:socnotdie} Hypatia will never die.
+%\item[M4] \label{itm:socmortal} Hypatia is mortal.
+\begin{earg}
+\item Consistent. %Statements M2 and M3
+\item Consistent. %Statements M1 and M4
+\item Inconsistent. %Statements M1, M2, and M3
+\item Consistent. %Statements M1, M2, and M4
+\item Inconsistent. %Statements M1, M3, and M4
+\item Inconsistent. %Statements M2, M3, and M4
+\item Inconsistent. %Statements M1, M2, M3, and M4
+\end{earg}
+
+
+\solutionsection{ch:BasicNotions}{pr.EnglishCombinations2}
+%Which of the following is possible? \\
+%\indent If it is possible, give an example. If it is not possible, explain why.
+\begin{earg}
+\item Possible. 20=30. Therefore 2 = 3. %A valid argument, the conclusion of which is a logical falsehood
+
+\item Impossible. Invalid arguments have counter-examples. Counter-examples make the conclusion false. Logical truths can never be false. %An invalid argument, the conclusion of which is a logical truth
+
+\item Impossible. Valid arguments have a true conclusion if the premises are true, and they are true always, so the conclusion is true always. %A valid argument, whose premises are all logical truths, and whose conclusion is contingent
+
+\item Impossible. Contingent statements are those that are neither logical truths nor falsehoods. %A logical truth that is contingent
+
+\item Possible. Any two logical truths are equivalent. %Two logically equivalent statements, both of which are logical truths
+
+\item Impossible. The contingent statement will be false in a situation where the logical truth is true, so they are not equivalent. %Two logically equivalent statements, one of which is a logical truth and one of which is contingent
+
+\item Possible. Any two logical falsehoods are equivalent, and  inconsistent. %Two logically equivalent statements that are mutually inconsistent
+
+\item Impossible. A falsehood is never true, so all the statements can't be true. %A mutually consistent collection that contains a logical falsehood
+
+\item Possible. As long as the other statements are mutually inconsistent, adding a logical truth won't make the other statements all true. %A mutually inconsistent set of statements that contains a logical truth
+\end{earg}
+
+%\solutionsection{ch.BasicNotions}{pr.MartianGiraffes}
+%\begin{earg}
+%\item consistent %\nextSeq %G2, G3, and G4
+%\item inconsistent %\noSeq %G1, G3, and G4
+%\item consistent %\nextSeq %G1, G2, and G4
+%\item consistent %\lastSeq %G1, G2, and G3
+%\end{earg}
+
+%----------------------------------------------------
+% TFL
+%----------------------------------------------------
+
+\solutionsection{ch:Symbolising}{pr.symbolisation1}
+%		\item[G] The grass is wet
+%		\item[R] It is raining
+%		\item[S] The sun is shining
+%		\item[W] The ground is wet
+\begin{earg}
+\item $(R \eand W)$ %It’s both raining and the ground is wet.
+\item $(R \eand \enot S$ %It’s raining and the sun is not shining.
+\item $\enot(R \eand S)$ %It’s not both raining and the sun shining.
+\item $\enot(R \eor S)$ % It’s neither raining nor is the sun shining.
+\item $(R \eif (W \eand G))$ %If it’s raining, then the ground and the grass are wet.
+\item $(G \eand \enot W)$ %The grass is wet but the ground isn't.
+\item $(R \eif (W \eand \enot S))$ %If it’s raining, then the ground is wet and the sun is not shining.
+\item $((R \eif W) \eand \enot S)$ %If it’s raining then the ground is wet, and the sun is not shining.
+\end{earg}
+
+
+\solutionsection{ch:Symbolising}{pr.symboliseargument1}
+
+The letters in your symbolisation keys may differ from ours.
+\begin{earg}
+\item $(\enot Z \eif \enot C), (Z \eif T), (T \eif \neg C)\ \therefore \ \enot C$. %I will not be conscripted into the army. The reasons are that I won’t be conscripted unless there is a Zombie Apocalypse. But if there is a Zombie Apocalypse then it will be over in ten days. If a Zombie Apocalypse is over in ten days then they won’t conscript me.
+
+\item $(R \eif S), (R \eif E) \ \therefore \ (\enot E \eif (\enot R \eand \enot S))$. %If Kim runs for the bus, then she is stressed. If Kim runs for the bus, then she gets more exercise.  So if Kim does not get more exercise, she need not run for the bus and will not be stressed.
+
+\item $(R \eif \enot D), (P \eif M), ((P \eif M) \eif (\enot D \eif \enot N)) \ \therefore \ (N \eif \enot R)$. % If minds are wholly private, then I cannot know about any individual other than myself that they have a mind. Having a mind is needed for being a person. If this is true, then if I cannot know that any individual besides myself has a mind, then I also cannot know that any other individual is a person.  So, if I can know that even one individual other than myself is a person, then it is false that minds are completely private.
+\end{earg}
+
+
+\solutionsection{ch:TFLComplications}{pr.monkeysuits}
+\begin{earg}
+\item $\enot M$
+\item $(M \eor \enot M)$
+\item $(G \eor C)$
+\item $\enot (C \eor G)$
+\item $C \eif \enot( G \eor M)$
+\item $\enot M \eif (C \eor G)$
+\end{earg}
+
+
+\solutionsection{ch:TFLComplications}{pr.avacareer}
+%		\item[A] Ava is an electrician.
+%		\item[B] Harrison is an electrician.
+%		\item[C] Ava is a firefighter.
+%		\item[D] Harrison is a firefighter.
+%		\item[E] Ava is satisfied with her career.
+%		\item[F] Harrison is satisfied with his career.
+\begin{earg}
+\item $(A \eand B)$ %Ava and Harrison are both electricians.
+\item $(C \eif E)$ %If Ava is a firefighter, then she is satisfied with her career.
+\item $(C \eor A)$ %Ava is a firefighter, unless she is an electrician.
+\item $(B \eand \enot F)$ %Harrison is an unsatisfied electrician.
+\item $(\enot A \eand \enot B)$ %Neither Ava nor Harrison is an electrician.
+\item $(A \eand B \eand \enot(E \eor F))$ %Both Ava and Harrison are electricians, but neither of them find it satisfying.
+\item $(F \eif D)$ %Harrison is satisfied only if he is a firefighter.
+\item $((\enot A \eif \enot B) \eand (A \eif B))$ %If Ava is not an electrician, then neither is Harrison, but if she is, then he is too.
+\item $(E \eiff \enot F)$ %Ava is satisfied with her career if and only if Harrison is not satisfied with his.
+\item $((B \eand D) \eif F)$ %If Harrison is both an electrician and a firefighter, then he must be satisfied with his work.
+\item $\enot(B \eand D)$ %It cannot be that Harrison is both an electrician and a firefighter.
+%\item $((C \eand D) \eiff (\enot A \eand \enot B))$
+\end{earg}
+
+
+\pagebreak
+\solutionsection{ch:TFLComplications}{pr.spies}
+%\begin{ekey}
+%\item[A:] Alice is a spy.
+%\item[B:] Bob is a spy.
+%\item[C:] The code has been broken.
+%\item[E:] The American embassy will be in an uproar.
+%\end{ekey}
+\begin{earg}
+\item %Alice and Bob are both spies.
+$(A \eand B)$
+\item %If either Alice or Bob is a spy, then the code has been broken.
+$((A \eor B) \eif C)$
+\item %If neither Alice nor Bob is a spy, then the code remains unbroken.
+$(\enot(A \eor B) \eif \enot C)$
+\item %The American embassy will be in an uproar, unless someone has broken the code.
+$(E \eor C)$
+\item %Either the code has been broken or it has not, but the American embassy will be in an uproar regardless.
+$((C \eor \enot C) \eand E)$
+\item %Either Alice or Bob is a spy, but not both.
+$((A \eor B) \eand \enot(A \eand B))$
+\end{earg}
+
+
+
+\solutionsection{ch:TFLComplications}{pr.complexargument1}
+
+The letters in your symbolisation keys may differ from ours.
+\begin{earg}
+\item $(A \eif E), (\enot D \eif A) \ \therefore \ (\enot E \eif D)$. % Anna plays in the snow in the morning, then Elsa wakes up cranky. Anna plays in the snow in the morning unless she is distracted. So if Elsa does not wake up cranky, then  Anna will be distracted.
+\item $(R \eor S), (R \eif D), (S \eif C)\ \therefore \ (D \eor C)$. %It will either rain or snow on Tuesday. If it rains, Xinyu will be sad. If it snows, Xinyu will be cold. Therefore, Xinyu will either be sad or cold on Tuesday.
+\item $(R \eif (C \eand \enot N)), (\enot R \eif (N \eand \enot C))\ \therefore \ ((N \eor C) \eand \enot (N \eand C))$. %If Badr remembered to do his chores, then things are clean but not neat. If he forgot, then things are neat but not clean. Therefore, things are either neat or clean; but not both.
+\item $(\enot M \eif D), (\enot D \eif M), \enot (M \eand D)\ \therefore \ ((M \eor D)\eand \enot (M \eand D))$.  %Jane will see exactly one of her parents at her 21st party. If her mum doesn't go, her father will definitely attend; and if her dad can't make it, her mother will make an appearance. But they simply refuse to be in the same room any more.
+\end{earg}
+
+
+%----------------------------------------------------
+% Truth Tables
+%----------------------------------------------------
+
+\solutionsection{ch:CompleteTruthTables}{pr.completeTT1}
+
+\begin{earg}
+\item $\enot (S \eiff (P \eif S))$
+
+\begin{tabular}{c c|cccccc}
+ $P$ & $S$ &\enot&$(S$&\eiff& $(P$& \eif& $S))$\\
+\hline
+ \vT & \vT & \gF & \vT & \vT & \vT & \vT & \vT\\
+ \vT & \vF & \gF & \vF & \vT & \vT & \vF & \vF\\
+ \vF & \vT & \gF & \vT & \vT & \vF & \vT & \vT\\
+ \vF & \vF & \gT & \vF & \vF & \vF & \vT & \vF
+\end{tabular} \medskip
+
+\item $\enot ((X \eand Y) \eor (X \eor Y))$
+
+\begin{tabular}{c c|cccccccc}
+ $X$ & $Y$ &\enot&$((X$&\eand& $Y)$& \eor& $(X$& \eor& $Y))$\\
+\hline
+ \vT & \vT & \gF & \vT & \vT & \vT & \vT & \vT & \vT & \vT\\
+ \vT & \vF & \gF & \vT & \vF & \vF & \vT & \vT & \vT & \vF\\
+ \vF & \vT & \gF & \vF & \vF & \vT & \vT & \vF & \vT & \vT\\
+ \vF & \vF & \gT & \vF & \vF & \vF & \vF & \vF & \vF & \vF
+\end{tabular} \medskip
+
+\item $((\enot P \eor \enot M) \eiff M)$
+
+\begin{tabular}{c c|ccccccc}
+ $P$ & $M$ &((\enot&$P$& \eor&\enot& $M)$&\eiff& $M)$\\
+\hline
+ \vT & \vT & \vF & \vT & \vF & \vF & \vT & \gF & \vT\\
+ \vT & \vF & \vF & \vT & \vT & \vT & \vF & \gF & \vF\\
+ \vF & \vT & \vT & \vF & \vT & \vF & \vT & \gT & \vT\\
+ \vF & \vF & \vT & \vF & \vT & \vT & \vF & \gF & \vF
+\end{tabular} \medskip
+
+\item $((A \eif B) \eiff (\enot B\eiff \enot A))$
+
+\begin{tabular}{c c|ccccccccc}
+ $A$ & $B$ &$((A$&\eif &$B)$ &\eiff&(\enot& $B$&\eiff&\enot& $A))$\\
+\hline
+ \vT & \vT & \vT & \vT & \vT & \gT & \vF & \vT & \vT & \vF & \vT\\
+ \vT & \vF & \vT & \vF & \vF & \gT & \vT & \vF & \vF & \vF & \vT\\
+ \vF & \vT & \vF & \vT & \vT & \gF & \vF & \vT & \vF & \vT & \vF\\
+ \vF & \vF & \vF & \vT & \vF & \gT & \vT & \vF & \vT & \vT & \vF
+\end{tabular} \medskip
+
+\item $\enot \enot (\enot A \eand \enot B)$
+
+\begin{tabular}{c c|ccccccc}
+ $A$ & $B$ &\enot&\enot&(\enot&$A$ &\eand&\enot& $B)$\\
+\hline
+ \vT & \vT & \gF & \vT & \vF & \vT & \vF & \vF & \vT\\
+ \vT & \vF & \gF & \vT & \vF & \vT & \vF & \vT & \vF\\
+ \vF & \vT & \gF & \vT & \vT & \vF & \vF & \vF & \vT\\
+ \vF & \vF & \gT & \vF & \vT & \vF & \vT & \vT & \vF
+\end{tabular} \medskip
+
+\item $(((D \eand R) \eif I) \eif \enot(D \eor R))$
+
+\begin{tabular}{c cc|ccccccccccc}
+ $D$ & $I$ & $R$ &$((D$&\eand& $R)$& \eif& $I)$& \eif&\enot& $(D$& \eor& $R))$\\
+\hline
+ \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \gF & \vF & \vT & \vT & \vT\\
+ \vT & \vT & \vF & \vT & \vF & \vF & \vT & \vT & \gF & \vF & \vT & \vT & \vF\\
+ \vT & \vF & \vT & \vT & \vT & \vT & \vF & \vF & \gT & \vF & \vT & \vT & \vT\\
+ \vT & \vF & \vF & \vT & \vF & \vF & \vT & \vF & \gF & \vF & \vT & \vT & \vF \\
+ \vF & \vT & \vT & \vF & \vF & \vT & \vT & \vT & \gF & \vF & \vF & \vT & \vT\\
+ \vF & \vT & \vF & \vF & \vF & \vF & \vT & \vT & \gT & \vT & \vF & \vF & \vF\\
+ \vF & \vF & \vT & \vF & \vF & \vT & \vT & \vF & \gF & \vF & \vF & \vT & \vT\\
+ \vF & \vF & \vF & \vF & \vF & \vF & \vT & \vF & \gT & \vT & \vF & \vF & \vF
+\end{tabular} \medskip
+
+\item $((C \eiff (D \eor E)) \eand \enot C)$
+
+\begin{tabular}{c cc|ccccccccccc}
+ $C$ & $D$ & $E$ &$((C$&\eiff& $(D$& \eor&$E))$&\eand&\enot& $C)$\\
+\hline
+ \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \gF & \vF & \vT\\
+ \vT & \vT & \vF & \vT & \vT & \vT & \vT & \vF & \gF & \vF & \vT\\
+ \vT & \vF & \vT & \vT & \vT & \vF & \vT & \vT & \gF & \vF & \vT\\
+ \vT & \vF & \vF & \vT & \vF & \vF & \vF & \vF & \gF & \vF & \vT\\
+ \vF & \vT & \vT & \vF & \vF & \vT & \vT & \vT & \gF & \vT & \vF\\
+ \vF & \vT & \vF & \vF & \vF & \vT & \vT & \vF & \gF & \vT & \vF\\
+ \vF & \vF & \vT & \vF & \vF & \vF & \vT & \vT & \gF & \vT & \vF\\
+ \vF & \vF & \vF & \vF & \vT & \vF & \vF & \vF & \gT & \vT & \vF
+\end{tabular} \medskip
+
+\item $(\enot(G \eand (B \eand H)) \eiff (G \eor \enot(B \eor H)))$
+
+\begin{tabular}{c cc|cccccccccccccc}
+ $B$ & $G$ & $H$ &(\enot&$(G$&\eand& $(B$&\eand&$H))$&\eiff& $(G$& \eor&\enot&
+ $(B$& \eor& $H))$\\
+\hline
+ \vT & \vT & \vT & \vF & \vT & \vT & \vT & \vT & \vT & \gF & \vT & \vT & \vF & \vT & \vT & \vT\\
+ \vT & \vT & \vF & \vT & \vT & \vF & \vT & \vF & \vF & \gT & \vT & \vT & \vF & \vT & \vT & \vF\\
+ \vT & \vF & \vT & \vT & \vF & \vF & \vT & \vT & \vT & \gF & \vF & \vF & \vF & \vT & \vT & \vT\\
+ \vT & \vF & \vF & \vT & \vF & \vF & \vT & \vT & \vF & \gF & \vF & \vF & \vF & \vT & \vT & \vF \\
+ \vF & \vT & \vT & \vT & \vT & \vF & \vF & \vF & \vT & \gT & \vT & \vT & \vF & \vF & \vT & \vT\\
+ \vF & \vT & \vF & \vT & \vT & \vF & \vF & \vF & \vF & \gT & \vT & \vT & \vT & \vF & \vF & \vF\\
+ \vF & \vF & \vT & \vT & \vF & \vF & \vF & \vF & \vT & \gF & \vF & \vF & \vF & \vF & \vT & \vT\\
+ \vF & \vF & \vF & \vT & \vF & \vF & \vF & \vF & \vF & \gT & \vF & \vT & \vT & \vF & \vF & \vF
+\end{tabular} \medskip
+
+%\vfill
+%\item $(\enot ((D \eiff O) \eiff A) \eif (\enot D \eand O))$
+%
+%\begin{tabular}{c cc|cccccccccccc}
+% $A$ & $D$ & $O$&(\enot&$((D$&\eiff& $O)$&\eiff&$ A)$& \eif&(\enot& $D$&\eand&$O))$\\
+%\hline
+% \vT & \vT & \vT & \vF & \vT & \vT & \vT & \vT & \vT & \gT & \vF & \vT & \vF & \vT\\
+% \vT & \vT & \vF & \vT & \vT & \vF & \vF & \vF & \vT & \gF & \vF & \vT & \vF & \vF\\
+% \vT & \vF & \vT & \vT & \vF & \vF & \vT & \vF & \vT & \gT & \vT & \vF & \vT & \vT\\
+% \vT & \vF & \vF & \vF & \vF & \vT & \vF & \vT & \vT & \gT & \vT & \vF & \vF & \vF\\
+% \vF & \vT & \vT & \vT & \vT & \vT & \vT & \vF & \vF & \gF & \vF & \vT & \vF & \vT\\
+% \vF & \vT & \vF & \vF & \vT & \vF & \vF & \vT & \vF & \gT & \vF & \vT & \vF & \vF\\
+% \vF & \vF & \vT & \vF & \vF & \vF & \vT & \vT & \vF & \gT & \vT & \vF & \vT & \vT\\
+% \vF & \vF & \vF & \vT & \vF & \vT & \vF & \vF & \vF & \gF & \vT & \vT & \vF & \vF
+%\end{tabular}
+\end{earg}
+
+\vfill
+\pagebreak
+
+\solutionsection{ch:SemanticNotions}{pr.TT.consistent}
+%Use truth tables to determine whether these formulas are mutually consistent, or mutually inconsistent:
+\begin{earg}
+\item $A\eif A$, $\enot A \eif \enot A$, $A\eand A$, $A\eor A$ are mutually consistent.
+
+\begin{tabular}{c| ccc | ccccc|ccc|ccc}
+ $A$ & $(A$& \eif& $A)$&(\enot& $A$& \eif&\enot& $A)$& $(A$&\eand&$ A)$& $(A$& \eor&$A)$\\
+\hline
+ \vT & \vT & \gT & \vT & \vF & \vT & \gT & \vF & \vT & \vT & \gT & \vT & \vT & \gT & \vT\\
+ \vF & \vF & \vT & \vF & \vT & \vF & \vT & \vT & \vF & \vF & \vF & \vF & \vF & \vF & \vF
+\end{tabular} \medskip
+ 
+\item $A\eor B$, $A\eif C$, $B\eif C$ are mutually consistent.
+
+\begin{tabular}{c cc|ccc|ccc|ccc}
+ $A$ & $B$ & $C$ & $(A$&\eor & $B)$& $(A$& \eif& $C)$& $(B$& \eif& $C)$\\
+\hline
+ \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT\\
+ \vT & \vT & \vF & \vT & \vT & \vT & \vT & \vF & \vF & \vT & \vF & \vF\\
+ \vT & \vF & \vT & \vT & \gT & \vF & \vT & \gT & \vT & \vF & \gT & \vT\\
+ \vT & \vF & \vF & \vT & \vT & \vF & \vT & \vF & \vF & \vF & \vT & \vF\\
+ \vF & \vT & \vT & \vF & \vT & \vT & \vF & \vT & \vT & \vT & \vT & \vT\\
+ \vF & \vT & \vF & \vF & \vT & \vT & \vF & \vT & \vF & \vT & \vF & \vF\\
+ \vF & \vF & \vT & \vF & \vF & \vF & \vF & \vT & \vT & \vF & \vT & \vT\\
+ \vF & \vF & \vF & \vF & \vF & \vF & \vF & \vT & \vF & \vF & \vT & \vF
+\end{tabular} \medskip
+
+\item $B\eand(C\eor A)$, $A\eif B$, $\enot(B\eor C)$ are mutually \emph{in}consistent.
+
+\begin{tabular}{c cc|ccccc|ccc|cccc}
+ $A$ & $B$ & $C$ &$(B$ &\eand& $(C$& \eor&$A))$& $(A$& \eif&$ B)$&(\enot&$(B$& \eor& $C))$\\
+\hline
+ \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \gF & \vT & \vT & \vT\\
+ \vT & \vT & \vF & \vT & \vT & \vF & \vT & \vT & \vT & \vT & \vT & \gF & \vT & \vT & \vF\\
+ \vT & \vF & \vT & \vF & \vF & \vT & \vT & \vT & \vT & \vF & \vF & \gF & \vF & \vT & \vT\\
+ \vT & \vF & \vF & \vF & \vF & \vF & \vT & \vT & \vT & \gF & \vF & \vT & \vF & \vF & \vF\\
+ \vF & \vT & \vT & \vT & \vT & \vT & \vT & \vF & \vF & \vT & \vT & \gF & \vT & \vT & \vT\\
+ \vF & \vT & \vF & \vT & \vF & \vF & \vF & \vF & \vF & \vT & \vT & \gF & \vT & \vT & \vF\\
+ \vF & \vF & \vT & \vF & \vF & \vT & \vT & \vF & \vF & \vT & \vF & \gF & \vF & \vT & \vT\\
+ \vF & \vF & \vF & \vF & \gF & \vF & \vF & \vF & \vF & \vT & \vF & \vT & \vT & \vF & \vF
+\end{tabular} \medskip
+
+\item $A\eiff(B\eor C)$, $C\eif \enot A$, $A\eif \enot B$ are mutually consistent.
+
+\begin{tabular}{c cc|ccccc|cccc|cccc}
+ $A$ & $B$ & $C$ &$(A$ &\eiff& $(B$& \eor&$C))$& $(C$& \eif&\enot&$ A)$& $(A$& \eif&\enot&$B)$\\
+\hline
+ \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vF & \vF & \vT & \vT & \vF & \vF & \vT\\
+ \vT & \vT & \vF & \vT & \vT & \vT & \vT & \vF & \vF & \vT & \vF & \vT & \vT & \vF & \vF & \vT\\
+ \vT & \vF & \vT & \vT & \vT & \vF & \vT & \vT & \vT & \vF & \vF & \vT & \vT & \vT & \vT & \vF\\
+ \vT & \vF & \vF & \vT & \vF & \vF & \vF & \vF & \vF & \vT & \vF & \vT & \vT & \vT & \vT & \vF\\
+ \vF & \vT & \vT & \vF & \vF & \vT & \vT & \vT & \vT & \vT & \vT & \vF & \vF & \vT & \vF & \vT\\
+ \vF & \vT & \vF & \vF & \vF & \vT & \vT & \vF & \vF & \vT & \vT & \vF & \vF & \vT & \vF & \vT\\
+ \vF & \vF & \vT & \vF & \vF & \vF & \vT & \vT & \vT & \vT & \vT & \vF & \vF & \vT & \vT & \vF\\
+ \vF & \vF & \vF & \vF & \gT & \vF & \vF & \vF & \vF & \gT & \vT & \vF & \vF & \gT & \vT & \vF
+\end{tabular} \medskip
+\end{earg}
+
+\vfill
+\pagebreak
+\solutionsection{ch:SemanticNotions}{pr.TT.valid}
+%Use truth tables to determine whether each argument is valid or invalid.
+\begin{earg}
+\item $A\eif A \therefore A$ is invalid.
+
+\begin{tabular}{c| ccc ||c}
+ $A$ & $(A$& \eif& $A)$& $A$\\
+\hline
+ \vT & \vT & \vT & \vT & \vT\\
+ \vF & \vF & \gT & \vF & \gF
+ \end{tabular} \medskip
+
+\item $A\eif(A\eand\enot A) \therefore \enot A$ is valid.
+
+\begin{tabular}{c| cccccc ||cc}
+ $A$ & $(A$& \eif& $(A$&\eand&\enot& $A)$&\enot& $A$\\
+\hline
+ \vT & \vT & \vF & \vT & \vF & \vF & \vT & \vF & \vT\\
+ \vF & \vF & \vT & \vF & \vF & \vT & \vF & \vT & \vF
+ \end{tabular} \medskip
+ 
+\item $A\eor(B\eif A) \therefore \enot A \eif \enot B$ is valid.
+
+\begin{tabular}{c c|ccccc||ccccc}
+ $A$ & $B$ & $(A$& \eor& $(B$& \eif& $A)$&(\enot&$A$ & \eif&\enot& $B)$\\
+\hline
+ \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vF & \vT & \vT & \vF & \vT\\
+ \vT & \vF & \vT & \vT & \vF & \vT & \vT & \vF & \vT & \vT & \vT & \vF\\
+ \vF & \vT & \vF & \vF & \vT & \vF & \vF & \vT & \vF & \vF & \vF & \vT\\
+ \vF & \vF & \vF & \vT & \vF & \vT & \vF & \vT & \vF & \vT & \vT & \vF
+\end{tabular} \medskip
+
+\item $A\eor B, B\eor C, \enot A \therefore B \eand C$ is invalid.
+
+\begin{tabular}{c c c|ccc|ccc|cc|ccc}
+ $A$ & $B$ & $C$ &$(A$ & \eor& $B)$& $(B$& \eor& $C)$&\enot& $A$ & $(B$& \eand&$C)$\\
+\hline
+ \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vF & \vT & \vT & \vT & \vT\\
+ \vT & \vT & \vF & \vT & \vT & \vT & \vT & \vT & \vF & \vF & \vT & \vT & \vF & \vF\\
+ \vT & \vF & \vT & \vT & \vT & \vF & \vF & \vT & \vT & \vF & \vT & \vF & \vF & \vT\\
+ \vT & \vF & \vF & \vT & \vT & \vF & \vF & \vF & \vF & \vF & \vT & \vF & \vF & \vF\\
+ \vF & \vT & \vT & \vF & \vT & \vT & \vT & \vT & \vT & \vT & \vF & \vT & \vT & \vT\\
+ \vF & \vT & \vF & \vF & \gT & \vT & \vT & \gT & \vF & \gT & \vF & \vT & \gF & \vF\\
+ \vF & \vF & \vT & \vF & \vF & \vF & \vF & \vT & \vT & \vT & \vF & \vF & \vF & \vT\\
+ \vF & \vF & \vF & \vF & \vF & \vF & \vF & \vF & \vF & \vT & \vF & \vF & \vF & \vF
+\end{tabular} \medskip
+
+\item $(B\eand A)\eif C, (C\eand A)\eif B \therefore (C\eand B)\eif A$ is invalid.
+
+\begin{tabular}{c c c|ceccc|ceccc|ceccc}
+ $A$ & $B$ & $C$ &$((B$&\eand& $A)$& \eif& $C)$&$((C$&\eand& $A)$& \eif& $B)$&$((C$&\eand& $B)$& \eif& $A)$\\
+\hline
+ \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT & \vT\\
+ \vT & \vT & \vF & \vT & \vT & \vT & \vF & \vF & \vF & \vF & \vT & \vT & \vT & \vF & \vF & \vT & \vT & \vT\\
+ \vT & \vF & \vT & \vF & \vF & \vT & \vT & \vT & \vT & \vT & \vT & \vF & \vF & \vT & \vF & \vF & \vT & \vT\\
+ \vT & \vF & \vF & \vF & \vF & \vT & \vT & \vF & \vF & \vF & \vT & \vT & \vF & \vF & \vF & \vF & \vT & \vT\\
+ \vF & \vT & \vT & \vT & \vF & \vF & \gT & \vT & \vT & \vF & \vF & \gT & \vT & \vT & \vT & \vT & \gF & \vF\\
+ \vF & \vT & \vF & \vT & \vF & \vF & \vT & \vF & \vF & \vF & \vF & \vT & \vT & \vF & \vF & \vT & \vT & \vF\\
+ \vF & \vF & \vT & \vF & \vF & \vF & \vT & \vT & \vT & \vF & \vF & \vT & \vF & \vT & \vF & \vF & \vT & \vF\\
+ \vF & \vF & \vF & \vF & \vF & \vF & \vT & \vF & \vF & \vF & \vF & \vT & \vF & \vF & \vF & \vF & \vT & \vF
+\end{tabular}
+\end{earg}
+
+\vfill
+\pagebreak
+\solutionsection{ch:SemanticNotions}{pr.TT.concepts}
+%Give reasons for your answers to these questions.
+\begin{earg}
+\item %Suppose that \meta{A} and \meta{B} are logically equivalent. What can you say about $\meta{A}\eiff\meta{B}$?
+\meta{A} and \meta{B} have the same truth value on every line of a complete truth table, so $\meta{A}\eiff\meta{B}$ is true on every line. It is a logical truth.
+\item %Suppose that $(\meta{A}\eand\meta{B})\eif\meta{C}$ is neither a logical truth nor a contradiction. What can you say about whether $\meta{A}, \meta{B} \therefore\meta{C}$ is valid?
+ $(\meta{A}\eand\meta{B})\eif\meta{C}$ is false on some line of a complete truth table. On that line, \meta{A} and \meta{B} are true and \meta{C} is false. So the argument is invalid.
+\item %Suppose that $\meta{A}$, $\meta{B}$ and $\meta{C}$  are mutually inconsistent. What can you say about $(\meta{A}\eand\meta{B}\eand\meta{C})$?
+Since $\meta{A}$, $\meta{B}$ and $\meta{C}$  are mutually inconsistent,  there is no line on which all three are true, so their conjunction will be a logical falsehood.
+\item %Suppose that \meta{A} is a contradiction. What can you say about $\meta{A}, \meta{B} \entails \meta{C}$?
+Since \meta{A} is false on every line of a complete truth table, there is no line on which \meta{A} and \meta{B} are true and \meta{C} is false. So the argument is valid.
+\item %Suppose that \meta{C} is a logical truth. What can you say about $\meta{A}, \meta{B}\entails \meta{C}$?
+Since \meta{C} is true on every line of a complete truth table, there is no line on which \meta{A} and \meta{B} are true and \meta{C} is false. So the argument is valid.
+\item %Suppose that \meta{A} and \meta{B} are logically equivalent. What can you say about $(\meta{A}\eor\meta{B})$?
+$(\meta{A}\eor\meta{B})$ is equivalent to $\meta{A}$. So $(\meta{A}\eor\meta{B})$ is a logical truth iff \meta{A} is; a contradiction iff \meta{A} is; and contingent iff \meta{A} is.
+\item %Suppose that \meta{A} and \meta{B} are \emph{not} logically equivalent. What can you say about $(\meta{A}\eor\meta{B})$?
+\meta{A} and \meta{B} have different truth values on at least one line of a complete truth table, and $(\meta{A}\eor\meta{B})$ will be true on that line. On other lines, it might be true or false. So $(\meta{A}\eor\meta{B})$ is either a logical truth or it is contingent; it is \emph{not} a contradiction.
+\end{earg}
+
+
+\solutionsection{ch:PartialTruthTable}{pr.TT.eQuiv3}
+%Use partial truth tables to test for logical equivalence:
+\begin{earg}
+\item $A$, $\enot A$ are not equivalent.
+
+\begin{tabular}{c|c|cc}
+ $A$ & $A$ &\enot& $A$\\
+\hline
+ \vT & \gT & \gF & \vT
+\end{tabular} \medskip
+
+\item $A$, $A \eor A$ are equivalent.
+\item $A\eif A$, $A \eiff A$ are equivalent.
+\item $A \eor \enot B$, $A\eif B$ are not equivalent.
+
+\begin{tabular}{c c|cccc|ccc}
+ $A$ & $B$ & $A$ & \eor&\enot& $B$ & $A$ & \eif& $B$\\
+\hline
+ \vT & \vF & \vT & \gT & \vT & \vF & \vT & \gF & \vF
+\end{tabular} \medskip
+
+\item $A \eand \enot A$, $\enot B \eiff B$ are equivalent.
+\item $\enot(A \eand B)$, $\enot A \eor \enot B$ are equivalent.
+\item $\enot(A \eif B)$, $\enot A \eif \enot B$ are not equivalent.
+
+\begin{tabular}{c c|cccc|ccccc}
+ $A$ & $B$ &\enot& $(A$& \eif& $B)$&\enot& $A$ & \eif&\enot& $B$\\
+\hline
+ \vF & \vF & \gF & \vF & \vT & \vF & \vT & \vF & \gT & \vT & \vF \\
+ \vT & \vT & \gF & \vT & \vT & \vT & \vF & \vT & \gT & \vF & \vT
+\end{tabular}  \medskip
+
+\item $(A \eif B)$, $(\enot B \eif \enot A)$ are equivalent.
+\end{earg}
+
+
+\vfill
+\pagebreak
+\solutionsection{ch:PartialTruthTable}{pr.TT.valid4}
+%Use partial truth tables to test for validity:
+\begin{earg}
+\item $A\eor(A\eif(A\eiff A)) \therefore A$ is invalid.
+
+\begin{tabular}{c|ccccccc||c}
+ $A$ & $(A$& \eor& $(A$& \eif& $(A$&\eiff& $A))$&$A$\\
+\hline
+ \vF & \vF & \gT & \vF & \vT & \vF & \vT & \vF & \gF
+\end{tabular} \medskip
+
+\item $A\eiff\enot(B\eiff A) \therefore A$ is invalid.
+
+\begin{tabular}{c c|cccccc||c}
+ $A$ & $B$ & $(A$&\eiff&\enot& $(B$&\eiff&$A))$&$A$\\
+\hline
+ \vF & \vF & \vF & \gT & \vF & \vF & \vT & \vF & \gF
+\end{tabular}  \medskip
+
+\item $A\eif B, B \therefore A$ is invalid.
+
+\begin{tabular}{c c|ccc|c||c}
+ $A$ & $B$ & $(A$& \eif& $B)$& $B$ & $A$\\
+\hline
+ \vF & \vT & \vF & \gT & \vT & \gT & \gF
+\end{tabular} \medskip
+
+\item $A\eor B, B\eor C, \enot B \therefore A \eand C$ is valid.
+\item $A\eiff B, B\eiff C \therefore A\eiff C$ is valid.
+\end{earg}
+
+
+%----------------------------------------------------
+% Truth Trees
+%----------------------------------------------------
+\solutionsection{ch:chaptertruthtrees}{pr.tfl.ttreeconcepts}
+
+%How well do you understand the idea of a truth tree? Try to explain each of the following concepts:
+
+\begin{earg}
+\item The root of a truth tree is the list of formulas at the beginning of the tree. Trees test whether the root is consistent.
+\item You should tick (\checkmark) a formula when you've decomposed it on every open branch below that formula. This is simply to remind yourself that it has been decomposed, and so avoid decomposing it again.
+\item A truth tree branch represents a potential valuation that may make the root formulas all true.
+\item You should create branches when the formula being decomposed has more than one valuation that would make it true.
+\item You should close a branch when it contains any formula and its negation, as we know that branch represents an impossible valuation.
+\item An open branch is complete when all the formulas above it either have a check mark, or are atomic. Once you have found a complete open branch, you can stop growing the tree. 
+\item The collection of atomic formulas in an open branch describe a valuation under consideration. A \emph{complete} open branch represents a valuation where all the formulas in the root are true.
+\end{earg}
+
+\solutionsection{ch:tfl.tree.planting}{pr.tfl.root}
+To be updated shortly.
+
+
+\solutionsection{ch:TFLtreerules}{pr.tfl.treeroot}
+%To evaluate each of the following claims with a tree, (a) what would you put in the root of the tree?, and (b) if the tree closes, does that show that the claim is true or false?
+\begin{earg}
+\item %$P, P \eif Q, Q \eif \enot P$ is mutually consistent
+(a) $\{P, P \eif Q, Q \eif \enot P\}$; (b) false.
+\item %$(P \eif Q) \eiff (Q \eif P)$ is a tautology.
+(a) $\enot((P \eif Q) \eiff (Q \eif P))$; (b) true.
+\item %The following argument is valid:
+% $P \eand Q$,  $\enot R \eif \enot Q$ $\ \therefore \ $ $P \eand R$
+(a) $\{P \eand Q, \enot R \eif \enot Q, \enot (P \eand R)\}$; (b) true.
+\item %There is no valuation that makes $A \eor B$, $B \eif C$, and $A \eiff C$ all true but C false.
+(a) $\{A \eor B, B \eif C, A \eiff C, \enot C\}$; (b) true.
+\item %$A \eiff \enot A$ is a contradiction.
+(a) $A \eiff \enot A$; (b) true.
+\item %Every valuation making $P$, $P \eif Q$, and $\enot Q$ true also makes $A$ true.
+	(a) $\{P, P \eif Q, \enot Q, \enot A\}$; (b) true.
+\item %There is at least one valuation that makes $P \eif Q$, $\enot P \eor \enot Q$, and $Q \eif P$ true.
+	(a) $\{P \eif Q, \enot P \eor \enot Q, Q \eif P\}$; (b) false.
+ \end{earg}
+
+
+\solutionsection{ch:TFLtreerules}{pr.tfl.trees}
+%Evaluate each claim from Exercise \ref{pr.tfl.treeroot} by constructing a tree. If applicable, give the valuation that demonstrates the claim true or false, and use a partial truth table to confirm this.\\
+\begin{earg}
+\item $P, P \eif Q, Q \eif \enot P$ are NOT mutually consistent
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[P, name=r1, just={Root}
+[P \eif Q, checked, name=r2, just={Root}
+[Q \eif \enot P, checked, name=r3, just={Root}
+	[\enot P, close={:r1,!c}]
+	[Q, name=r4, just={\eif}:r2
+		[\enot Q, close={:r4,!c}, just={\eif}:r3]
+		[\enot P, close={:r1,!c}, just={\eif}:r3]
+	]
+]]]
+\end{prooftree}\end{center} 
+
+
+\vfill\pagebreak
+\item $(P \eif Q) \eiff (Q \eif P)$ is NOT a tautology.
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot ((P \eif Q) \eiff (Q \eif P)), name=r1, checked, just={Root}
+	[P \eif Q, name=r2, checked, just={\eiff}:r1
+	 [\enot(Q \eif P), name=r3, checked, just={\eiff}:r1
+	  [Q, name=r4, just={\enot\eif}:r3
+	   [\enot P, name=r5, just={\enot\eif}:r3
+	    [\enot P, open, just={\eif}:r2]
+	    [Q]
+	]]]]
+	[Q \eif P
+	 [\enot(P \eif Q)
+	  [\vdots]
+	]]
+]
+\end{prooftree} 
+
+\begin{tabular}{c c|ccccccc}
+ $P$ & $Q$ & $(P$& \eif& $Q)$&\eiff& $(Q$& \eif&$P)$\\
+\hline
+ \vF & \vT & \vF & \vT & \vT & \gF & \vT & \vF & \gF
+\end{tabular}\end{center}
+
+
+\item  $P \eand Q$,  $\enot R \eif \enot Q$ $\ \therefore \ $ $P \eand R$ is valid.
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[P \eand Q, name=p1, checked, just={Premise}
+[\enot R \eif \enot Q, name=p2, checked, just={Premise}
+[\enot(P \eand R), name=nc, checked, just={Neg Conc}
+	[P, name=r4, just={\eand}:p1
+	[Q, name=r5, just={\eand}:p1
+		[\enot\enot R, name=r6, just={\eif}:p2
+			[\enot P, close={:r4, !c}, just={\enot\eand}:nc]
+			[\enot R, close={:r6, !c}, just={\enot\eand}:nc]
+		]
+		[\enot Q, close={:r5,!c}, just={\eif}:p2]
+	]]
+]]]
+\end{prooftree}\end{center}
+
+
+\item Every valuation making $P$, $P \eif Q$, and $\enot Q$ true also makes $A$ true.
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[P, name=p1,  just={Premise}
+[P \eif Q, name=p2,  just={Premise}
+[\enot Q, name=p3,  just={Premise}
+[\enot A, name=nc,  just={Neg Conc}
+	[\enot P, close={:p1,!c}, just={\eif}:p2]
+	[Q, close={:p3,!c}, just={\eif}:p2]
+]]]]
+\end{prooftree}\end{center}
+
+
+\vfill\pagebreak
+\item $A \eor B$, $B \eif C$, and $A \eiff C$ cannot all be true but C false.
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[A \eor B, name=r1, checked, just={Root}
+[B \eif C, name=r2, checked, just={Root}
+[A \eiff C, name=r3, checked, just={Root}
+[\enot C, name=r4,  just={Root}
+	[\enot B, name=r5, just={\eif}:r2
+		[A, name=r6, just={\eor}:r1
+			[A, name=r7, just={\eiff}:r3
+			[C, close={:r4,!c}, just={\eiff}:r3]]
+			[\enot A
+			[\enot C, close={:r6,!u}]]
+		]
+		[B, close={:r5,!c}, just={\eor}:r5]
+	]
+	[C, close={:r4, !c}, just={\eif}:r2]
+]]]]
+\end{prooftree}\end{center}
+
+
+\item $A \eiff \enot A$ is a contradiction.
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[A \eiff \enot A, name=r1, checked, just={Root}
+	[A, name=r2, just={\eiff}:r1
+	[\enot A, close={:r2,!c}, just={\eiff}:r1]]
+	[\enot A
+	[\enot \enot A, close={:r2,!c}]]
+]
+\end{prooftree}\end{center}
+
+
+
+
+\item $P \eif Q$, $\enot P \eor \enot Q$, and $Q \eif P$ are mutually consistent.
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[P \eif Q, name=r1,  just={Root}
+[\enot P \eor \enot Q, name=r2,  just={Root}
+[Q \eif P, name=r3,  just={Root}
+	[\enot P, name=r4, just={\eif}:r1
+		[\enot P, just={\eor}:r2
+			[\enot Q, open, just={\eif}:r3]
+			[P, close={:r4,!c}]
+		]
+		[\enot Q]
+	]
+	[Q]
+]]]
+\end{prooftree}
+
+\begin{tabular}{c c|ccc|ccccc|ccc}
+ $P$ & $Q$ & $(P$& \eif& $Q)$&(\enot&$P$ & \eor&\enot& $Q)$& $(Q$& \eif&$P)$\\
+\hline
+ \vF & \vF & \vF & \gT & \vF & \vT & \vF & \gT & \vT & \vF & \vF & \gT & \gF
+\end{tabular}\end{center}
+
+\end{earg}
+
+\vfill\pagebreak
+
+\solutionsection{ch:TFLtreerules}{pr.tfl.agtree}
+%Evaluate the argument 
+%  $$A\eiff B, \enot B \eif (C \eor D), E \eif \enot C, (\enot D \eand F) \eor G, \enot A \eand E, \ \therefore \ H \eor G$$
+%by constructing a tree. If the tree is open, prove your counter-example is correct using a partial truth table.
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[A\eiff B, checked, name=p1, just={Premise}
+[\enot B \eif (C \eor D), checked, name=p2, just={Premise}
+[E \eif \enot C, checked, name=p3, just={Premise}
+[(\enot D \eand F) \eor G, checked, name=p4, just={Premise}
+[\enot A \eand E, checked, name=p5, just={Premise}
+[\enot(H \eor G), checked, name=nc, just={Neg Conc}
+	[\enot A, name=r7, just={\eand}:p5	
+	[E, name=r8, just={\eand}:p5	
+	[\enot H, just={\enot\eor}:nc	
+	[\enot G, name=r10, just={\enot\eor}:nc	
+		[\enot E, close={:r8, !c}, just={\eif}:p3]
+		[\enot C, name=r11, just={\eif}:p3
+			[\enot D \eand F, checked, name=r12, just={\eor}:p4
+				[\enot D, name=r13, just={\eand}:r12
+				[F, just={\eand}:r12
+				[\enot\enot B, checked, name=r15b, just={\eif}:p2
+				[B, name=r17, just={\enot\enot}:r15b, move by = 1
+					[A, name=r18, just={\eiff}:p1
+					[B, close={7,:r18}, just={\eiff}:p1]]
+						[\enot A, just={\eiff}:p1
+						[\enot B, close={:r17,!c}, just={\eiff}:p1]]
+					]]
+				[C \eor D, checked, name=r15, just={\eif}:p2
+					[C, close={:r11,!c}, just={\eor}:r15]
+					[D, close={:r13,!c}, just={\eor}:r15]
+				]]]
+			]
+			[G, close={:r10,!c}, just={\eor}:p4]
+		]
+	]]]]
+]]]]]]
+\end{prooftree}\end{center} 
+This argument is valid.\\
+
+%====================================================
+% Predicate Logic
+%====================================================
+
+\solutionsection{ch:scope}{pr.scope}
+\begin{earg}
+\item The scope of $\exists x$ is $\atom Fx$ and the scope of $\exists y$ is $\atom G y$.
+\item The scope of $\exists x$ is $\atom Fx$ and the scope of $\exists y$ is $\atom F y$.
+\item The scope of $\exists x$ is $(\atom F x \land \exists y \atom Gy)$ and the scope of $\exists y$ is $\atom Gy$.
+\item The scope of $\exists x$ is $(\atom F x\eif \exists y((\atom G y \lor \atom H y)\land \enot \forall z(\atom F x \lor \atom Gz)))$, the scope of $\exists y$ is $((\atom G y \lor \atom H y)\land \enot \forall z(\atom F x \lor \atom Gz))$ and the scope of $\forall z$ is $(\atom F x \lor \atom Gz)$.
+\item The scope of $\exists x$ is $(\atom G a \land Hx))$.
+\end{earg}
+
+
+\pagebreak	
+	\solutionsection{ch:MoreMonadic}{pr.plalligators}
+	\begin{earg}
+	\item %Amos, Bouncer, and Cleo all live at the zoo.
+	$Za \eand Zb \eand Zc$
+	\item %Bouncer is a reptile, but not an alligator. 
+	$Rb \eand \enot Ab$
+	\item %If Cleo loves Bouncer, then Bouncer is a monkey. 
+	$Lcb \eif Mb$
+	\item %If both Bouncer and Cleo are alligators, then Amos loves them both.
+	$(Ab \eand Ac)\eif(Lab \eand Lac)$
+	\item %Some reptile lives at the zoo. 
+	$\exists x(Rx \eand Zx)$
+	\item %Every alligator is a reptile. 
+	$\forall x(Ax \eif Rx)$
+	\item %Any animal that lives at the zoo is either a monkey or an alligator. 
+	$\forall x\bigl[Zx \eif (Mx \eor Ax)\bigr]$
+	\item %There are reptiles which are not alligators.
+	$\exists x(Rx \eand \enot Ax)$
+	\item %Cleo loves a reptile.
+	$\exists x(Rx \eand Lcx)$
+	\item %Bouncer loves all the monkeys that live at the zoo.
+	$\forall x\bigl[(Mx \eand Zx) \eif Lbx\bigr]$
+	\item %All the monkeys that Amos loves love him back.
+	$\forall x\bigl[(Mx \eand Lax) \eif Lxa\bigr]$
+	\item %If any animal is an reptile, then Amos is.
+	$\exists x Rx \eif Ra$
+	\item %If any animal is an alligator, then it is a reptile.
+	$\forall x(Ax \eif Rx)$
+	\item %Every monkey that Cleo loves is also loved by Amos.
+	$\forall x\bigl[(Mx \eand Lcx) \eif Lax\bigr]$
+	\item %There is a monkey that loves Bouncer, but sadly Bouncer does not reciprocate this love.
+	$\exists x(Mx \eand Lxb \eand \enot Lbx)$
+	\end{earg}
+%	
+%	
+%	\solutionsection{s:MultipleGenerality}{pr.QLcandies}
+%	\begin{earg}
+%	\item %Boris has never tried any candy.
+%	$\enot\exists x Tx$
+%	\item %Marzipan is always made with sugar.
+%	$\forall x(Mx \eif Sx)$
+%	\item %Some candy is sugar-free.
+%	$\exists x \enot Sx$
+%	\item %The very best candy is chocolate.
+%	$\exists x[Cx \eand \enot\exists y Byx]$
+%	\item %No candy is better than itself.
+%	$\enot \exists x Bxx$
+%	\item %Boris has never tried sugar-free chocolate.
+%	$\enot \exists x(Cx \eand \enot Sx \eand Tx)$
+%	\item %Boris has tried marzipan and chocolate, but never together.
+%	$\exists x(Cx \eand Tx) \eand \exists x(Mx \eand Tx) \eand \enot \exists x(Cx \eand Mx \eand Tx)$
+%	%\item Boris has tried nothing that is better than sugar-free marzipan.
+%	%$\enot\exists x[Bx \eand \exists y(
+%	\item %Any candy with chocolate is better than any candy without it.
+%	$\forall x[Cx \eif \forall y(\enot Cy \eif Bxy)]$
+%	\item %Any candy with chocolate and marzipan is better than any candy without either.
+%	$\forall x\bigl((Cx \eand Mx) \eif \forall y[(\enot Cy \eand \enot My) \eif Bxy]\bigr)$
+%	\end{earg}
+%	
+%	
+	\solutionsection{ch:MultipleGenerality}{pr.plballet}
+	\begin{earg}
+	\item %All of Patrick's children are ballet dancers.
+	$\forall x[Cxp \eif Dx]$
+	\item %Jane is Patrick's daughter.
+	$Cjp \eand Fj$
+	\item %Patrick has a daughter.
+	$\exists x[Cxp \eand Fx]$
+	\item %Jane is an only child.
+	$\enot\exists x [Sxj]$
+	\item %All of Patrick's sons dance ballet.
+	$\forall x\bigl[(Cxp \eand Mx)\eif Dx\bigr]$
+	\item %Patrick has no sons.
+	$\enot\exists x[Cxp \eand Mx]$
+	\item %Jane is Elmer's niece.
+	$\exists x[Cjx \eand Sxe \eand Fj]$
+	\item %Patrick is Elmer's brother.
+	$Spe \eand Mp$
+	\item %Patrick's brothers have no children.
+	$\forall x\bigl[(Sxp \eand Mx) \eif \enot\exists y Cyx\bigr]$
+	\item %Jane is an aunt.
+	$\exists x[Sxj \eand \exists y [Cyx] \eand Fj]$
+	\item %Everyone who dances in the ballet has a brother who also dances in the ballet.
+	$\forall x\bigl[Dx \eif \exists y(Sxy \eand My \eand Dy)\bigr]$
+	\item %Every woman who dances in the ballet is the child of someone who dances in the ballet.
+	$\forall x\bigl[(Fx \eand Dx) \eif \exists y[Cxy \eand Dy]\bigr]$
+	\end{earg}
+%	
+	\solutionsection{ch:identity}{pr.plcards}
+	\begin{earg}
+	\item %All clubs are black cards.
+	$\forall x[Cx \eif (Bx \eand Sx)]$.
+	\item %There are no wild cards.
+	$\enot\exists x [Wx \eand Sx]$
+	\item %There are at least two clubs.
+	$\exists x \exists y[Cx \eand Cy \eand x\neq y]$
+	\item %There is more than one one-eyed jack.
+	$\exists x \exists y[Jx \eand Ox \eand Jy \eand Oy \eand x\neq y]$
+	\item %There are at most two one-eyed jacks.
+	$\forall x\forall y\forall z\bigl[(Jx \eand Ox \eand Jy \eand Oy \eand Jz \eand Oz)\eif(x=y \eor x=z \eor y=z)\bigr]$
+	\item %There are two black jacks.
+	$\exists x\exists y\bigl[Jx \eand Bx \eand Jy \eand By \eand x \neq y\eand \forall z[(Jz \eand Bz) \eif (x=z \eor y=z)]\bigr]$
+	\item %There are four deuces.
+	$\exists x_1\exists x_2\exists x_3\exists x_4\bigl[Dx_1 \eand Dx_2 \eand Dx_3 \eand Dx_4 \eand x_1 \neq x_2 \eand x_1 \neq x_3 \eand x_1 \neq x_4 \eand x_2 \neq x_3 \eand x_2 \neq x_4 \eand x_3 \neq x_4  \eand \enot\exists y[Dy \eand y\neq x_1 \eand y\neq x_2 \eand y\neq x_3 \eand y\neq x_4]\bigr]$
+	\item %The deuce of clubs is a black card.
+	$\exists x\bigl[Dx \eand Cx \eand \forall y[(Dy\eand Cy) \eif x=y] \eand (Bx \eand Sx)\bigr]$
+	\item %One-eyed jacks and the man with the axe are wild.
+	$\forall x\bigl[(Ox \eand Jx) \eif Wx\bigr] \eand \exists x\bigl[Mx \eand \forall y[My \eif x=y] \eand Wx\bigr]$
+	\item %If the deuce of clubs is wild, then there is exactly one wild card.
+	$\exists x\bigl[Dx \eand Cx \eand \forall y[(Dy\eand Cy) \eif x=y] \eand (Wx \eand Sx)\bigr]\eif \\ 
+	\indent \exists x\forall y[(Wx \eand Sx) \eiff x=y]$
+	\item %The man with the axe is not a jack.
+	wide scope: $\enot \exists x\bigl[Mx \eand \forall y(My \eif x=y) \eand Jx\bigr]$\\
+	narrow scope: $\exists x\bigl[Mx \eand \forall y(My \eif x=y) \eand \enot Jx\bigr]$
+	\item %The deuce of clubs is not the man with the axe.
+	wide scope: $\enot \exists x\exists z\bigl[Dx \eand Cx \eand Mz \eand \forall y[(Dy\eand Cy) \eif x=y]  \eand \\
+	 \indent \forall y[(My \eif z=y) \eand x=z]\bigr]$\\
+	narrow scope: $\exists x\exists z\bigl[Dx \eand Cx \eand Mz \eand \forall y[(Dy\eand Cy) \eif x=y]  \eand \\
+	 \indent\forall y[(My \eif z=y) \eand x\neq z]\bigr]$
+	\end{earg}
+
+
+\solutionsection{ch:models.quantifiers}{pr.quant01}
+
+\begin{earg}
+\item True
+\item False
+\item True
+\item False
+\item False
+\item False
+\item True
+\item True
+\item False
+\item True
+\item True
+\item False
+\item True
+\item False
+\item True
+\end{earg}
+
+%==========================
+
+
+%----------------------
+% Predicate Truth Trees
+%----------------------
+
+
+\solutionsection{ch:pl.tree.strategies}{pr.PL.trees.tautology}
+
+%Use a tree to test whether the following formulas are tautologies. If they are not tautologies, describe a model on which they are false.
+
+\begin{earg}
+\item $\forall x \forall y (Gxy \eif \exists z Gxz)$
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot \qan x {\qan y {Gxy \eif \qeb z {Gxz}}}, name=r1, checked, just={Root}
+[\qen x {\enot\qan y {Gxy \eif \qeb z {Gxz}}}, name=r2, checked=a, just={$\enot\forall$}:r1
+[\enot\qan y {Gay \eif \qeb z {Gaz}}, name=r3, checked, just={$\exists$ a}:r2
+[\qen y {\enot (Gay \eif \qeb z {Gaz})}, name=r4, checked=b, just={$\enot\forall$}:r3
+[\enot (Gab \eif \qeb z {Gaz}), name=r5, just={$\exists$ b}:r4
+	[Gab, just={\enot\eif}:r5
+	[\enot \qeb z {Gaz}, checked, name=r7, just={\enot\eif}:r5
+	[\qab z {\enot Gaz}, subs={b}, name=r8, just={$\enot\exists$}:r7
+	[\enot Gab, close, just={$\forall$ b}:r8
+	]]]]
+]]]]]
+\end{prooftree}\end{center}
+
+
+\item $\forall x Fx \eor \forall x (Fx \eif Gx)$
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot (\qab x {Fx} \eor \qab x {Fx \eif Gx}), name=r1, checked, just={Root}
+ [\enot \qab x {Fx}, name=r2, checked, just={$\enot\eor$}:r1
+ [\enot \qab x {Fx \eif Gx}, name=r3, checked, just={$\enot\eor$}:r1
+  [\qeb x {\enot Fx}, name=r4, checked=a, just={$\enot\forall$}:r2
+   [\enot Fa, name=r5, checked, just={$\exists$ a}:r4
+  [\qeb x {\enot (Fx \eif Gx)}, name=r6, checked=b, just={$\enot\forall$}:r3
+   [\enot (Fb \eif Gb), name=r7, checked, just={$\exists$ b}:r3
+    [Fb, just={$\enot\eif$}:r7
+     [\enot Gb, open, just={$\enot\eif$}:r7
+  ]]]]
+  ]]
+]]]
+\end{prooftree}\end{center}
+\begin{tabular}{c|cc}
+ & F & G\\
+\hline
+a & \vF & \vU\\
+b & \vT & \vF
+\end{tabular}
+
+\medskip\medskip
+
+
+\item $\forall x (Fx \eif (\enot Fx \eif \forall y Gy))$
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot \qab x {Fx \eif (\enot Fx \eif \qab y {Gy})}, name=r1, checked, just={Root}
+[\qeb x {\enot (Fx \eif (\enot Fx \eif \qab y {Gy}))}, name=r2, checked, just={$\enot\forall$}:r1
+[\enot (Fa \eif (\enot Fa \eif \qab y {Gy})), name=r3, checked, just={$\exists$ a}:r2
+ [Fa, just={$\enot\eif$}:r3
+  [\enot (\enot Fa \eif \qab y {Gy}), name=r5, just={$\enot\eif$}:r3
+   [\enot Fa, just={$\enot\eif$}:r5
+	[\enot \qab y {Gy}, close, name=r7, just={$\enot\eif$}:r5
+ ]]]]
+]]]
+\end{prooftree}\end{center}
+
+
+\item $\exists x Jx \eiff \enot \forall x \enot Jx$
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot (\qeb x {Jx} \eiff \enot \qab x {\enot Jx}), name=r1, checked, just={Root}
+  [\qeb x {Jx}, checked=a, name=r2, just={$\enot\eiff$}:r1
+   [\enot\enot  \qab x {\enot Jx}, checked, name=r3, just={$\enot\eiff$}:r1
+    [\qab x {\enot Jx}, checked, name=r4, just={$\enot\enot$}:r3%, move by = 3
+     [Ja, just={$\exists$ a}:r2
+      [\enot Ja, close, just={$\forall$ a}:r4
+  ]]]]]
+  [\enot\qeb x {Jx}, name=r2b
+   [\enot \qab x {\enot Jx}, name=r3b
+	[\qab x {\enot Jx}, subs={b}, name=r7, just={$\enot\exists$}:r2, move by = 1
+	 [\qeb x {\enot \enot Jx}, checked=b, name=r8, just={$\enot\forall$}:r3
+	  [\enot \enot Jb, just={$\exists$ b}:r8
+	   [\enot Jb, close, just={$\forall$ b}:r7]
+      ]
+  ]]]]
+]
+\end{prooftree}\end{center}
+
+
+\item $\exists x (Fx \eor \enot Fx)$
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot \qeb x {Fx \eor \enot Fx}, name=r1, checked, just={Root}
+[\qab x {\enot (Fx \eor \enot Fx)}, name=r2, subs={a}, just={$\enot\exists$}:r1
+[\enot (Fa \eor \enot Fa), name=r3, checked, just={$\forall$ a}:r2
+ [\enot Fa , just={$\enot\eor$}:r3
+  [\enot\enot Fa, close, just={$\enot\eor$}:r3
+]]]]]
+\end{prooftree}\end{center}
+
+
+
+\item $\forall x (Fx \eor Gx) \eif (\forall y Fy \eor \exists x Gx)$
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot (\qab x {Fx \eor Gx} \eif (\qab y {Fy} \eor \qeb x {Gx})), name=r1, checked, just={Root}
+ [\qab x {Fx \eor Gx}, name=r2, subs={a}, just={$\enot\eif$}:r1
+  [\enot(\qab y {Fy} \eor \qeb x {Gx}), name=r3, checked, just={$\enot\eif$}:r1
+   [\enot\qab y {Fy}, name=r4, checked, just={$\enot\eor$}:r3
+	[\enot\qeb x {Gx}, name=r5, checked, just={$\enot\eor$}:r3
+	 [\qeb y {\enot Fy}, name=r6, checked=a, just={$\enot\exists$}:r4
+	  [\enot Fa, name=r7, just={$\enot\exists$}:r6
+	   [\qab x {\enot Gx}, name=r8, subs={a}, just={$\enot\exists$}:r5
+		[Fa \eor Ga, name=r9, just={$\forall$ a}:r2
+		 [Fa, close, just={$\eor$}:r9]
+		 [Ga, just={$\eor$}:r9
+		  [\enot Ga, close, just={$\forall$ a}:r8
+		]]]
+	 ]]]
+]]]]]
+\end{prooftree}\end{center}
+
+\end{earg}
+
+
+\vspace{-8pt}
+\noindent
+\solutionsection{ch:pl.tree.strategies}{pr.PL.trees.validity}
+%Use a tree to test whether the following arguments are valid. If they are not, give a model as a counterexample.
+\begin{earg}
+
+\item $Fa$, $Ga$ \therefore\ $\forall x (Fx \eif Gx)$
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[Fa, name=p1, just={Premise}
+ [Ga, name=p2, just={Premise}
+  [\enot\qab x {Fx \eif Gx}, checked, name=nc, just={Neg Conc}
+   [\qeb x {\enot(Fx \eif Gx)},checked=b, name=r4, just={$\enot\forall$}:nc
+	[\enot(Fb \eif Gb), name=r5, just={$\exists$ b}:r4
+	 [Fb, just={$\enot\eif$}:r5
+	  [\enot Gb, open, just={$\enot\eif$}:r5
+	 ]]
+]]]]]
+\end{prooftree}\end{center}
+\begin{tabular}{c|cc}
+ & F & G\\
+\hline
+a & \vT & \vT\\
+b & \vT & \vF
+\end{tabular} 
+\medskip
+
+
+\item $Fa$, $Ga$ \therefore\ $\exists x (Fx \eand Gx)$
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[Fa, name=p1, just={Premise}
+ [Ga, name=p2, just={Premise}
+  [\enot\qeb x {Fx \eand Gx}, checked, name=nc, just={Neg Conc}
+   [\qab x {\enot(Fx \eand Gx)}, subs={a}, name=r4, just={$\enot\exists$}:nc
+	[\enot(Fa \eand Ga), checked, name=r5, just={$\forall$ a}:r4
+	 [\enot Fa , close, just={$\enot\eand$}:r5]
+	 [\enot Ga , close, just={$\enot\eand$}:r5]
+]]]]]
+\end{prooftree}\end{center}
+
+
+\item $\forall x \exists y Lxy$ \therefore\ $\exists x \forall y Lxy$
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qan x{\qeb y{Lxy}}, name=p1, subs={a}, just={Premise}
+ [\enot\qen x {\qab y{Lxy}}, checked, name=nc, just={Neg Conc}
+  [\qan x {\enot \qab y{Lxy}}, subs={a}, name=r3, just={$\enot\exists$}:nc
+   [\qeb y{Lay}, name=r4, checked=b, just={$\forall$ a}:p1
+	[Lab, name=r5, just={$\exists$ b}:r4
+	 [\enot \qab y{Lay}, checked, name=r6, just={$\forall$ a}:r3
+	  [\qeb y {\enot Lay}, checked=c, name=r7, just={$\enot\forall$}:r6
+	   [\enot Lac, open, just={$\exists$ c}:r7
+]]]]]]]]
+\end{prooftree}\end{center}
+
+\begin{tabular}{c|ccc}
+L & a & b & c\\
+\hline
+a & \vU & \vT & \vF\\
+b & \gT & \vU & \vU\\
+c & \gT & \vU & \vU
+\end{tabular} \\
+
+Note that this tree is infinite, as both \#1/\#4 and \#3/\#6 will generate new atomic letters every time they are decomposed. The greyed values are not read from the tree, but instead `guessed' to complete the counter-example.
+
+\medskip\medskip
+
+
+\pagebreak
+\item $\exists x (Fx \eand Gx)$, $Fb \eiff Fa$, $Fc \eif Fa$ \therefore\ $Fa$
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qeb x {Fx \eand Gx}, checked, name=p1, just={Premise}
+ [Fb \eiff Fa, name=p2, just={Premise}
+  [Fc \eif Fa, name=p3, just={Premise}
+   [\enot Fa, name=nc, just={Neg Conc}
+	[Fd \eand Gd, name=r5, just={$\exists$ d}:p1
+	 [\enot Fc, name=r6, just={$\eif$}:p3
+	  [Fb, just={$\eiff$}:p2
+	   [Fa, close, just={$\eiff$}:p2
+	  ]]
+	  [\enot Fb
+	   [\enot Fa
+		[Fd, just={$\eand$}:r5
+		 [Gd, open, just={$\eand$}:r5
+	  ]]]]
+	 ]
+	 [Fa, close]
+]]]]]
+\end{prooftree}\end{center}
+
+\begin{tabular}{c|cc}
+ & F & G\\
+\hline
+a & \vF & \vU\\
+b & \vF & \vU\\
+c & \vF & \vU\\
+d & \vT & \vT
+\end{tabular} 
+\medskip\medskip
+
+
+\item $\forall x \exists y Gyx$ \therefore\ $\forall x \exists y (Gxy \eor Gyx)$
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qab x {\qen y{Gyx}}, subs={a}, name=p1, just={Premise}
+ [\enot\qab x { \qen y {Gxy \eor Gyx}}, checked, name=nc, just={Neg Conc}
+  [\qeb x {\enot \qen y {Gxy \eor Gyx}}, checked=a, name=r3, just={$\enot\forall$}:nc
+   [\enot \qeb y {Gay \eor Gya}, checked, name=r4, just={$\exists$ a}:r3
+	[\qen y{Gya}, checked=b, name=r5,just={$\forall$ a}:p1
+	 [Gba, just={$\exists$ b}:r5
+		[\qab y {\enot(Gay \eor Gya)}, subs={b}, name=r7, just={$\enot\forall$}:r4
+		 [\enot(Gab \eor Gab), checked, name=r8, just={$\forall$ b}:r7
+		  [\enot Gab, just={$\enot\eor$}:r8
+		   [\enot Gba, close, just={$\enot\eor$}:r8
+		]]]]
+   ]]]
+]]]
+\end{prooftree}\end{center}
+
+\end{earg}
+
+
+\pagebreak
+
+\noindent
+\solutionsection{ch:identity.trees}{pr.identity01}
+\begin{earg}
+\item $b = b \eif (Rca \eor Pb), a = b \eif (Rcb \eor Pb), b = b \eif (Rcb \eor Pb)$
+\item $a = a \eif (Rca \eor Pb), a = b \eif (Rca \eor Pa), a = a \eif (Rca \eor Pa)$.
+\item $c = b \eif (Rca \eor Pb), a = b \eif (Rcc \eor Pb), c = b \eif (Rcc \eor Pb)$.
+\item $a = b \eif (Raa \eor Pb)$.
+\item $a = c \eif (Rca \eor Pb), a = b \eif (Rca \eor Pc), a = c \eif (Rca \eor Pc)$.
+  \item $a = b \eif (Rba \eor Pb)$. 
+\end{earg}
+
+
+\noindent
+\solutionsection{ch:identity.trees}{pr.identity.trees.validity}
+	%Use a tree to show that the following arguments are valid.
+\begin{earg}
+\item $\forall x (x=a \eor x=b)$, $\enot(Fa \eand Ga)$, $Gb \eif Hb$ \therefore\ $\forall x ((Fx \eand \enot Hx) \eif \enot Gx)$ %Ex. 10
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qab x {x=a \eor x=b}, subs={c}, name=p1, just={Premise}
+ [\enot(Fa \eand Ga), name=p2, checked, just={Premise}
+  [Gb \eif Hb, name=p3, checked, just={Premise}
+   [\enot\qab x {(Fx \eand \enot Hx) \eif \enot Gx}, name=nc, checked, just={Neg Conc}
+	[\qeb x {\enot((Fx \eand \enot Hx) \eif \enot Gx)}, name=r5, checked=a, just={$\enot\forall$}:nc
+	 [\enot((Fc \eand \enot Hc) \eif \enot Gc), name=r6, checked, just={$\exists$ c}:r5
+	  [Fc \eand \enot Hc, name=r7, checked, just={$\enot\eif$}:r6
+	   [\enot\enot Gc, name=r8, checked, just={$\enot\eif$}:r6
+		[Gc, name=r9, just={$\enot\enot$}:r8
+		 [Fc, just={$\eand$}:r7
+		  [\enot Hc, just={$\eand$}:r7
+	[{c=a \eor c=b}, checked, name=r12, just={$\forall$ c}:p1
+	 [{c=a}, name=r13, just={$\eor$}:r12
+	  [\enot (Fc \eand Gc), name=r14, checked, just={$[a/c]$:p2,r13}
+	   [\enot Fc, close, just={$\enot\eand$}:r14]
+	   [\enot Gc, close, just={$\enot\eand$}:r14]
+	 ]]
+	 [{c=b}, name=r13b, just={$\eor$}:r12
+	  [Gc \eif Hc, name=r14b, checked, just={$[b/c]$:p3,r13b}, move by = 2
+	   [\enot Gc, close, just={$\eif$}:r14b]
+	   [Hc, close, just={$\eif$}:r14b]
+	 ]]
+	]
+	]]]]]]]
+]]]]
+\end{prooftree}\end{center}
+
+
+\pagebreak
+
+\item $\exists x Fx$, $\forall x \forall y ((Fx \eand Fy) \eif x=y)$ \therefore\ $\exists x \forall y (Fy \eiff (x=y))$ %Ex. 14
+\vspace{-5pt}
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qab x {Fx}, checked=a, name=p1, just={Premise}
+ [\qan x {\qab y {(Fx \eand Fy) \eif x=y}} , subs={a}, name=p2, just={Premise}
+  [\enot \qen x {\qab y {Fy \eiff(x=y)}}, checked, name=nc, just={Neg Conc}
+   [\qab x {\enot (\qab y {Fy \eiff(x=y)})}, subs={a}, name=r4, just={$\enot\exists$}:nc
+	[Fa, name=r5, just={$\exists$ a}:p1
+	 [\enot (\qab y {Fy \eiff(a=y)}), checked, name=r6, just={$\forall$ a}:r4
+	  [\qeb y {\enot (Fy \eiff(a=y))}, checked=b, name=r7, just={$\enot\forall$}:r6
+	   [\enot (Fb \eiff({a=b})), checked, name=r8, just={$\exists$ b}:r7
+		[Fb, name=r9, just={$\enot\eiff$}:r8
+		 [\enot ({a=b}), name=r10, just={$\enot\eiff$}:r8
+		  [\qab y {(Fa \eand Fy) \eif a=y}, subs={b}, name=r11, just={$\forall$ a}:p2
+		   [(Fa \eand Fb) \eif a=b, checked, name=r12, just={$\forall$ b}:r11
+			[\enot (Fa \eand Fb), checked, name=r13, just={$\eif$}:r12
+			 [\enot Fa, close, just={$\enot\eand$}:r13]
+			 [\enot Fb, close, just={$\enot\eand$}:r13]
+			]
+			[{a=b}, close, just={$\eif$}:r12]
+		]]]]
+		[\enot Fb, name=r9b, just={$\enot\eiff$}:r8
+		 [{a=b}, name=r10b, just={$\enot\eiff$}:r8
+		  [\enot Fa, close, just={$[b/a]$:r9,r10}, move by = 1]
+		]]
+	]]]]
+]]]]
+\end{prooftree}\end{center}
+\vspace{-5pt}
+
+
+%\pagebreak
+\item $\forall x \forall y (Fx \eif x=y)$, $\forall x(Fx \eor Gx)$ \therefore\ $(\forall x Fx \eor \forall x Gx)$ %Ex. 15
+\vspace{-5pt}\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qan x {\qab y {Fx \eif x=y}}, subs={b}, name=p1, just={Premise}
+ [\qab x {Fx \eor Gx}, subs={b}, name=p2, just={Premise}
+  [\enot (\qab x {Fx} \eor \qab x {Gx}), name=nc, checked, just={Neg Conc}
+   [\enot \qab x {Fx}, name=r4, checked, just={$\enot\eor$}:nc
+	[\enot \qab x {Gx}, name=r5, checked, just={$\enot\eor$}:nc
+	 [\qeb x {\enot Fx}, name=r6, checked=a, just={$\enot\forall$}:r4
+	  [\enot Fa, name=r7, just={$\exists$ a}:r6
+	   [\qeb x {\enot Gx}, name=r8, checked=b, just={$\enot\forall$}:r5
+		[\enot Gb, name=r9, just={$\exists$ b}:r8
+	[Fb \eor Gb, name=r10, checked, just={$\forall$ b}:p2
+	 [Fb, name=r11, just={$\eor$}:r10
+	  [\qab y {Fb \eif b=y}, name=r12, subs={a}, just={$\forall$ b}:p1
+	   [Fb \eif {b=a}, name=r13, checked, just={$\forall$ a}:r12
+		[\enot Fb, close, just={$\eif$}:r13]
+		[{b=a}, name=r14, just={$\eif$}:r13
+		 [Fa, close, just={$[b/a]$:r11,r14}]
+		]
+	 ]]]
+	 [Gb, close]
+	]
+]]]]]]]]]
+\end{prooftree}\end{center}
+
+
+\item $\exists x \forall y (Fy \eiff (x=y))$ \therefore\ $\exists x Fx$ %Ex. 13
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qeb x {\qab y {Fy \eiff (x=y)}}, checked=a, name=p1, just={Premise}
+ [\enot \qeb x {Fx}, checked, name=nc, just={Neg Conc}
+  [\qab x {\enot Fx}, subs={a}, name=r3, just={$\enot\exists$}:nc
+   [\qab y {Fy \eiff (a=y)}, subs={a}, name=r4, just={$\exists$ a}:p1
+	[\enot Fa, name=r5, just={$\forall$ a}:r3
+	 [Fa \eiff ({a=a}), name=r6, just={$\forall$ a}:r4
+		[Fa, just={$\eiff$}:r6
+		 [{a=a}, close, just={$\eiff$}:r6]
+		]
+		[\enot Fa, just={$\eiff$}:r6
+		 [\enot ({a=a}),just={$\eiff$}:r6
+		  [{a=a}, close, just={Identity}]
+		]]
+]]]]]]
+\end{prooftree}\end{center}
+
+
+\item $\exists x \forall y(Fy \eiff (x=y))$ \therefore\ $\forall x \forall y ((Fx \eand Fy)\eif (x=y))$ %Ex. 12
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qen x {\qab y {Fy \eiff (x=y)}}, checked=c, name=p1, just={Premise}
+ [\enot \qan x {\qab y {(Fx \eand Fy)\eif (x=y)}}, checked, name=nc, just={Neg Conc}
+  [\qeb x {\enot \qab y {(Fx \eand Fy)\eif (x=y)}}, checked=a, name=r3, just={$\enot\forall$}:nc
+   [\enot \qab y {(Fa \eand Fy)\eif (a=y)}, checked, name=r4, just={$\exists$ a}:r3
+	[\qeb y {\enot ((Fa \eand Fy)\eif (a=y))}, checked=b, name=r5, just={$\enot\forall$}:r4
+	 [\enot ((Fa \eand Fb)\eif ({a=b})), checked, name=r6, just={$\exists$ b}:r5
+	  [Fa \eand Fb, checked, name=r7, just={$\enot\eif$}:r6
+	   [\enot ({a=b}), checked, name=r8, just={$\enot\eif$}:r6
+		[Fa, name=r9, just={$\eand$}:r7
+		 [Fb, name=r10, just={$\eand$}:r7
+	[\qab y {Fy \eiff (c=y)}, subs={a,b}, name=r11, just={$\exists$ c}:p1
+	 [Fa \eiff ({c=a}), checked, name=r12, just={$\forall$ a}:r11
+	  [Fa, just={$\eiff$}:r12
+	   [{c=a}, name=r14, just={$\eiff$}:r12
+		[Fb \eiff ({c=b}), checked, name=r15, just={$\forall$ b}:r11
+		 [Fb, just={$\eiff$}:r15
+		  [{c=b}, name=r17, just={$\eiff$}:r15
+		   [{a=b}, close, just={$[c/a]$:r14,r17}
+		 ]]]
+		 [\enot Fb
+		  [\enot ({c=b}), close]
+		 ]
+	  ]]]
+	  [\enot Fa
+	   [\enot ({c=a}), close]
+	  ]
+	]]
+	]]]]]]
+]]]]
+\end{prooftree}\end{center}
+
+
+\pagebreak
+\item $\exists x \forall y(Fy \eiff(x=y))$, $\forall x(Fx \eor Gx)$ \therefore\ $\forall x \forall y((Gx \eor Gy) \eor x=y)$ %Ex. 17
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qeb x {\qab y {Fy \eiff(x=y)}}, checked=c, name=p1, just={Premise}
+ [\qab x {Fx \eor Gx}, subs={a,b}, name=p2, just={Premise}
+  [\enot \qab x {\qab y {(Gx \eor Gy) \eor x=y}}, checked, name=nc, just={Neg Conc}
+   [\qeb x {\enot \qab y {(Gx \eor Gy) \eor x=y}}, checked=a, name=r4, just={$\enot\forall$}:nc
+	[\enot \qab y {(Ga \eor Gy) \eor a=y}, checked, name=r5, just={$\exists$ a}:r4
+	 [\qeb y {\enot ((Ga \eor Gy) \eor a=y)}, checked=b, name=r6, just={$\enot\forall$}:r5
+	  [\enot ((Ga \eor Gb) \eor {a=b}), checked, name=r7, just={$\exists$ b}:r6
+	   [\enot (Ga \eor Gb), checked, name=r8, just={$\enot\eor$ }:r7
+		[\enot ({a=b}), checked, name=r9, just={$\enot\eor$ }:r7
+		 [\enot Ga, name=r10, just={$\enot\eor$ }:r8
+		  [\enot Gb, name=r11, just={$\enot\eor$ }:r8
+	[\qab y {Fy \eiff(c=y)}, subs={a,b}, name=r12, just={$\exists$ c}:p1
+	 [Fa \eor Ga, name=r13, checked, just={$\forall$ a}:p2
+	  [Fa, just={$\eor$}:r13
+	   [Fb \eor Gb, name=r15, checked, just={$\forall$ b}:p2
+		[Gb, close]
+		[Fb, just={$\eor$}:r15
+		 [Fa \eiff ({c=a}), name=r17, checked, just={$\forall$ a}:r12
+		  [Fa, just={$\eiff$}:r17
+		   [{c=a}, name=r19, just={$\eiff$}:r17
+			[Fb \eiff ({c=b}), name=r20, checked, just={$\forall$ a}:r12
+			 [Fb, just={$\eiff$}:r20
+			  [{c=b}, name=r22, just={$\eiff$}:r20
+			   [{a=b}, close, just={$[c/a]$:r19,r22}]
+			 ]]
+			 [\enot Fb
+			  [\enot ({c=b}), close]
+			 ]
+			]
+		  ]]
+		  [\enot Fa
+		   [\enot ({c=a}), close]
+		  ]
+		]]
+	  ]]
+	  [Ga, close]
+	]]
+]]]]]]]]]]]
+\end{prooftree}\end{center}
+
+\end{earg}
+
+
+\end{document}

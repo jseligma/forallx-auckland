@@ -1,0 +1,214 @@
+\documentclass[a4paper,12pt,oneside,table]{book}
+\usepackage{auckland-macros, forallx-macros}
+
+\begin{document}
+
+%
+%\begin{center}\begin{prooftree}
+%{close with=\ensuremath{\times}}
+%[A\eand B, checked, name=p1, just={Root}
+%[\enot(C\eor D), checked, name=p2, just={Root}
+%[(\enot B \eor C) \eor E, checked, name=p3, just={Root}
+%[\enot E, just={Root}
+%	[A, just={\eand}:p1
+%	[B, just={\eand}:p1
+%	[\enot C, just={\enot\eor}:p2
+%	[\enot D, just={\enot\eor}:p2
+%			[\enot B \eor C \ \ , checked, name=p9, just={\eor}:p3
+%				[\enot B, close, just={\eor}:p9]
+%				[C, close, just={\eor}:p9]
+%			]
+%			[E, close, just={\eor}:p3]						
+%	]]]]
+%]]]]
+%\end{prooftree}\end{center}
+%
+%
+%
+%\begin{center}\begin{prooftree}
+%{close with=\ensuremath{\times}}
+%[D \eor G, checked, name=p1, just={Root}
+%[\enot D, checked, name=p2, just={Root}
+%[\enot G \eor S, checked, name=p3, just={Root}
+%	[D, close, just={\eor}:p1	]
+%	[G, just={\eor}:p1	
+%		[\enot G, close, just={\eor}:p3	]
+%		[S, open, just={\eor}:p3	]
+%	]
+%]]]
+%\end{prooftree}\end{center}
+%
+%
+%
+%
+%\begin{center}\begin{prooftree}
+%{close with=\ensuremath{\times}}
+%[(D\eor A) \eand \enot N, checked, name=p1, just={Premise}
+%[N \eor \enot A, checked, name=p2, just={Premise}
+%[\enot (\enot N \eand A), checked, name=p3, just={Neg Conc}
+%	[D \eor A, checked, name=p4, just={\eand}:p1	
+%	[\enot N, just={\eand}:p1	
+%		[N, close, just={\eor}:p2]
+%		[\enot A, just={\eor}:p2
+%			[\enot \enot N, close, just={\enot\eand}:p3]
+%			[\enot A, just={\enot\eand}:p3
+%				[D, open, just={\eor}:p4]
+%				[A, close, just={\eor}:p4]
+%			]
+%		]
+%	]]
+%]]]
+%\end{prooftree}\end{center}
+%
+%
+%
+%\begin{center}\begin{prooftree}
+%{close with=\ensuremath{\times}}
+%[(\enot S \eand T) \eif (\enot P \eiff (Q \eor R)), checked
+%[\enot S \eand T, name=p2
+%[\enot (\enot P \eiff (Q\eor R)),  name=p3
+%	[\enot(\enot S \eand T), close %close={:p2,!c}
+%	]
+%	[\enot P \eiff (Q \eor R), close %close={:p3,!c}
+%	]
+%]]]
+%\end{prooftree}\end{center}
+%
+%
+%
+%\begin{center}\begin{prooftree}
+%{close with=\ensuremath{\times}}
+%[(D \eand \enot R) \eor Q, name={p1}, checked
+%[\enot Q \eor R, checked, name={p2}
+%	[D \eand \enot R, just={\eor}:p1, name={p3}, checked
+%		[\enot Q, just={\eor}:p2
+%			[D, just={\eand}:p3
+%				[\enot R, open, just={\eand}:p3]
+%			]
+%		]
+%		[R, name={R}
+%			[D, just={\eand}:p3
+%				[\enot R, close, just={\eand}:p3] %close={:R,!c}]
+%			]
+%		]
+%	]
+%	[Q
+%		[\enot Q, close, just={\eor}:p2 ] %, close={:!u,!c}
+%		[R, open, just={\eor}:p2]
+%	]
+%]]
+%\end{prooftree}\end{center}
+%
+%
+%
+%\begin{center}\begin{prooftree}
+%{close with=\ensuremath{\times}}
+%[\enot (C \eand A), checked, name=p1
+%[D \eiff C, checked, grouped, name=p2
+%[A \eor B, grouped, checked, name=p3
+%[\enot B, grouped, name=p4
+%	[\enot C, just={\enot\eand}:p1
+%		[D, just={\eiff}:p2
+%		[C, grouped, close]
+%		]
+%		[\enot D
+%		[\enot C
+%			[A, open,  just={\eor}:p3]
+%			[B, close, just={\eor}:p3]
+%		]]
+%	]
+%	[\enot A
+%		[D , just={\eiff}:p2
+%		[C , just={\eiff}:p2
+%			[A, close]
+%			[B, close]
+%		]]
+%		[\enot D
+%		[\enot C
+%			[A, close]
+%			[B, close]
+%		]]
+%	]
+%]]]]
+%\end{prooftree}\end{center}
+%
+%
+%
+%\begin{center}\begin{prooftree}
+%{close with=\ensuremath{\times}}
+%[\enot (C \eand A), checked, name=p1
+%[D \eiff C,         checked, name=p2
+%[A \eor B,          checked, name=p3
+%[\enot B,                    name=p4
+%	[A, just={\eor:p3}
+%		[\enot C,      just={\enot\eand:p1}
+%			[D,        just={\eiff:p2}
+%			[C, close, just={\eiff:p2}
+%			]]
+%			[\enot D
+%			[\enot C, open
+%			]]
+%		]
+%		[\enot A, close]
+%	]
+%	[B, close]
+%]]]]
+%\end{prooftree}\end{center}
+%
+%
+
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[(\neg r \eor p), checked, name=p2, just={Prem}
+[((p \eiff q) \eiff r), just={Prem}
+[\neg ( p \eif \neg q), just={Neg Conc}
+	[\hspace{20pt}\enot r\hspace{20pt}, just={\eor:p2}
+	]
+	[\hspace{20pt}p\hspace{20pt}, just={\eor:p2}
+	]
+]]]
+\end{prooftree}\end{center}
+
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[(r \eif p), checked, name=p2, just={Prem}
+[(p \eiff (q \eiff r)), just={Prem}
+[\neg (q \eif \neg p), just={Neg Conc}
+	[\hspace{20pt}\enot r\hspace{20pt}, just={\eif:p2}
+	]
+	[\hspace{20pt}p\hspace{20pt}, just={\eif:p2}
+	]
+]]]
+\end{prooftree}\end{center}
+
+
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[(\neg p \eor q), checked, name=p2, just={Prem}
+[(q \eiff (r \eiff p)), just={Prem}
+[\neg ( q \eif \neg r), just={Neg Conc}
+	[\hspace{20pt}\enot p\hspace{20pt}, just={\eor:p2}
+	]
+	[\hspace{20pt}q\hspace{20pt}, just={\eor:p2}
+	]
+]]]
+\end{prooftree}\end{center}
+
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[(p \eif q), checked, name=p2, just={Prem}
+[((q \eiff r) \eiff p), just={Prem}
+[\neg (r \eif \neg q), just={Neg Conc}
+	[\hspace{20pt}\enot p\hspace{20pt}, just={\eif:p2}
+	]
+	[\hspace{20pt}q\hspace{20pt}, just={\eif:p2}
+	]
+]]]
+\end{prooftree}\end{center}
+
+
+\end{document}

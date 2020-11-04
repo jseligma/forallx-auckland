@@ -1,0 +1,49 @@
+\documentclass[a4paper,12pt,oneside,table]{book}
+\usepackage{auckland-macros, forallx-macros}
+\usepackage{subfiles}
+
+%Glossary not fully implemented, inconsistently used
+%\usepackage{auckland-glossary}
+%\makeglossaries
+%\clearpage	
+%\printglossary
+
+\begin{document}
+
+\subfile{auckland-frontmatter}
+\tableofcontents
+
+\subfile{part01-key-notions}
+
+\subfile{part02-tfl}
+
+\subfile{part03-truth-tables}
+
+%comment for speed
+\subfile{part04-tfl-trees}
+
+\subfile{part04.5-reflective-interlude}
+
+\subfile{part05-pl}
+
+\subfile{part06-models}
+
+%comment for speed
+\subfile{part07-pl-trees}
+\subfile{part07B-identity-trees}
+
+
+
+\appendix
+\part{Appendix}\label{ch.appendix}
+\addtocontents{toc}{\protect\mbox{}\protect\hrulefill\par}
+
+%comment for speed
+\subfile{app-solutions}
+
+%Draft quick reference
+%Needs formatting
+%\subfile{app-quickreference}
+
+
+\end{document}

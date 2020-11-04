@@ -1,0 +1,866 @@
+\documentclass[PHIL101-Textbook.tex]{subfiles}
+\begin{document}
+
+\part{\tfl\ Truth Trees}\label{part:tfl.trees}
+
+\chapter{Truth Trees}\label{ch:chaptertruthtrees}
+
+\section{Truth Tables aren't Enough}
+
+We've learned two ways of using truth tables to test for consistency, equivalence, validity, etc. Both of them have their uses and their drawbacks. A complete truth table always gives the right answer by following a mechanical process. But it can be long and tedious; and the complexity and length increases exponentially with the number of variables. A 2 variable table only has 4 rows, but a 20 variable table has over 1 million.
+
+A partial truth table, on the other hand, requires a little bit of cunning to see which step should be taken next, and to spot contradictions. And it can be difficult to tell which steps were done in which order, unless you make many copies of your truth table.
+
+So our first method takes too long for complex formulas, while our second method is too unstructured both when creating and reviewing. In this part, we will introduce a third method that is intrinsically more complex than either, but does not grow as fast as complete truth tables, and is more structured, rule-driven and checkable than partial truth tables. It will also work for the logic we introduce in the second half of this book, unlike truth tables.
+
+The structures produced by this new method are called \define{truth trees}, because of the way the diagram of formulas can `branch' out to represent possibilities. 
+
+
+
+\section{Mutual Consistency}
+
+The method of trees is most directly a way to test for the consistency of a set of \tfl\ formulas. Since all our other logical notions can be defined in terms of consistency (or lack of consistency), it indirectly gives a way to test for equivalence, validity, and so forth. For example, you may recall that one way to test if an argument is valid, is to  test if the premises and the negation of the conclusion are mutually consistent -- that is, if there is a counter-example, and thus the argument is invalid.
+
+The basic idea of the tree method is that we'll write down the formulas we are testing for consistency, and then we'll break these formulas down into their component subformulas, like with did with our partial truth tables, in order to see whether it's possible to find a valuation where they are all true.
+
+\paragraph{Our first Truth Tree}
+We will begin by working through an example that illustrates the general method, then come back to give precise rules for the tree method. We want to know whether the following formulas are all mutually consistent in \tfl:
+
+$$A\eand B, 
+\enot(C\eor D),
+(\enot B \eor C) \eor E, \enot E$$
+
+We begin by writing down the formulas we will test for consistency:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[A\eand B, just={Root}
+[\enot(C\eor D), just={Root}
+[(\enot B \eor C) \eor E, just={Root}
+[\enot E, just={Root}
+]]]]
+\end{prooftree}\end{center}
+
+The formulas we write down at the beginning of the tree are called the \define{root}. Trees are designed to show whether the root is consistent, and if so, provide a valuation. We will assume the formulas in the root are all true.
+We then write down formulas which our previous formulas tell us must also be true, and repeat this process until we have found the information we need.
+
+ Consider line (1), $A \eand B$. For this conjunction to be true, both conjuncts must be true. %So any valuation that makes the root formulas true must also make both $A$ and $B$ true. 
+The truth of each conjunct follows from what is already written down. We add them to the tree:
+
+
+\begin{center}
+\begin{prooftree}
+{close with=\ensuremath{\times}}
+[A\eand B, checked, name=p1, just={Root}
+[\enot(C\eor D), just={Root}
+[(\enot B \eor C) \eor E, just={Root}
+[\enot E, just={Root}
+	[A, just={\eand}:p1
+	[B, just={\eand}:p1
+	]]
+]]]]
+\end{prooftree}\end{center}
+
+When we add lines (5) and (6), we note that they came from line (1), and that we considered conjunction (\eand) to produce them. This is useful for you when revising your work, and to help us to understand what you thought you were doing when we see some unexpected formulas in the truth tree. We also add a check mark on (1) once we've decomposed it, to avoid repeating our actions.  %This ensures that we only look at each line once. 
+%Think of the check mark as saying that we've extended the tree in a way that encodes the information from this line.
+
+Now consider line (2) $\enot(C\eor D)$. This is a negated disjunction. A negated disjunction is true when a disjunction is false. Disjunctions are false iff \emph{both} disjuncts are false. We only write down formulas that are true, so if a formula is false, we write down its negation, which will be true. So we include new lines for \enot $C$ and \enot $D$, adding a check mark on line (2):
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[A\eand B, checked, name=p1, just={Root}
+[\enot(C\eor D), checked, name=p2, just={Root}
+[(\enot B \eor C) \eor E, just={Root}
+[\enot E, just={Root}
+	[A, just={\eand}:p1
+	[B, just={\eand}:p1
+	[\enot C, just={\enot\eor}:p2
+	[\enot D, just={\enot\eor}:p2
+	]]]]
+]]]]
+\end{prooftree}\end{center}
+
+Line (3) is a disjunction. Unlike the previous two cases, it doesn't tell us what \emph{must} be the case; it says that (at least) one of the disjuncts must be true. We represent this by \emph{branching} our tree :
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[A\eand B, checked, name=p1, just={Root}
+[\enot(C\eor D), checked, name=p2, just={Root}
+[(\enot B \eor C) \eor E, checked, name=p3, just={Root}
+[\enot E, just={Root}
+	[A, just={\eand}:p1
+	[B, just={\eand}:p1
+	[\enot C, just={\enot\eor}:p2
+	[\enot D, just={\enot\eor}:p2
+			[\enot B \eor C \ \ , just={\eor}:p3
+			]
+			[E, just={\eor}:p3]					
+		]
+		]
+	]
+	]
+]
+]
+]
+]
+\end{prooftree}\end{center}
+
+These two branches represent different potential valuations that we are considering. We always read a branch from the bottom up. So both branches contain all the root formulas. Another way of thinking about branches in a truth tree is that we have several lists, and we've been too lazy to write the formulas in common more than once. 
+
+So now we have to consider our branches in turn. We start by examining the right branch, just because it's simpler -- it just contains an atomic formula, $E$. Notice, however, that line (4) was \enot $E$. So this branch's valuation requires both $E$ and $\enot E$ to be true; that's impossible. If a branch contains any formula and its negation, we know that branch represents an impossible valuation. We'll call this branch \emph{closed}, and mark it with an `\ensuremath\times'.
+
+The left branch on (9) is another disjunction $\enot B \eor C $. It too branches out into its two disjuncts:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[A\eand B, checked, name=p1, just={Root}
+[\enot(C\eor D), checked, name=p2, just={Root}
+[(\enot B \eor C) \eor E, checked, name=p3, just={Root}
+[\enot E, just={Root}
+	[A, just={\eand}:p1
+	[B, just={\eand}:p1
+	[\enot C, just={\enot\eor}:p2
+	[\enot D, just={\enot\eor}:p2
+			[\enot B \eor C \ \ , checked, name=p9, just={\eor}:p3
+				[\enot B, close, just={\eor}:p9]
+				[C, close, just={\eor}:p9]
+			]
+			[E, close, just={\eor}:p3]						
+	]]]]
+]]]]
+\end{prooftree}\end{center}
+
+Both of these disjuncts also result in closed branches. The left branch at (10) is the negation of (6), and the right branch is the negation of (7). Now every branch in this tree is closed. This corresponds to the idea that every potential way to make the formulas consistent ended up requiring a contradiction, so are impossible. There is no possible valuation that makes (1)-(4) all true. In other words, the formulas are mutually inconsistent.
+
+\paragraph{Our second Truth Tree}
+
+Let's work through another consistency example. We've seen most of the elements of a truth tree, so we can make this one simpler. we want to test whether the following formulas are mutually consistent in \tfl:
+
+$$ D \eor G, \enot D, \enot G \eor S $$
+
+We begin by writing down the root:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[D \eor G, just={Root}
+[\enot D, just={Root}
+[\enot G \eor S, just={Root}
+]]]
+\end{prooftree}\end{center}
+
+Line (1) is a disjunction, so it will produce a branch:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[D \eor G, checked, name=p1, just={Root}
+[\enot D, just={Root}
+[\enot G \eor S, just={Root}
+	[D, just={\eor}:p1
+	]
+	[G, just={\eor}:p1
+	]
+]]]
+\end{prooftree}\end{center}
+
+Line (2) is already atomic, and can't be decomposed. But it does help us to close one of the branches:
+
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[D \eor G, checked, name=p1, just={Root}
+[\enot D, checked, name=p2, just={Root}
+[\enot G \eor S, just={Root}
+	[D, close, just={\eor}:p1	]
+	[G, just={\eor}:p1	]
+]]]
+\end{prooftree}\end{center}
+
+Line (3) is another disjunction, and will branch again. Note that if we hadn't closed one of the branches, we would have to add branches to both of them, leading to four open branches! It is important to try to close branches as soon as you can, to stop the tree from getting too complex. 
+
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[D \eor G, checked, name=p1, just={Root}
+[\enot D, checked, name=p2, just={Root}
+[\enot G \eor S, checked, name=p3, just={Root}
+	[D, close, just={\eor}:p1	]
+	[G, just={\eor}:p1	
+		[\enot G, close, just={\eor}:p3	]
+		[S, open, just={\eor}:p3	]
+	]
+]]]
+\end{prooftree}\end{center}
+
+We've closed one of these branches, but we can see that the last branch is still open, and that all the formulas above it either have a check mark, or are atomic. There is nothing more we can do; our tree is complete. We mark the open branch with an $\uparrow$. This represents the valuation we were seeking.
+
+To read off the valuation (or truth table row, if you prefer), start at the arrow and read all the atomic and negated atomic symbols from the tree. In this case, we get: $S, G, \enot D$. So when $G=1$, $S=1$ and $D=0$, all the formulas are true; they are mutually consistent.
+
+
+\pagebreak
+\practiceproblems
+
+\noindent\solutions
+\problempart \label{pr.tfl.ttreeconcepts}
+How well do you understand the idea of a truth tree? Try to explain each of the following concepts:
+
+\begin{earg}
+\item What is the Root of a truth tree?
+\item When should you tick (\checkmark) a formula, and why?
+\item What does a branch of a truth tree represent?
+\item When should you create new branches of your tree?
+\item When should you close a branch, and why?
+\item When is an open branch complete? Why is this important?
+\item What does the collection of atomic formulas in an open branch mean?
+\end{earg}
+
+
+\chapter{Planting your Tree}\label{ch:tfl.tree.planting}
+\section{Selecting the Right Root}
+
+Truth trees are used to indicate whether the root set of formulas is consistent. To use a truth tree to answer a question, the first step is always to convert the question into a question about whether some formula, or set of formulas, is mutually consistent. 
+
+Consider how this would apply to validity. An argument in \tfl\ is invalid iff the set of its premises and the negation of its conclusion are mutually consistent. It is valid iff this set of formulas is mutually inconsistent. So we can test for the validity of a \tfl\ argument using a truth tree.
+If at least one branch of the tree is open, then the set is consistent, and we've found a valuation that makes the premises true and the conclusion false. The argument is invalid, and the valuation is a counter-example. If the tree closes, the argument is valid.
+
+Consistency and validity are the two main notions we are interested in. But we've already looked at several other \tfl\ properties, including tautologies (logical truths), contradictions (logical falsehoods), and equivalences. These can all be tested with truth trees too.
+
+For example, suppose you want to test if a formula is a tautology. To test this with a truth tree, we'll check if the formula can be false -- that is whether it is consistent for its \emph{negation} to be true. So we will put the negation of the formula in the root. If this truth tree remains open, it shows us how to make the negation true, so the formula is \emph{not} a tautology. If it closes, the negation is inconsistent (can't be true), so the formula \emph{is} a tautology.
+
+%But trees can be used to evaluate many other kinds of questions, aside from validity. Any question that can be converted into a question about consistency can be answered with a tree. For example, if you want to find out whether a set of formulas is consistent, put that set of formulas into the tree. A set of formulas is consistent if and only if there is an valuation where they are all true, so you can use a tree to find out.
+
+You should be able to devise methods for testing for contradictions and equivalences from our complete and partial truth table methods, and the definitions of these notions. Give this a go, and then test your trees by trying some of the Exercises from previous chapters.
+
+%A pair of formulas in \tfl\ are \emph{not} equivalent iff there is a valuation on which they have different truth values (i.e., there is  a valuation where one of the formulas and the negation of the other is consistent). The trick is to guess which formula you negate!
+
+%To find out whether a formula is a contradiction, check and see whether it is possible to make it true, by putting it in the root of the tree. If the tree remains open, the formula is consistent, which means it's not a contradiction. If the tree closes, then it is a contradiction.
+
+
+
+\section{Growing your Tree}
+\label{sec.TFLinvalidtree}
+
+If you have been wondering how to decompose each formula in the tree, we'll introduce the formal rules for \tfl\ truth trees in \S\ref{ch:TFLtreerules}. In the meantime, we are just reading our truth tables backwards, as we did for partial truth tables. We figure out what subformulas have to be true for the current formula to be true, and write those sub-formulas down. If either of two subformulas being true is enough to make the current formula true, then we have a choice. Instead of making that choice, we branch the tree and put one option on each branch. This allows us to delay making our choice until we have more information.
+
+
+Let's now test an argument for validity.  Consider this argument form:
+
+$$(D\eor A) \eand \enot N,  N \eor \enot A \ \therefore \ \enot N \eand A$$
+
+
+We are looking to see if a counter-example is possible; that is, if the premises are consistent with the conclusion being false. So the root of our tree will have the premises and the negation of the conclusion. We'll be looking for a valuation that makes all these formulas true. It's also useful to note what each part of the root comes from. We'll label the premises `Premise' and the negated conclusion `Neg Conc'. This also serves as a reminder to negate the conclusion! 
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[(D\eor A) \eand \enot N, just={Premise}
+[N \eor \enot A, just={Premise}
+[\enot (\enot N \eand A), just={Neg Conc}
+]]]
+\end{prooftree}\end{center}
+
+
+Line (1) is a conjunction; it decomposes into its conjuncts on (4) and (5). Line (2) is a disjunction; it branches into its disjuncts on line (6), and then the left branch closes as $N$ and $\enot N$ cannot both be true.
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[(D\eor A) \eand \enot N, checked, name=p1, just={Premise}
+[N \eor \enot A,  checked, name=p2, just={Premise}
+[\enot (\enot N \eand A), just={Neg Conc}
+	[D \eor A, just={\eand}:p1	
+	[\enot N, just={\eand}:p1	
+		[N, close, just={\eor}:p2]
+		[\enot A, just={\eor}:p2]
+	]]
+]]]
+\end{prooftree}\end{center}
+
+
+Line (3) is a negated conjunction. A conjunction is true iff both conjuncts are true, so it is false if at least one conjunct is false. As we don't know which conjunct has to be false, the tree branches on line (7), with one negated conjunct on each branch: \enot\enot$N$ and \enot$A$. The first of these branches then closes because it is the negation of line (5). The final formula to decompose is line (4)'s disjunction; it branches on line (8), and one branch closes as it is the negation of line (7).
+
+The remaining formulas are all atomic, so cannot be decomposed.
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[(D\eor A) \eand \enot N, checked, name=p1, just={Premise}
+[N \eor \enot A, checked, name=p2, just={Premise}
+[\enot (\enot N \eand A), checked, name=p3, just={Neg Conc}
+	[D \eor A, checked, name=p4, just={\eand}:p1	
+	[\enot N, just={\eand}:p1	
+		[N, close, just={\eor}:p2]
+		[\enot A, just={\eor}:p2
+			[\enot \enot N, close, just={\enot\eand}:p3]
+			[\enot A, just={\enot\eand}:p3
+				[D, open, just={\eor}:p4]
+				[A, close, just={\eor}:p4]
+			]
+		]
+	]]
+]]]
+\end{prooftree}\end{center}
+
+The $\uparrow$ indicates that the open branch ending in $D$ is \emph{completed}. (We'll define `complete' in \S\ref{ch:TFLtreerules}.) This branch represents the valuation we were seeking. This valuation is a counter-example, and so this argument is \emph{not} valid in \tfl. We can read the counter-example off the tree by starting at the arrow, reading upwards, and listing the atomic symbols: \enot $A$, $D$, and \enot $N$. 
+
+Our counter-example is: $A=\vF, D=\vT, N=\vF$. A partial truth table can prove the mutual consistency of the formulas in the root:\\
+
+
+
+\noindent \begin{tabular}{ccc | cccccc | cccc | ccccccc }
+$A$ & $D$ & $N$ & 
+$(D$ & $\eor $ & $A) $ & $\eand $ & $\enot$ & $ N$ & 
+$N$ & $ \eor$ & $ \enot $ & $A$ & 
+$\enot$ & $ (\enot $ & $N $ & $\eand $ & $A)$\\
+\hline
+\vT & \vT & \vF & 
+\vT & \vT & \vF & \gT & \vT & \vF &
+\vF & \gT & \vT & \vF &
+\gT & \vT & \vF & \vF & \vF\\
+\end{tabular} $ $ \\
+
+
+All three formulas are true -- the counter-example is possible.\\
+
+
+On line (7) we wrote $\enot\enot N$. Some students want to write $N$ instead. But that's not what our rules say. 
+We also wrote $\enot A$ on both lines (6) and (7). That's absolutely fine. There's more than one piece of information that led us to the same formula. Again, don't try to out-think the rules and leave out seemingly redundant steps. It will just cause you confusion and error. 
+
+
+
+
+\section{Completing your Tree} 
+
+A tree is complete when there are no more formulas to decompose on any of its branches. This occurs when each branch has either been closed, or all its complex formulas have already been decomposed. By a complex formula, we mean any formula which is not just an atomic symbol or negated atomic symbol.
+
+\subsection{Closing a Branch}
+
+We \emph{close} a branch when it contains a formula along with its negation: 
+
+\factoidbox{
+A branch is \define{closed} iff it contains both some formula \meta{A} and its negation \enot\meta{A}. We mark closed branches with the `\ensuremath{\times}' symbol.
+
+A branch is \define{open} iff it is not closed.
+
+A tree is \define{closed} iff every branch in that tree is closed.
+
+A tree is \define{open} iff it is not closed.
+}
+
+If a tree is closed, we have shown that its root is inconsistent.
+
+
+%We've closed one of these branches, but we can see that the last branch is still open, and that all the formulas above it either have a check mark, or are atomic. There is nothing more we can do; our tree is complete. We mark the open branch with an $\uparrow$. This represents the valuation we were seeking.
+
+\subsection{Completing an Open Branch}
+\label{sec.TFL.tree.completion}
+An open branch is only complete when we've decomposed all its complex formulas. We then write an `$\uparrow$' at the bottom of that branch.
+
+
+
+\factoidbox{
+An open branch is \define{complete} iff all its complex formulas have been decomposed, as indicated by a check mark.
+
+A tree is \define{complete} iff all its branches are closed or complete.}
+
+If there is at least one open branch in a completed tree, then each open branch represents a valuation that makes all the formulas in the root true.
+
+\subsection{Reading the Tree Leaves}
+
+To read off the valuation from an open branch on a completed tree, start at the `$\uparrow$' arrow and follow the tree upwards, writing down all the atomic and negated atomic symbols from the tree. An atomic symbol means that atom is true; a negated atomic symbol means that atom is false. If you have both an atomic symbol and its negation in your list, close the branch.
+
+This valuation will correspond to a case where all the formulas in the root are true. The mutual consistency of these formulas will mean different things depending on whether you are testing for consistency, validity, logical truth, logical falsehood, or equivalence, as we've already discussed.
+
+
+\pagebreak
+\practiceproblems
+
+\noindent\solutions
+\problempart \label{pr.tfl.root}
+List the formulas in the root of your tree when testing whether:
+\begin{earg}
+\item Are $(p \eif q), (p \eand r), (\enot r \lor \neg q)$ consistent?
+\item Are $(p \eor \neg q), (q \eor \neg r), (r \eor \neg p)$ consistent?
+\item Is $(\neg p \to p)$ a logical falsehood?
+\item Is $(((p\to q)\to p)\eand\enot q)$ a logical falsehood?
+\item Is $(((p\to q)\to p)\to p)$ a logical truth?
+\item Is $((q \eor \enot q)\eif p)$ a logical truth?
+\item Are $(p \eiff q), (\enot (p \eand q) \eiff (\enot p \eand \enot q))$ equivalent?
+\item Are $((p \eor q) \eand (q \eor r) \eand (r \eor p)), ((p \eand q) \eor (q \eand r) \eor (r \eand p))$ equivalent?
+\item Are $(p \eiff q), (p \eiff \enot q)$ contradictory?
+\item Are $(p \eand q), (\enot p \eand \enot q)$ contradictory?
+\item Is $(p\to r), (q\to r)\ \therefore\ (p \eif q) \to r)$ valid?
+\item Is $(p\to r), (q\to r)\ \therefore\ (p \eor q) \to r)$ valid?
+\end{earg}
+
+\problempart \label{pr.tfl.treetest}
+Complete the trees from Exercise \ref{pr.tfl.root}. For each closed tree, state what you have proved.\\
+\medskip
+
+\problempart \label{pr.tfl.treeprove}
+For each open tree from Exercise \ref{pr.tfl.treetest}, complete the partial truth table, and state what you have proved.
+
+
+
+\chapter{\tfl\ Tree Rules}
+\label{ch:TFLtreerules}
+
+The examples we've worked through should have given you an overview of the tree method for \tfl. But we haven't precisely defined how to decompose each type of main connective. We are now ready to give formal rules for trees. You should be able to recognize the following rules as a generalization of the steps of the proofs given above.
+
+Our \define{decomposition} rules describe how the tree can be extended by decomposing formulas. The rules depend on the main connective of the formula. (If the main connective is a negation, then they also depend on the main connective inside that negation.)
+
+\label{TFL.treerules.start}
+\section{Decomposition Rules}
+
+The decomposition rule for conjunction is that if you have a conjunction in a branch, you may make a linear extension of the branch that includes each conjunct, adding a check mark next to the conjunction. %Using our Greek symbols once again as variables to stand in for any formula of \tfl, 
+So, any time you have a conjunction $\meta{A}\eand\meta{B}$ on line ($i$) you may extend that branch of the tree by writing:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times},
+ not line numbering}
+%[\meta{A}\eand\meta{B}, checked, name=p1
+	[\meta{A} , just={$i$ \eand}
+	[\meta{B} , grouped, just={$i$ \eand}
+	]]
+%]
+\end{prooftree}\end{center}
+
+It is important to remember once again that \meta{A} and \meta{B} here can stand for \emph{any} formula of \tfl, including complex ones. The formulas must be copied exactly as written, including any negation signs. Also, write the line \# of the decomposed formula, and which decomposition rule you used, on the new line(s). This will help you when you check your work.
+You do check your work, right?
+
+%We won't have such detailed explanations for the remaining decomposition rules.
+
+\pagebreak
+
+\subsection{Conjunction} 
+\noindent Our conjunction decomposition rule is:
+
+\factoidbox{
+	\begin{center}\begin{prooftree}
+	{close with=\ensuremath{\times},
+	 not line numbering}
+	[\meta{A}\eand\meta{B}, checked
+		[\meta{A} , just={$i$, \eand}
+		[\meta{B} , just={$i$, \eand}
+		]]
+	]
+	\end{prooftree}\end{center}
+}
+
+
+\subsection{Negated conjunction}
+
+A negated conjunction, branches into the negation of each conjunct. This is because there are two ways for a negated conjunct to be true -- either conjunct can be false:
+
+\factoidbox{
+	\begin{center}\begin{prooftree}
+	{close with=\ensuremath{\times},
+	 not line numbering}
+	[\enot(\meta{A}\eand\meta{B}), checked
+		[\enot\meta{A} , just={$i$, \enot\eand}]
+		[\enot\meta{B} , just={$i$, \enot\eand}]
+	]
+	\end{prooftree}\end{center}
+}
+
+
+\subsection{Disjunction}
+\label{subsec.DisjunctionTreeRule}
+%\begin{groupitems}
+Disjunctions branch into each disjunct:
+
+\factoidbox{
+	\begin{center}\begin{prooftree}
+	{close with=\ensuremath{\times},
+	 not line numbering}
+	[\meta{A}\eor\meta{B}, checked
+		[\meta{A} , just={$i$, \eor}]
+		[\meta{B} , just={$i$, \eor}]
+	]
+	\end{prooftree}\end{center}
+}
+
+
+\subsection{Negated disjunction}
+
+Since disjunctions are true any time either disjunct is true, they are only false if both disjuncts are false; that is, their negations are both true:
+
+\factoidbox{
+	\begin{center}\begin{prooftree}
+	{close with=\ensuremath{\times},
+	 not line numbering}
+	[\enot(\meta{A}\eor\meta{B}), checked
+		[\enot\meta{A} , just={$i$, \enot\eor}
+		[\enot\meta{B} , just={$i$, \enot\eor}
+		]
+		]
+	]
+	\end{prooftree}\end{center}
+}
+
+
+\subsection{Conditional}
+
+Conditionals are true when the antecedent is false \emph{or} the consequent is true. This means that conditionals in \tfl\ are treated similarly to disjunctions:
+
+%\begin{center}
+%\begin{tabular}{c c|c}
+%\meta{A} & \meta{B} & $\meta{A}\eif\meta{B}$\\
+%\hline
+%\vT & \vT & \vT\\
+%\vT & \vF & \vF\\
+%\vF & \vT & \vT\\
+%\vF & \vF & \vT
+%\end{tabular}
+%\end{center}
+%
+%We can represent this with a branching tree, similar to a disjunction.
+
+\factoidbox{
+	\begin{center}\begin{prooftree}
+	{close with=\ensuremath{\times},
+	 not line numbering}
+	[\meta{A}\eif\meta{B}, checked
+		[\enot\meta{A} , just={$i$, \eif}]
+		[     \meta{B} , just={$i$, \eif}]
+	]
+	\end{prooftree}\end{center}
+}
+
+\subsection{Negated conditional}
+
+The negation of a conditional is true when the conditional is false. That is, when its antecedent is true \emph{and} its consequent is false:
+
+\factoidbox{
+	\begin{center}\begin{prooftree}
+	{close with=\ensuremath{\times},
+	 not line numbering}
+	[\enot(\meta{A}\eif\meta{B}), checked
+		[     \meta{A} , just={$i$, \enot\eif}
+		[\enot\meta{B} , just={$i$, \enot\eif}
+		]]
+	]
+	\end{prooftree}\end{center}
+}
+
+
+\subsection{Double negation}
+
+A doubly-negated formula is true iff the singly-negated formula is false iff the original formula is true. So we can simply remove a double negation. However, this has to be done as a separate step:
+
+\factoidbox{
+	\begin{center}\begin{prooftree}
+	{close with=\ensuremath{\times},
+	 not line numbering}
+	[\enot\enot\meta{A}, checked
+		[\meta{A} , just={$i$, \enot\enot}]
+	]
+	\end{prooftree}\end{center}
+}
+
+\logic{You may have noticed that the decomposition rules for the standard connectives and their negations are duals of each other -- if one branches, the other doesn't, if one negates \meta{A}, the other does not, and so forth. This means that if you know the decomposition rule for a connective, you also know the rule for its negation. Just do everything the opposite way!}
+
+
+
+
+\subsection{Biconditional}
+
+Biconditionals are really just a combination of two conditionals. That is, $\meta{A}\eiff\meta{B}$ iff $(\meta{A}\eif\meta{B}) \eand (\meta{B}\eif\meta{A})$. If we decompose this formula, we get:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[(\meta{A}\eif\meta{B}) \eand (\meta{B}\eif\meta{A}), checked , name=p1
+	[\meta{A}\eif\meta{B} , checked , name=p2, just={\eand}:p1
+	[\meta{B}\eif\meta{A} , checked , name=p3, just={\eand}:p1
+		[\enot\meta{A} , just={\eif}:p2
+			[\enot\meta{B}        , just={\eif}:p3]
+			[     \meta{A} , close, just={\eif}:p3]
+		]
+		[\meta{B} , just={\eif}:p2
+			[\enot\meta{B} , close, just={\eif}:p3]
+			[     \meta{A}        , just={\eif}:p3]
+		]
+	]]
+]
+\end{prooftree}\end{center}
+
+One open branch has \meta{A} and \meta{B}; the other \enot\meta{A} and\enot\meta{B}.  This might seem odd, but recall that a biconditional is true when its sub formulas have the same truth value: either both are true, or both are false. And that's exactly what this rule states:
+
+\factoidbox{
+	\begin{center}\begin{prooftree}
+	{close with=\ensuremath{\times},
+	 not line numbering}
+	[\meta{A}\eiff\meta{B}, checked
+		[\meta{A}, just={$i$, \eiff}
+		[\meta{B}, just={$i$, \eiff}
+		]]
+		[\enot\meta{A}
+		[\enot\meta{B}
+		]]
+	]
+	\end{prooftree}\end{center}
+}
+
+\subsection{Negated biconditional}
+%\begin{groupitems}
+Negated biconditionals are true when the subformulas have different truth values. The tree rule looks remarkably similar to the standard biconditional:
+
+\factoidbox{
+	\begin{center}\begin{prooftree}
+	{close with=\ensuremath{\times},
+	 not line numbering}
+	[\enot(\meta{A}\eiff\meta{B}), checked
+		[     \meta{A}, just={$i$, \enot\eiff}
+		[\enot\meta{B}, just={$i$, \enot\eiff}
+		]]
+		[\enot\meta{A}
+		[     \meta{B}
+		]]
+	]
+	\end{prooftree}\end{center}
+}
+
+You can derive this rule too, by creating a tree for the negation of a conjunction of conditionals:  $\enot((\meta{A}\eif\meta{B}) \eand (\meta{B}\eif\meta{A}))$.
+
+
+
+%\section{Decomposition rule summary}
+%These nine decomposition rules describe, in purely formal terms, how to deal with almost any \tfl\ formula that appears in a tree. 
+
+
+
+
+
+
+\section{Truth Tree Complexities}
+%These decomposition rules work on almost every formula. The only formulas they don't apply to are atomic symbols and negated atomic symbols. Atoms and negated atoms cannot be decomposed for further information. Instead they are used to describe the valuation represented by an open branch.
+
+%When creating a truth tree, you may apply any of these decomposition rules to any  formula (other than an atom or negated atom) in the branch. Mark decomposed formulas with a check mark.
+
+
+
+\subsection{Incomplete Valuations}
+
+Sometimes our open branch will not contain every atom in our set of formulas. That is, our valuation does not specify the truth value of some atomic symbols. When this occurs, the  truth value of the remaining atomic symbols does not affect the consistency of the formulas. However, a valuation must specify the truth value of every symbol, so you can arbitrarily pick some truth value for each, or indicate its truth value is unknown by a `?'.
+
+For example, suppose an open branch for a set of formulas using the symbols $\{p,q,r\}$ contains only $p$ and $\neg q$. This valuation would be: $p$ is true, $q$ is false, $r$ is unknown; or in symbols: $p = 1, q=0, r=?$.
+
+
+\subsection{Early Closing} 
+Note that we close a branch when it contains \emph{any} formula and its negation. We don't need an atomic formula and its negation. We saw this in an early example when we closed a branch containing \enot\enot$N$ and \enot$A$. Here is another example:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[(\enot S \eand T) \eif (\enot P \eiff (Q \eor R)), checked
+[\enot S \eand T, name=p2
+[\enot (\enot P \eiff (Q\eor R)),  name=p3
+	[\enot(\enot S \eand T), close %close={:p2,!c}
+	]
+	[\enot P \eiff (Q \eor R), close %close={:p3,!c}
+	]
+]]]
+\end{prooftree}\end{center}
+
+In this tree, we only decomposed the first formula -- using the conditional rule -- and then the tree immediately closed. The left branch of (4) is the negation of (2), and the right branch is the negation of (3). Notice that we \emph{could} have ignored (or missed) this, and decomposed lines (2) and (3) using the conjunction or negated biconditional rules, respectively. However, this would have resulted in a more complicated tree that would also have eventually closed. Missing an early closing opportunity will never affect the final result of a truth tree, just create more work and a higher chance of error.
+%Similarly, if we hadn't noticed that both branches close at line (4), we could have continued decomposing the tree, working on the left branch using the negated conjunction rule on (4), and then the right branch using the biconditionals rule. But this too would have involved needless complication for no benefit. (Eventually, the tree would have closed with simpler formulas too.) 
+You can occasionally save yourself a lot of effort by noticing when branches are ready to mark as closed. However, if you don't notice this early closing, no real harm will be done. %, and by thinking a bit strategically about which formulas to decompose first.
+
+
+\subsection{Multiple Open Branches}
+If you are decomposing a formula after the tree has already branched, you must add the new formulas under \emph{each} open branch that descends from that formula. Here is a tree illustrating how to do this:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[(D \eand \enot R) \eor Q, name={p1}, checked
+[\enot Q \eor R, checked, name={p2}
+	[D \eand \enot R, just={\eor}:p1, name={p3}, checked
+		[\enot Q, just={\eor}:p2
+			[D, just={\eand}:p3
+				[\enot R, open, just={\eand}:p3]
+			]
+		]
+		[R, name={R}
+			[D, just={\eand}:p3
+				[\enot R, close, just={\eand}:p3] %close={:R,!c}]
+			]
+		]
+	]
+	[Q
+		[\enot Q, close, just={\eor}:p2 ] %, close={:!u,!c}
+		[R, open, just={\eor}:p2]
+	]
+]]
+\end{prooftree}\end{center}
+
+This tree has two disjunctions in the root, so it will branch multiple times. We decomposed line (1) first, branching into the two disjuncts at line (3). When we decomposed (2), both branches descending from (2) were still open, so we added line (4) to both these branches. That's why our two branches split into four at line (4). The third branch contains $Q$ and $\enot Q$, and so closes. At line (5), the conjunction $D \eand \enot R$ at line (3) is decomposed. Only the left-most 2 of the 3 open branches descend from  this conjunction. So the conjuncts need to be added to both branches that descend from that conjunction, but not the right-most branch, which does not. %Decomposing a formula applies to every one of its open descendent branches, but not to branches that are off to the side.
+
+\subsection {Multiple Valuations}
+
+A tree can have more than one completed open branch. The tree above is an example of this. These completed open branches can have different valuations. This is because there can be more than one counter-example, or row that doesn't satisfy the property you are testing. It is fine to use any completed open branch. However, be careful.
+
+First, don't combine your open branches. In the tree above, one valuation has $Q=1, R=1$, and the other $Q=0, R=0$. Any combination of these would fail to be a valuation where all the formulas in the root are true.
+
+Second, indicate clearly which open branch your counter-example comes from. We suggest that you only use the symbol $\uparrow$ on the completed branch which you are reading your valuation from. Leave the other open branches blank.
+
+
+
+\pagebreak
+
+\section{Order of Decomposition} 
+You do \emph{not} need to decompose formulas in strict order from the top of the tree. You can decompose formulas in whichever order you find convenient. Some ways of decomposing trees are more efficient than others. The most basic principle is to decompose formulas that won't branch before those that will. When all the remaining complex formulas will branch, try to look a step ahead, and select a formula that will have a branch that closes immediately. This reduces the likelihood of having multiple open branches. Next, decompose simple formulas before complex ones, as you are less likely to muck this up. Finally, I suggest you decompose biconditionals last, as they have the most complex rules of all.
+
+\begin{earg}
+\item Non-branching rules before branching. 
+\item Close branches quickly.
+\item Simple formulas before complex. 
+\item Biconditionals last.
+\end{earg}
+
+
+Suppose we want to test whether $\enot (C \eand A), D \eiff C, A \eor B, \enot B$ are mutually consistent. These formulas would then form the root of our tree. Here's the tree formed if we decompose the formulas in the order in which they're listed:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot (C \eand A), checked, name=p1
+[D \eiff C, checked, grouped, name=p2
+[A \eor B, grouped, checked, name=p3
+[\enot B, grouped, name=p4
+	[\enot C, just={\enot\eand}:p1
+		[D, just={\eiff}:p2
+		[C, grouped, close]
+		]
+		[\enot D
+		[\enot C
+			[A, open,  just={\eor}:p3]
+			[B, close, just={\eor}:p3]
+		]]
+	]
+	[\enot A
+		[D , just={\eiff}:p2
+		[C , just={\eiff}:p2
+			[A, close]
+			[B, close]
+		]]
+		[\enot D
+		[\enot C
+			[A, close]
+			[B, close]
+		]]
+	]
+]]]]
+\end{prooftree}\end{center}
+
+This completed tree is open. We can read off the valuation from its one open branch. The atomic and negated atomic symbols on this open branch are: $A$, $\enot C$, $\enot D$, $\enot C$, $\enot B$. This tells us that a valuation where all the formulas are true is $A=1, B=0, C=0, D=0$.
+
+
+This tree suffers from the problem of having multiple open branches during its construction. That's why, for example, decomposing line (3) at line (8) requires three different new branchings. So when there are more open branches, decomposing formulas requires more work on the tree, more repetition, and more chance of errors. 
+
+The tree above is a perfectly fine completed tree, and it gives a correct answer. However, it's possible to get there with less work, by choosing to decompose formulas that will close off branches right away. Here is another tree with the same root as in the previous example, but which decomposes formulas in a more efficient order:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot (C \eand A), checked, name=p1
+[D \eiff C,         checked, name=p2
+[A \eor B,          checked, name=p3
+[\enot B,                    name=p4
+	[A, just={\eor:p3}
+		[\enot C,      just={\enot\eand:p1}
+			[D,        just={\eiff:p2}
+			[C, close, just={\eiff:p2}
+			]]
+			[\enot D
+			[\enot C, open
+			]]
+		]
+		[\enot A, close]
+	]
+	[B, close]
+]]]]
+\end{prooftree}\end{center}
+
+We can use a partial truth table to confirm our answer:\\
+
+
+
+\noindent \begin{tabular}{cccc | cccc | ccc | ccc | cc}
+$A$ & $B$ & $C$ & $D$ & 
+$\enot$ & $(C$ & $\eand$ & $A)$ & 
+$(D$& $\eiff$ & $C)$ & 
+$A$ & $\eor$  & $B$  & 
+$\enot$ & $B$\\
+\hline
+\vT & \vF & \vF & \vF & 
+\gT & \vF & \vF & \gT &
+\vF & \gT & \vF &
+\vT & \gT & \vF &
+\gT & \vF\\
+\end{tabular} $ $ \\
+
+
+%All three formulas are true -- the counter-example is possible.\\
+
+This tree gets us to the same result much more quickly, and generates the same valuation. Here's a description of the reasoning for deciding which formula to decompose at each step:
+
+\begin{earg}
+\item[5.] Line (4) contains a $\enot B$. Line (3) would generate a branch with $B$. 
+\item[6.] Line (5) contains an $A$. Line (1) would generate a branch with $\enot A$.
+\item[7.] Line (6) contains a $C$. Line (2) would generate a branch with $\enot C$.
+\end{earg}
+
+You usually don't need to think more than one line ahead to select branches that create a much simpler tree.
+
+%Trees require practice to understand which formulas to put in the root for which test, to reliably decompose formulas correctly, to interpret the result of a closed or open tree, to read of the valuation from an open branch, and to create efficient trees by selecting the order to decompose formulas. Practice each of these steps in turn, and don't be disheartened if you don't master all of them at your first attempt.
+
+\pagebreak
+\practiceproblems
+
+\noindent\solutions
+\problempart \label{pr.tfl.treeroot}
+To evaluate each of the following claims with a tree, (a) what would you put in the root of the tree?, and (b) if the tree closes, does that show that the claim is true or false?
+\begin{earg}
+\item $P, P \eif Q, Q \eif \enot P$ is mutually consistent
+%(a) $\{P, P \eif Q, Q \eif \enot P\}$, (b) true
+\item $(P \eif Q) \eiff (Q \eif P)$ is a tautology.
+%(a) $\enot((P \eif Q) \eiff (Q \eif P))$, (b) true
+\item The following argument is valid:
+ $P \eand Q$,  $\enot R \eif \enot Q$ $\ \therefore \ $ $P \eand R$
+
+%(a) $\{P \eand Q, \enot R \eif \enot Q, \enot (P \eand R)\}$, (b) true
+\item Every valuation making $P$, $P \eif Q$, and $\enot Q$ true also makes $A$ true.
+%(a) $\{P, P \eif Q, \enot Q, \enot A\}$
+\item There is no valuation that makes $A \eor B$, $B \eif C$, and $A \eiff C$ all true but C false.
+%$\{A \eor B, B \eif C, A \eiff C, \enot C\}, (b) true
+\item $A \eiff \enot A$ is a contradiction.
+%(a) $A \eiff \enot A$, (b) false
+\item There is at least one valuation that makes $P \eif Q$, $\enot P \eor \enot Q$, and $Q \eif P$ true.
+%(a) $\{P \eif Q, \enot P \eor \enot Q, Q \eif P\}, (b) false.
+ \end{earg}
+
+
+\noindent\solutions
+\problempart \label{pr.tfl.trees}
+Evaluate each claim from Exercise \ref{pr.tfl.treeroot} by constructing a tree. If applicable, give the valuation that demonstrates the claim true or false, and use a partial truth table to confirm this.\\
+
+
+\noindent\solutions
+\problempart \label{pr.tfl.agtree}
+Evaluate the argument 
+  $$A\eiff B, \enot B \eif (C \eor D), E \eif \enot C, (\enot D \eand F) \eor G, \enot A \eand E, \ \therefore \ H \eor G$$
+by constructing a tree. If the tree is open, prove your counter-example is correct using a partial truth table.\\
+
+
+\noindent\problempart The Sheffer stroke \meta{A} $|$ \meta{B} is a rarely-used connective of \tfl. It has the following characteristic truth table:
+
+\begin{center}
+\begin{tabular}{c|c|c}
+\meta{A} & \meta{B} & \meta{A} $|$ \meta{B}\\
+\hline
+1 & 1 & 0\\
+1 & 0 & 1\\
+0 & 1 & 1\\
+0 & 0 & 1
+\end{tabular}
+\end{center}
+
+Create appropriate tree decomposition rules for the Sheffer stroke, and for the negated Sheffer stroke.\\
+
+\noindent \problempart 
+Construct trees for any of the exercises from the complete and partial truth tables chapters. Check the valuations from any open branches are correct using partial truth tables.
+
+\end{document}

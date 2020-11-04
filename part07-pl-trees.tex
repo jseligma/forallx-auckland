@@ -1,0 +1,1010 @@
+\documentclass[PHIL101-Textbook.tex]{subfiles}
+\begin{document}
+
+\part{PL Truth Trees}\label{part:pl.trees}
+
+\chapter{Reintroducing Truth Trees}
+%\section{Why we need Truth Trees}
+
+%In Part \ref{part.PL.models} we saw that the more structured models of PL make reasoning about all possible models rather complex. 
+In TFL a model was just an assignment of truth values to atomic formulas, so reasoning about all models was relatively straightforward: we could simply list them all in a complete truth table. In PL there isn't a simple method like complete truth tables for reasoning about consistency and validity. So we must use other methods, such as truth trees.
+
+In this Part, we will extend our TFL truth tree method to allow for the extra complexity and symbols in PL. The tree method still tests whether a set of formulas is consistent, and we can still use it to test for properties like consistency and argument validity. If the root formulas are consistent, we will still generate a valuation from the truth tree; it will merely be a valuation for a model containing objects and predicates.
+
+%You might want to refresh your knowledge of propositional truth trees before starting this section, as we'll be using all the methodology, rules, and strategies from that section, then adding some further complexity and subtlety.
+
+\notation{We having been representing predicates as $P(a)$ or $R(x,y)$. But trees require us to write formulas repeatedly, and brackets can be confusing. It's fine to drop predicate brackets now and just write $Pa$ or $Rxy$.}
+
+
+\section{Unquantified Trees}
+PL without quantifiers behaves a lot like TFL. We have the same set of connectives, and atomic formulas such as $Pa$ and $Rbc$ behave exactly like atomic formulas such as $p$ and $q$ in TFL. It doesn't matter whether they are one-place predicates like $Pa$ or many-place like $Rbc$ or even $Skdq$. These atoms are true or false, and that's all the tree method cares about. So, if the root of our PL truth tree has no quantifiers, we can use exactly the same techniques as we did with TFL truth trees.
+
+
+\subsection{Closed Trees}
+
+Compare the truth trees that test if the TFL formula $(p \eand q) \eiff (p \eif \enot q)$ and the PL formula $(Pa \eand Qb) \eiff ( Pa \eif \enot Qb)$ are logical falsehoods:
+
+%\begin{tabular}{c|c}
+\begin{prooftree}
+{close with=\ensuremath{\times}}
+[(p \eand q) \eiff (p \eif \enot q), checked%, name=p1
+	[p \eand q, checked%, just={\eiff}:p1, name=p2
+	 [p \eif \enot q, checked%, just={\eiff}:p1, name=p3
+	  [p%,  just={\eand}:p2
+	   [q%,  just={\eand}:p2
+	   [\enot p, close ]%, just={\eif}:p3]
+	   [\enot q, close ]%, just={\eif}:p3]
+	]]]]
+	[\enot(p \eand q), checked
+	 [\enot(p \eif \enot q), checked%, just={\eiff}:p1
+	  [\enot\enot p
+	   [\enot\enot q
+	    [\enot p, close]
+	    [\enot q, close]
+	]]]]
+]
+\end{prooftree}
+%& 
+\begin{prooftree}
+{close with=\ensuremath{\times}, not line numbering}
+[(Pa \eand Qb) \eiff (Pa \eif \enot Qb), checked
+	[Pa \eand Qb, checked
+	 [Pa \eif \enot Qb, checked
+	  [Pa
+	   [Qb
+	   [\enot Pa, close ]
+	   [\enot Qb, close ]
+	]]]]
+	[\enot(Pa \eand Qb), checked
+	 [\enot(Pa \eif \enot Qb), checked
+	  [\enot\enot Pa
+	   [\enot\enot Qb
+	    [\enot Pa, close]
+	    [\enot Qb, close]
+	]]]]
+]
+\end{prooftree}
+%\end{tabular}
+
+These trees have parallel structures. The decomposition rules for conjunction, disjunction, conditional, biconditional, double negation, and the rules for creating a root, branching, and closing a branch, are identical.
+
+
+\subsection{Open Trees}
+
+Similarly, compare the truth trees that test if the TFL formulas $p \eor q$, $\enot p$, $\enot q \eor r$ and the PL formulas $Pa \eor Qb$, $\enot Pa$, $\enot Qb \eor Rba$ are mutually consistent:
+
+
+\begin{prooftree}
+{close with=\ensuremath{\times}}
+[p \eor q, checked
+ [\enot p, checked
+  [\enot q \eor r, checked
+	[p, close]
+	[q
+	 [\enot q, close]
+	 [r, open]
+	]
+]]]
+\end{prooftree}\hspace{50pt}
+\begin{prooftree}
+{close with=\ensuremath{\times}, not line numbering}
+[Pa \eor Qb, checked
+ [\enot Pa, checked
+  [\enot Qb \eor Rba, checked
+	[Pa, close]
+	[Qb
+	 [\enot Qb, close]
+	 [Rba, open]
+	]
+]]]
+\end{prooftree}
+
+Again, the trees have parallel structures. When we read off the valuation which makes all the formulas true, we use the same process, but the valuations will look different.
+ 
+The valuation for the TFL tree is $p=\vF, q=\vT, r=\vT$.
+
+The valuation for the PL tree is: \\
+
+ \begin{tabular}{r l l l }
+	  Domain = $\{a, b\}$
+	  %\[\domain \, = \, \{\dom a, \dom b\}\]
+	\\
+ 
+	& \begin{tabular}{l|ll}
+	           & $P$ & $Q$ \\ \hline
+		a & \vF & \vU\\
+		b & \vU & \vT\\
+		\end{tabular}
+	& \hspace{30pt}
+	& \begin{tabular}{l|ll} $Rxy$        & a & b \\ \hline
+		a & \vU          & \vU  \\
+		b & \vT          & \vU
+		\end{tabular}
+\end{tabular}
+
+We can use tables to check that the valuations make all formulas true. In \tfl:
+
+\[
+  \begin{array}{ccc|ccc|cc|cccc}
+    p & q & r & p & \lor & q & \neg & p & \neg & q & \lor & r \\\hline
+   \vF & \vT & \vT & \gF & \cellcolor{green!15} \vT & \gT & \cellcolor{green!15} \vT & \gF & \gF & \gT & \cellcolor{green!15} \vT & \gF
+            \end{array}
+  \]
+
+  \noindent In \pl:
+
+  \[
+  \begin{array}{ccc|cc|cccc}
+ Pa & \lor & Qb & \neg & Pa & \neg & Qb & \lor & Rba \\\hline
+\gF & \cellcolor{green!15} \vT & \gT & \cellcolor{green!15} \vT & \gF & \gF & \gT & \cellcolor{green!15} \vT & \gF
+            \end{array}
+  \]
+\section{Quantified Trees}
+\label{sec.fixedrules}
+
+If we can remove all the quantifiers from a PL tree, we can simply use the existing TFL tree rules, as we  have seen. This will be our goal. The problem is that we don't know which names (or objects) each variable should stand for in our valuations.
+
+We will play it safe by assuming that an existential quantifier \emph{might} be referring to a new object, and so we will always use a new name. (Remember that an object can have more than one name, so if the new name needs to apply to an object we've already named, that's fine). This means that our existential quantifier rule will add new information to our tree, unlike every other rule.
+
+A universal quantifier will always be referring to all existing objects. But we don't know which objects exist, so we will confine ourselves to using old names; names that we know refer to existing objects. As a universal quantifier applies to all existing objects, it might be used several times. This means that our universal quantifier rule will be reusable, unlike every other rule.
+
+We will also need to decompose negated quantifiers, in the same way that we decomposed negated conjunctions and so forth. Here, we will take a short-cut, to simplify our PL trees. 
+
+
+
+\subsection{Negated Quantifiers}
+
+Negated existential claims are quite similar to universals. They say that no instance is true, which is another way of saying that every instance is false. And in fact: \[\enot\qe \script{x} \ \meta{A} \eiff \qa \script{x}\ \enot\meta{A}\]
+\noindent Similarly, a negated universal is similar to an existential. It says that not all instances are true, so at least one instance is false:
+\[\enot\qa \script{x}\ \meta{A} \eiff \qe \script{x}\ \enot\meta{A}\]
+
+We will take advantage of these two equivalences to transform all negated quantified formulas into non-negated quantified formulas.
+
+\factoidbox{
+\begin{center}
+\begin{prooftree}
+{not line numbering}
+[\enot\qe\script{x}\ \meta{A}
+ [\qa\script{x}\ \enot\meta{A} , just={$i$ \enot\esome}]
+]
+\end{prooftree}\hspace{40pt}
+\begin{prooftree}
+{not line numbering}
+[\enot\qa\script{x}\ \meta{A}
+ [\qe\script{x}\ \enot\meta{A} , just={$i$ \enot\eall}]
+]
+\end{prooftree}
+\end{center}
+}
+
+For example, if $\enot\qeb x {Fx}$ is in the tree, we can decompose it to $\qab x {\enot Fx}$. And likewise we can decompose $\enot \qab z {Raz \eif Pz}$ to $\qen z {\enot (Raz \eif Pz)}$.
+
+
+
+
+
+
+\subsection{Existential Quantifiers}
+
+Our tree rule for decomposing existential quantifiers replaces all instances of the existential variable in the formula with our new object name:
+
+\factoidbox{
+	\begin{center}\begin{prooftree}
+	{not line numbering}
+	[\qe\script{x}\meta{A}, checked={\script{a}}
+	 [\meta{A}\substitution{x}{a}, just={$i$ \esome \script{a}}
+ 	  [ , just={(where \script{a} is new})]
+	 ]
+	]
+\end{prooftree}\end{center}
+}
+
+Just as \meta{A} stands in for any formula of PL, the \script{x} stands in for any variable, and \script{a} stands in for any name. The requirement that the name be \emph{new} means that the name chosen for the substitution instance must be a name that has not appeared \emph{anywhere} in the tree so far. 
+
+
+For example, consider this tree:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[Fa, just={Root}
+ [\qeb x {\enot Fx}, name=p2, checked=b, just={Root}
+  [\enot Fb, just=$\exists b$:p2]
+]]
+\end{prooftree}\end{center}
+
+On line (2), we replace $x$ with $b$ (rather than $a$), because $a$ is a name that is already in use. We want to say that \emph{something} is $F$, not necessarily that $a$ is $F$. Of course, $Fa$ could also be true: there could be more than one object that is $F$; and it is also possible for $a$ and $b$ to be names for the same object ($a = b$).
+
+There is also a $b$ next to the check mark in line (2). When we mark the existential quantifier as decomposed, we add the name that we've used to replace the quantified variable, so we can trace our work more easily.
+
+
+
+Consider this more complex example:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+ [\qeb x {\qeb y { Rxy} \eif Rbx}, name=p1, checked=a, just={Root}
+  [\qeb y {Ray} \eif Rba, grouped, name=p2, checked, just=$\exists a$:p1
+   [\enot \qeb y {Ray} , name=p3, checked, just=$\eif$:p2
+    [\qab y {\enot Ray} , just=$\enot\exists$:p3]
+   ]
+   [Rba, just=$\eif$:p2]
+ ]]
+\end{prooftree}\end{center}
+
+On line (2), we decompose line (1) and can replace $x$ with any letter except $b$, which is already used on line (1). On line (2), the main connective is not $\qe$ but $\eif$, so we can't decompose it using our existential tree rule. When we finally have a quantifier as the main connective on line (4), it's now a universal quantifier. We need another rule to decompose this formula.
+
+\subsection{Universal Quantifiers}
+
+Our tree rule for decomposing universal quantifiers replaces all instances of the existential variable in the formula with an old object name:
+
+\factoidbox{
+	\begin{center}\begin{prooftree}
+	{not line numbering}
+	[\qa\script{x}\meta{A}, subs={\script{a}}
+	 [\meta{A}\substitution{x}{a}, just={$i$ \eall \script{a}}
+ 	  [ , just={(where \script{a} is old})]
+	 ]
+	]
+\end{prooftree}\end{center}
+}
+
+For a name to be `old' means that it has appeared \emph{somewhere} in the tree. 
+
+
+Unlike all the other tree rules, we don't decompose a universally quantified formula and then check it off, never to use it again. Because more than one name can appear in a tree, each universal formula can be used more than once.  We mark this by writing a $\backslash$ instead of a \checkmark next to the universal formula.\\
+
+Here is an example illustrating the importance of decomposing a universally quantified formula multiple times:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qab x {Fx \eand Gx}, name=p1, subs={a,b}, just={Root}
+ [\enot Fa \eor \enot Gb, grouped, name=p2, checked, just={Root}
+  [Fa \eand Ga, name=p3, checked, just=$\forall a$:p1
+	[Fa, just=$\eand$:p3
+	 [Ga, just=$\eand$:p3
+		[\enot Fa, just=\eor:p2, close]
+		[\enot Gb
+		 [Fb \eand Gb, just=$\forall b$:p1, checked, name=p7
+			[Fb, just=\eand:p7
+			 [Gb, just=\eand:p7, close
+			]]
+		]]
+	]]
+]]]
+\end{prooftree}\end{center}
+
+On line (3) we replace the universally quantified variable with $a$ at line (1), and this helps to close one branch. But the other branch won't close until we take the $b$ instance as well on line (7).
+Of course, we might have foreseen that we would need both a formula containing $a$ and one containing $b$ to close the tree, and replaced the quantified variable with $b$ on line (4); the tree would have worked just as well. But in general, we want to delay acting on universal quantifiers for as long as possible, for reasons we'll explain shortly.
+
+
+
+
+\section{Completing your Tree} 
+
+%Our branch closure rules also remain unchanged. A branch closes if and only if it contains some formula \meta{A} along with its negation, \enot\meta{A}. We mark closed branches with an `\ensuremath\times'.
+
+Although the connective, branching, and branch closing rules are identical to those in TFL, we will need to change our completion rule slightly.
+
+%From TFL Trees
+%\factoidbox{
+%An open branch is \define{complete} iff all its complex formulas have been decomposed, as indicated by a check mark.
+%
+%A tree is \define{complete} iff all its branches are closed or complete.}
+
+
+
+The TFL tree completion rule, given in \S\ref{sec.TFL.tree.completion}, said that a branch was complete if every complex formula has been decomposed, as indicated by a check mark. But universally quantified formulas may need to be decomposed several times -- once for each name in the tree. We need our completion condition to ensure that we've taken \emph{enough} instances.
+
+For example, this should not count as a completed tree:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qab x {Fx \eif Ga}, name=p1, subs=a, just={Root}
+ [\enot Ga, just={Root}
+  [Fb, just={Root}
+	[Fa \eif Ga, checked, name=p4, just={$\eall a$:p1}
+	 [\enot Fa, just={\eif}:p4]
+	 [Ga, close]
+	]
+]]]
+\end{prooftree}\end{center}
+
+The universal quantifier on line (1) can be decomposed using $a$ and using $b$. If we did this, the tree would close:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qab x {Fx \eif Ga}, name=p1, subs={a,b}, just={Root}
+ [\enot Ga, just={Root}
+  [Fb, just={Root}
+   [Fa \eif Ga, checked, name=p4, just={$\eall a$:p1}
+	[\enot Fa, just={\eif}:p4
+	  [Fb \eif Ga, checked, name=p6, just={$\eall b$:p1}
+	   [\enot Fb, close, just={\eif}:p6]
+	   [Ga, close]
+	  ]
+	]
+	[Ga, close]
+]]]]
+\end{prooftree}\end{center}
+
+We don't want this tree to count as complete until it has decomposed line (1) using both $a$ and $b$. A true universal formula is true of \emph{every} object; we can't test that formula properly if we've only checked \emph{some} objects.
+
+For an open branch to be complete, every universally quantified formula in that branch must be decomposed using \emph{every} name in the branch. 
+
+
+
+%\factoidbox{
+%A branch is \define{complete} if and only if either (i) it is closed, or (ii) every resolvable formula in the branch has been resolved, and for every universal formula and every name \script{a} in the branch, the \script{a} instance of that universal formula has been taken.
+
+
+%\pagebreak
+
+\section{More PL Tree Examples}
+
+A tautology can never be false. A tree can test if a formula can be false.\\
+Is $(\enot \qeb x {Ax \eand  \enot Bx} \eif  \qab y {Ay \eif  By})$ a tautology?
+
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot(\enot \qeb x {Ax \eand \enot Bx} \eif \qab y {Ay \eif  By}), name=p1, checked, just={Root}
+ [\enot \qeb x {Ax \eand \enot Bx}, name=p2, checked, just={$\enot\eif$:p1}
+  [\enot \qab y {Ay \eif  By}, name=p3, checked, just={$\enot\eif$:p1}
+   [\qen y {\enot (Ay \eif  By)}, name=p4, checked=a, just={$\enot\forall$:p3}
+    [\enot (Aa \eif  Ba), name=p5, checked, just={$\exists a$:p4}
+     [Aa , name=p6, just={$\enot \eif$:p5}
+      [\enot Ba, name=p7, just={$\enot \eif$:p5}
+       [\qan x {\enot ( Ax \eand \enot Bx)}, name=p8, subs={a}, just={$\enot\exists$:p2}   
+        [\enot ( Aa \eand \enot Ba), name=p9, just={$\forall a$:p8}   
+         [\enot Aa, close, name=p10, just={$\enot\eand$:p9}]
+         [\enot\enot Ba, close, name=p11, just={$\enot\eand$:p9}]
+       ]]
+    ]]]
+]]]]
+\end{prooftree}\end{center}
+
+The tree shows that the negated formula can never be true. This means that 
+the formula can never be false -- it is a tautology.\\
+
+\noindent Is the argument `No flasks are not made of glass so all flasks are made of glass' valid?
+
+%Using an intuitive symbolisation key, we symbolise this argument as:
+
+$$\enot \qeb {x} {Fx \eand \enot Gx} \ \therefore  \ \qab{y} {Fy \eif Gy}$$
+
+\noindent We check if the premises can be true while the conclusion is false: 
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot \qeb x {Fx \eand \enot Gx}, name=p1, checked, just={Premise}
+ [\enot \qab y {Fy \eif Gy}, name=p2, checked, just={Neg Conc}
+  [\qab x {\enot (Fx \eand \enot Gx)}, name=p3, subs={a}, just={$\enot\exists$:p1}
+   [\qeb y {\enot (Fy \eif Gy)}, name=p4, checked=a, just={$\enot\forall$:p2}
+	[\enot (Fa \eif Ga), name=p5, checked, just={$\exists a$:p4}
+	 [Fa , name=p6, just={$\enot\eif$:p5}
+	  [\enot Ga , name=p7, just={$\enot\eif$:p5}
+		[\enot (Fa \eand \enot Ga), name=p8, checked, just={$\forall a $:p3}
+		 [\enot       Fa, name=p9a, close, just={$\enot\eand$:p8}]
+		 [\enot \enot Ga, name=p9b, close, just={$\enot\eand$:p8}]
+		]
+	]]]
+]]]]
+\end{prooftree}\end{center}
+
+\noindent It is impossible for the premises to be true and the conclusion false, so there is no counter-example, and the argument is valid.
+
+%\pagebreak
+
+\noindent Proof that $\qa y {\qe x {(Ryy \eif  Rxy)}}$ is a tautology:
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot \qan y {\qeb x {Ryy \eif  Rxy}}, name=p1, checked, just={Root}
+ [\qen y {\enot \qeb x {Ryy \eif  Rxy}}, name=p2, checked=a, just={$\enot\forall$:p1}
+  [\enot \qeb x {Raa \eif  Rxa}, name=p3, checked, just={$\forall a$:p2}
+   [\qab x {\enot (Raa \eif  Rxa)}, name=p4, checked=a, just={$\enot\exists$:p3}
+	[\enot(Raa \eif  Raa)), name=p5, checked, just={$\exists a$:p4}
+	 [Raa, just={$\enot\eif$:p5}
+	  [\enot Raa, close, just={$\enot\eif$:p5}
+	 ]]
+  ]]]
+]]
+\end{prooftree}\end{center}
+
+%The negated formula can never be true, so the formula is a tautology.\\
+
+\newpage
+\noindent Proof that $\qa{x}{\qa{y}{\qab{z}{(Rxy \eand  Ryz) \eif  Rxz}}}, \qab{x}{\enot Rxx} \ \therefore	\ \qa{x}{\qab{y}{Rxy \eif  \enot Ryx}}$ is valid:
+
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qan x {\qan y {\qab z {(Rxy \eand  Ryz) \eif  Rxz}}}, subs={a}, name=p1, just={Premise}
+ [\qab x {\enot Rxx}, name=p2, subs={a}, just={Premise}
+  [\enot \qan x {\qab y {Rxy \eif  \enot Ryx}}, name=p3, checked, just={Neg Conc}
+	[\qen x {\enot \qab y {Rxy \eif  \enot Ryx}}, name=p4, checked=a, just={$\enot\forall$:p3}
+	 [\enot \qab y {Ray \eif  \enot Rya}, name=p5, just={$\exists$a :p4}
+	  [\qeb y {\enot (Ray \eif  \enot Rya)}, name=p6, checked=b, just={$\enot\forall$ :p5}
+	   [\enot (Rab \eif  \enot Rba), name=p7, just={$\exists$b :p6}
+		[Rab, just={$\enot\eif$:p7}
+		 [\enot\enot Rba, name=p9, just={$\enot\eif$:p7}
+		  [Rba, name=p10, just={$\enot\enot$:p9}
+			[\qan y {\qab z {(Ray \eand  Ryz) \eif  Raz}}, subs={b}, name=p11, just={$\forall a$:p1}
+			 [\qab z {(Rab \eand  Rbz) \eif  Raz}, subs={a}, name=p12, just={$\forall b$:p11}
+			  [(Rab \eand  Rba) \eif  Raa, checked, name=p13, just={$\forall a$:p12}
+			   [\enot Raa, name=p14, just={$\forall a$:p2}
+				[\enot(Rab \eand  Rba), checked, name=p15, just={$\eif$:p13}
+				 [\enot Rab, close, just={$\enot\eand$:p15}]
+				 [\enot Rba, close, just={$\enot\eand$:p15}]
+				]
+				[Raa, close, just={$\eif$:p13}]
+				]
+			]]]]
+		]]]
+	]]]]
+]]]
+\end{prooftree}\end{center}
+
+
+%It is impossible for the premises to be true and the conclusion false, so there is no counter-example, and the argument is valid.
+
+\mathematics{The above argument is a proof from mathematics. It says that any relation that is transitive and anti-reflexive (e.g., the greater-than `$>$' and strict subset `$\subset$' relations) must also be anti-symmetric. %For example,  is transitive (if $A>B$ and $B>C$ then $A>C$), and anti-reflexive ($A\ngtr A$), so must also be anti-symmetric (if $A > B$ then $B \ngtr A$). %One of the big changes in mathematics at the moment is the increased emphasis on the formalisation of mathematical proofs into pure logic that can be checked by computers.
+}  
+\pagebreak
+The following argument is invalid:\\
+
+\indent\indent\indent\indent\indent
+$\qab{x}{\enot (\qeb{y}{Syx} \eand  \enot Ax)}$
+
+\indent\indent\indent\indent\indent
+$\qab{x}{\qeb{y}{Sxy} \eif  \enot Bx}$
+
+\indent\indent\indent\indent\indent
+$\therefore \ \qab{x}{Sxx \eif  (Ax \eand  Bx)}$
+
+
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qab x {\enot (\qeb y {Syx} \eand  \enot Ax)}, subs={a}, name=p1, just={Premise}
+ [\qab x {\qeb y {Sxy} \eif \enot Bx}, name=p2, subs={a}, just={Premise}
+  [\enot \qab x {Sxx \eif  (Ax \eand  Bx)}, name=p3, checked, just={Neg Conc}
+   [\qeb x {\enot (Sxx \eif  (Ax \eand  Bx))}, name=p4, checked=a, just={$\enot\forall$:p3}
+    [\enot (Saa \eif  (Aa \eand  Ba)), name=p5, checked, just={$\exists a$:p4}
+     [Saa, name=p6, just={$\enot\eif$:p5}
+	  [\enot (Aa \eand  Ba), name=p7, just={$\enot\eif$:p5}
+		[\enot (\qeb y {Sya} \eand  \enot Aa), name=p8, checked, just={$\forall a$:p1}
+		 [\enot \qeb y {Sya}, checked, name=p9, just={$\enot\eand$:p8}%, move by=4
+		  [\qab y {\enot Sya}, subs={a}, name=p10, just={$\enot\exists$:p9}
+		   [\enot Saa, close, just={$\forall a$:p10}]
+		 ]]
+		 [\enot \enot Aa, name=p9a, just={$\enot\eand$:p8}
+		  [Aa, just={$\enot\enot$:p9a}, move by=1
+		   [\enot Aa, close, just={$\enot\eand$:p7}]
+		   [\enot Ba, just={$\enot\eand$:p7}
+			[\qeb y {Say} \eif \enot Ba, checked=a, name=p11, just={$\forall a$:p2}
+			 [\enot \qeb y {Say}, checked, name=p12, just={$\eif$:p11}
+			  [\qab y {\enot Say}, subs={a}, name=p13, just={$\enot\exists$:p12}
+			   [\enot Saa, close, just={$\forall a$:p13}]
+			 ]]
+			 [\enot Ba, open, just={$\eif$:p11}]
+			]
+		]]]]
+    ]]]
+]]]]
+\end{prooftree}\end{center}
+
+\noindent Fortunately the tree has produced a one-item counter-example. This will lead to a short counter-example and proof:\\
+
+\noindent
+\begin{tabular}{l ll lcc}
+ Domain = $\{a\}$ 
+& & \begin{tabular}{c|l}
+	 $Sxy$     & a\\ \hline
+	a & \vT      
+	\end{tabular}
+& &  \begin{tabular}{l|ll}
+				& $A$	& $B$ \\ \hline
+	a	& \vT	& \vF \\
+	\end{tabular}
+\end{tabular} 
+
+$ $\\
+
+
+\begin{tabular}{c c | ceeeeec }
+$x$ & $y$ & $\qa x$ & $[\enot$ & $(\qe y$ & $[Syx]$ & $\eand$ & $\enot$ & $Ax)]$\\
+\hline
+$a$ & $a$ & \vT & \vT & \vT & \vT & \vF & \vF & \vT\\
+\end{tabular} 
+$ $ 
+\begin{tabular}{c c | ceeeec }
+$x$ & $y$ & $\qa x$ & $[\qe y$ & $[Sxy]$ & $\eif$ & $\enot$ & $Bx]$\\
+\hline
+$a$ & $a$ & \vT & \vT & \vT & \vT & \vT & \vF
+\end{tabular}
+
+$ $\\
+
+\begin{tabular}{c c | ceeeeec }
+$x$ & $y$ & $\enot$ & $\qa x$ & $[Sxx$ & $\eif$ & $(Ax$ & $\eand$ & $Bx)]$\\
+\hline
+$a$ & $a$ & \vT & \vF & \vT & \vF & \vT & \vF & \vF
+\end{tabular}
+
+
+
+
+\pagebreak
+
+
+
+
+\noindent $\qab {x} {\qeb{y}{Rxy} \eif  Fx}, 	\qab{x}{Fx \eif \enot Rxx} \ \therefore	\ \qa{x}{\qab{y}{Rxx \eor \enot Rxy}}$ is invalid:
+
+
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qab x {\qeb y {Rxy} \eif  Fx}, subs={a,b}, name=p1, just={Premise}
+ [\qab x {Fx \eif \enot Rxx}, name=p2, subs={a}, just={Premise}
+  [\enot \qan x {\qab y {Rxx \eor \enot Rxy}}, name=p3, checked, just={Neg Conc}
+   [\qeb x {\enot (\qab y {Rxx \eor \enot Rxy})}, name=p4, checked=a, just={$\enot\forall$:p3}
+	[\enot (\qab y {Raa \eor \enot Ray}), name=p5, checked, just={$\exists a$:p4}
+	 [\qeb y {\enot (Raa \eor \enot Ray)}, name=p6, checked=b, just={$\enot\forall$:p5}
+	  [\enot (Raa \eor \enot Rab), name=p7, checked, just={$\exists b$:p6}
+		[\enot Raa, name=p8, just={$\enot \eor$:p7}
+		 [\enot \enot Rab, name=p9, just={$\enot \eor$:p7}
+		  [Rab, name=p10, just={$\enot \enot$:p9}
+	[\qeb y {Ray} \eif  Fa, name=p11, checked, just={$\forall a$:p1}
+	 [\enot \qeb y {Ray} , name=p12a, checked, just={$\eif$:p11}
+	  [\qab y {\enot Ray} , name=p13a, subs={b}, just={$\enot\exists$:p12a}
+	   [\enot Rab, close, just={$\forall b$:p13a}]
+	 ]]
+	 [Fa, name=p12b, just={$\eif$:p11}
+	  [Fa \eif \enot Raa, name=p13b, checked, just={$\forall a$:p2}, move by=2
+	   [\enot Fa, close, just={$\eif$:p13b}]
+	   [\enot Raa, just={$\eif$:p13b}
+		[\qeb y {Rby} \eif  Fa, name=q11, checked, just={$\forall b$:p1}
+		 [\enot \qeb y {Rby} , name=q12a, checked, just={$\eif$:q11}
+		  [\qab y {\enot Rby} , name=q13a, subs={a,b}, just={$\enot\exists$:q12a}
+		   [\enot Rba, just={$\forall a$:q13a}
+		    [\enot Rbb, open, just={$\forall b$:q13a}]
+		 ]]]
+	    [Fb, name=q12b, just={$\eif$:q11}
+	     [\vdots]
+	    ]
+	   ]]
+	  ]
+	 ]
+	]
+		]]]
+   ]]]]
+]]]
+\end{prooftree}\end{center}
+
+
+
+\noindent While the branch under $Fb$ might continue, it can't affect our open branch. Our counter-example and proof is:\\
+
+\noindent
+\begin{tabular}{l ll ll}
+Domain = $\{a, b\}$ 
+& & \begin{tabular}{c|ll}
+	 $Rxy$     & a & b \\ \hline
+	a & \vF        & \vT  \\
+	b & \vF        & \vF
+	\end{tabular}
+& &  \begin{tabular}{l|l}
+	 & $F$  \\ \hline
+	a & \vT          \\
+	b & \vU
+	\end{tabular}
+\end{tabular} 
+
+$ $\\
+
+
+\begin{tabular}{c c | ceeec | ceeec | ceeeeec }
+$x$ &$y$&	$\qa x $ & $[\qe y$ & $ [Rxy] $ & $\eif$ & $Fx]$ 
+		&	$\qa x $ & $[Fx$ & $\eif$ & $\enot$ & $Rxx]$
+		& 	$\enot$ & $ \qa x $ & $\qa y $ & $[Rxx $ & $\eor $ & $\enot$ & $ Rxy]$
+    \\
+\hline
+$a$ & $a$&	\brax{4}{\vT} & \brax{2}{\vT} & \vF & \braz{2}{\vT} & \mrow{2}{\vT}
+		&	\brax{4}{\vT} & \mrow{2}{\vT} & \mrow{2}{\vT} & \mrow{2}{\vT} & \mrow{2}{\vF}
+		& 	\mrow{4}{\vT} & \brax{4}{\vF} & \brax{2}{\vF} & \vF & \vT & \vT & \vF\\
+
+$a$ & $b$&	$ $ & $ $ & \vT & $ $ & $ $ 
+		&	$ $ & $ $ & $ $ & $ $ & $ $
+		& 	$ $ & $ $ & $ $ & \vF & \vF & \vF & \vT\\
+
+\cline{5-5}\cline{16-19}		
+
+$b$ & $a$&	$ $ & \brax{2}{\vF} & \vF & \braz{2}{\vT} & \mrow{2}{\vU}
+		&	$ $ & \mrow{2}{\vU} & \mrow{2}{\vT} & \mrow{2}{\vT} & \mrow{2}{\vF}
+		& 	$ $ & $ $ & \brax{2}{\vT} & \vF & \vT & \vT & \vF\\
+
+$b$ & $b$&	$ $ & $ $ & \vF & $ $ & $ $ 
+		&	$ $ & $ $ & $ $ & $ $ & $ $
+		& 	$ $ & $ $ & $ $ & \vF & \vT & \vT & \vF\\
+\end{tabular} 
+
+
+
+
+\pagebreak
+
+
+
+\chapter{Tree Strategies}\label{ch:pl.tree.strategies}
+\section{Order of Decomposition}
+
+You can always decompose the complex formulas of a truth tree in any order you want. The resulting trees will all eventually give the same (or equivalent) results. But some trees are shorter, or easier to find good strategies to complete, or easier to complete without making mistakes. Here's the advice we gave for TFL trees:
+
+\begin{earg}
+\item Non-branching rules before branching. 
+\item Close branches quickly.
+\item Simple formulas before complex. 
+\item Biconditionals last.
+\end{earg}
+
+All this still holds. However, we also have some quantifier-specific advice.
+
+\begin{earg}
+\item Negated Quantifiers are simple non-branching rules; do them early.
+\item Existential Quantifiers after other non-branching rules.
+\item Universal Quantifiers only when you have a clear plan for them.
+\item Otherwise, delay Universal Quantifiers if there are many names.
+\end{earg}
+
+This advice isn't perfect, but it will generally serve you well.
+
+Existential quantifiers generate new information and new possibilities. Every existential quantifier will add a new name. Negated quantifiers will either become existential quantifiers, to be decomposed immediately, or universal quantifiers, to be planned for and used wisely (or often).
+
+ Because universal quantifiers can generate so many new formulas, you should either use them only when you have a clear plan, or when you are out of plans; at which point, use all the names, and see if anything useful appears!
+
+\pagebreak
+Let's test if $\qa x {Rax}, \qa x {\qa y {(Rxy \eif Ryx)}} \ \therefore \ \qa y {Rya}$ is valid. %The root will contain the premises, and the negation of the conclusion:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qab x {Rax}, name=p1, just={Premise}
+ [\qan x {\qab y {Rxy \eif Ryx}}, grouped, name=p2, just={Premise}
+  [\enot \qab y {Rya}, grouped, name=p3, just={Neg Conc}
+]]]
+\end{prooftree}\end{center}
+
+If we ignored (3) and decomposed our universals first, we'd get
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qab x {Rax}, subs={a}, name=p1, just={Premise}
+ [\qan x {\qab y {Rxy \eif Ryx}}, subs={a}, name=p2, just={Premise}
+  [\enot \qab y {Rya}, checked, name=p3, just={Neg Conc}
+	[Raa, just={$\eall a$:p1}
+	 [\qab y {Ray \eif Rya}, subs={a}, name=p5, just={$\eall a$:p2}
+	  [Raa \eif Raa, name=p6, just={$\eall a$:p5}
+		[\enot Raa, close, name=p7, just=$\eif$:{p6}]
+		[Raa, just=$\eif$:{p6}
+		 [\qeb y {\enot Rya}, checked=b, name=p8, just={$\enot \eall$: p3}
+		  [\enot Rba, just={$\exists b$: p8}
+		 ]]
+		]
+	]]]
+]]]
+\end{prooftree}\end{center}
+
+The tree hasn't closed yet, and the new name $b$ on line (8) means we need to rethink our use of lines (1), (2) and (5). If we instead delayed our universals until we had a plan, we might get:
+
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qab x {Rax}, subs={b}, name=p1, just={Premise}
+ [\qan x {\qab y {Rxy \eif Ryx}}, subs={a}, name=p2, just={Premise}
+  [\enot \qab y {Rya}, checked, name=p3, just={Neg Conc}
+	[\qeb y {\enot Rya}, checked=b, name=p4, just={$\enot \eall$: p3}
+	 [\enot Rba, just={$\exists b$: p4}
+		[Rab, just={$\eall b$:p1}
+		 [\qab y {Ray \eif Rya}, subs={b}, name=p7, just={$\eall a$:p2}
+		  [Rab \eif Rba, name=p8, just={$\eall b$:p7}
+			[\enot Rab, close, just=$\eif$:{p8}]
+			[Rba, close, just=$\eif$:{p8}]
+		]]]
+	]]
+]]]
+\end{prooftree}\end{center}
+
+With line (5) giving us $\enot Rba$, we could see that line (2), which switches the order of the names, could cause a contradiction with $(Rab \eif Rba)$ if we also had $Rab$. And line (1) could give us $Rab$. So we had a plan for which names to substitute into lines (1) and (2) -- and with a little luck, our plan worked.
+%The good news is that even if our plan didn't work, we could just try the next idea, but we've also increased our chances of a short, simple tree, and so fewer errors.
+
+%Planning ahead can help make your trees more efficient. The general principle you should keep in mind is, if you have a choice for what resolvable formula to resolve, or what instance of a general formula to take, make a choice that will allow you to close branches more quickly.
+
+
+
+
+
+\section{Truth Tree Complexities}
+
+\subsection{Strategically Selecting Names}
+In our last example, we had a plan for substituting our universal quantifiers by trying to create contradictions. This sort of strategy is important, particularly when you realise how long your tree could get if you just listed all possible substitutions. Lets try a more complex argument:
+%Everyone is related to someone, if you are related to someone, they re related to you, If you are related to someone, and they are related to someone, you are related to that last person. \therefore you are related to yourself.
+$$\qa x {\qe y {Rxy}},
+\qa x {\qa y {Rxy \eif Ryx}} , 
+\qa x {\qa y {\qa z {(Rxy \eand Ryz) \eif Rxz}}} \
+\therefore \ \qa x {Rxx}$$
+
+We'll start by decomposing all the existentials as quickly as we can:
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qan x {\qeb y {Rxy}}, subs={a}, name=p1, just={Premise}
+ [\qan x  {\qab y {Rxy \eif Ryx}}, name=p2, just={Premise}
+  [\qan x  {\qan y  {\qab z {(Rxy \eand Ryz) \eif Rxz}}}, name=p3, just={Premise}
+   [\enot\qab x  {Rxx}, checked, name=p4, just={Neg Conc}
+	[\qeb x {\enot Rxx}, checked=a, name=p5, just={$\enot\eall$:p4}
+	 [\enot Raa, name=p6, just={$\exists a$:p6}
+	  [\qeb y {Ray}, checked=b, name=p7, just={$\eall a$:p1}
+	   [Rab, name=p8, just={$\exists b$:p7}
+	]]]]
+]]]]
+\end{prooftree}\end{center}
+
+Now we ask how we can get a contradiction with these formulas. $\enot Raa$ is our only negative formula, so we need to get $Raa$ from lines (2) or (3). If $Raa$ was the consequent of line (2), the full formula would be $Raa \eif Raa$, which doesn't seem useful? If $Raa$ was the consequent of line (3), the full formula would be $(Rab \eand Rba) \eif Raa$. So we'd need $Rab \eand Rba$. And we already have $Rab$! How can we get $Rba$? Well, line (2) can give us $Rab \eif Rba$, and we already have $Rab$. We have a plan!!
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}, line no shift=8}
+[ \qab y {Ray \eif Rya}, subs={b}, name=p9, just={2\ $\eall a$}
+ [Rab \eif Rba, name=p10, just={$\eall b$:p9}
+  [\enot Rab, close, just={$\eif$:p10}]
+  [Rba, name=p11, just={$\eif$:p10}
+	[\qan y {\qab z {(Ray \eand Ryz) \eif Raz}}, checked=b, name=p12, just={3\ $\eall a$}
+	 [\qab z {(Rab \eand Rbz) \eif Raz}, name=p13, checked=a, just={$\eall b$:p12}
+	  [(Rab \eand Rba) \eif Raa, name=p14, just={$\eall a$:p13}
+		[\enot(Rab \eand Rba), checked, name=p15, just={$\eif$:p14}
+	     [\enot Rab, close, just={$\enot\eand$:p15}]
+	     [\enot Rba, close, just={$\enot\eand$:p15}
+		]]
+		[Raa, close, just={$\eif$}:p14]
+	]]]
+]]]
+\end{prooftree}\end{center}
+
+%\aw{possibly a little more discussion, or a simpler example.}
+
+\subsection{Infinite Trees}
+
+Every decomposition of a TFL tree takes us closer to a completed tree, because we check of formulas as decomposed, and replace them with either one or two simpler formulas. TFL trees are guaranteed to be completed in a finite number of steps --- they will either close, or every formula will be decomposed into an atomic or negated atomic formula.
+
+However, the universal quantifier rule can be applied to the same formula once for every name in the tree, and so if we keep generating new names, it is possible for trees to continue indefinitely without closing. 
+
+Consider a tree with two formulas in its root: $Raa, \qa{x}{\qeb{y}{Rxy}}$. We will have to decompose the universal, using the existing name `$a$'. And that will give us $\qeb{y}{Ray}$, which in turn will give us a new name `$b$', which we'll use to decompose the universal quantifier...
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[Raa, just={Root}
+[\qan x {\qeb y {Rxy}}, name=p1, subs={a,b,c}, just={Root}
+	[\qeb y {Ray}, just=1 $\forall a$, checked=b
+	[Rab, just=2 $\exists b$
+		[\qeb y {Rby}, just=1 $\forall b$, checked=c
+		[Rbc, just=4 $\exists c$
+			[\qeb y {Rcy}, just=1 $\forall c$, checked=d
+			[Rcd, just=5 $\exists d$
+				[\vdots]
+			]]
+		]]
+	]]
+]]
+\end{prooftree}\end{center}
+
+
+As the pattern makes clear, this tree will never close, but it will also never be complete. It will just keep decomposing instances of an existential with new names, then decomposing those instances of the universal, which in turn require a new existential, and so on. 
+
+The tree will never close, and its open branch is describing a model where all the formulas are true, but it is an infinite model. There's nothing illogical about that, but we certainly can't use truth tables to check formulas in that model. The good news is that in PL whenever there is an infinite model that makes a finite list of formulas true, there is also a finite model that does the same. The bad news is that we can't tell you how to find this finite model.
+
+
+\logic{Congratulations, you've run into a limit of logic. PL is \emph{semi-decidable}. We can always tell if a set of formulas is inconsistent, but we can't always tell if a set of formulas is consistent -- any algorithm will sometimes go into an infinite loop rather than stopping with an answer.}
+
+So, what should you do if your tree starts looping? First, check your tree decompositions, in case you've made a mistake. Then, once you are sure your tree is looping, stop extending the tree, draw a table with all the information you have \emph{before the loop starts}, and manually, creatively, add more information to the table until you can make all the formulas true. We can't give you precise instructions on how to do this, because there is no algorithm that will always work.
+
+However, usually (particularly with exercises in this course) you can produce a counter-example which is a model with one or two names. For example, with the tree above, a one-name model where $Raa=1$ makes both $Raa$ and $\qa{x}{\qeb {y}{Rxy}}$ true. So would any two-name model with $Raa=1$ and $Rba=1$, or $Raa=1$ and $Rbb=1$. You can then check your counter-example using the techniques we discussed in Part \ref{part:models}.
+
+Here is one counter-example, taken from the first 4 lines of the tree:\\
+
+\noindent
+\begin{tabular}{l l }
+Domain = $\{a, b\}$
+	\\
+ 
+	& \begin{tabular}{l|ll} $Rxy$        & a & b \\ \hline
+		a & \vT          & \vT  \\
+		b & \vT          & \vU
+		\end{tabular}
+\end{tabular} 
+\ \ \  \begin{tabular}{c c | c | c c c }
+$x$ & $y$ &  $Raa$ & $\qa x $ & $\qe y$ & $[Rxy]$ \\
+\hline
+$a$ & $a$ &\mrow{4}{\vT}&\brax{4}{\vT}&\brax{2}{\vT}& \vT\\
+$a$ & $b$ & 		    &             &				& \vT\\
+\cline{6-6}
+$b$ & $a$ & 		    & 			  &\brax{2}{\vT}& \vT\\
+$b$ & $b$ & 		    &             &				& \vU\\
+\end{tabular} \\
+
+
+
+
+\logic{In theory, to determine whether a set of formulas is consistent, or an argument valid, you don't need to produce a finite model. If a tree continues infinitely, there will always be an open branch. But in this course you must always produce a finite model.}
+
+\subsection{An Old New Name}
+There is one case where you can use a \emph{new} name when decomposing a universal quantifier. Suppose that you have no existential quantifiers, and no names already mentioned. Then there are no old names, and you can't decompose any of your universal quantifiers. In this one case, you can (after double-checking), use a new name to decompose a universal quantifier. Why? Because we can assume that the model we are reasoning about is not empty. Empty models aren't interesting. Consider the seemingly valid argument that `everything is made out of atoms, so something is made of atoms'. If there's nothing at all, then the premise could be true and the conclusion false. But truth trees assume there is always at least one object:
+
+$$\qab{x}{Ax} \ \therefore \ \qeb{x}{Ax}$$
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qab x {Ax}, name=p1, just={Premise}
+[\enot \qeb x {Ax}, name=p2, subs=b, just={Neg Conc}
+	[\qab x {\enot Ax}, name=p3, just=$\enot\exists $:p2, checked=b
+	 [\enot Ab, just=$\forall b$:p3
+	  [Ab, close, just=$\forall b$: p1
+	]]]
+]]
+\end{prooftree}\end{center}
+
+%On line (4) we used a new letter `$b$', as there was not, and could not be, any old letters in the tree. We couldn't decompose our formulas unless we assumed there was at least one named object in our domain.
+
+
+
+
+Is $\qe x {\qab y {Ryy \eif  Rxy}}$ a tautology? 
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\enot \qen x {\qab y {Ryy \eif  Rxy}}, name=p1, checked, just={Root}
+ [\qab x {\enot \qab y {Ryy \eif  Rxy}}, name=p2, subs={a}, just={$\enot\exists$:p1}
+  [\enot \qab y {Ryy \eif  Ray}, name=p3, checked, just={$\forall a$:p2}
+   [\qeb y {\enot Ryy \eif  Ray}, name=p4, checked=b, just={$\enot\forall$:p3}
+	[\enot( Rbb \eif  Rab), name=p5, checked, just={$\exists b$:p4}
+	 [Rbb, just={$\enot\eif$:p5}
+	  [\enot Rab, open, just={$\enot\eif$:p5}
+	 ]]
+  ]]]
+]]
+\end{prooftree}\end{center}
+
+Is this valid: `All Unicorns have horns, so some Unicorns have horns'?
+
+$$\qab{x}{Ux \eif Hx} \ \therefore\ \enot \qe{y}{Uy \eand Hy}$$
+
+
+\begin{center}\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qab x {Ux \eif Hx}, subs={a}, name=p1, just={Premise}
+[\enot \qeb y {Uy \eand Hy}, name=p2, checked, just={Neg Conc}
+ [\qab y {\enot (Uy \eand Hy)}, name=p3, subs={a}, just={$\enot\exists$:p2}
+  [Ua \eif Ha, checked, name=p4, just={$\forall a$:p1}
+   [\enot (Ua \eand Ha), checked, name=p5, just={$\forall a$:p3}
+	[\enot Ua, just={$\eif$:p4}
+	 [\enot Ua, open, just={$\enot\eand$:p5}]
+	 [\enot Ha]
+	]
+    [Ha
+	 [\enot Ua]
+	 [\enot Ha, close]
+    ]
+ ]]]
+]]
+\end{prooftree}\end{center}
+
+
+A counter-example is: \ \ Domain = $\{a\}$. \ \ 
+ \begin{tabular}{l|cc} & $Hx$ & $Ux$ \\ \hline
+			a & \vU  & \vF  \\
+ \end{tabular} $ $\\
+
+
+
+ You can use new letters for your universals in other situations, but they will only make your tree longer, and never help it close or generate a counter-example. So don't. Just don't.
+
+
+\section{Common Student Errors}
+
+
+\subsection{Using Old Names}
+
+The most frequent errors for trees in PL involve ignoring the restrictions on names when taking instances. Particular formulas (existentials and negated universals) require a \emph{new} name --- if the name appears anywhere in the branch at the time the existential is taken (including below it), it is not suitable for substitution via these rules.
+
+For example, this tree contains a mistake in a quantifier rule. See if you can spot it:
+
+\begin{prooftree}
+{close with=\ensuremath{\times}}
+[\qan x {\qeb y {\enot Rxy}}, subs={a}
+ [Rab, grouped
+	[\qeb y {\enot Ray}, just=1 $\forall$, checked=b
+	 [\enot Rab, just=3 $\exists$, close%={2, 4}
+	]]
+]]
+\end{prooftree}
+
+Line (3) here is fine; but at line (4), this tree uses the name `$b$' to decompose the existential on line (3), even though `$b$' had already appeared in line (2). The existential rule requires a new name. The correct version of this tree would remain open. (It will extend infinitely.)
+
+\subsection{Main Connectives}
+
+You can only ever decompose the main connective of a formula. If you have a formula like $\qa x \qe y (\enot Ryx) \eand (Fa \eif Fb)$ you can't decompose the universal quantifier. This formula is a conjunction, so the only decomposition rule possible is that for conjunction.
+
+It's often tempting to decompose a quantifier that's not the main connective. First, you can't. The rules don't work that way. Second, there are several ways that this can cause trouble. For instance, an existential quantifier within the scope of either a negation or the antecedent of a conditional will become a universal quantifier by the time the formula is decomposed. Second, if a quantifier is inside the scope of another quantifier, decomposing the inner quantifier first is effectively moving the inner quantifier outside the other quantifier. This quantifier scope shift is particularly problematic for an existential quantifier inside a universal quantifier.
+
+
+It may help you to remember this by remembering our earlier example that `Every day someone is struck by lightning' is true, but `Someone is struck by lightning every day' is false, as different people are struck each day. 
+
+\subsection{Decomposing Universals Only Once}
+
+It's very easy to forget that a universal quantifier can be decomposed multiple times in a tree. And often a single use will close some or all branches. But if there's an open branch, you'll need to identify every name used in that branch, and make sure that every universal quantifier in that branch is decomposed for every name. This is important for populating the counter-example, and also because occasionally it will close a seemingly open branch.
+
+\subsection{Negating Formulas in the Root}
+When testing consistency, we want to check if all the formulas can be true together. So no formula is negated. When testing validity, we want to check if all the premises can be true and the conclusion false (a counter-example). So we negate the conclusion only. When testing if a formula is a logical truth, we want to check if it can be false, so we negate the formula. It is very easy to tangle these up - particularly to forget to negate the conclusion of an argument. Then the information in the root of your tree is rotten. And a tree with a rotten root won't turn out well.
+
+
+\subsection{Reading off Counter-examples incorrectly}
+
+When you read off a counter-example from an open branch, make sure that you only trace up the tree towards the root. Do not use any atomic formulas that are on other branches, even if they are also open. If a name doesn't appear on your chosen open branch, its not needed in the counter-example. All the predicates in the root are needed, however.
+
+
+Once you have your list of names from the open branch, and predicates from the root, draw up your tables -- one for all the one-place predicates, and one for each two-place predicate. Then fill in the values for each atom in your open branch. Any cell in the tables that isn't filled with a \vT\ or \vF\ is then filled with a \vU.
+
+When you complete your partial predicate truth table, you should be able to fill in all the cells even with the missing truth values. If you need a truth value to calculate a row, check if you didn't decompose all names in one of the universal quantified formulas, as that's the most likely way to skip generating a needed atomic formula.
+
+
+
+
+%\subsection{Final Tips}
+%\begin{itemize}
+%\item Negate your conclusion.
+%
+%\item Know your decomposition rules.
+%
+%\item Branch rules before column rules.
+%
+%\item Re-use your universal quantifiers.
+%\end{itemize}
+
+
+\pagebreak
+\practiceproblems
+
+\noindent\solutions
+\problempart
+\label{pr.PL.trees.tautology}
+Use a tree to test whether the following formulas are tautologies. If they are not tautologies, describe a model on which they are false.
+\begin{earg}
+\item $\qa{x}{\qab{y}{Gxy \eif \qeb{z}{Gxz}}}$
+\item $\qab{x}{Fx} \eor \qab{x}{Fx \eif Gx}$
+\item $\qab{x}{Fx \eif (\enot Fx \eif \qab{y}{Gy}}$
+\item $\qeb{x}{Jx} \eiff \enot \qab{x}{\enot Jx}$
+\item $\qeb{x}{Fx \eor \enot Fx}$
+\item $\qab{x}{Fx \eor Gx} \eif (\qab{y}{Fy} \eor \qeb{x}{Gx})$
+\end{earg}
+
+\noindent\solutions
+\problempart
+\label{pr.PL.trees.validity}
+Use a tree to test whether the following arguments are valid. If they are not, give a model as a counterexample.
+\begin{earg}
+\item $Fa$, $Ga$ \therefore\ $\qab{x}{Fx \eif Gx}$
+\item $Fa$, $Ga$ \therefore\ $\qeb{x}{Fx \eand Gx}$
+\item $\qa{x}{\qeb{y}{Lxy}}$ \therefore\ $\qe{x}{\qab{y}{Lxy}}$
+\item $\qeb{x}{Fx \eand Gx}$, $Fb \eiff Fa$, $Fc \eif Fa$ \therefore\ $Fa$
+\item $\qa{x}{\qeb{y}{Gyx}}$ \therefore\ $\qa{x}{\qeb{y}{Gxy \eor Gyx}}$
+\end{earg}
+
+\noindent\problempart
+\label{pr.PL.trees.translation.and.validity}
+Translate each argument into PL, then use a tree to evaluate for validity. If they are invalid give a model as a counterexample.
+\begin{earg}
+\item Every logic student is studying. Patrick is not studying. Therefore, Patrick is not a logic student.
+\item Kane Williamson is a New Zealand male athlete. Therefore, some athletes are New Zealand.
+\item The All Blacks are going to win the game. Every team who wins the game will be celebrated. Therefore, the All Blacks will be celebrated.
+\item The All Blacks are going to win the game. Therefore, the Springboks are not going to win the game.
+\item All cats make Deborah sneeze, unless they are hairless. Some hairless cats are cuddly. Therefore, some cuddly things make Deborah sneeze.
+\end{earg}
+
+\end{document}

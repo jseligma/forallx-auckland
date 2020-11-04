@@ -1,0 +1,2435 @@
+\documentclass[PHIL101-Textbook.tex]{subfiles}
+\begin{document}
+
+\part{Models}\label{part:models}
+
+\chapter{Predicate Models}\label{ch:pl-models}
+
+\section{Models}
+
+In \tfl\, we use truth tables to calculate truth values of complex formulas based on the values of simpler ones, and see how the truth-value of formulas impact on that of others. In \pl, because we are dealing with a more complex language, we need something more complex than truth tables: \emph{models}. 
+Models have a domain, predicate tables, relation tables, and identity tables.
+Models, like truth tables, are based on stipulations about the simplest bits of our language, namely names and predicates.
+They give possible ways information about predicates and names could be combined.
+With this basic information provided by models, we can use logic to find the truth value of
+more complex formulas.
+Like in \tfl, we can also use models to figure out semantic notions that hold between formulas (consistency, validity, etc). 
+
+
+\section{The Domain}
+
+The \emph{domain} is the collection of things that we are talking about. So if we want to talk about people in Auckland, we define the domain to be people in Auckland.
+The quantifiers \emph{range over} the domain. Given this domain, `$\qa{x}$' can be read roughly as `Every person in Auckland is such that\ldots' and `$\qe{x}$' as `Some person in Auckland is such that\ldots'. 
+
+In \pl, the domain must always include at least one thing. We insist that each name must pick out exactly one thing in the domain. If we want to name people in places beside Auckland, then we need to include those people in the domain. 
+\factoidbox{
+  A domain must have \emph{at least} one member. Each member of the domain must be named. A name must pick out \emph{exactly} one member of the domain, but a member of the domain may be picked out by more than one name.}
+
+Because of the close relationship between names and objects in the domain, we use a notation that makes it clear which item of the domain names refer to. If $a$ is a name in a symbolisation key, we will write \dom a\ for the object of the domain it refers to. Take for instance this symbolisation key:
+
+\begin{ekey}
+\item[a] Andrew
+\item[e] Emily 
+\item[k] Kim
+\item[\atom P x] $x$ is a philosopher of science. 
+\item[\atom L xy ] $x$ works with $y$.
+\item[x=y] $x$ is identical to $y$.
+\end{ekey}
+
+\noindent Models for this key will have at most three items, because each item in the domain must be named, and the key only has three names. In a model, we would write a domain as:
+
+\[\domain \, = \, \{\dom a, \dom e, \dom k\}\]
+
+The name $a, e$ and $k$ respectively refer to items $\dom a, \dom e$ and $\dom k$ of the domain. We could have a different model with a different domain in which two names refer to the same item: 
+
+\[\domain \, = \, \{\dom a, \dom e(=\dom k)\}\]
+
+This is a domain with two items $\dom a$ and $\dom e$, and the names $e$ and $k$ from the symbolisation key refer to the same item: \dom e. 
+
+
+\logic{When you start to do advanced work in logic, the assumption that every member of the domain must be named is dropped. If you think about it, that makes sense, because we don't have names for everything. If we did, every rock, every leaf of grass, indeed every subatomic particle would have a name. In this course, however, we will make our lives much simpler by requiring everything in the domain to have a name.}
+
+\mathematics{We acknowledge mathematical reasons against the assumption that everything in a domain has a name. These go back to the work of Georg Cantor in the Nineteenth century about sizes of infinity. If a domain has an uncountable number of items (for instance the domain that contains all real numbers), then it is \emph{impossible} to name them all! This follows from what some of you might know as the \emph{pigeonhole principle}. Such mathematical sophistication goes well beyond the practical purposes of this book.}
+
+
+Numbers and numerals provide an excellent way to appreciate the distinction between items and names. You may have wondered about the difference between the number 1 and the numeral `one'. Consider the following domain and symbolisation key:
+
+\[\domain \, = \, \{\dom 1, \dom 2, \dom 3, \dom 4 \}\]
+
+\begin{ekey}
+\item[i] One
+\item[ii] Two
+\item[iii] Three
+\item[iv] Four
+\end{ekey}
+
+There are many ways we can assign the names `$i$', `$ii$', `$iii$', and `$iv$' to our domain. The Romans decided to give the item 1 the name `$i$', 2 the name `$ii$', 3 the name `$iii$', and 4 the name `$iv$'. In English we use the names `one', `two', `three', and `four'. Numerals (in any language) are merely names that refer to numbers. Numbers are the actual items in the mathematical domain.
+
+
+
+
+
+\section{Predicate tables}
+
+Carol has a small dog called Benji, and a Maine Coon cat called Louie. Maine Coon cats are big! We will analyse this case with this symbolisation key:  
+
+\begin{ekey}
+\item[b] Benji
+\item[l] Louie
+\item[\atom B x] x is big.
+\item[\atom D x] x is a dog.
+\item[\atom M x] x is a Maine Coon cat. 
+\end{ekey}
+
+\noindent We record information about Carol's pets in a model using a \emph{predicate table}:
+
+\begin{center}
+  \begin{tabular}{cc}
+	$\domain = \{\dom b, \dom l\}$ & 
+	$\begin{array}{c|ccc}
+	    &\atom B x& \atom D x& \atom M x\\ \hline
+	  b & \vF & \vT & \vF\\
+	  l & \vT & \vF & \vT
+	\end{array}$
+  \end{tabular}
+\end{center}
+
+\noindent The model has a domain with two items, \dom b (Benji) and \dom l (Louie), and a predicate table that records information about them. Once we have a predicate table, we no longer need to work with the domain. We've collated the data in our table, so we can focus on how to treat the information it contains logically. We will no longer list the domain unless it is important to do so, although every model has a domain at its foundation. So let's focus on the predicate table:  
+
+\[\begin{array}{c|ccc}
+	  &\atom B x& \atom D x& \atom M x\\ \hline
+	  b & \vF & \vT & \vF\\
+	  l & \vT & \vF & \vT
+	\end{array}\]
+
+\noindent In the leftmost column, we list all the names of items in the domain, in this case the items $\dom b$ and $\dom l$. The remaining columns, one for each predicate of the symbolisation key, tell us which items they apply to. For example, the second column tells us that $b$ isn't a $B$ ($B(b) = \vF$), whereas $l$ is a $B$ ($B(l) = \vT$). Hence, this predicate table models a case in which Benji is big, and Louie is big. We can use \pl\ to read off all the basic information of this case: 
+
+\[\begin{array}{ccc}
+	\enot \atom B b& \atom D b& \enot \atom M b\\
+	\atom B l & \enot \atom D l & \atom M l
+\end{array}\]
+
+
+\noindent We can use \pl\ formulas to express the complex information contained in the table:
+
+\[\begin{array}{cc}
+	\atom D b \eand \atom \enot B b & \atom B l \eand M l\\
+	\atom B b \eif  \enot \atom D b & \atom M l \eor \enot \atom B l
+\end{array}\]
+
+\noindent Given a predicate table that record information about Benji and Louie, we can test the truth of complex statements, such as:
+
+\begin{earg}
+\item[\ex{Benji}]If Benji is a dog or a Maine Coon cat, then Benji is big.
+\item[\ex{Louie}]Louie is not a big dog or a Maine Coon cat.
+\end{earg}
+
+\noindent First we symbolise the statements in \pl:
+
+\begin{earg}
+\item[\ex{Benjipl}] $(\atom D b \eor \atom M b) \eif \atom B b$
+\item[\ex{Louiepl}] $\enot((\atom B l \eand \atom D l) \eor \atom M l)$
+\end{earg}
+
+\noindent Then we use the information from the predicate table to find the truth-values. We start by reading off the values from the predicate table: 
+
+\[\begin{array}{ccccc}
+	(\atom D b&\eor&\atom Mb)&\eif& \atom Bb\\\hline
+	\vT& & \vF&& \vF
+\end{array}\]
+
+\noindent After this step, we no longer need the predicate table. The rest is found by logic, using truth-tables. We start with the disjunction: 
+
+\[\begin{array}{ccccc}
+	(\atom D b&\eor&\atom Mb)&\eif& \atom Bb\\\hline
+	\gT & \vT & \gF&& \vF
+\end{array}\]
+
+\noindent Finally, we find the value of the conditional:
+
+\[\begin{array}{ccccc}
+	(\atom D b&\eor&\atom Mb)&\eif& \atom Bb\\\hline
+	\gT & \gT & \gF&\vF& \gF
+\end{array}\]
+
+\noindent Our logical analysis of Statement \ref{Benji} tells us that it is false in the given model. We can similarly use \pl\ to analyse Statement \ref{Louie}, resulting in this truth-table:
+
+\[\begin{array}{cccccc}
+	\enot &((\atom B l&\eand&\atom D l)&\eor& \atom M l)\\\hline
+	\vF & \gT & \gF & \gF & \gT& \gT
+\end{array}\]
+
+\noindent Our analysis of Statement \ref{Louie} reveals that it is also false in this model.\\
+
+We can now see the primary role of predicate tables in models: they lay out the basic information of the case being modelled, so that we can truth-functionally compose it into more complicated formulas. The predicate tables for a model in \pl\ serve the same role as the valuation of the propositional variables in \tfl.
+
+This means that our counter-example will be represented by a model with predicate tables in \pl\, rather than a simple valuation. Our methods for testing consistency, validity, etc will need to allow for this extra complexity.
+
+\medskip
+
+
+
+
+ Different cases will be modelled by different tables, which give us different information. Consider for instance this case: 
+
+\[\begin{array}{c|ccc}
+	  &\atom B x& \atom D x& \atom M x\\ \hline
+	b & \vT & \vF& \vF\\
+	l & \vF & \vF & \vT
+\end{array}\]
+
+\noindent This predicate table models a case in which Benji, not Louie, is a big Maine Coon cat, and Louie is neither a dog nor a Maine Coon cat, and is not big. With this new predicate table, we again start by reading off the atomic information and plugging it in a truth table symbolising Statement \ref{Benji}: 
+
+\[\begin{array}{ccccc}
+	(\atom D b&\eor&\atom Mb)&\eif& \atom Bb\\\hline
+	\vF& & \vF&& \vT
+\end{array}\]
+
+\noindent Using logic to find the truth-value of the whole formula, we get:
+
+\[\begin{array}{ccccc}
+	(\atom D b&\eor&\atom Mb)&\eif& \atom Bb\\\hline
+	\gF & \gF & \gF&\vT& \gT						  
+\end{array}\]
+
+\noindent Again, we use \pl\ to analyse the symbolisation of Statement \ref{Louie} for this case:
+
+\[\begin{array}{cccccc}
+	\enot &((\atom B l&\eand&\atom D l)&\eor& \atom M l)\\\hline
+	\vF & \gF & \gF & \gF & \gT& \gT
+\end{array} \]
+
+\noindent In this case, Statement \ref{Benji} is true and statement \ref{Louie} is false. \\
+
+Predicate tables list all the possible ways information about predicates and names can be combined. Some are realistic, some aren't, but this is not something logic can assess. What logic can do is to calculate the information of complex formulas given the simple information contained in a predicate table. Logic even allows for weird cases that don't match up with reality, for instance:
+
+\[\begin{array}{c|ccc}
+	  &\atom B x& \atom D x& \atom M x\\ \hline
+	b & \vT & \vT& \vT\\
+	l & \vF & \vF & \vF
+\end{array}\]
+
+\indent This is a predicate table that represents a case in which Benji is big, is a dog, and is a Maine Coon cat. It is not realistic, because dogs aren't cats, but logic is not concerned about that. What matters to logic is how the truth and falsity ascribed to simple facts combine into complex logical formulas.
+
+%\pagebreak
+
+%\pagebreak
+
+
+\section{Many-place Predicates}
+Predicate tables aren't too bad to understand when they only contain one-place predicates, but it gets messier when we consider two-place predicates. Consider a symbolisation key like:
+\begin{ekey}
+\item[\atom L xy ] $x$ loves $y$
+\end{ekey}
+Given what we said above, this symbolisation key should be read as saying:
+\begin{earg}
+\item[\textbullet] `$\atom L {xy} $' and `$x$ loves $y$' are true of exactly the same things
+\end{earg}
+So, in particular:
+\begin{earg}
+\item[\textbullet] `$\atom L xy $' is to be true of $x$ and $y$ (in that order) iff $x$ loves $y$.
+\end{earg}
+It is important that we insist upon the order here, since love -- famously -- is not always reciprocated. The way we represent information in predicate tables will make the order explicit. 
+
+Suppose we are using the following names for people:
+\begin{ekey}
+\item[b] de Beauvoir
+\item[l] Lenin
+\item[m] Marx
+\item[s] Sartre
+\end{ekey}
+
+\noindent We can use a predicate table to represent who loves who in different cases, such as:
+
+
+\[\begin{array}{c|cccc}
+	\atom L {x y} & b & l & m & s\\ \hline
+	b & \vT & \vF & \vF & \vF \\
+	l & \vT & \vT & \vT & \vT\\
+	m & \vF & \vF & \vT & \vF\\
+	s & \vF & \vF & \vF & \vF	
+\end{array}\]
+\noindent Given this table, we read the information in a specific way. The top corner tells us what predicate we are considering, in this case the love predicate $\atom L {xy}$:
+
+\[\begin{array}{c|cccc}
+	\cellcolor{gray!15}\atom L {x y} & b & l & m & s\\ \hline
+	b & \vT & \vF & \vF & \vF \\
+	l & \vT & \vT & \vT & \vT\\
+	m & \vF & \vF & \vT & \vF\\
+	s & \vF & \vF & \vF & \vF	
+\end{array} \]
+
+
+\noindent A entry in the table tells us whether the name on the left column is related by the predicate to the name on the top row, in that order.
+
+
+
+\[\begin{array}{c|cccc}
+	\atom L {x y} & b & \cellcolor{magenta!35}l & \cellcolor{green!15}m & s\\ \hline
+	b & \vT & \vF & \vF & \vF \\
+	\cellcolor{green!15} l & \vT & \vT & \cellcolor{green!15}\vT & \vT\\
+	\cellcolor{magenta!35}m & \vF & \cellcolor{magenta!35}\vF & \vT & \vF\\
+	s & \vT & \vF & \vF & \vF	
+\end{array} \]
+
+
+\noindent The table tells us that $\atom L {l, m}$ is true, because of the value $\vT$ highlighted in green, which tells us that $l$ (in the left column) is related to $m$ (in the top row) by $L$. The table also tells us that $\atom L {m, l}$ is false, because of the value $\vF$ highlighted in magenta, which tells us that $m$ is not related to $l$ by $L$. Simply put, the predicate table models a case in which Lenin loves Marx, but Marx doesn't love Lenin. Further information can be read in the same way, for instance that Sartre loves de Beauvoir and no-one else, and that de Beauvoir loves herself and no-one else.\\
+
+A model and its predicate tables can only tell us of one possible case amongst many others. Here's for instance a case in which everyone (in the domain) loves everyone: 
+
+
+\[\begin{array}{c|cccc}
+	\atom L {x y} & b & l & m & s\\ \hline
+	b & \vT & \vT & \vT & \vT \\
+	l & \vT & \vT & \vT & \vT\\
+	m & \vT & \vT & \vT & \vT\\
+	s & \vT & \vT & \vT & \vT	
+\end{array} \]
+
+This simple table can tell many stories -- that of mutual love, unfulfilled yearning, jealousy, betrayal, polyamory, and self-love. Combining it with predicates for sex, hate, and death, and you have the key elements for a heart-wrenching best-seller: `\pl: A Logical Romantic Tragedy'.
+
+\logic{Tables work well for one-place and two-place predicates. With three-place predicates, we would need three-dimensional tables, and for four-place predicates, we would need to step in the fourth-dimension. There are general ways to represent information for cases that are about for complex predicates, but you will only learn about those in upper stage logic.}
+
+
+
+
+
+
+\pagebreak
+\practiceproblems
+\problempart
+\label{pr.predicate-tables} Four superheroes walk into a bar...
+
+This symbolisation key has four names:
+
+\begin{ekey}
+\item[b] Batman
+\item[j] Jessica Jones
+\item[s] Spiderman
+\item[w] Wonder Woman
+\end{ekey}
+
+Provide four models, with one, two, three, and four items in the domain. 
+
+
+
+\problempart
+\label{pr.predicate-tables1}
+Given this predicate table:
+
+\[\begin{array}{c|ccc}
+		&\atom F x& \atom G x& \atom H x\\ \hline
+	  a & \vT & \vF & \vT\\
+	  b & \vF & \vT & \vF\\
+	  c & \vT & \vT & \vT\\
+	  d & \vF & \vF & \vF
+	\end{array}\]
+
+\noindent What are the truth-values of the following formulas:
+
+\begin{earg}
+\item $\atom F a, \atom G b,\atom G d$.
+  \item $\enot \atom Fb, \enot \atom Gb, \enot \atom Hb$.
+  \item $\atom F a \eand \atom G a, \atom Fa \eor \atom Ga, \atom Ga \eand (\atom Fa \eand Ha)$.
+  \item $\atom F c \eif \atom Hc, \atom Fc \eif \atom Gd, \atom Gd \eor \enot \atom Hb$.
+	\item $\atom Ga \eif (\atom Hc \eif \atom Hd), \atom Ha \eif (\atom Hc \eif \atom Hd)$.
+\end{earg}
+
+
+\noindent\problempart \label{pr.predicate-tables2}
+Given this predicate table:
+
+\[\begin{array}{c|ccc}
+		&\atom F x& \atom G x& \atom H x\\ \hline
+	  a & \vT & \vT & \vF\\
+	  b & \vF & \vT & \vT\\
+	  c & \vT & \vF & \vF\\
+	  d & \vF & \vF & \vT
+	\end{array}\]
+
+\noindent What are the truth-values of the formulas from Exercise \ref{pr.predicate-tables1}?
+\medskip
+
+
+\noindent \problempart \label{pr.predicate-tables-backward-true}
+For each group of formulas, provide a predicate table that makes them all true. If you cannot, explain why. 
+
+\begin{earg}
+\item $\atom F b, \atom G c, \atom G d, \atom P a$.
+  \item $\atom F a, \enot \atom Fc, \enot \atom Gb, \atom G c, \enot \atom He$.
+  \item $\enot \atom F a \eand \enot \atom F b, \atom Fa \eor \atom Gc, \atom Gc \eif \atom Fb$.
+  \item $\atom F a, \atom F a\eif (\enot \atom G a \eor \atom G b), \enot (\atom G b \eor \atom F b)$.
+	\item $\atom Ga \eif (\atom Hc \eif \atom Hd), \atom Ha \eif (\atom Hc \eif \atom Hd)$.
+\end{earg}
+
+\noindent \problempart \label{pr.predicate-tables-backward-false}
+For each group of formulas, provide a predicate table that makes them all false. If you cannot, explain why. 
+ 
+\begin{earg}
+\item $\atom F b, \atom G c, \atom G d, \atom P a$.
+  \item $\atom F a, \enot \atom Fc, \enot \atom Gb, \atom G c, \enot \atom He$.
+  \item $\enot \atom F a \eand \enot \atom G a, \atom Fa \eor \atom Gc, \atom Gc \eif \atom Fb$.
+  \item $\atom F a, \atom F a\eif (\enot \atom G a \eor \atom G b), \enot (\atom G b \eor \atom F b)$.
+	\item $\atom Ga \eif (\atom Hc \eif \atom Hd), \atom Ha \eif (\atom Hc \eif \atom Hd)$.
+\end{earg}
+
+
+\problempart
+\label{pr.relation-tables}
+
+Given this two-place predicate table:
+
+
+ \[\begin{array}{c|cccc}
+	\atom L {x y} & b & l & m & s\\ \hline
+	b & \vT & \vF & \vF & \vF \\
+	l & \vT & \vT & \vT & \vT\\
+	m & \vF & \vF & \vT & \vF\\
+	s & \vF & \vF & \vF & \vF	
+  \end{array}\]
+
+\noindent What is the truth-value of the following formulas:
+
+\begin{earg}
+\item $\atom L {b,b}, \atom L {b,s}, \atom L {s,s}, \atom L {m,l}$.
+\item $\enot\atom L {b,b}, \enot\atom L {m,s}, \enot\atom L {l,m}$.
+\item $\atom L {l,b}\eand \atom L {m,m}, \atom L {s,s} \eor \atom L {s,l}, \atom L {m,s} \eand (\atom L{m,s}  \eor \atom L {l,l})$.
+\item $\atom L {l,m} \eif \atom L {m,l}, \atom L {m,l} \eif \atom L {l,m}$.
+\item $\atom L {l,s} \eif (\atom L {m,m} \eif (\atom L {l,b}\eand \atom L {m,s}))$.
+\end{earg}
+
+\noindent \problempart
+\label{pr.relation-tables-2} Given these predicate tables:
+
+\begin{center}
+  \begin{tabular}{ccc}
+%\multicolumn{2}{l}{$\domain \, = \, \{\dom a, \dom b, \dom c, \dom d\}$}\\
+$\begin{array}{c|cc}
+	 & \atom P x & \atom Q x\\ \hline
+   a &\vF & \vF\\
+   b &\vT & \vF\\
+   c &\vF & \vT\\
+   d &\vT & \vT\\ 
+ \end{array}$
+   &
+$\begin{array}{c|cccc}
+	\atom R {x y} & a & b & c & d\\ \hline
+	a & \vT & \vF & \vF & \vT \\
+	b & \vF & \vT & \vT & \vT\\
+	c & \vF & \vF & \vT & \vF\\
+	d & \vF & \vT & \vF & \vF	
+ \end{array}$
+	&
+$\begin{array}{c|cccc}
+	\atom S {x y} & a & b & c & d\\ \hline
+	a & \vF & \vF & \vT & \vF \\
+	b & \vT & \vT & \vF& \vF\\
+	c & \vT & \vT & \vT & \vF\\
+	d & \vF & \vF & \vF & \vF	
+\end{array}$
+\end{tabular}
+\end{center}
+
+\noindent What is the truth-value of the following formulas:
+
+\begin{earg}
+\item $\atom P a, \enot \atom Q c, \atom P a \eor \enot \atom Q d$
+\item $\atom P d \eor \atom R {a,b}, \enot \atom P a \eand \atom S {c,c}, \atom S {d,b} \eor \atom R {a,c}$.
+\item $\atom Q b \eif (\atom R{a,c}\eand \atom S{d,d}), \atom P d \eif \enot (\atom R{c,c}\eif\atom S {c,d})$.
+\item $\enot((\atom R {a,b}\eif \atom R {c,a}), \atom P d \eand \atom Q d, \enot \atom S {c,b} \eif (\atom P c \eand \atom Q a)$.
+\end{earg}
+
+\noindent \problempart
+\label{pr.relation-tables-3}
+For each group of formulas, provide a model that makes them all true. If you cannot, explain why. 
+
+\begin{earg}
+\item $\atom P a, \enot \atom Q c, \atom R{a,b}, \enot \atom S{b,c}$
+\item $\atom P b \eand \atom R {a,b}, \enot \atom P a \eor \atom R {a,a}, \atom S {b,a} \eor \atom R {c,a}$.
+\item $\atom F a, \atom F a \eif \atom G b, \atom L {a,b} \eand \enot \atom G b$.
+\item $\enot((\atom R {a,b}\eif \atom R {c,a}), \atom P d \eand \atom Q d, \enot \atom S {c,b} \eif (\atom P c \eand \atom Q a)$.
+\end{earg}
+
+\noindent \problempart
+\label{pr.relation-tables-4}
+For each group of formulas in Exercise \ref{pr.relation-tables-3} above, provide a model that makes them all false. If you cannot, explain why. 
+
+%\begin{earg}
+%\item $\atom P a, \enot \atom Q c, \atom R{a,b}, \enot \atom S{b,c}$
+%\item $\atom P b \eand \atom R {a,b}, \enot \atom P a \eor \atom R {a,a}, \atom S {b,a} \eor \atom R {c,a}$.
+%\item $\atom F a, \atom F a \eif \atom G b, \atom L {a,b} \eand \enot \atom G b$.
+%\item $\enot((\atom R {a,b}\eif \atom R {c,a}), \atom P d \eand \atom Q d, \enot \atom S {c,b} \eif (\atom P c \eand \atom Q a)$.
+%\end{earg}
+
+
+
+
+\chapter{Models with Identity}
+\label{ch:models.identity}
+
+\section{Identity tables}
+
+We talked of identity as a special predicate of \pl. We write it a bit differently than other two-place predicates: `$x=y$' instead of `$\atom I {xy}$' (for example). That it is a special predicate is most apparent by looking at \emph{identity tables}. Identity tables are predicate tables that obey the specific principles that govern identity. These principles are:
+
+\begin{center}
+  \begin{tabular}{@{}lp{10cm}@{}}
+	Reflexivity& Everything is identical to itself.\\
+	Symmetry & If $a$ is identical to $b$, then $b$ is identical to $a$.\\
+	Transitivity & If $a$ is identical to $b$, and $b$ is identical to $c$, then $a$ is identical to $c$.
+  \end{tabular}
+\end{center}
+
+\mathematics{A relation that is reflexive, symmetric and transitive is called an \emph{equivalence relation}.}
+
+\paragraph{Reflexivity}
+
+That everything is identical to itself is represented in identity tables by (always) having a diagonal of \vT's: 
+
+\begin{center}
+\[\begin{array}{c|ccc}
+	= & a & b & c \\ \hline
+	a & \cellcolor{green!15}\vT & & \\
+	b & & \cellcolor{green!15}\vT & \\
+	c & & & \cellcolor{green!15}\vT \\
+\end{array} \]
+\end{center}
+
+\noindent The values highlighted in green represent that $a=a$, $b=b$ and $c=c$. From now on, we will always include a diagonal of \vT's in identity tables. 
+
+\paragraph{Symmetry}
+
+That the order of names in an identity predicate does not matter is represented in identity tables by always copying the value for one ordering to the other. This has an interesting geometric effect on the identity table. You can imagine a mirror being placed over the main diagonal of the truth-table, with the values identical on both sides of the mirror. 
+
+
+\begin{center}
+\[\begin{array}{c|ccc}
+	= & a & b & c \\ \hline
+	a & \vT & \cellcolor{green!15} \vT& \cellcolor{magenta!35} \vF \\
+	b & \cellcolor{green!15} \vT & \vT &  \\
+	c & \cellcolor{magenta!35} \vF&& \vT \\
+\end{array} \]
+\end{center}
+
+\noindent The values highlighted in green represent the symmetry between $a=b$ and $b=a$; both are true. The values highlighted in magenta represent the symmetry of $a=c$ and $c=a$; both are false.
+
+
+\paragraph{Transitivity}
+
+Transitivity isn't as easy to spot in identity tables as reflexivity or symmetry, but is just as important. 
+
+\begin{center}
+\[\begin{array}{c|ccc}
+	= & a & b & c \\ \hline
+	a & \vT & \cellcolor{green!15} \vT& \cellcolor{blue!15} \vT \\
+	b &  & \vT & \cellcolor{green!15} \vT \\
+	c &  &  & \vT \\
+\end{array} \]
+\end{center}
+
+\noindent The values highlighted in green tell us that $a=b$, and that $b=c$. Transitivity of identity then tells us that $a=c$, which is highlighted in blue. Transitivity could manifest in other configurations of identity tables, such as:
+
+\begin{center}
+  \begin{tabular}{ccc}
+	$\begin{array}{c|ccc}
+	   = & a & b & c \\ \hline
+	   a & \vT & \cellcolor{blue!15} \vT & \cellcolor{green!15} \vT \\
+	   b &  & \vT & \\
+	   c &  & \cellcolor{green!15} \vT & \vT \\
+	 \end{array}$
+	 &
+   $\begin{array}{c|ccc}
+	  = & a & b & c \\ \hline
+	  a & \vT &  & \cellcolor{green!15} \vT \\
+	  b & \cellcolor{green!15} \vT & \vT & \cellcolor{blue!15} \vT\\
+	  c &  & & \vT \\
+	\end{array}$
+	 & 
+   $\begin{array}{c|ccc}
+	  = & a & b & c \\ \hline
+	  a & \vT & \cellcolor{green!15} \vT &  \\
+	  b & & \vT & \\
+	  c & \cellcolor{green!15} \vT & \cellcolor{blue!15} \vT & \vT \\
+	\end{array}$\\ 
+	$a=c$ & $b=a$& $c=a$\\
+	$c=b$ & $a=c$& $a=b$\\
+	$\therefore a=b$ &$\therefore b=c$ & $\therefore c=b$
+  \end{tabular}
+\end{center}
+
+\noindent To keep track of transitivity, we recommend you write identity statements under the tables, as we just illustrated. 
+
+
+\section{Identity \& Predicate tables}
+
+There's a fundamental principle that describes how identity and predicate tables interact. It is attributed to Wilhelm Gottfried Leibniz in his \emph{Discourse on Metaphysics}, and is called the \emph{indiscernibility of identicals}:
+
+\factoidbox{Identical things have exactly the same properties.}
+
+\noindent For example, Spiderman can shoot webs, and Spiderman is identical to Peter Parker, so Peter Parker can also shoot webs. This principle tells us that the these tables are incompatible:
+
+
+\begin{center}
+  \begin{tabular}{ll}
+	$\begin{array}{c|cc}
+	   = & p & s\\ \hline
+	   p &\vT&\vT\\
+	   s &\vT&\vT
+	 \end{array}$
+ &
+	$\begin{array}{c|c}
+		 & \atom W x\\ \hline
+	   p & \vF \\
+	   s & \vT 
+	 \end{array}$
+  \end{tabular}
+\end{center}
+
+\noindent They are incompatible because the identity table tells us that $p = s$, but the predicate table tells us that $\atom W p = \vF$ and $\atom W s =\vT$.
+
+\medskip
+
+%In combination with the identity tables principles from the last section, 
+\subsection*{Identical implies Indiscernible}
+
+The principle of \emph{indiscernibility of identicals} helps us to complete information described by partial predicate and identity tables. The principle of \emph{indiscernibility of identicals} tells us that identical things have the same properties. This means these things have the same rows for all their predicate tables. Consider these partial tables: 
+
+\begin{center}
+  \begin{tabular}{ll}
+	$\begin{array}{c|ccc}
+		= & a & b & c\\ \hline
+		a &&& \vT\\
+		b \\
+		c
+	\end{array}$
+ &
+	$\begin{array}{c|c}
+		& \atom P x \\ \hline
+		a & \vT\\
+		b &\\
+		c
+	 \end{array}$
+  \end{tabular}
+\end{center}
+
+
+We start by using reflexivity, symmetry, transitivity, and the information that $a=c$ to complete as much of the identity table as we can:
+
+\begin{center}
+  \begin{tabular}{ll}
+	$\begin{array}{c|ccc}
+	 = & a & b & c\\ \hline
+	 a &\vT&& \vT\\
+	 b & &\vT\\
+	 c &\vT&&\vT
+	 \end{array}$
+&
+	$\begin{array}{c|c}
+	   & \atom P x \\ \hline
+	 a & \vT\\
+	 b &\\
+	 c
+	 \end{array}$
+  \end{tabular}
+\end{center}
+
+\noindent Next, we apply the \emph{indiscernibility of identicals} to complete the predicate table. We will make sure identical names have the same predicate entries.
+
+\pagebreak
+
+Because $a = c$, the rows in the predicate tables for $a$ and for $c$ must be the same, we add a \vT\ for $c$ under $\atom P x$: 
+
+\begin{center}
+  \begin{tabular}{ll}
+	$\begin{array}{c|ccc}
+	 = & a & b & c\\ \hline
+	 a &\vT&   &\vT\\
+	 b &   &\vT\\
+	 c &\vT&   &\vT
+	\end{array}$
+  & 
+	$\begin{array}{c|c}
+	  & \atom P x \\ \hline
+	  \cellcolor{blue!15} a & \cellcolor{blue!15}\vT\\
+						  b &\\
+	  \cellcolor{blue!15} c & \cellcolor{blue!15}\vT
+	\end{array}$
+  \end{tabular}
+\end{center}
+
+\noindent And this is all that we can do. As we don't have enough information for the remaining entries, we write `$\vU$' in the gaps: 
+
+\begin{center}
+  \begin{tabular}{ll}
+	$\begin{array}{c|ccc}
+	 = & a & b & c\\ \hline
+	 a & \vT & \vU & \vT\\
+	 b & \vU & \vT & \vU\\
+	 c & \vT & \vU & \vT
+	 \end{array}$
+	&
+	$\begin{array}{c|c}
+	   & \atom P x \\ \hline
+	 a & \vT\\
+	 b & \vU\\
+	 c & \vT
+						
+	 \end{array}$
+  \end{tabular}
+\end{center}
+
+\philosophy{Leibniz also believed the reverse of the \emph{indiscernibility of identicals}: if two things have the same properties, then they are identical. This is called the \emph{identity of indiscernibles}. Our logic does not follow this principle; we allow that two \emph{distinct} objects might have exactly the same properties.} 
+
+\paragraph{WARNING} We'd really like you to avoid a common mistake when completing tables. If you know that $a=b$ and $\atom P a$, then you also know that $\atom P b$. But you \emph{can't} reason from $a \neq b$ and  $\atom P a$ to $\enot \atom P b$. For example John Key and Helen Clark are not the same person, but they are both past prime ministers of New Zealand. Suppose you are given those tables: 
+
+\begin{center}
+  \begin{tabular}{ll}
+  $\begin{array}{c|cc}
+	   = & j & h\\ \hline
+	   j && \vF\\
+	   h
+	 \end{array}$  & $\begin{array}{c|c}
+	   & \atom P x \\ \hline
+	   j & \vT\\
+	   h & 
+	 \end{array}$
+  \end{tabular}
+\end{center}
+
+\noindent You can use reflexivity and symmetry to complete the identity table, but that's it. All you have is that $j\neq h$ and that $\atom P j$, which leaves open whether $\atom P h$ or not:
+
+
+\begin{center}
+  \begin{tabular}{ll}
+  $\begin{array}{c|cc}
+	   = & j & h\\ \hline
+	   j &\vT& \vF\\
+	   h & \vF & \vT
+	 \end{array}$  & $\begin{array}{c|c}
+	   & \atom P x \\ \hline
+	   j & \vT\\
+	   h & \vU
+	 \end{array}$
+  \end{tabular}
+\end{center}
+
+
+\subsection*{Discernible implies Non-identical}
+When completing tables, you can also use negative information with the \emph{converse indiscernibility of identicals} principle: 
+
+\factoidbox{ Things that have different properties are non-identical. }
+
+
+\noindent For example, Serena Williams has won 23 grand slams, and Roger Federer has won 20, so Serena Williams is not identical to Roger Federer. To apply the \emph{converse indiscernibility of identicals} principle, we look for rows that have different entries.
+%\begin{center}
+%  \begin{tabular}{ll}
+%	$\begin{array}{c|ccc}
+%	 = & a & b & c\\ \hline
+%	 a && \\
+%	 b\\
+%	 c
+%	 \end{array}$
+%	 &
+%	$\begin{array}{c|c}
+%	 & \atom P x \\ \hline
+%	 \cellcolor{magenta!35} a &  \cellcolor{magenta!35}\vT\\
+%	 \cellcolor{magenta!35} b & \cellcolor{magenta!35} \vF\\
+%							c &  
+%	 \end{array}$
+%  \end{tabular}
+%\end{center}
+For example, consider these partial tables: 
+
+\begin{center}
+  \begin{tabular}{ll}
+  $\begin{array}{c|ccc}
+	 = & a & b & c\\ \hline
+	 a && \\
+	 b \\
+	 c
+	 \end{array}$
+&
+	$\begin{array}{c|c}
+	   & \atom P x \\ \hline
+	 a & \vT\\
+	 b & \\
+	 c & \vF
+	 \end{array}$
+  \end{tabular}
+\end{center}
+
+\noindent We start with the identity table, using reflexivity, which we can always apply: 
+
+\begin{center}
+  \begin{tabular}{ll}
+  $\begin{array}{c|ccc}
+	 = & a & b & c\\ \hline
+	 a &\vT&   &\\
+	 b &   &\vT&\\
+	 c &   &   &\vT
+	 \end{array}$
+&
+	$\begin{array}{c|c}
+	   & \atom P x \\ \hline
+	 a & \vT\\
+	 b & \\
+	 c & \vF
+	 \end{array}$
+  \end{tabular}
+\end{center}
+
+\noindent Next, we apply \emph{converse indiscernibility of identicals}. We look for rows with different entries:
+
+\begin{center}
+  \begin{tabular}{ll}
+  $\begin{array}{c|ccc}
+	 = & a & b & c\\ \hline
+	 a &\vT&   &\\
+	 b &   &\vT&\\
+	 c &   &   &\vT
+	 \end{array}$
+&
+	$\begin{array}{c|c}
+							  & \atom P x \\ \hline
+	 \cellcolor{magenta!35} a & \cellcolor{magenta!35}\vT\\
+							b & \\
+	 \cellcolor{magenta!35} c & \cellcolor{magenta!35}\vF
+	\end{array}$
+  \end{tabular}
+\end{center}
+
+\noindent Because $\atom P a$ is true, but not $\atom P c$, we know that $a \neq c$, and we can include this information in the identity table: 
+
+\begin{center}
+  \begin{tabular}{ll}
+  $\begin{array}{c|ccc}
+	 = & a & b & c\\ \hline
+	 a &\vT&   &\vF\\
+	 b &   &\vT&\\
+	 c &\vF&   &\vT
+	 \end{array}$
+&
+	$\begin{array}{c|c}
+	   & \atom P x \\ \hline
+	 a & \vT\\
+	 b & \\
+	 c & \vF
+	\end{array}$
+  \end{tabular}
+\end{center}
+
+%\noindent Finally, we use symmetry and transitivity to complete as much as we can in the identity table:
+%
+%\begin{center}
+%  \begin{tabular}{ll}
+%  $\begin{array}{c|ccc}
+%	 = & a & b & c\\ \hline
+%	 a &\gT&   & \gF\\
+%	 b &   &\gT\\
+%	 c &\vF&   &\gT
+%   \end{array}$  
+%   & 
+%   $\begin{array}{c|c}
+%	   & \atom P x \\ \hline
+%	   a & \gT\\
+%	   b & \\
+%	   c&  \gF
+%	 \end{array}$
+%  \end{tabular}
+%\end{center}
+
+\noindent And this is all that we can do. As we don't have enough information for any other entries, we put `$\vU$' in the remaining spaces: 
+
+\begin{center}
+  \begin{tabular}{ll}
+  $\begin{array}{c|ccc}
+	 = & a & b & c\\ \hline
+	 a & \vT & \vU & \vF\\
+	 b & \vU & \vT & \vU\\
+	 c & \vF & \vU & \vT
+   \end{array}$  
+	 & 
+   $\begin{array}{c|c}
+	   & \atom P x \\ \hline
+	 a & \vT\\
+	 b & \vU\\
+	 c & \vF
+	 \end{array}$
+  \end{tabular}
+\end{center}
+%\pagebreak
+
+\paragraph{WARNING} We'd also like you to avoid a second common mistake when completing tables. If you know that $\atom P a$ and $\enot \atom P b$, then you also know that $a \neq b$. But you can't reason from $\atom P a$ and $\atom P b$ to $a=b$. It's quite common for two different things to share a property. For example, John Key and Helen Clark are both past prime ministers of New Zealand, but they are not the same person! Suppose you are given these tables: 
+
+\begin{center}
+  \begin{tabular}{ll}
+  $\begin{array}{c|cc}
+	   = & j & h\\ \hline
+	   j &&\\
+	   h
+	 \end{array}$  & 
+					 $\begin{array}{c|c}
+	   & \atom P x \\ \hline
+	   j & \vT\\
+	   h & \vT
+	 \end{array}$
+  \end{tabular}
+\end{center}
+
+\noindent You can use reflexivity to enter values in the identity table, but that's it. You are given that $\atom P j$ and $\atom P h$, but that doesn't inform you whether $j$ is identical to $h$: 
+
+\begin{center}
+  \begin{tabular}{ll}
+  $\begin{array}{c|cc}
+	   = & j & h\\ \hline
+	   j &\vT&\vU\\
+	   h &\vU&\vT
+	 \end{array}$  & 
+					 $\begin{array}{c|c}
+	   & \atom P x \\ \hline
+	   j & \vT\\
+	   h & \vT
+	 \end{array}$
+  \end{tabular}
+\end{center}
+
+Now, before you accuse us of being conspiracy mongers claiming that John Key might be Helen Clark, let us assure you that's not what we are claiming. We are merely claiming that we haven't been provided enough information to tell them apart, yet.
+
+So what would we need? Well, how do we ever tell people apart -- we find something that's different or distinctive about them. For instance, Helen Clark is a member of the Labour party, and John Key is not. Let's add that information to our model:
+
+
+\begin{center}
+  \begin{tabular}{ll}
+  $\begin{array}{c|cc}
+	   = & j & h\\ \hline
+	   j &\vT&   \\
+	   h &   &\vT
+	 \end{array}$  & 
+					 $\begin{array}{c|cc}
+	   & \atom P x & \atom L x \\ \hline
+	   j & \vT & \vF\\
+	   h & \vT & \vT
+	 \end{array}$
+  \end{tabular}
+\end{center}
+
+You will have noticed that we removed the `$\vU$' symbols. When we add any information, we always remove any `$\vU$' symbols, because the new information might help us to fill in the blanks. And in this case it does. By the \emph{converse indiscernibiility of identical} principle, as $\atom L h = \vT$ but $\atom L j = \vF$, we know that $h\neq j$. With a little application of symmetry, we have:
+
+\begin{center}
+  \begin{tabular}{ll}
+  $\begin{array}{c|cc}
+	   = & j & h\\ \hline
+	   j &\vT& \vF \\
+	   h &\vF& \vT
+	 \end{array}$  & 
+					 $\begin{array}{c|cc}
+	   & \atom P x & \atom L x \\ \hline
+	   j & \vT & \vF\\
+	   h & \vT & \vT
+	 \end{array}$
+  \end{tabular}
+\end{center}
+
+And we've shown that Helen Clark and John Key were different (non-identical) prime ministers of New Zealand!
+\pagebreak
+
+
+
+
+
+\section{Identity \& two-place predicate tables}
+
+Identity and two-place predicate tables interact in the same way as simple predicate tables. They are regulated by the \emph{indiscernibility of identicals} principle and its converse. The \emph{indiscernibility of identicals} principle tells us that identical things have the same properties and relations. For two-place predicate tables, this means that they have the same rows \emph{and} columns. 
+%\begin{center}
+%  \begin{tabular}{lll}
+%	$\begin{array}{c|ccc}
+%	   = & a & b & c\\ \hline
+%	   a & & &\vT\\
+%	   b & & &\\
+%	   c
+%	 \end{array}$
+%		 & 
+%	$\begin{array}{c|ccc}
+%	  \atom R {xy} & a & b & c\\ \hline
+%	  \cellcolor{blue!15} a & \cellcolor{blue!15}& \cellcolor{blue!15}&\cellcolor{blue!15} \\
+%						  b & & \\
+%	  \cellcolor{blue!15} c & \cellcolor{blue!15}& \cellcolor{blue!15}&\cellcolor{blue!15} 
+%	 \end{array}$
+%   & 
+%	$\begin{array}{c|ccc}
+%	  \atom R {xy} & \cellcolor{green!15} a & b & \cellcolor{green!15} c\\ \hline
+%	   a & \cellcolor{green!15}&&\cellcolor{green!15} \\
+%	   b & \cellcolor{green!15}&&\cellcolor{green!15} \\
+%	   c & \cellcolor{green!15}&&\cellcolor{green!15}
+%	 \end{array}$
+%  \end{tabular}
+%\end{center}
+
+\noindent Consider this example, with the identity table already partially completed:
+
+\begin{center}
+  \begin{tabular}{ll}
+	$\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a &   &   &\vT\\
+	   b &   &\vT&\\
+	   c &\vT&   &\vT
+	 \end{array}$
+		 & 
+	$\begin{array}{c|ccc}
+	  \atom R {xy} & a & b & c\\ \hline
+	   a & \vT& & \\
+	   b & \vF& \\
+	   c & & \vT& \vT
+	 \end{array}$
+  \end{tabular}
+\end{center}
+
+\noindent As we know that $a=c$, we ensure that $a$'s and $c$'s rows are identical:
+
+\begin{center}
+  \begin{tabular}{ll}
+	$\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a &   &   &\vT\\
+	   b &   &\vT&\\
+	   c &\vT&   &\vT
+	 \end{array}$
+		 & 
+	$\begin{array}{c|ccc}
+	   \atom R {xy} & a & b & c\\ \hline
+	   \cellcolor{blue!15} a & \cellcolor{blue!15}\vT& \cellcolor{blue!15}\vT&\cellcolor{blue!15} \vT \\
+	   b & \vF& \\
+	   \cellcolor{blue!15} c & \cellcolor{blue!15}\vT& \cellcolor{blue!15}\vT&\cellcolor{blue!15} \vT
+	 \end{array}$
+  \end{tabular}
+\end{center}
+
+\noindent Next, we ensure that $a$'s and $c$'s columns are identical:
+
+\begin{center}
+  \begin{tabular}{ll}
+	$\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a &   &   &\vT\\
+	   b &   &\vT&\\
+	   c &\vT&   &\vT
+	 \end{array}$
+		 & 
+	$\begin{array}{c|ccc}
+	   \atom R {xy} & \cellcolor{green!15} a  & b & \cellcolor{green!15} c\\ \hline
+	   a & \cellcolor{green!15}\vT & \vT  &\cellcolor{green!15} \vT \\
+	   b & \cellcolor{green!15}\vF & & \cellcolor{green!15}\vF\\
+	   c & \cellcolor{green!15}\vT & \vT  &\cellcolor{green!15} \vT
+	 \end{array}$
+  \end{tabular}
+\end{center} 
+
+% \noindent We get no further information as to how $b$ is or isn't related to $a$ or $c$, so we complete the table with `$\vU$':
+%
+%% \begin{center}
+%   \begin{tabular}{ll}
+%	 $\begin{array}{c|ccc}
+%		= & a & b & c\\ \hline
+%		a & \vT & \vU&\vT\\
+%		b &\vU & \vT&\vU\\
+%		c &\vT&\vU&\vT
+%	  \end{array}$
+%  & 
+%	$\begin{array}{c|ccc}
+%	   \atom R {xy} & a  & b & c\\ \hline
+%	   a & \vT &  \vT & \vT \\
+%	   b & \vF & \vU& \vF\\
+%	   c & \vT &  \vT & \vT
+%	 \end{array}$
+%   \end{tabular}
+% \end{center}
+
+To apply the \emph{converse indiscernibility of identicals} principle, we look for rows or columns that have different entries, as in:
+
+\begin{center}
+  \begin{tabular}{ccc}
+    $\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a &   &   & \\
+	   b &   &   & \\
+	   c &   &   & 
+	\end{array}$
+	&
+   $\begin{array}{c|ccc}
+	  \atom R {xy} & a & b & c\\ \hline
+	  \cellcolor{magenta!35} a & \cellcolor{magenta!35} \vT &\cellcolor{magenta!35}&\cellcolor{magenta!35} \\
+	  \cellcolor{magenta!35} b & \cellcolor{magenta!35} \vF& \cellcolor{magenta!35}&\cellcolor{magenta!35} \\
+ c & & \\
+	\end{array}$
+	&
+  $\begin{array}{c|ccc}
+	  \atom S {xy} & \cellcolor{magenta!35} a  & b & \cellcolor{magenta!35} c\\ \hline
+	  a & \cellcolor{magenta!35} &  &\cellcolor{magenta!35} \\
+	  b & \cellcolor{magenta!35}\vF&&\cellcolor{magenta!35}\vT\\
+	  c & \cellcolor{magenta!35} &  &\cellcolor{magenta!35} 
+	\end{array}$\\
+ & $a\neq b$ & $a\neq c$
+  \end{tabular}
+\end{center}
+
+With reflexivity and symmetry, we can complete our identity table:
+
+\begin{center}
+  $\begin{array}{c|ccc}
+	   = & a  & b & c\\ \hline
+	   a & \vT & \vF & \vF \\
+	   b & \vF & \vT & \vU\\
+	   c & \vF & \vU & \vT
+	\end{array}$
+ \end{center}
+
+\noindent Putting everything together, we can complete the following set of tables:
+
+\begin{center}
+  \begin{tabular}{ccc}
+   $\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & & \vT &\\
+	   b & & &\\
+	   c & & &
+	\end{array}$
+	 &
+   $\begin{array}{c|cc}
+	    & \atom F x& \atom G x\\ \hline
+	  a & & \vT \\
+	  b & \vF & \\
+	  c & \vF &
+	\end{array}$
+	 &
+   $\begin{array}{c|ccc}
+	  \atom R {xy} & a & b & c\\ \hline
+	  a & & \vF & \vT \\
+	  b & \vF & & \\
+	  c & & \vF & 
+	\end{array}$
+  \end{tabular}
+\end{center}
+
+\noindent We start with the identity table, completing as much as we can: 
+
+\begin{center}
+  \begin{tabular}{ccc}
+   $\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & \vT & \vT &\\
+	   b & \vT & \vT &\\
+	   c & & & \vT
+	\end{array}$
+	 &
+   $\begin{array}{c|cc}
+	  & \atom F x & \atom G x\\ \hline
+	  a & & \vT \\
+	  b & \vF & \\
+	  c & \vF &
+	\end{array}$
+	 &
+   $\begin{array}{c|ccc}
+	  \atom R {xy} & a & b & c\\ \hline
+	  a & & \vF & \vT \\
+	  b & \vF & & \\
+	  c & & \vF & 
+	\end{array}$\\
+	$a=b$
+  \end{tabular}
+\end{center}
+
+\noindent We gathered the information that $a=b$, which allows us to apply the \emph{indiscernibility of identicals} principle. We ensure that $a$'s and $b$'s rows are the same:
+
+\begin{center}
+  \begin{tabular}{ccc}
+	$\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & \vT & \vT &\\
+	   b & \vT & \vT &\\
+	   c & & & \vT
+	 \end{array}$
+	 &
+   $\begin{array}{c|cc}
+	  & \atom F x & \atom G x\\ \hline
+	  \cellcolor{blue!15} a & \cellcolor{blue!15}\vF & \cellcolor{blue!15}\vT \\
+	  \cellcolor{blue!15} b & \cellcolor{blue!15}\vF & \cellcolor{blue!15}\vT \\
+	  c & \vF &
+	\end{array}$
+	 &
+   $\begin{array}{c|ccc}
+	  \atom R {xy} & a & b & c\\ \hline
+	  \cellcolor{blue!15} a & \cellcolor{blue!15} \vF & \cellcolor{blue!15}\vF & \cellcolor{blue!15}\vT \\
+	  \cellcolor{blue!15} b & \cellcolor{blue!15} \vF & \cellcolor{blue!15}\vF & \cellcolor{blue!15}\vT \\
+	  c & & \vF & 
+	\end{array}$\\
+	$a=b$
+  \end{tabular}
+\end{center}
+
+\noindent Next we ensure that $a$'s and $b$'s columns are the same:
+
+\begin{center}
+  \begin{tabular}{ccc}
+   $\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & \vT & \vT &\\
+	   b & \vT & \vT &\\
+	   c & & & \vT
+	\end{array}$
+	 &
+   $\begin{array}{c|cc}
+	  & \atom F x & \atom G x\\ \hline
+	  a & \vF & \vT \\
+	  b & \vF & \vT \\
+	  c & \vF &
+	\end{array}$
+	 &
+	$\begin{array}{c|ccc}
+	  \atom R {xy} &\cellcolor{green!15} a & \cellcolor{green!15} b & c\\ \hline
+	  a & \cellcolor{green!15} \vF& \cellcolor{green!15}\vF & \vT \\
+	  b & \cellcolor{green!15} \vF& \cellcolor{green!15}\vF & \vT \\
+	  c & \cellcolor{green!15} \vF& \cellcolor{green!15}\vF & 
+				\end{array}$\\
+	$a=b$
+  \end{tabular}
+\end{center}
+
+\noindent This is as much information as we can extract from the \emph{indiscernibility of identicals} principle.
+
+\medskip
+
+You might be tempted to reason that because both $b$ and $c$ have $\vF$ for predicate $F$, they must be identical. This is one of the errors we just warned you about. It's particularly tempting in this example, as the $b$ and $c$ rows agree for several predicates, including the two-place predicate. However, $B$ and $C$ might just be similar; only the identity table can tell us that two items are identical.
+
+\pagebreak
+
+Next we turn to the \emph{converse} principle, looking for entries in tables that allow us to differentiate items:
+
+\begin{center}
+  \begin{tabular}{ccc}
+   $\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & \vT & \vT &\\
+	   b & \vT & \vT &\\
+	   c & &   & \vT
+	\end{array}$
+	 &
+   $\begin{array}{c|cc}
+	  & \atom F x & \atom G x\\ \hline
+	  a & \vF & \vT \\
+	  b & \vF & \vT \\
+	  c & \vF &
+	\end{array}$
+	 &
+	$\begin{array}{c|ccc}
+	  \atom R {xy} & a & \cellcolor{magenta!35} b & \cellcolor{magenta!35} c\\ \hline
+	  a & \vF& \cellcolor{magenta!35}\vF & \cellcolor{magenta!35}\vT \\
+	  b & \vF& \cellcolor{magenta!35}\vF & \cellcolor{magenta!35}\vT \\
+	  c & \vF& \cellcolor{magenta!35}\vF & \cellcolor{magenta!35}
+				\end{array}$\\
+	$a=b$ && $b\neq c$
+  \end{tabular}
+\end{center}
+
+\noindent We see that $b$ and $c$ do not have the same columns, which tells us that they are not equal. We add that information to the identity table, and apply the principle of symmetry:
+
+\begin{center}
+  \begin{tabular}{ccc}
+   $\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & \vT & \vT &\\
+	   b & \vT & \vT & \vF\\
+	   c &     & \vF & \vT
+	\end{array}$
+	 &
+   $\begin{array}{c|cc}
+	  & \atom F x & \atom G x\\ \hline
+	  a & \vF & \vT \\
+	  b & \vF & \vT \\
+	  c & \vF &
+	\end{array}$
+	 &
+   $\begin{array}{c|ccc}
+	  \atom R {xy} & a & b & c\\ \hline
+	  a & \vF& \vF & \vT \\
+	  b & \vF& \vF & \vT \\
+	  c & \vF& \vF & 
+	\end{array}$\\
+	$a=b$ && $b\neq c$
+  \end{tabular}
+\end{center}
+
+\noindent Now, we see from transitivity that $c \neq a$. Why? If it was true that $c = a$, we would get from transitivity that $c = b$, because $c = a$ and $a = b$ guarantees that $c = b$. But we already know that $c \neq b$. So it must be that $c \neq a$.
+(We also could have got this information by applying the \emph{converse} principle to columns $a$ and $c$, as we did for $b$ and $c$.)
+This allows us to complete the identity table: 
+
+\begin{center}
+  \begin{tabular}{ccc}
+   $\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & \vT & \vT & \vF\\
+	   b & \vT & \vT & \vF\\
+	   c & \vF & \vF & \vT
+	\end{array}$
+	 &
+   $\begin{array}{c|cc}
+	  & \atom F x & \atom G x\\ \hline
+	  a & \vF & \vT \\
+	  b & \vF & \vT \\
+	  c & \vF &
+	\end{array}$
+	 &
+   $\begin{array}{c|ccc}
+	  \atom R {xy} & a & b & c\\ \hline
+	  a & \vF& \vF & \vT \\
+	  b & \vF& \vF & \vT \\
+	  c & \vF& \vF & 
+	\end{array}$\\
+	$a=b$ && $b\neq c$, $a\neq c$
+  \end{tabular}
+\end{center}
+
+\noindent That's it! We get no further information, and we complete our tables by putting `$\vU$' in the remaining entries: 
+
+\begin{center}
+  \begin{tabular}{ccc}
+   $\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & \vT & \vT & \vF\\
+	   b & \vT & \vT & \vF\\
+	   c & \vF &\vF & \vT
+	\end{array}$
+		 &
+		   $\begin{array}{c|cc}
+			  & \atom F x & \atom G x\\ \hline
+			  a & \vF & \vT \\
+			  b & \vF & \vT \\
+			  c & \vF & \vU
+			\end{array}$
+					
+			 &
+			   $\begin{array}{c|ccc}
+				  \atom R {xy} & a & b & c\\ \hline
+				  a & \vF& \vF & \vT \\
+				 b & \vF& \vF & \vT \\
+				c & \vF&\vF & \vU
+				\end{array}$
+  \end{tabular}
+\end{center}
+
+
+\pagebreak
+\practiceproblems
+\problempart
+\label{pr.identity-tables}
+The following are partially-completed identity tables. For each identity table, fill in all the blank spaces that you can, using the principles of reflexivity, symmetry and transitivity. Put a `$\vU$' in spaces for which you don't have enough information. 
+
+%\begin{center}
+\begin{earg}
+\item\begin{tabular}{cccc}
+	$\begin{array}{c|cc}
+	   = & a & b\\ \hline
+	   a &   &\\
+	   b &\vF& \vT
+	 \end{array}$
+	 \end{tabular}\medskip\medskip
+\item\begin{tabular}{cccc}
+	$\begin{array}{c|cc}
+	   = & a & b\\ \hline
+	   a &\vT&\\
+	   b &   &
+	 \end{array}$
+	 \end{tabular}\medskip\medskip
+\item\begin{tabular}{cccc}
+	$\begin{array}{c|cc}
+	   = & a & b\\ \hline
+	   a &   &\\
+	   b &\vF&
+	 \end{array}$
+	 \end{tabular}\medskip\medskip
+\item\begin{tabular}{cccc}
+	$\begin{array}{c|cc}
+	  = & a & b\\ \hline
+	  a &   &\vT\\
+	  b &   &
+	 \end{array}$
+	 \end{tabular}\medskip\medskip
+\item\begin{tabular}{cccc}
+	$\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a &&\vT&\\
+	   b &&&\\
+	   c &\vT&&
+	 \end{array}$
+	 \end{tabular}\medskip\medskip
+\item\begin{tabular}{cccc}
+	$\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a &\vT&&\\
+	   b &&&\\
+	   c &&\vT&
+	 \end{array}$
+	 \end{tabular}\medskip\medskip
+\item\begin{tabular}{cccc}
+	$\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a &&&\vF\\
+	   b &&&\\
+	   c &&\vF&
+	 \end{array}$
+	 \end{tabular}\medskip\medskip
+\item\begin{tabular}{cccc}
+	$\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a &&&\vF\\
+	   b &\vT&&\\
+	   c &&&
+	 \end{array}$
+	 \end{tabular}
+%\end{center}
+\end{earg}
+
+
+\problempart
+\label{pr.identity-predicate-tables}
+
+The following are partial identity and predicate tables. Fill in all the blank spaces in the tables using only the information already available. Put a `$\vU$' in entries for which you don't have enough information. 
+
+\begin{earg}
+%2x2-1
+\item \begin{tabular}{ll}
+	$\begin{array}{c|cc}
+	   = & a & b\\ \hline
+	   a &&\\
+	   b &&
+	 \end{array}$
+		 & 
+		   $\begin{array}{c|cc}
+			  & \atom F x & \atom G x \\ \hline
+			  a &  & \\
+			  b & &
+			\end{array}$
+	 \end{tabular}\medskip\medskip
+%2x2-2
+\item \begin{tabular}{ll}
+	$\begin{array}{c|cc}
+	   = & a & b\\ \hline
+	   a &\vT&\vF\\
+	   b & &
+	 \end{array}$
+		 & 
+	$\begin{array}{c|cc}
+	   & \atom F x & \atom G x \\ \hline
+	   a & \vT & \vF\\
+	   b & &\vT
+	 \end{array}$
+  \end{tabular}\medskip\medskip
+%3x3-1
+\item  \begin{tabular}{ll}
+	$\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & &\\
+	   b & & \\
+	   c
+	 \end{array}$
+		 & 
+	$\begin{array}{c|ccc}
+	   & \atom F x & \atom G x & \atom H x\\ \hline
+	   a & & \\
+	   b & &\\
+	   c & &
+	 \end{array}$
+  \end{tabular}\medskip\medskip
+  
+%3x3-2
+\item \begin{tabular}{ll}
+	$\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & & &\vT\\
+	   b & & \\
+	   c
+	 \end{array}$
+		 & 
+	$\begin{array}{c|ccc}
+	   & \atom F x & \atom G x & \atom H x\\ \hline
+	   a & \vT& &\vF\\
+	   b & \vF& \vT\\
+	   c & &\vF &
+	 \end{array}$
+  \end{tabular}\medskip\medskip
+%3x3-3
+\item \begin{tabular}{ll}
+	$\begin{array}{c|ccc}
+	   = & d & e & f\\ \hline
+	   d & &\\
+	   e & \vT&& \\
+	   f & &
+	 \end{array}$
+		 & 
+	$\begin{array}{c|ccc}
+	   & \atom A x & \atom B x & \atom C x\\ \hline
+	   d & &\vF\\
+	   e & \vF&&\vT \\
+	   f &\vT &\vF
+	 \end{array}$
+  \end{tabular}\medskip\medskip
+%3x3-4
+\item \begin{tabular}{ll}
+	$\begin{array}{c|ccc}
+	   = & f & j & n\\ \hline
+	   f & &\\
+	   j & & \\
+	   n
+	 \end{array}$
+		 & 
+	$\begin{array}{c|ccc}
+	   & \atom G x & \atom W x& \atom Qx \\ \hline
+	   f & \vT& \vF & \vF \\
+	   j & & &\vT\\
+	   n & &\vT &\vT
+	 \end{array}$
+  \end{tabular}\medskip\medskip
+%3x3-5
+\item \begin{tabular}{ll}
+	$\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & &\vT\\
+	   b & & &\vT\\
+	   c
+	 \end{array}$
+		 & 
+	$\begin{array}{c|ccc}
+	   & \atom F x & \atom G x & \atom H x\\ \hline
+	   a & \vT& \\
+	   b & &\vF\\
+	   c & & &\vT
+	 \end{array}$
+  \end{tabular}
+\end{earg}
+
+
+\problempart
+\label{pr.identity-predicate-relation-tables}
+
+The following are partial identity and predicate tables. Fill in all the blank spaces in the tables using only the information already available. Put a `$\vU$' in entries for which you don't have enough information. 
+
+
+% 1
+\begin{earg}
+\item \begin{tabular}{ccc}
+   $\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & & &\\
+	   b & & &\vT\\
+	   c & & &
+	\end{array}$
+	 &
+   $\begin{array}{c|cc}
+	  & \atom F x & \atom G x\\ \hline
+	  a & &  \\
+	  b &  & \vF\\
+	  c &  &
+	\end{array}$
+	 &
+   $\begin{array}{c|ccc}
+	  \atom R {xy} & a & b & c\\ \hline
+	  a & \vF&  &  \\
+	  b &  & & \\
+	  c & & \vT & 
+	\end{array}$
+\end{tabular}\medskip\medskip
+%2
+\item \begin{tabular}{ccc}
+   $\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & &\vT  &\\
+	   b & & &\\
+	   c & & &
+	\end{array}$
+	&
+	$\begin{array}{c|cc}
+	  & \atom F x & \atom G x\\ \hline
+	  a & \vF&  \\
+	  b &  & \vT\\
+	  c &  & \vF
+	\end{array}$
+	&
+	$\begin{array}{c|ccc}
+	  \atom R {xy} & a & b & c\\ \hline
+	  a & \vF &  &  \vT\\
+	  b &  & & \\
+	  c & \vT &  & 
+	\end{array}$
+\end{tabular}\medskip\medskip
+%3
+\item \begin{tabular}{ccc}
+   $\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & & &\vT\\
+	   b & & &\\
+	   c & &\vT &
+	\end{array}$
+	 &
+	$\begin{array}{c|cc}
+	  & \atom F x & \atom G x\\ \hline
+	  a & \vF&  \\
+	  b &  & \vT\\
+	  c &  & 
+	\end{array}$
+	 &
+	$\begin{array}{c|ccc}
+	  \atom R {xy} & a & b & c\\ \hline
+	  a & \vT &  &  \\
+	  b &  & & \\
+	  c &  &  & 
+	\end{array}$
+\end{tabular}\medskip\medskip
+%4
+\item \begin{tabular}{ccc}
+   $\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & & &\\
+	   b & & &\\
+	   c & & &
+	\end{array}$
+	 &
+	$\begin{array}{c|cc}
+	  & \atom F x & \atom G x\\ \hline
+	  a & \vT& \vT \\
+	  b & \vT& \vT\\
+	  c &  \vF& \vF 
+	\end{array}$
+	 &
+	$\begin{array}{c|ccc}
+	  \atom R {xy} & a & b & c\\ \hline
+	  a & \vT & \vT &  \vF\\
+	  b &  \vF& \vT& \vF\\ 
+	  c &  \vF& \vT  &\vT 
+	\end{array}$
+\end{tabular}\medskip\medskip
+%5
+\item \begin{tabular}{cccc}
+   $\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & & &\\
+	   b & & &\\
+	   c & & \vT &
+	\end{array}$
+	 &
+	$\begin{array}{c|cc}
+	  & \atom F x & \atom G x\\ \hline
+	  a & & \vF \\
+	  b & \vT & \\
+	  c &  & \vF
+	\end{array}$
+	 &
+	$\begin{array}{c|ccc}
+	  \atom R {xy} & a & b & c\\ \hline
+	  a & \vF& \vF &  \\
+	  b &  & & \\
+	  c &  &  &\vF 
+	\end{array}$
+	 &
+	$\begin{array}{c|ccc}
+	  \atom S {xy} & a & b & c\\ \hline
+	  a & \vT&  \vF&  \\
+	  b &  & & \\
+	  c & \vF &  & \vT
+	\end{array}$
+\end{tabular}\medskip\medskip
+%6
+\item \begin{tabular}{cccc}
+	$\begin{array}{c|ccc}
+	   = & a & b & c\\ \hline
+	   a & & &\vT\\
+	   b & & &\\
+	   c & & &
+	\end{array}$
+	 &
+	$\begin{array}{c|cc}
+	  & \atom F x & \atom G x\\ \hline
+	  a &\vF& \\
+	  b &\vT& \vT\\
+	  c &   & \vF
+	\end{array}$
+	 &
+	$\begin{array}{c|ccc}
+	  \atom R {xy} & a & b & c\\ \hline
+	  a &\vT&   &   \\
+	  b &   &\vT&\vF\\
+	  c &   &\vT 
+	\end{array}$
+	 &
+	$\begin{array}{c|ccc}
+	  \atom S {xy} & a & b & c\\ \hline
+	  a &\vT&   &  \\
+	  b &   &   & \vF\\
+	  c &   &\vT&
+	\end{array}$
+  \end{tabular}\medskip\medskip
+%7
+\item \begin{tabular}{ccc}
+	$\begin{array}{c|cccc}
+	   = & a & b & c & d\\ \hline
+	   a & & &\vT\\
+	   b & & & &\vF\\
+	   c & &\vF&\\
+	   d &\vT& &
+	\end{array}$
+	 &
+	$\begin{array}{c|cc}
+	  & \atom F x & \atom G x\\ \hline
+	  a &\vF& \\
+	  b &\vT& \\
+	  c &   & \\
+	  d &   & \vF
+	\end{array}$
+	 &
+	$\begin{array}{c|cccc}
+	  \atom L {xy} & a & b & c & d\\ \hline
+	  a &\vF&   &   \\
+	  b &   &\vT&\vF\\
+	  c &   &   & \\
+	  d &   &\vT 
+	\end{array}$
+  \end{tabular}
+\end{earg}
+
+
+
+\chapter{Models with Quantifiers}\label{ch:models.quantifiers}
+
+%[Quantifiers]{When the main logical operator is a quantifier
+
+
+\section{Quantified predicates}
+
+We finally come to the most intricate part of \pl: quantifiers. What makes calculating the truth-value of quantifiers more difficult is that the result depends on multiple rows of a predicate table. A simple existentially quantified ($\qe$) formula is true if the unquantified formula is true on at least one row of the table, and a simple universally quantified ($\qa$) formula is true if the unquantified formula is true on all the rows. Let's start with an example:
+
+\begin{center}
+  $\begin{array}{c|cc}
+	 x & \atom F x & \atom G x\\ \hline
+	 a & \vF & \vT\\
+	 b & \vT & \vT\\
+	 c & \vF & \vT
+   \end{array}$
+ \end{center}
+
+ \noindent This table represents a case in which $b$ is $F$, but not $a$ or $c$, whereas $a$, $b$, and $c$ are all $G$. Because $\atom F b = \vT$, we know that at least one item of the domain has the property $F$:
+
+  \begin{center}
+  $\begin{array}{c|cc}
+	 x & \atom F x & \atom G x\\ \hline
+	 a &  \vF & \vT\\
+	 b & \cellcolor{green!15} \vT & \vT\\
+	 c &  \vF & \vT
+   \end{array}$
+ \end{center}
+
+ \noindent So $\qeb{x}{\atom F x} = \vT$. However, not all items in the domain have property $F$:
+
+
+ \begin{center}
+  $\begin{array}{c|cc}
+	 x & \atom F x & \atom G x\\ \hline
+	 a &  \cellcolor{magenta!35}\vF & \vT\\
+	 b & \vT & \vT\\
+	 c &  \cellcolor{magenta!35}\vF & \vT
+   \end{array}$
+ \end{center}
+
+ \noindent So we know $\qab{x}{\atom F x} = \vF$. 
+ \pagebreak
+
+% We see that some, but not all, things in the domain have property $F$:
+%
+% 
+% \begin{center}
+%  $\begin{array}{c|cc}
+%	 x & \atom F x & \atom G x\\ \hline
+%	 a &  \cellcolor{magenta!35}\vF & \vT\\
+%	 b & \cellcolor{green!15}\vT & \vT\\
+%	 c &  \cellcolor{magenta!35}\vF & \vT
+%   \end{array}$
+% \end{center}
+
+
+ \noindent What about $G$? The domain of the model has three items: $a$, $b$, and $c$. The predicate $G$ is true of each of them:
+
+ \begin{center}
+  $\begin{array}{c|cc}
+	 x & \atom F x & \atom G x\\ \hline
+	 a & \vF & \cellcolor{green!15}\vT\\
+	 b & \vT &\cellcolor{green!15} \vT\\
+	 c & \vF & \cellcolor{green!15}\vT
+   \end{array}$
+ \end{center}
+
+
+ \noindent Everything in the domain has the property $G$. Hence, $\qab{x}{\atom G x} = \vT$.\\
+
+ Let's consider another model, in which everything is an $F$, but nothing is a $G$. In this model $\qab{x}{\atom F x} = \vT$ and $\qeb{x}{\atom G x} =\vF$, just as we'd expect. 
+
+\begin{center}
+  $\begin{array}{c|cc}
+	 x & \atom F x & \atom G x\\ \hline
+	 a & \vT & \vF\\
+	 b & \vT & \vF\\
+	 c & \vT & \vF			
+   \end{array}$
+ \end{center}
+
+ \noindent 
+
+The truth-value of quantified formulas in models depends on everything in the domain. A simple universal formula $\qab{x}{ \atom  F x}$ is true in a model if everything is an $F$, and it is false if at least one thing is not an $F$: 
+
+
+ 
+ \begin{center}
+   \begin{tabular}{cccc}
+	$\qab{x}{\atom F x} = \vT$& 
+	$\begin{array}{c|c}
+	 x & \atom F x\\ \hline
+	 a &\cellcolor{green!15} \vT \\
+	 b & \cellcolor{green!15}\vT \\
+	 c &\cellcolor{green!15} \vT		   
+   \end{array}$ & $\ \ \ \ \qab{x}{\atom F x} = \vF$ &$\begin{array}{c|c}
+	 x & \atom F x \\ \hline
+	 a &\cellcolor{green!15} \vT \\
+	 b & \cellcolor{magenta!35}\vF \\
+	 c &\cellcolor{green!15} \vT		   
+										   \end{array}$
+		 \end{tabular}
+	   \end{center}
+
+
+
+	   \noindent A simple existential formula $\qeb{x}{\atom F x}$ is true if at least one thing in the domain is an $F$, and it is false if everything is not an $F$: 
+	   \begin{center}
+   \begin{tabular}{cccc}
+	 $\qeb{x}{F(x)} = \vT$& 
+	$\begin{array}{c|c}
+	 x & \atom F x\\ \hline
+	 a &\cellcolor{magenta!35}\vF \\
+	 b & \cellcolor{green!15}\vT \\
+	 c &\cellcolor{magenta!35}\vF		   
+   \end{array}$ & $\ \ \ \ \qeb{x}{F(x)} = \vF$ &$\begin{array}{c|c}
+	 x & \atom F x \\ \hline
+	 a &\cellcolor{magenta!35}\vF \\
+	 b & \cellcolor{magenta!35}\vF \\
+	 c &\cellcolor{magenta!35}\vF		  
+   \end{array}$
+   \end{tabular}
+	   \end{center} 
+
+But what about  complex formulas like $\qab{x}{\enot \atom F x}$ or $\qeb{x}{\atom Fx \land \atom Gx}$, or the even more complex $\qa{x}{\qeb{y}{\neg \atom L {xy}}}$? We will need a more orderly process, which will be an extension of the complete truth tables that we used for \tfl.
+	   
+
+\section{Single Quantifiers}
+
+Here is the first model we will use in this section:
+
+\begin{center}
+  $\begin{array}{c|ccc}
+	 x & \atom F x & \atom G x \\ \hline
+	 a & \vF & \vT \\
+	 b & \vT & \vT \\
+	 c & \vF & \vT		   
+   \end{array}$
+\end{center}
+
+
+To find the truth value of $\qeb{x}{\enot \atom F x}$, we need to find the truth value of $\enot \atom F x$ for each item in the domain. We can use something like our familiar \tfl\ truth-table. The initial columns are a little different, however. We have one column for each variable, and one row for each name it can take.
+
+\begin{center}
+\begin{tabular}{c| ccc}
+ $x$ & $\qe x$ & $[\enot$ & $\atom F x]$\\
+\hline
+ a &  &  & \\
+ b &  &  &  \\
+ c &  &  &
+\end{tabular}
+\end{center}
+
+\noindent We start with the values for $\atom F x$ for each item. From the model, we know $\atom F a = \vF$, $\atom F b = \vT$, and $\atom Fc= \vF$, which we enter in the truth-table:
+
+\begin{center}
+\begin{tabular}{c| ccc}
+ $x$ & $\qe x$ & $[\enot$ & $\atom F x]$\\
+\hline
+ a &  &  & \vF\\
+ b &  &  & \vT\\
+ c &  &  & \vF
+\end{tabular}
+\end{center}
+
+\noindent With these values recorded, we can calculate the values of $\enot \atom F x$ for each item, just as we would calculate negation in \tfl:
+
+\begin{center}
+\begin{tabular}{c| ccc}
+ $x$ & $\qe x$ & $[\enot$ & $\atom F x]$\\
+\hline
+ a &  & \vT & \gF\\
+ b &  & \vF & \gT\\
+ c &  & \vT & \gF
+\end{tabular}
+\end{center}
+
+\noindent To find the value of the existential quantifier, we need to look for (at least) one row with a $\vT$, which there is:
+
+\begin{center}
+\begin{tabular}{c| ccc}
+ $x$ & $\qe x$ & $[\enot$ & $\atom F x]$\\
+\hline
+ a &  & \cellcolor{green!15} \vT & \gF\\
+ b &  & \vF & \gT\\
+ c &  & \vT & \gF
+\end{tabular}
+\end{center}
+
+\noindent We indicate that the existential quantifier is true like this: 
+
+\begin{center}
+\begin{tabular}{c| ccc}
+ & $\qe x$ & $[\enot$ & $\atom F x]$\\
+\hline
+ a & \ldelim\{{3}{*}[\ \vT] & \cellcolor{green!15} \vT & \gF\\
+b &  & \gF &  \gT\\
+ c&  & \gT &\gF
+\end{tabular}
+\end{center}
+
+\noindent The cell of the table highlighted in green is the item that makes the existential quantifier true, and the left brace `$\{$' with the value \vT\ says that the formula is true of (at least) one of the bracketed items.
+
+A similar table shows that $\qab{x}{\enot \atom F x} = \vF$:
+
+\begin{center}
+\begin{tabular}{c| ccc}
+ & $\qa x$ & $[\enot$ & $\atom F x]$\\
+\hline
+ a & \ldelim\{{3}{*}[\ \vF] &\gT & \gF\\
+b &  &  \cellcolor{magenta!35}\vF &  \gT\\
+ c&  & \gT &\gF
+\end{tabular}
+\end{center}
+
+\noindent The cell highlighted in magenta indicates which item makes the quantified formula false. (The magenta and green cells are just for your reference -- the large curly bracket and the truth value are all that you need to write).\\
+
+
+
+Now that we've got the basics, we can look at some more interesting examples. We'll use a simpler model, but add a symbolisation key:
+
+\begin{center}
+  $\begin{array}{c|ccc}
+	 x & \atom C x \\ \hline
+	 p & \vF &  \\
+	 w & \vT & 
+   \end{array}$
+\end{center}
+
+
+\begin{ekey}
+\item[p] Patrick
+\item[w] Willi
+\item[\atom C x] $x$ is a cat.
+%\item[x=y] $x$ is identical to $y$.
+\end{ekey}
+
+\noindent These are the statements that we will be evaluating in our model:
+\begin{earg}
+\item\label{ex.pq.1} Not everyone is a cat. \\ $\enot \qab{x}{ \atom C x}$
+\item\label{ex.pq.2} Willi is a cat, but not everyone is. \\ $\atom C w \eand \enot \qab{x}{\atom C x}$
+\item\label{ex.pq.3} Not everyone is a cat, but Willi is. \\ $ \enot \qab{x}{\atom C x} \eand \atom C w$
+\item\label{ex.pq.4} Some creatures are cats and some aren't. \\ $\qeb{x}{\atom C x} \eand \qeb{y}{\enot \atom C y}$.
+\end{earg}
+%\pagebreak
+
+The \pl\ truth table for Statement \ref{ex.pq.1} looks like this:
+
+
+
+ \begin{center}
+ \begin{tabular}{c| ccc}
+	$x$ & $\enot$ & $\qa x$& $[\atom C x]$\\
+	\hline
+	$p$ & \mrow{2}{\vT} & \brax{2}{\GF} & \gF  \\
+	$w$ & & & \gT 
+ \end{tabular}
+ \end{center}
+
+We can see that it's not just the quantifier column whose truth value is on a single row. The negation is also not dependent on which item the variable $x$ is referring to, and so it does not need to be repeated on each row. This might be clearer in the \pl\ truth table for Statement \ref{ex.pq.2}:
+
+\begin{center}
+ \begin{tabular}{c| ccccc}
+	$x$ & $\atom C q$ & $\eand$ & $\enot$ & $\qa x$& $[\atom C x]$\\
+	\hline
+	$p$ & \mrow{2}{\GT} &\mrow{2}{\vT} &\mrow{2}{\GT} & \brax{2}{\GF} & \gF  \\
+	$w$ & & & & & \gT 
+ \end{tabular}
+ \end{center}
+ 
+The rows in our \pl\ truth tables represent the different items that each variable could be referring to, and so when a column is outside the scope of a quantified variable, it only needs to be calculated once across all those items. The braces `$\{$' helps us to see that the information held across several rows is combined by the quantifier into a single row. However, sometimes there is a single row on both sides of a quantified sub-formula, as in Statement \ref{ex.pq.3}, and we need a new symbol to indicate the end of a quantifier, the `$]$':
+
+\begin{center}
+ \begin{tabular}{c| ccccc}
+	$x$ & $\enot$ & $\qa x$& $[\atom C x]$  & $\ \ \eand$ & $\atom C q$ \\
+	\hline
+	$p$ & \mrow{2}{\GT} & \brax{2}{\GF} & \gF & \braz{2}{\vT} &\mrow{2}{\GT} \\
+	$w$ & & & \gT  & &
+ \end{tabular}
+ \end{center}
+ 
+
+
+Finally, we will introduce a common mistake, and a useful logic technique for avoiding it. Statement \ref{ex.pq.4} has two quantifiers, and we might think its \pl\ table should look something like:
+
+ \begin{center}
+ \begin{tabular}{cc| cccccc}
+	$x$ & $y$ & $\qe x$ & $[\atom C x]$  & $\eand$ & $\qe y$& $[\enot$ & $\atom C y]$ \\
+	\hline
+	$p$ & $p$ & & \vF & & & \vT & \vF \\
+	$p$ & $w$ & & \vF & & & \vF & \vT \\
+	$w$ & $p$ & & \vT & & & \vT & \vF \\
+	$w$ & $w$ & & \vT & & & \vF & \vT 
+ \end{tabular}
+ \end{center}
+
+
+ 
+ However, we can't easily combine rows 1 and 3, nor rows 2 and 4, for our $\qe y$ quantifier. Instead, \emph{because the two quantifiers are not nested}, we can rename the $y$ variable to $x$, breaking our rule-of-thumb that every new quantifier gets a new variable.
+ 
+  
+  \begin{center}
+ \begin{tabular}{c| cccccc}
+	$x$ & $\qe x$ & $[\atom C x]$  & $\ \ \eand$ & $\qe x$& $[\enot$ & $\atom C x]$ \\
+	\hline
+	$p$ & \brax{2}{\GT} & \gF & \braz{2}{\vT} & \brax{2}{\GT} &\gT & \gF \\
+	$w$ & & \gT  & & & \gF & \gT
+ \end{tabular}
+ \end{center}
+
+Now we have all the tools we need to consider multiple quantifiers.
+
+
+ 
+\section{Multiple Quantifiers}
+
+Let's start with a simple model with one predicate table: 
+
+\[\begin{array}{c|cc}
+  \atom R {xy} & a & b \\ \hline
+  a & \vF & \vT   \\
+  b & \vT & \vT\\
+\end{array}\]
+
+\noindent What is the value of $\qa{x}{\qab{y}{\atom R {xy} \eif \qab{z}{\atom R {yz}\eif \atom R{xz}}}}$ in this model? 
+
+\noindent  The first step is to figure out how many rows we will need in our table. The difference with tables from the previous section is that we have quantifiers with overlapping scopes. This means that we must consider all possible combinations of items that the variables $x$, $y$, and $z$ can take amongst $a$ and $b$. There's a case in which all variables represent the item $a$, so we need to find the value of $\atom R{a,a} \eif (\atom R {a,a} \eif \atom R{a,a})$; a case in which $x$ represents $a$, $y$ represents $b$ and $z$ represents $a$, so we need to find the value of $\atom R{a,b} \eif (\atom R {b,a} \eif \atom R{a,a})$; and so on\dots\ In total, there are eight possible combinations, which means our empty \pl\ table looks like this: 
+
+\[
+\begin{array}{@{}ccc|cccccccc@{}}
+  x & y & z & \qa x & \qa y & [\atom R {xy} & \eif & \qa z & [\atom R {yz} & \eif & \atom R {xz}]]\\ \hline
+  a & a & a \\
+  a & a & b \\
+  a & b & a \\
+  a & b & b \\
+  b & a & a \\
+  b & a & b \\
+  b & b & a \\
+  b & b & b \\
+\end{array}
+\]
+
+\noindent Now we can use our predicate table to record the values for the predicates, and then the connectives, in the innermost brackets: 
+
+
+\[
+\begin{array}{@{}ccc|cccccccc@{}}
+  x & y & z & \qa x & \qa y & [\atom R {xy} & \eif & \qa z & [\atom R {yz} & \eif & \atom R {xz}]]\\ \hline
+  a & a & a & &&  &&& \gF & \vT & \gF \\
+  a & a & b & &&  &&& \gT & \vT & \gT \\
+  a & b & a & &&  &&& \gT & \vF & \gF \\
+  a & b & b & &&  &&& \gT & \vT & \gT \\
+  b & a & a & &&  &&& \gF & \vT & \gT \\
+  b & a & b & &&  &&& \gT & \vT & \gT \\
+  b & b & a & &&  &&& \gT & \vT & \gT \\
+  b & b & b & &&  &&& \gT & \vT & \gT \\
+\end{array}
+\]
+
+\noindent Now, we need to find the truth-value for the innermost quantifier $\forall z$. For a universal quantifier to be true, as in the previous section, the formula must take the value $\vT$ for each item in the domain \emph{in which the value of the other variables is fixed}. This means that the universal quantifier will be true (for a set of rows where $x$ and $y$ are both fixed and $z$ varies) if the value is $\vT$ on all of those rows. Both $x$ and $y$ are fixed over the first two rows, so we group the first two rows of the table with a curly bracket, and put a line under it to demarcate it from the other cases. We repeat this for the remaining rows: 
+
+\[
+\begin{array}{@{}ccc|cccccccc@{}}
+  x & y & z & \qa x & \qa y & [\atom R {xy} & \eif & \qa z & [\atom R {yz} & \eif & \atom R {xz}]]\\ \hline
+  a & a & a & &&  &&\brax{2}{\TT}& \gF & \TT & \gF \\
+  a & a & b & &&  &&& \gT & \TT & \gT \\
+				\hhline{~~~|~~~~~---}
+  a & b & a & &&  &&\brax{2}{\FF}& \gT & \FF & \gF \\
+  a & b & b & &&  &&& \gT & \vT & \gT \\
+				\hhline{~~~|~~~~~---}
+  b & a & a & &&  &&\brax{2}{\TT}& \gF & \TT & \gT \\
+  b & a & b & &&  &&& \gT & \TT & \gT \\
+				\hhline{~~~|~~~~~---}
+  b & b & a & &&  &&\brax{2}{\TT}& \gT & \TT & \gT \\
+  b & b & b & &&  &&& \gT & \TT & \gT \\\end{array}
+\]
+
+\noindent Next, we can add the values for the predicates, and then connectives, in the next layer of brackets:
+
+\[
+\begin{array}{@{}ccc|cccccccc@{}}
+  x & y & z & \qa x & \qa y & [\atom R {xy} & \eif & \qa z & [\atom R {yz} & \eif & \atom R {xz}]]\\ \hline
+  a & a & a & &&\mrow{2}{\GF}&\mrow{2}{\vT}&\brax{2}{\GT}& \gF & \gT & \gF \\
+  a & a & b & &&  &&& \gT & \gT & \gT \\
+				\hhline{~~~|~~~~~---}
+  a & b & a & &&\mrow{2}{\GT}&\mrow{2}{\vF}&\brax{2}{\GF}& \gT & \gF & \gF \\
+  a & b & b & &&  &&& \gT & \gT & \gT \\
+				\hhline{~~~|~~~~~---}
+  b & a & a & &&\mrow{2}{\GT}&\mrow{2}{\vT}&\brax{2}{\GT}& \gF & \gT & \gT \\
+  b & a & b & &&  &&& \gT & \gT & \gT \\
+				\hhline{~~~|~~~~~---}
+  b & b & a & &&\mrow{2}{\GT}&\mrow{2}{\vT}&\brax{2}{\GT}& \gT & \gT & \gT \\
+  b & b & b & &&  &&& \gT & \gT & \gT \\\end{array}
+\]
+
+\noindent For the quantifier $\forall y$, only the $x$ remains constant, so we will group the first four rows of the table with a curly bracket, and the next four:
+\[
+\begin{array}{@{}ccc|cccccccc@{}}
+  x & y & z & \qa x & \qa y & [\atom R {xy} & \eif & \qa z & [\atom R {yz} & \eif & \atom R {xz}]]\\ \hline
+  a & a & a & &\brax{4}{\FF}&\mrow{2}{\GF}&\mrow{2}{\vT}&\brax{2}{\GT}& \gF & \gT & \gF \\
+  a & a & b & &&  &&& \gT & \gT & \gT \\
+				\hhline{~~~|~~~~~---}
+  a & b & a & &&\mrow{2}{\GT}&\mrow{2}{\FF}&\brax{2}{\GF}& \gT & \gF & \gF \\
+  a & b & b & &&  &&& \gT & \gT & \gT \\
+				\hhline{~~~|~~------}
+  b & a & a & &\brax{4}{\TT}&\mrow{2}{\GT}&\mrow{2}{\TT}&\brax{2}{\GT}& \gF & \gT & \gT \\
+  b & a & b & &&  &&& \gT & \gT & \gT \\
+				\hhline{~~~|~~~~~---}
+  b & b & a & &&\mrow{2}{\GT}&\mrow{2}{\TT}&\brax{2}{\GT}& \gT & \gT & \gT \\
+  b & b & b & &&  &&& \gT & \gT & \gT \\\end{array}
+\]
+
+\noindent Finally, we find the value of $\forall x$, which needs to be true in all cases: 
+\[
+\begin{array}{@{}ccc|cccccccc@{}}
+  x & y & z & \qa x & \qa y & [\atom R {xy} & \eif & \qa z & [\atom R {yz} & \eif & \atom R {xz}]]\\ \hline
+a & a & a &\brax{8}{\FF} &\brax{4}{\FF}&\mrow{2}{\GF}&\mrow{2}{\GT}&\brax{2}{\GT}& \gF & \gT & \gF \\
+  a & a & b & &&  &&& \gT & \gT & \gT \\
+				\hhline{~~~|~~~~~---}
+  a & b & a & &&\mrow{2}{\GT}&\mrow{2}{\GF}&\brax{2}{\GF}& \gT & \gF & \gF \\
+  a & b & b & &&  &&& \gT & \gT & \gT \\
+				\hhline{~~~|~~------}
+  b & a & a & &\brax{4}{\vT}&\mrow{2}{\GT}&\mrow{2}{\GT}&\brax{2}{\GT}& \gF & \gT & \gT \\
+  b & a & b & &&  &&& \gT & \gT & \gT \\
+				\hhline{~~~|~~~~~---}
+  b & b & a & &&\mrow{2}{\GT}&\mrow{2}{\GT}&\brax{2}{\GT}& \gT & \gT & \gT \\
+  b & b & b & &&  &&& \gT & \gT & \gT \\\end{array}
+\]
+
+
+\noindent The formula $\qa{x}{\qab{y}{\atom R {xy} \eif \qab{z}{\atom R {yz}\eif \atom R{xz}}}}$ is therefore false in our model. The case in which $x$ and $z$ are set to $a$ and $y$ is set to $b$ is a case in which we have $\atom R {a,b} = \vT$ and $\atom R{b,a} = \vT$, but $\atom R{a,a} = \vF$, and this is enough to make the whole formula false in our model. 
+
+
+However, in a different model, it may be true. And we don't need to add or remove items from the domain. A small change to the entries in the predicate table should suffice:
+
+\[\begin{array}{c|cc}
+  \atom R {xy} & a & b \\ \hline
+  a & \vT & \vF   \\
+  b & \vF & \vT\\
+\end{array}\]
+
+\noindent Go through the same process that we did above, with this new valuation. Once you've done that, check it against our result:
+
+\[
+\begin{array}{@{}ccc|cccccccc@{}}
+  x & y & z & \qa x & \qa y & [\atom R {xy} & \eif & \qa z & [\atom R {yz} & \eif & \atom R {xz}]]\\ \hline
+  a & a & a &\brax{8}{\vT} &\brax{4}{\GT}&\mrow{2}{\GT}&\mrow{2}{\GT}&\brax{2}{\GT}& \gT & \gT & \gT \\
+  a & a & b & &&  &&& \gF & \gT & \gF \\
+				\hhline{~~~|~~~~~---}
+  a & b & a & &&\mrow{2}{\GF}&\mrow{2}{\GT}&\brax{2}{\GF}& \gF & \gT & \gT \\
+  a & b & b & &&  &&& \gT & \gF & \gF \\
+				\hhline{~~~|~~------}
+  b & a & a & &\brax{4}{\GT}&\mrow{2}{\GF}&\mrow{2}{\GT}&\brax{2}{\GF}& \gT & \gF & \gF \\
+  b & a & b & &&  &&& \gF & \gT & \gT \\
+				\hhline{~~~|~~~~~---}
+  b & b & a & &&\mrow{2}{\GT}&\mrow{2}{\GT}&\brax{2}{\GT}& \gF & \gT & \gF \\
+  b & b & b & &&  &&& \gT & \gT & \gT \\\end{array}
+\]
+
+One important point, that we didn't emphasise when we set up the table, is that the order of the variables on the left hand side of the table must be the same order as the quantifiers; the variable from the first quantifier should be first, and so on. This ensures that the rows are grouped in the right order. %Otherwise, we might need to combine e.g., the 1st, 3rd, 5th, and 7th rows for a quantifier, and representing this clearly in a table is hopeless.
+
+%\pagebreak
+
+For our final example, we'll work with this model:
+\begin{center}
+  \begin{tabular}{cc}
+	$\begin{array}{c|cc}
+	   & \atom D x& \atom F x\\ \hline
+	   a & \vF& \vF \\
+	   b & \vT & \vT \\
+	   c & \vT &\vT
+	 \end{array}$				 
+		 &
+		   $\begin{array}{c|ccc}
+			  \atom K {xy} & a & b & c\\ \hline
+			  a & \vT& \vF & \vF \\
+			  b & \vF & \vF& \vF\\
+			  c & \vT& \vT & \vT
+			\end{array}$
+  \end{tabular}
+\end{center}
+
+\noindent Is the formula $\qab{x}{\atom D x \eif (\qeb{y}{ \atom K{xy}} \eand \atom F x}$ true in our model? First, we need to figure out how many rows we will need in our table. As the formula has two variables that can each represent any of the three items in the model, we will need nine rows. We record the values for the innermost predicates.  At this point we need to be careful, because only the predicate $\atom K{xy}$ is in the scope of $\qe y$: 
+
+\[
+  \begin{array}{@{}cc|ccccccc@{}}
+	x & y & \qa x & [\atom D x & \eif & (\qe y & [\atom K {xy}] & \eand & \atom F x]\\ \hline
+	a & a &&&&\brax{3}{\ }&\vT&\braz{3}{\ }&\\
+	a & b &&&&&\vF&&\\
+	a & c &&&&&\vF&&\\
+                 \hhline{~~|~~~~-~~}
+	b & a &&&&\brax{3}{\ }&\vF&\braz{3}{\ }&\\
+	b & b &&&&&\vF&&\\
+	b & c &&&&&\vF&&\\
+                 \hhline{~~|~~~~-~~}
+	c & a &&&&\brax{3}{\ }&\vT&\braz{3}{\ }&\\
+	c & b &&&&&\vT&&\\
+	c & c &&&&&\vT&&\\
+	\end{array}
+  \]
+
+\noindent We can now find the value of $\qe y$: 
+
+  \[
+	\begin{array}{@{}cc|ccccccc@{}}
+	x & y & \qa x & [\atom D x & \eif & (\qe y & [\atom K {xy}] & \eand & \atom F x]\\ \hline
+	a & a &&&&\brax{3}{\TT}&\TT&\braz{3}{\ }&\\
+	a & b &&&&&\vF&&\\
+	a & c &&&&&\vF&&\\
+                 \hhline{~~|~~~~-~~}
+	b & a &&&&\brax{3}{\FF}&\FF&\braz{3}{\ }&\\
+	b & b &&&&&\FF&&\\
+	b & c &&&&&\FF&&\\
+                 \hhline{~~|~~~~-~~}
+	c & a &&&&\brax{3}{\TT}&\vT&\braz{3}{\ }&\\
+	c & b &&&&&\TT&&\\
+	c & c &&&&&\vT&&\\
+	\end{array}
+  \]
+
+  \noindent The table tells us that for $x=a$, it is true that $\qeb{y}{\atom K {xy}}$, and again for $x=c$, but for $x=b$ there is no $y$ such that $\atom K {xy}$. Now we have exited the scope of the $\qe y$ quantifier, and so we will only be interested in the three distinct cases where $x=a$, $x=b$, and $x=c$. So the rest of the table will only use these three rows.
+  
+
+
+  \noindent We can now complete the value for the conjunction:
+
+  \[
+	\begin{array}{@{}cc|ccccccc@{}}
+	x & y & \qa x & [\atom D x & \eif & (\qe y & [\atom K {xy}] & \eand & \atom F x]\\ \hline
+ a & a &&&&\brax{3}{\GT}&\gT&\braz{3}{\ \vF}&\\
+	  a & b &&&&&\gF&&\gF\\
+	  a & c &&&&&\gF&&\\\hhline{~~|~~~~-~~}
+	  b & a &&&&\brax{3}{\GF}&\gF&\braz{3}{\ \vF}&\\
+	  b & b &&&&&\gF&&\gT\\
+	  b & c &&&&&\gF&&\\\hhline{~~|~~~~-~~}
+	  c & a &&&&\brax{3}{\GT}&\gT&\braz{3}{\ \vT}&\\
+	  c & b &&&&&\gT&&\gT\\
+	  c & c &&&&&\gT&&\\
+	\end{array}
+  \]  
+  
+
+  \noindent The next step is the $\atom D x$ predicate, and the conditional:
+
+ \[
+	\begin{array}{@{}cc|ccccccc@{}}
+	x & y & \qa x & [\atom D x & \eif & (\qe y & [\atom K {xy}] & \eand & \atom F x]\\ \hline
+ a & a &\brax{9}{\ \ }&&&\brax{3}{\GT}&\gT&\braz{3}{\ \GF}&\\
+	  a & b &&\gF&\vT&&\gF&&\gF\\
+	  a & c &&&&&\gF&&\\\hhline{~~|~~~~-~~}
+	  b & a &&&&\brax{3}{\GF}&\gF&\braz{3}{\ \GF}&\\
+	  b & b &&\gT&\vF&&\gF&&\gT\\
+	  b & c &&&&&\gF&&\\\hhline{~~|~~~~-~~}
+	  c & a &&&&\brax{3}{\GT}&\gT&\braz{3}{\ \GT}&\\
+	  c & b &&\gT&\vT&&\gT&&\gT\\
+	  c & c &&&&&\gT&&\\
+	\end{array}
+  \]  
+
+
+  \noindent Finally, the truth-value of the universal quantifier $\forall x$, and the formula:
+
+ \[
+	\begin{array}{@{}cc|ccccccc@{}}
+	x & y & \qa x & [\atom D x & \eif & (\qe y & [\atom K {xy}] & \eand & \atom F x]\\ \hline
+ a & a &\brax{9}{\ \FF}&&&\brax{3}{\GT}&\gT&\braz{3}{\ \GF}&\\
+	  a & b &&\gF&\vT&&\gF&&\gF\\
+	  a & c &&&&&\gF&&\\\hhline{~~|~~~~-~~}
+	  b & a &&&&\brax{3}{\GF}&\gF&\braz{3}{\ \GF}&\\
+	  b & b &&\gT&\FF&&\gF&&\gT\\
+	  b & c &&&&&\gF&&\\\hhline{~~|~~~~-~~}
+	  c & a &&&&\brax{3}{\GT}&\gT&\braz{3}{\ \GT}&\\
+	  c & b &&\gT&\vT&&\gT&&\gT\\
+	  c & c &&&&&\gT&&\\
+	\end{array}
+  \]  
+
+  
+The formula $\qab{x}{\atom D x \eif (\qeb{y}{\atom K{xy}} \eand \atom F x)}$ turns out to be false in our model. And the table even allows us to trace why. When $x = b$, the conditional is false because the conjunction is false, and that's because the formula $\qeb{y}{\atom K {xy}}$ is false, and that's because there is no $y$ such that $\atom K {by}$.
+
+
+\pagebreak  
+\practiceproblems
+
+ \solutions   
+\noindent\problempart  \label{pr.quant01}
+  Consider the following model:
+
+  \begin{center}
+  $\begin{array}{c|ccc}
+	 & \atom A x & \atom B x & \atom N x \\ \hline
+	 a & \vF & \vT &\vT \\
+	 b & \vT & \vT & \vF \\
+	 c & \vF & \vT & \vF		  
+   \end{array}$
+\end{center}
+
+Determine the truth value of the following formulas in this model:
+\begin{earg}
+\item $\atom{B}{c} $
+\item $\atom{A}{c}  \eiff \enot \atom{N}{c}$
+\item $\atom{N}{c}  \eif (\atom{A}{c} \eor \atom{B}{c})$
+\item $\qab{x}{\atom{A}{x}}$
+\item $\qab{x}{\enot \atom{B}{x}}$
+\item $\qeb{x}{\atom{A}{x} \eand \atom{B}{x}}$
+\item $\qeb{x}{\atom{A}{x} \eif \atom{N}{x}}$
+\item $\qab{x}{\atom{N}{x} \eor \enot \atom{N}{x}}$
+\item $\qab{x}{\atom{N}{x} \eor \enot \atom{A}{x}}$
+\item $\qeb{x}{\atom N x} \eor \enot \qeb{y}{\atom N y}$
+\item $\qab{x}{\atom A x} \eor \enot \qab{y}{\atom A y}$
+\item $\qab{x}{\atom A x} \eor \qab{y}{\enot\atom A y}$
+\item $\qeb{x}{\atom N x} \eor \qeb{y}{\enot\atom N y}$
+\item $\qeb{x}{\atom B x} \eif \qab{y}{\atom A y}$
+\item $\qab{x}{\atom A x \eor \atom N x} \eif \enot \qab{y}{ \enot \atom B y}$
+\end{earg}
+
+\noindent\problempart
+\label{pr.TorF2}
+
+Given this model:
+
+\begin{center}
+  $\begin{array}{c|ccc}
+	 & \atom G x & \atom H x & \atom  M x \\ \hline
+	 c & \vF & \vF &\vT \\
+	 e & \vF & \vT & \vF \\
+   \end{array}$
+\end{center}
+
+
+
+Determine the truth value of the following formulas in this model:
+\begin{earg}
+\item $\atom{H}{c} $
+\item $\atom{H}{e} $
+\item $\atom{M}{c}  \eor \atom{M}{e}$
+\item $\atom{G}{c}  \eor \enot \atom{G}{c}$
+\item $\atom{M}{c}  \eif \atom{G}{c}$
+\item $\qeb{x}{\atom{H}{x}}$
+\item $\qab{x}{\atom{H}{x}}$
+\item $\qeb{x}{\enot \atom{M}{x}}$
+\item $\qeb{x}{\atom{H}{x} \eand \atom{G}{x}}$
+\item $\qeb{x}{\atom{M}{x} \eand \atom{G}{x}}$
+\item $\qab{x}{\atom{H}{x} \eor \atom{M}{x}}$
+\item $\qeb{x}{\atom Hx} \eand \qeb{y}{\atom M y}$
+\item $\qab{x}{\atom{H}{x} \eiff \enot \atom{M}{x}}$
+\item $\qeb{x}{\atom Gx} \eand \qeb{y}{\enot \atom G y}$
+\item $\qa{x}{\qeb{y}{\atom{G}{x} \eand \atom{H}{y}}}$
+\item $\qeb{x}{\qab{y}{\atom G x \eand \atom H y}}$
+\item $\qa{x}{\qab{y}{\atom Gx \eif \enot (\atom Hy \land \atom M y)}}$
+\end{earg}
+
+\noindent\problempart
+\label{pr.TorF3}
+%Following the diagram conventions introduced at the end of \S\ref{s:Interpretations}, 
+Consider the following model:	
+
+\begin{center}
+  \begin{tabular}{cc}
+	\begin{tabular}{c|ccc}
+	  $\atom R {xy}$ & a & b & c\\ \hline
+	  a & \vT & \vT & \vF \\
+	  b & \vF & \vF & \vF \\
+	  c & \vT & \vF & \vT \\
+	\end{tabular}
+  &
+\begin{tabular}{c|ccc}
+	  $\atom S {xy}$ & a & b & c\\
+	  \hline
+	  a & \vF & \vT & \vF \\
+	  b & \vT & \vT & \vT \\
+	  c & \vF & \vT & \vF 
+\end{tabular}
+\end{tabular}
+\end{center}
+Determine the truth value of the following formulas in this model:
+\begin{earg}
+\item $\qeb{x}{\atom R xx}$
+\item $\qab{x}{\atom{R}{xx}}$
+\item $\qeb{x}{\atom S xy}$
+\item $\qab{x}{\atom S{xy}}$
+\item $\qe{x}{\qab{y}{ \atom R xy}}$
+\item $\qe{x}{\qab{y}{ \atom R xy}}$
+\item $\qa{x}{\qeb{y}{ \atom R xy}}$
+\item $\qa{x}{\qeb{y}{ \atom S xy}}$
+\item $\qe{x}{\qab{y}{ \atom R xy}}$
+\item $\qe{x}{\qab{y}{ \atom R yx}}$
+\item $\qa{x}{\qab{y}{(\atom{R}{xy} \eand \atom{R}{yx}) \eif \atom{R}{xx}}}$
+\item $\qa{x}{\qab{y}{\atom{R}{xy}\eif \atom S {xy}}}$
+\item $\qe{x}{\qab{y}{\atom R {xy}\eif \atom S yx}}$
+\item $\qeb{x}{\atom R {xx} \lor \enot \atom S xx}$
+\item $\qeb{x}{\atom R{xx} \lor \qeb{y}{\enot \atom S yy}}$
+\item $\qe{x}{\qab{y}{\enot \atom R xy}}$
+\item $\qab{x}{\qeb{y}{\atom R xy} \eif \qeb{z}{ \atom{R}{xz}}}$.\\
+NB This one requires a big table and we'll understand if you don't complete it. But how many rows do you need? 
+\end{earg}
+
+\pagebreak
+\noindent\problempart
+\label{pr.TorF4}
+
+Consider the following model:	
+
+\begin{center}
+  \begin{tabular}{cc}
+	\begin{tabular}{c|cc}
+	  $\atom R {xy}$ & a & b\\ \hline
+	  a & \vF & \vT \\
+	  b & \vT & \vF \\
+	\end{tabular}
+  &
+\begin{tabular}{c|cc}
+  $\atom S {xy}$ & a
+  & b \\
+	  \hline
+	  a & \vT & \vF \\
+	  b & \vF & \vT \\
+\end{tabular}
+\end{tabular}
+\end{center}
+Determine the truth value of the following formulas in this model:
+
+\begin{earg}
+\item $\qeb{x}{\atom R xx}$
+\item $\qeb{y}{\atom S yy}$
+\item $\qeb{x}{\enot \atom S xx} \eor \qeb{y}{\enot \atom R yy}$
+\item $\qab{x}{\atom R{xx}} \eor \qab{y}{\atom S{yy}}$
+\item $\qab{x}{\qeb{y}{ \atom R xy} \eif \qeb{z}{\atom R xz}}$. 
+\item $\qa{x}{\qab{y}{\atom R {xy} \eif \qab{z}{ \atom S zz}}}$
+\item $\qe{x}{\qe{y}{\qeb{z}{\atom R {xz} \land (\atom S{xy} \eor \atom S{yx})}}}$
+\item $\qe{x}{ \qab{y}{ \qeb{z}{\atom R {xy}\land (\atom R{yx} \eif \atom R {zz})}}}$
+\item $\qe{x}{\qeb{y}{\atom R{xy} \land \qeb{z}{\atom S{xx} \eor \atom S {xz}}}}$
+\item $\qa{x}{\qab{y}{\atom R{xy} \eif (\qeb{z}{\atom S{zx}} \eor \atom S{yx})}}$
+\end{earg}
+
+\end{document}
